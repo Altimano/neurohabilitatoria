@@ -1,0 +1,33 @@
+services:
+  web:
+    image: apache:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "5080:80"
+    networks:
+      - neurodesarrollo
+
+  db:
+    image: vsamov/mysql-5.1.73
+    volumes:
+      - inb_db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 15103106
+      MYSQL_USER: terapia_appuser
+      MYSQL_PASSWORD: accessme
+      MYSQL_DATABASE: inb
+    ports:
+      - "3311:3306"
+    networks:
+      - neurodesarrollo
+
+volumes:
+  inb_db_data:
+  
+networks:
+  neurodesarrollo:
+    driver: bridge
