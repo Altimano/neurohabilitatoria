@@ -2,12 +2,13 @@
 $uriData = parse_url($_SERVER["REQUEST_URI"]);
 $uri = isset($uriData["path"]) ? $uriData["path"] : "/";
 
-echo $uri;
-
 $rutas = [
     "/" => "controladores/login.php",
     "/inicio" => "controladores/inicio.php",
-    "/crear" => "controladores/crearEstudio.php"
+    "/crear" => "controladores/crearEstudio.php",
+    "/consultar" => "controladores/consultar.php",
+    "modificar" => "controladores/modificarEstudio.php",
+    "/eliminar" => "controladores/eliminar.php"
 ];
 
 if (array_key_exists($uri, $rutas)) {
