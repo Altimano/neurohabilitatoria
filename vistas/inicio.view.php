@@ -119,7 +119,7 @@ require 'partials/head.php';
                             <th scope="col" class="px-4 py-3">Description</th>
                             <th scope="col" class="px-4 py-3">Price</th>
                             <th scope="col" class="px-4 py-3">
-                                <span class="sr-only">Actions</span>
+                                <span class="sr-only"> Actions</span>
                             </th>
                         </tr>
                     </thead>
@@ -765,3 +765,8 @@ require 'partials/head.php';
         </div>
     </div>
 </div>
+<button> <a href="/consultar">Consultar</a> </button>
+<button> <a href="/crear">Agregar Estudio</a> </button>
+<button> <a href="/modificar">Modificar Estudio</a> </button>
+<button> <a href="/eliminar">Eliminar Estudio</a> </button>
+<button> <a href="/salir">Cerrar Sesion</a> </button>

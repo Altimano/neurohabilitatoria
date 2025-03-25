@@ -7,8 +7,9 @@ $rutas = [
     "/inicio" => "controladores/inicio.php",
     "/crear" => "controladores/crearEstudio.php",
     "/consultar" => "controladores/consultar.php",
-    "modificar" => "controladores/modificarEstudio.php",
-    "/eliminar" => "controladores/eliminar.php"
+    "/modificar" => "controladores/modificarEstudio.php",
+    "/eliminar" => "controladores/eliminar_paciente.php",
+    "/salir" => "controladores/salir.php"
 ];
 
 if (array_key_exists($uri, $rutas)) {

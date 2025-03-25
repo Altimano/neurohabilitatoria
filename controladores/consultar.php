@@ -17,9 +17,38 @@ if ($_SESSION["session"] === 'okA'){
         $stmt->execute();
         $result = $stmt->get_result();
         $TotalFilas = mysqli_num_rows($result);
-        for ($i = 0; $i < $TotalFilas; $i++) {
+        if ($TotalFilas > 0) {
+            echo "<table border='1'>";
+            echo "<thead><tr>";
+
+
             $Fila = mysqli_fetch_assoc($result);
-            echo "<tr><td>" . $Fila["clave_paciente"] ."</td></tr>";
+
+            foreach ($Fila as $nom_columna => $valor_columna) {
+                echo "<th>$nom_columna</th>"; 
+            }
+
+            echo "</tr></thead><tbody>";
+
+
+            echo "<tr>";
+            foreach ($Fila as $valor_columna) {
+                echo "<td>$valor_columna</td>";
+            }
+            echo "</tr>";
+
+
+            while ($Fila = mysqli_fetch_assoc($result)) {
+                echo "<tr>";
+                foreach ($Fila as $valor_columna) {
+                    echo "<td>$valor_columna</td>";
+                }
+                echo "</tr>";
+            }
+
+            echo "</tbody></table>";
+        } else {
+            echo "No hay datos disponibles.";
         }
 
         $stmt->close();

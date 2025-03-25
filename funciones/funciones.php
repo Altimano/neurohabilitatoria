@@ -6,7 +6,7 @@
         $stmt -> bind_param("ss", $user, $password);
 
         if (!$stmt) {
-            die("Error en la preparación de la consulta: " . $conexion->error);
+            die("Error en la preparación de la consulta: " . $Con->error);
         }
     
         $stmt->bind_param("ss", $user, $password);
