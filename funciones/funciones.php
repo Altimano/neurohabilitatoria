@@ -21,3 +21,48 @@
         header("Location: /");
     }
 
+//    Funciones para agregar estudios / formato pdf
+    function calcularFechaNacimientoCorregida($fechaNacimiento, $semanasEnGestacion)
+    {
+        $semanasEnGestacion = (39-$semanasEnGestacion)*7;
+        $fechaNacimientoCorregida = date("Y-m-d", strtotime($fechaNacimiento . " + $semanasEnGestacion week"));
+        return $fechaNacimientoCorregida;
+
+    }
+
+    function calcularEdadCronologicaIngreso($fechaInicioTratamiento, $fechaNacimiento)
+    {
+        $fechaInicio = new DateTime($fechaInicioTratamiento);
+        $fechaNacimiento = new DateTime($fechaNacimiento);
+        $diferencia = $fechaInicio->diff($fechaNacimiento);
+        $edadAnios = $diferencia->y;
+        $edadMeses = $diferencia->m;
+        return "$edadAnios A $edadMeses M";
+
+    }
+
+//    QUEDA PENDIENTE REVISAR COMO AJUSTAR LA EDAD CRONOLOGICA DE INGRESO PARA CALCULAR LA EDAD CORREGIDA EN SEMANAS
+//    EDAD CORREGIDA SEMANAS SE PUEDEN PONER LA PURA CANTIDAD DE SEMANAS?
+    function calcularEdadCorregidaSemanas($edadCronologicaIngreso, $semanasEnGestacion)
+    {
+        $semanasEnGestacion = (39-$semanasEnGestacion);
+        // A INVESTIGAR CHAVITO
+        $edadCorregidaSemanas = $edadCronologicaIngreso - $semanasEnGestacion;
+        return $edadCorregidaSemanas;
+    }
+
+    function calcularSemana($fechaDeEvaluacion, $fechaNacimientoCorregida)
+    {
+
+    }
+
+    function calcularPuntuacion($valoresColumna){
+        return  array_sum($valoresColumna);
+    }
+
+    function calcularPorcentaje($puntuacionTotal, $puntuacionMaxima)
+    {
+        return ($puntuacionTotal * 100) / $puntuacionMaxima;
+    }
+
+
