@@ -11,7 +11,7 @@
     <div class="container mx-auto flex justify-between items-center px-6">
 
         <!-- logo izquierdo -->
-        <img src="/neurohabilitatoria/assets/img/Logo1.png" alt="Logo Izquierdo" class="h-32 w-auto">
+        <img src="/assets/img/Logo1.png" alt="Logo Izquierdo" class="h-32 w-auto">
 
         <!-- menu -->
         <nav class="flex items-center space-x-12">
@@ -28,7 +28,7 @@
 
         <!-- logo derecho-->
         <div class="flex items-center space-x-6">
-            <img src="/neurohabilitatoria/assets/img/Logo2.png" alt="Logo Derecho" class="h-24 w-auto">
+            <img src="/assets/img/Logo2.png" alt="Logo Derecho" class="h-24 w-auto">
             <!-- cerrar sesión -->
             <a href="logout.php"
                 class="bg-[#1F7BB8] text-black font-bold px-10 py-3 text-lg rounded-full hover:bg-[#155E8A] no-underline">

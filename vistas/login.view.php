@@ -1,4 +1,4 @@
-<?php require 'partials/head.php'; ?>
+<?php require './vistas/partials/header.php'; ?>
 
 <form action="/" class="max-w-sm mx-auto" method="post">
   <div class="mb-5">
