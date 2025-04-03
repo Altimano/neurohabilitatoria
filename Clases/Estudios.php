@@ -22,6 +22,39 @@ class Estudios{
         $stmt->close();
         $this->db->close();
     }
+//   regresa todos los datos de los pacientes / paciente por año LUEGO AGREGAR EN LA CONSULTA QUE SI EL CAMPO ES NULL NO LO REGRESE Y EJECTUE LAS OTRAS CONSULTAS
+    public function consultarPorAno($Criterio){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval LIKE ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $stmt->bind_param("s", $likeCriterio);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarPorCodigo($Criterio){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria 
+        INNER JOIN paciente 
+        ON terapia_neurohabilitatoria.clave_paciente = paciente.clave_paciente
+        WHERE paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("s", $Criterio);
+        if (!$stmt->execute()) {
+            die("Error en la consulta: " . $stmt->error);
+        }
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
 
 //    Regresa los datos del paciente / pacientes para la vista general de agregar y modificar
     public function consultarEstudio($Criterio){
@@ -90,5 +123,9 @@ WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_e
     public function regresarDatosInicialesPaciente($codigo_paciente){
         $stmt = $this->db->prepare("SELECT fecha_nacimiento_paciente FROM paciente WHERE codigo_paciente = ?");
         $stmt->bind_param("s", $codigo_paciente);
+    }
+    //verificar si es el primer estudio del paciente en terapia neurohabilitatoria
+    public function validarEvaluacionInicial() {
+        
     }
 }
