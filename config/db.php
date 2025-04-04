@@ -3,7 +3,7 @@
         $Hostname = "db"; // Nombre del servicio en Docker Compose
         $Usuario = "root";
         $Password = "15103106";
-        $BD = "inb";
+        $BD = "terapiaNeurohabilitatoria_2025";
         $Port = 3306; // Puerto interno del contenedor MySQL
     
         $Con = mysqli_connect($Hostname, $Usuario, $Password, $BD, $Port);

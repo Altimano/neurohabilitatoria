@@ -56,9 +56,28 @@ class Estudios{
         $this->db->close();
     }
 
+    public function consultarPorCodigo($Criterio){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria 
+        INNER JOIN paciente 
+        ON terapia_neurohabilitatoria.clave_paciente = paciente.clave_paciente
+        WHERE paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("s", $Criterio);
+        if (!$stmt->execute()) {
+            die("Error en la consulta: " . $stmt->error);
+        }
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
 //    Regresa los datos del paciente / pacientes para la vista general de agregar y modificar
     public function consultarEstudio($Criterio){
-        $SQL = "SELECT paciente.codigo_paciente,
+        $SQL = "SELECT DISTINCT paciente.codigo_paciente,
        terapia_neurohabilitatoria.nombre_pacinete,
        paciente.fecha_nacimiento_paciente,
        paciente.semanas_gestacion,
