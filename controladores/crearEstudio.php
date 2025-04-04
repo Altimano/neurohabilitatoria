@@ -37,9 +37,6 @@ if ($_SESSION["session"] === 'okA') {
                   </td>";
             echo "</tr>";
         }
-
         echo "</table>";
-        $stmt->close();
-        $Con->close();
     }
 }

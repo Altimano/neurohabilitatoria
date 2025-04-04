@@ -15,13 +15,13 @@ session_start()
                 <div class="input-box">
                     <input type="text" placeholder="Nombre" name="Nombre" id="Nombre">
                 </div>
-                <div class="input-box"><label for="" style="background-color: rgb(131 70 177);">Ingresa el ano del paciente</label> </div>
+                <div class="input-box"><label for="" style="background-color: rgb(131 70 177);">Ingresa el año del paciente</label> </div>
                 <div class="input-box">
                     <input type="text" placeholder="fecha" name="fecha" id="fecha">
                 </div>
                 <div class="input-box"><label for="" style="background-color: rgb(131 70 177);">Ingresa el codigo de paciente</label> </div>
                 <div class="input-box">
-                    <input type="text" placeholder="codigo" name="codigo" id="codigo">
+                    <input type="text" placeholder="codigo"  name="codigo" id="codigo">
                 </div>
                 <div class="input-box">
                     <input type="submit" class="btn">
@@ -32,3 +32,4 @@ session_start()
             </div>
         </form>
 </html>
+

@@ -17,4 +17,5 @@ if (array_key_exists($uri, $rutas)) {
 } else {
     require "vistas/404.view.php";
 }
+//Codigo para el input del form y que solo acepte numeros onkeypress="return /[0-9]/i.test(event.key)"
 ?>
