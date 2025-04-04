@@ -23,7 +23,7 @@ class Estudios{
 
 //    Regresa los datos del paciente / pacientes para la vista general de agregar y modificar
     public function consultarEstudio($Criterio){
-        $SQL = "SELECT paciente.codigo_paciente,
+        $SQL = "SELECT DISTINCT paciente.codigo_paciente,
        terapia_neurohabilitatoria.nombre_pacinete,
        paciente.fecha_nacimiento_paciente,
        paciente.semanas_gestacion,
