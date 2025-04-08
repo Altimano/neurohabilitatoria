@@ -51,11 +51,6 @@
         return $edadCorregidaSemanas;
     }
 
-    function calcularSemana($fechaDeEvaluacion, $fechaNacimientoCorregida)
-    {
-
-    }
-
     function calcularPuntuacion($valoresColumna){
         return  array_sum($valoresColumna);
     }

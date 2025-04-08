@@ -1,6 +1,5 @@
 <?php
 
-include './funciones/funciones.php';
 class Estudios{
     private $db;
     public function __construct($db)
@@ -23,14 +22,13 @@ class Estudios{
         $this->db->close();
     }
 //   regresa todos los datos de los pacientes / paciente por año LUEGO AGREGAR EN LA CONSULTA QUE SI EL CAMPO ES NULL NO LO REGRESE Y EJECTUE LAS OTRAS CONSULTAS
-    public function consultarPorAno($Criterio){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval LIKE ? ORDER BY eval_subs_fec_eval DESC";
+    public function consultarPorAno($fechaInicio, $fechaFin){
+        $SQL = "SELECT DISTINCT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
         }
-        $likeCriterio = "%$Criterio%";
-        $stmt->bind_param("s", $likeCriterio);
+        $stmt->bind_param("ss", $fechaInicio, $fechaFin);
         $stmt->execute();
         return $stmt->get_result();
         $stmt->close();
@@ -103,7 +101,34 @@ WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_e
     }
 
     public function consultarPacientes($Criterio){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE nombre_paciente OR apellido_paterno_paciente OR apellido_materno_paciente LIKE ? ORDER BY fecha_registro DESC";
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE nombre_paciente LIKE ? OR apellido_paterno_paciente LIKE ? OR apellido_materno_paciente LIKE ? ORDER BY fecha_registro DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $stmt->bind_param("sss", $likeCriterio, $likeCriterio, $likeCriterio);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarPacientesPorAno($fechaInicio, $fechaFin){
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? and ? ORDER BY fecha_registro DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("ss", $fechaInicio, $fechaFin);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarPacientesPorCodigo($Criterio){
+        $SQL = "SELECT * FROM paciente  WHERE codigo_paciente LIKE ? ORDER BY fecha_registro DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -115,6 +140,8 @@ WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_e
         $stmt->close();
         $this->db->close();
     }
+
+
 //    Elimina un estudio a base de el campo post agregado en el formulario inicial
     public function eliminarEstudio($row_id){
         $stmt = $this->db-> prepare("DELETE FROM terapia_neurohabilitatoria WHERE id_terapia_neurohabilitatoria = ?");

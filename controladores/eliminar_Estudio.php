@@ -1,36 +1,32 @@
 <?php
 session_start();
-
 include './config/db.php';
 include './Clases/Estudios.php';
-if ($_SESSION["session"] === 'okA'){
-    require './vistas/eliminar.view.php';
-    if (isset($_POST['Nombre'])) {
+
+$pacientes = [];
+if ($_SESSION["session"] === 'okA') {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre'])) {
         $Criterio = strtoupper($_POST['Nombre']);
         $Con = conectar();
-        //QUEDA PENDIENTE QUE MOSTRAR PARA CONSULTAR ELIMINAR
-        $Estudios = new Estudios($Con);
-        $result = $Estudios->consultarTodosLosEstudios($Criterio);
-        $TotalFilas = mysqli_num_rows($result);
-        echo "<table border='1'>";
-        echo "<tr><th>Acción</th><th>Clave Paciente</th><th>Nombre</th><th>Fecha de Evaluacion Subsecuente</th></tr>";
-        while ($Fila = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>
-                    <form action='controladores/eliminar.php' method='POST' style='display:inline;'>
-                        <input type='hidden' name='row_id' value='" . $Fila["id_terapia_neurohabilitatoria"] . "'>
-                        <button type='submit' onclick='return confirm(\"¿Estás seguro de eliminar este paciente?\");'>
-                            Eliminar
-                        </button>
-                    </form>
-                  </td>";
-            echo "<td>" . $Fila["clave_paciente"] . "</td>";
-            echo "<td>" . $Fila["nombre_pacinete"] . "</td>";
-            echo "<td>" . $Fila["eval_subs_fec_eval"] . "</td>";
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudios($Criterio);
+        
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['codigo'])) {
+        $Criterio = strtoupper($_POST['codigo']);
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPorCodigo($Criterio);
 
-            echo "</tr>";
-        }
-
-        echo "</table>";
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])) {
+        $fechaInicial = $_POST['fechaInicial'];
+        $fechaFinal = $_POST['fechaFinal'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientesPorAno($fechaInicial, $fechaFinal);
+        
     }
+    while ($Fila = mysqli_fetch_assoc($result)) {
+        $pacientes[] = $Fila;
+    }
+    require './vistas/eliminar.view.php';
 }

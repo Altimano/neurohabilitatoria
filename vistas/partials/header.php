@@ -24,6 +24,9 @@
             <a href="/modificar" class="font-bold text-xl px-4 py-2 hover:underline hover:text-[#1F7BB8]">
                 MODIFICAR
             </a>
+            <a href="/eliminar" class="font-bold text-xl px-4 py-2 hover:underline hover:text-[#1F7BB8]">
+                ELIMINAR
+            </a>
         </nav>
 
         <!-- logo derecho-->
