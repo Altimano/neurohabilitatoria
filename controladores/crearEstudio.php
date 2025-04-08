@@ -4,6 +4,14 @@ include './config/db.php';
 include './Clases/Estudios.php';
 error_reporting(E_ERROR | E_PARSE);
 $pacientes = [];
+/*$filtros = [
+    'Nombre' => isset($_POST['Nombre']) ? $_POST['Nombre'] : null,
+    'codigo' => isset($_POST['codigo']) ? $_POST['codigo'] : null,
+    'fechaInicial' => isset($_POST['fechaInicial']) ? $_POST['fechaInicial'] : null,
+    'fechaFinal' => isset($_POST['fechaFinal']) ? $_POST['fechaFinal'] : null,
+];*/
+
+
 if ($_SESSION["session"] === 'okA') {
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre'])) {
         $Criterio = strtoupper($_POST['Nombre']);
@@ -25,6 +33,7 @@ if ($_SESSION["session"] === 'okA') {
         $result = $Estudio->consultarPacientesPorAno($fechaInicial, $fechaFinal);
         
     }
+
     while ($Fila = mysqli_fetch_assoc($result)) {
         $pacientes[] = $Fila;
     }

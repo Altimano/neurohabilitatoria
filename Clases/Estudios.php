@@ -7,6 +7,8 @@ class Estudios{
         $this->db = $db;
     }
 
+    
+
 //    regresa todos los datos de los pacientes / paciente
     public function consultarTodosLosEstudios($Criterio){
         $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC";
@@ -155,4 +157,61 @@ WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_e
     public function validarEvaluacionInicial() {
         
     }
+
+    /*public function validarPorFiltrosPacientes($filtros) {
+        $parametros = [];
+        $condiciones = [];
+        $sql = "SELECT * FROM paciente";
+        $tipos = [];
+    
+        if (!$filtros['Nombre']) {
+            $condiciones[] = "(nombre_paciente LIKE ? OR apellido_paterno_paciente LIKE ? OR apellido_materno_paciente LIKE ?)";
+            $nombre = "%" . $_POST['Nombre'] . "%";
+            $parametros[] = $nombre;
+            $parametros[] = $nombre;
+            $parametros[] = $nombre;
+            $tipos[] = 's';
+            $tipos[] = 's';
+            $tipos[] = 's';
+        }
+    
+        if (!$filtros['codigo']) {
+            $condiciones[] = "codigo_paciente LIKE ?";
+            $parametros[] = "%" . $_POST['codigo'] . "%";
+            $tipos[] = 's';
+        }
+    
+        if (!$filtros['fechaInicial'] && !$filtros['fechaFinal']) {
+            $condiciones[] = "fecha_registro BETWEEN ? AND ?";
+            $parametros[] = $_POST['fechaInicial'];
+            $parametros[] = $_POST['fechaFinal'];
+            $tipos[] = 's';
+            $tipos[] = 's';
+        }
+    
+        if (!empty($condiciones)) {
+            $sql .= " WHERE " . implode(" AND ", $condiciones);
+        }
+    
+        $sql .= " ORDER BY fecha_registro DESC";
+    
+        $stmt = $this->db->prepare($sql);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+    
+        if (!empty($parametros)) {
+            $bind_names[] = implode("", $tipos);
+            foreach ($parametros as $key => $value) {
+                $bind_names[] = &$parametros[$key];
+            }
+            call_user_func_array([$stmt, 'bind_param'], $bind_names);
+        }
+    
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $stmt->close();
+        return $resultado;
+    }
+    */
 }

@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
 include './config/db.php';
 include './Clases/Estudios.php';
 
@@ -22,7 +23,7 @@ if ($_SESSION["session"] === 'okA') {
         $fechaFinal = $_POST['fechaFinal'];
         $Con = conectar();
         $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarPacientesPorAno($fechaInicial, $fechaFinal);
+        $result = $Estudio->consultarPorAno($fechaInicial, $fechaFinal);
         
     }
     while ($Fila = mysqli_fetch_assoc($result)) {

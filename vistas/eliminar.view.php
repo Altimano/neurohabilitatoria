@@ -95,10 +95,22 @@
         <?php foreach ($pacientes as $paciente): ?>
             <tr>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_pacinete"])  ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?php 
+                    if (!empty($paciente["nombre_pacinete"])) {
+                        echo htmlspecialchars($paciente["nombre_pacinete"]);
+                    } else {
+                        echo htmlspecialchars($paciente["nombre_paciente"] . " " . $paciente["apellido_materno_paciente"] . " " . $paciente["apellido_paterno_paciente"]);
+                    }
+                    ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["eval_subs_fec_eval"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?php 
+                    if (!empty($paciente["eval_subs_fec_eval"])) {
+                        echo htmlspecialchars($paciente["eval_subs_fec_eval"]);
+                    } else {
+                        echo htmlspecialchars($paciente["nombre_paciente"] . " " . $paciente["apellido_materno_paciente"] . " " . $paciente["apellido_paterno_paciente"]);
+                    }
+                    ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
                     <form action='controladores/eliminar.php' method='POST' style='display:inline;'>
                     <input type='hidden' name='row_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoria"] , ENT_QUOTES); ?>'>
