@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(E_ERROR | E_PARSE);
+//error_reporting(E_ERROR | E_PARSE);
 include './config/db.php';
 include './Clases/Estudios.php';
 
@@ -10,20 +10,20 @@ if ($_SESSION["session"] === 'okA') {
         $Criterio = strtoupper($_POST['Nombre']);
         $Con = conectar();
         $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarTodosLosEstudios($Criterio);
+        $result = $Estudio->consultarEstudioPorNombreEliminar($Criterio);
         
     }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['codigo'])) {
         $Criterio = strtoupper($_POST['codigo']);
         $Con = conectar();
         $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarPorCodigo($Criterio);
+        $result = $Estudio->consultarEstudioPorCodigoEliminar($Criterio);
 
     }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])) {
         $fechaInicial = $_POST['fechaInicial'];
         $fechaFinal = $_POST['fechaFinal'];
         $Con = conectar();
         $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarPorAno($fechaInicial, $fechaFinal);
+        $result = $Estudio->consultarEstudioPorFechaEliminar($fechaInicial, $fechaFinal);
         
     }
     while ($Fila = mysqli_fetch_assoc($result)) {

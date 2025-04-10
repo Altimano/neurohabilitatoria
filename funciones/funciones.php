@@ -12,8 +12,58 @@
         $stmt->bind_param("ss", $user, $password);
         $stmt->execute();
         $stmt->store_result();
+        //Incluir la clave de personal 
         return $stmt->num_rows > 0;
     }
+
+    function tomarClavePersonal(){
+        include "./config/db.php";
+        $Con = conectar();
+        $stmt = $Con -> prepare("SELECT clave_personal FROM personal WHERE nombre_usuario_personal = ? AND `contraseña_personal` = ?");
+        $stmt -> bind_param("ss", $user, $password);
+
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $Con->error);
+        }
+    
+        $stmt->bind_param("ss", $user, $password);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+
+    /*function validarUsuario($user) {
+        include "./config/db.php";
+        $Con = conectar();
+        $stmt = $Con -> prepare("SELECT nombre_usuario_personal FROM personal WHERE nombre_usuario_personal = ?");
+        $stmt -> bind_param("s", $user);
+
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $Con->error);
+        }
+    
+        $stmt->bind_param("s", $user);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+
+    function validarContra(){
+        include "./config/db.php";
+        $Con = conectar();
+        $stmt = $Con -> prepare("SELECT contraseña_personal FROM personal WHERE contraseña_personal = ?");
+        $stmt -> bind_param("s", $password);
+
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $Con->error);
+        }
+    
+        $stmt->bind_param("s", $password);
+        $stmt->execute();
+        $stmt->store_result();
+        return $stmt->num_rows > 0;
+    }
+        */
 
     function cerrar_sesion() {
         session_start();

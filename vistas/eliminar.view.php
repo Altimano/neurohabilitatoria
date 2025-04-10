@@ -94,7 +94,7 @@
                 <?php if (!empty($pacientes)): ?>
         <?php foreach ($pacientes as $paciente): ?>
             <tr>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["codigo_paciente"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?php 
                     if (!empty($paciente["nombre_pacinete"])) {
                         echo htmlspecialchars($paciente["nombre_pacinete"]);

@@ -78,11 +78,11 @@
             </div>
         </form>
 
-        <form method="$post" action="/generarExcel" class="flex flex-col sm:flex-row items-end space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+        <form method="post" action="/generarExcel" class="flex flex-col sm:flex-row items-end space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
         <input type="hidden" name="Nombre" value="<?= htmlspecialchars($_POST['Nombre']) ?>">
-        <input type="hidden" name="fechaInicial" value="<?= htmlspecialchars($_POST['fechaInicial']) ?>">
-        <input type="hidden" name="fechaFinal" value="<?= htmlspecialchars($_POST['fechaFinal']) ?>">
-        <input type="hidden" name="codigo" value="<?= htmlspecialchars($_POST['codigo']) ?>">
+        <input type="hidden" name="eval_subs_fec_eval" value="<?= htmlspecialchars($_POST['eval_subs_fec_eval'])?>">
+        <input type="hidden" name="clave_paciente" value="<?= htmlspecialchars($_POST['clave_paciente']) ?>">
+        <input type="hidden" name="datosExcel" value="<?= json_encode($pacientes) ?>">
             <div class="w-full sm:w-auto"> 
                 <button 
                     type="submit" 
@@ -105,6 +105,7 @@
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de registro</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Edad Corregida</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de inicio de tratamiento</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluacion</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -117,6 +118,7 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["edad_corregida"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["dat_ter_fec_ini_tratam_terap"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["eval_subs_fec_eval"]) ?></td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

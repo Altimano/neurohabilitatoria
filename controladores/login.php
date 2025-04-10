@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     if (validarAcceso($user, $password)) {
         $_SESSION["user"] = $user;
-        //$_SESSION["password"] = $password;
         $_SESSION["session"] = 'okA';
         header("Location: /inicio");
         exit();

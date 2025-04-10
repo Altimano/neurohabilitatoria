@@ -56,21 +56,53 @@ class Estudios{
         $this->db->close();
     }
 
-//    Regresa los datos del paciente / pacientes para la vista general de agregar y modificar
-    public function consultarEstudio($Criterio){
-        $SQL = "SELECT paciente.codigo_paciente,
-       terapia_neurohabilitatoria.nombre_pacinete,
-       paciente.fecha_nacimiento_paciente,
-       paciente.semanas_gestacion,
-CASE
-    WHEN paciente.clave_estado_paciente = 1 THEN 'Activo'
-    WHEN paciente.clave_estado_paciente = 2 THEN 'Inactivo'
-    WHEN paciente.clave_estado_paciente = 3 THEN 'Baja'
-END AS estado_paciente
+    public function consultarEstudioPorNombreEliminar($Criterio){
+        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
+        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
+        terapia_neurohabilitatoria.eval_subs_fec_eval
 FROM terapia_neurohabilitatoria
 INNER JOIN paciente
 ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
 WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $stmt->bind_param("s", $likeCriterio);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarEstudioPorFechaEliminar($fechaInicio, $fechaFin){
+        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
+        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
+        terapia_neurohabilitatoria.eval_subs_fec_eval
+FROM terapia_neurohabilitatoria
+INNER JOIN paciente
+ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
+WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("ss", $fechaInicio, $fechaFin);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarEstudioPorCodigoEliminar($Criterio){
+        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
+        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
+        terapia_neurohabilitatoria.eval_subs_fec_eval
+FROM terapia_neurohabilitatoria
+INNER JOIN paciente
+ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
+WHERE paciente.codigo_paciente LIKE ? ORDER BY eval_subs_fec_eval DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
