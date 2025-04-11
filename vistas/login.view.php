@@ -1,32 +1,40 @@
+<?php require 'partials/header.php'; ?>
 
-<form action="/" class="max-w-sm mx-auto" method="post">
-  <div class="mb-5">
-    <label for="user" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de usuario</label>
-    <input 
-      type="text" 
-      id="user" 
-      name="user" 
-      class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" 
-      placeholder="Tu usuario" 
-      required 
-    />
-  </div>
-  
-  <div class="mb-5">
-    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
-    <input 
-      type="password" 
-      id="password" 
-      name="password" 
-      class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light" 
-      required 
-    />
-  </div>
+<div class="text-4xl mt-10 block text-center text-[#1f7BB8] font-semibold">
+    <h1>Terapia Neurohabilitatoria</h1>
+</div>
 
-  <button 
-    type="submit" 
-    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  >
-    Iniciar sesión
-  </button>
-</form>
+<body class="bg-[#BBD6DE]">
+  <form action="/" class="max-w-sm mx-auto p-6 rounded-xl" method="post">
+
+    <div class="w-102 p-6 shadow-lg content-center bg-[#1f7BB8] rounded-xl">
+      <label for="usuario" class="block text-base mb-2 text-white">Usuario</label>
+      <input 
+        type="text" 
+        id="usuario" 
+        name="usuario"
+        class="border w-full text-base px-2 py-1 mb-4 focus:outline-none focus:ring-0 focus:border-gray-600 rounded"
+        placeholder="Ingresar Usuario"
+        required
+      />
+
+      <label for="contraseña" class="block text-base mb-2 text-white">Contraseña</label>
+      <input 
+        type="password" 
+        id="contraseña" 
+        name="contraseña"
+        class="border w-full text-base px-2 py-1 mb-4 focus:outline-none focus:ring-0 focus:border-gray-600 rounded"
+        placeholder="Ingresar Contraseña"
+        required
+      />
+
+      <button type="submit" class="mt-4 w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-800">
+        Iniciar sesión
+      </button>
+    </div>
+  </form>
+
+  <?php require 'partials/modal.php'; ?>
+</body>
+
+
