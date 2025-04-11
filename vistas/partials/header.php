@@ -27,10 +27,10 @@
         </button>
 
         <nav id="menu" class="hidden md:flex flex-col md:flex-row md:space-x-4 w-full md:w-auto">
-            <a href="#" class="font-bold text-lg px-4 py-2">AGREGAR</a>
-            <a href="#" class="font-bold text-lg px-4 py-2">CONSULTAR</a>
-            <a href="#" class="font-bold text-lg px-4 py-2">MODIFICAR</a>
-            <a href="#" class="font-bold text-lg px-4 py-2">ELIMINAR</a>
+            <a href="/crear" class="font-bold text-lg px-4 py-2">AGREGAR</a>
+            <a href="/consultar" class="font-bold text-lg px-4 py-2">CONSULTAR</a>
+            <a href="/modificar" class="font-bold text-lg px-4 py-2">MODIFICAR</a>
+            <a href="/eliminar" class="font-bold text-lg px-4 py-2">ELIMINAR</a>
         </nav>
     </div>
 </header>
