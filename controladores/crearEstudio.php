@@ -1,45 +1,41 @@
 <?php
 session_start();
-
 include './config/db.php';
 include './Clases/Estudios.php';
+error_reporting(E_ERROR | E_PARSE);
+$pacientes = [];
+/*$filtros = [
+    'Nombre' => isset($_POST['Nombre']) ? $_POST['Nombre'] : null,
+    'codigo' => isset($_POST['codigo']) ? $_POST['codigo'] : null,
+    'fechaInicial' => isset($_POST['fechaInicial']) ? $_POST['fechaInicial'] : null,
+    'fechaFinal' => isset($_POST['fechaFinal']) ? $_POST['fechaFinal'] : null,
+];*/
+
 
 if ($_SESSION["session"] === 'okA') {
-    require './vistas/crear.view.php';
-    if (isset($_POST['Nombre'])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre'])) {
         $Criterio = strtoupper($_POST['Nombre']);
         $Con = conectar();
-        //QUEDA PENDIENTE QUE DATOS MOSTRAR AL AGREGAR ESTUDIO
-        //QUEDA PENDIENTE EN PRUEBA LOCAL AGREGAR BAYLEY3
         $Estudio = new Estudios($Con);
         $result = $Estudio->consultarPacientes($Criterio);
-        $TotalFilas = mysqli_num_rows($result);
-        $Fila = mysqli_fetch_assoc($result);
-        echo "<table border='1'>";
-        echo "<tr><th>Codigo Paciente</th><th>Nombre</th><th>Fecha de Nacimiento</th><th>Semanas de Gestacion</th><th>Fecha de registro</th><th>Acción</th></tr>";
-        for ($i = 0; $i < $TotalFilas; $i++) {
-            $Fila = mysqli_fetch_assoc($result);
-            echo "<tr>";
-            echo "<td>" . $Fila["codigo_paciente"] . "</td>";
-            echo "<td>" . $Fila["nombre_paciente"] . " " . $Fila["apellido_paterno_paciente"] . " " . $Fila["apellido_materno_paciente"] . "</td>";
-            echo "<td>" . $Fila["fecha_nacimiento_paciente"] . "</td>";
-            echo "<td>" . $Fila["semanas_gestacion"] . "</td>";
-            echo "<td>" . $Fila["fecha_registro"] . "</td>";
-            echo "<td>
-                    <form action='controladores/crear.php' method='POST' style='display:inline;'>
-                        <input type='hidden' name='codigo_paciente' value='" . $Fila["codigo_paciente"] . $Fila["fecha_nacimiento_paciente"] . $Fila["semanas_gestacion"] ."'>
-                        <input type='hidden' name='fecha_nacimiento_paciente' value='".$Fila["fecha_nacimiento_paciente"]."'>
-                         <input type='hidden' name='semanas_gestacion' value='".$Fila["semanas_gestacion"]."'>
-                        <button type='submit' onclick='return confirm(\"¿Estás seguro de agregar un estudio para este paciente?\");'>
-                            Agregar
-                        </button>
-                    </form>
-                  </td>";
-            echo "</tr>";
-        }
+        
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['codigo'])) {
+        $Criterio = strtoupper($_POST['codigo']);
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientesPorCodigo($Criterio);
 
-        echo "</table>";
-        $stmt->close();
-        $Con->close();
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])) {
+        $fechaInicial = $_POST['fechaInicial'];
+        $fechaFinal = $_POST['fechaFinal'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientesPorAno($fechaInicial, $fechaFinal);
+        
     }
+
+    while ($Fila = mysqli_fetch_assoc($result)) {
+        $pacientes[] = $Fila;
+    }
+    require './vistas/crear.view.php';
 }

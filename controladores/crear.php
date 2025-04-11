@@ -7,7 +7,17 @@
     $semanasEnGestacion = $_POST["semanas_gestacion"];
     $fechaInicioTratamiento = new DateTime();
     $fechaInicioTratamiento = $fechaInicioTratamiento->format('Y-m-d');
+    var_dump($_POST);
+    echo "<br>";
     echo $fechaInicioTratamiento;
+    echo "<br>";
+    echo $fechaNacimiento;
+    echo "<br>";
+    echo $semanasEnGestacion;
+    echo "<br>";
+    echo $codigo_paciente;
+    echo "<br>";
     //calcularEdadCorregidaSemanas();
      echo calcularEdadCronologicaIngreso($fechaInicioTratamiento, $fechaNacimiento);
+    echo "<br>";
      echo calcularFechaNacimientoCorregida($fechaNacimiento, $semanasEnGestacion);

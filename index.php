@@ -9,7 +9,8 @@ $rutas = [
     "/consultar" => "controladores/consultar.php",
     "/modificar" => "controladores/modificarEvaluacion.php",
     "/eliminar" => "controladores/eliminar_Estudio.php",
-    "/salir" => "controladores/salir.php"
+    "/salir" => "controladores/salir.php",
+    "/generarExcel" => "controladores/generarExcel.php"
 ];
 
 if (array_key_exists($uri, $rutas)) {

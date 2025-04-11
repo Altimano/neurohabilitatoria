@@ -1,50 +1,37 @@
 <?php
 session_start();
-
+//error_reporting(E_ERROR | E_PARSE);
 include './config/db.php';
 include './Clases/Estudios.php';
-
+$pacientes = [];
 if ($_SESSION["session"] === 'okA'){
-    require './vistas/consultar.view.php';
-    if (isset($_POST['Nombre'])) {
-        $Criterio = strtoupper($_POST['Nombre']);
-        $Con = conectar();
-        $Estudios = new Estudios($Con);
-        $result = $Estudios->consultarTodosLosEstudios($Criterio);
-        $TotalFilas = mysqli_num_rows($result);
-        if ($TotalFilas > 0) {
-            echo "<table border='1'>";
-            echo "<thead><tr>";
 
+    if ($_SESSION["session"] === 'okA') {
 
-            $Fila = mysqli_fetch_assoc($result);
-
-            foreach ($Fila as $nom_columna => $valor_columna) {
-                echo "<th>$nom_columna</th>";
-            }
-
-            echo "</tr></thead><tbody>";
-
-
-            echo "<tr>";
-            foreach ($Fila as $valor_columna) {
-                echo "<td>$valor_columna</td>";
-            }
-            echo "</tr>";
-
-
-            while ($Fila = mysqli_fetch_assoc($result)) {
-                echo "<tr>";
-                foreach ($Fila as $valor_columna) {
-                    echo "<td>$valor_columna</td>";
-                }
-                echo "</tr>";
-            }
-
-            echo "</tbody></table>";
-        } else {
-            echo "No hay datos disponibles.";
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre'])) {
+            $Criterio = strtoupper($_POST['Nombre']);
+            $Con = conectar();
+            $Estudio = new Estudios($Con);
+            $result = $Estudio->consultarTodosLosEstudios($Criterio);
+            
+        }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['codigo'])) {
+            $Criterio = strtoupper($_POST['codigo']);
+            $Con = conectar();
+            $Estudio = new Estudios($Con);
+            $result = $Estudio->consultarPorCodigo($Criterio);
+    
+        }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])) {
+            $fechaInicial = $_POST['fechaInicial'];
+            $fechaFinal = $_POST['fechaFinal'];
+            $Con = conectar();
+            $Estudio = new Estudios($Con);
+            $result = $Estudio->consultarPorAno($fechaInicial, $fechaFinal);
+            
         }
-
+    
+        while ($Fila = mysqli_fetch_assoc($result)) {
+            $pacientes[] = $Fila;
+        }
+        require './vistas/consultar.view.php';
     }
 }

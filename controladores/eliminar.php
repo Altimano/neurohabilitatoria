@@ -7,6 +7,7 @@ if (isset($_POST['row_id'])) {
     $Con = conectar();
     $Estudios = new Estudios($Con);
     $Estudios->eliminarEstudio($row_id);
+    echo "<script type='text/javascript'>alert('Evaluacion eliminada exitosamente');</script>";
 }else{
     echo "No se ha podido eliminar el estudio.";
 }
