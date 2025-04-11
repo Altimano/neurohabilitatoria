@@ -12,7 +12,7 @@ if ($_SESSION["session"] === 'okA') {
         //QUEDA PENDIENTE QUE DATOS MOSTRAR AL AGREGAR ESTUDIO
         //QUEDA PENDIENTE EN PRUEBA LOCAL AGREGAR BAYLEY3
         $Estudios = new Estudios($Con);
-        $result = $Estudios->consultarTodosLosEstudios($Criterio);
+        $result = $Estudios->consultarTodosLosEstudiosPorNombre($Criterio);
         $TotalFilas = mysqli_num_rows($result);
         echo "<table border='1'>";
         echo "<tr><th>Acción</th><th>Clave Paciente</th><th>Nombre</th><th>Fecha de Evaluacion Subsecuente</th></tr>";

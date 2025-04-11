@@ -9,8 +9,9 @@ class Estudios{
 
     
 
-//    regresa todos los datos de los pacientes / paciente
-    public function consultarTodosLosEstudios($Criterio){
+//    FUNCIONES PARA LA CONSULTA 
+
+    public function consultarTodosLosEstudiosPorNombre($Criterio){
         $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -23,8 +24,36 @@ class Estudios{
         $stmt->close();
         $this->db->close();
     }
-//   regresa todos los datos de los pacientes / paciente por año LUEGO AGREGAR EN LA CONSULTA QUE SI EL CAMPO ES NULL NO LO REGRESE Y EJECTUE LAS OTRAS CONSULTAS
-    public function consultarPorAno($fechaInicio, $fechaFin){
+
+    public function consultarTodosLosEstudiosPorNombreyFecha($Criterio, $fechaInicio, $fechaFin){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? AND eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $stmt->bind_param("sss", $likeCriterio, $fechaInicio, $fechaFin);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarTodosLosEstudiosPorNombreyCodigo($Criterio, $codigo){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? AND clave_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $stmt->bind_param("ss", $likeCriterio, $codigo);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarTodosLosEstudiosPorFecha($fechaInicio, $fechaFin){
         $SQL = "SELECT DISTINCT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -37,7 +66,20 @@ class Estudios{
         $this->db->close();
     }
 
-    public function consultarPorCodigo($Criterio){
+    public function consultarTodosLosEstudiosPorFechaYCodigo($fechaInicio, $fechaFin, $codigo){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? AND clave_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("sss", $fechaInicio, $fechaFin, $codigo);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarTodosLosEstudiosPorCodigo($Criterio){
         $SQL = "SELECT * FROM terapia_neurohabilitatoria 
         INNER JOIN paciente 
         ON terapia_neurohabilitatoria.clave_paciente = paciente.clave_paciente
@@ -56,6 +98,7 @@ class Estudios{
         $this->db->close();
     }
 
+    //Funciones para Eliminar
     public function consultarEstudioPorNombreEliminar($Criterio){
         $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
         terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
