@@ -2,7 +2,6 @@
 session_start();
 include './config/db.php';
 include './Clases/Estudios.php';
-error_reporting(E_ERROR | E_PARSE);
 $pacientes = [];
 /*$filtros = [
     'Nombre' => isset($_POST['Nombre']) ? $_POST['Nombre'] : null,
@@ -33,9 +32,10 @@ if ($_SESSION["session"] === 'okA') {
         $result = $Estudio->consultarPacientesPorAno($fechaInicial, $fechaFinal);
         
     }
-
-    while ($Fila = mysqli_fetch_assoc($result)) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+        while ($Fila = mysqli_fetch_assoc($result)) {
         $pacientes[] = $Fila;
+         }
     }
     require './vistas/crear.view.php';
 }
