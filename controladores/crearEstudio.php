@@ -12,30 +12,66 @@ $pacientes = [];
 
 
 if ($_SESSION["session"] === 'okA') {
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre'])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientes();
+        //FUNCIONA
+
+    }elseif ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
         $Criterio = strtoupper($_POST['Nombre']);
         $Con = conectar();
         $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarPacientes($Criterio);
+        $result = $Estudio->consultarPacientesPorNombre($Criterio);
+        //FUNCIONA
         
-    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['codigo'])) {
-        $Criterio = strtoupper($_POST['codigo']);
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
+        $Criterio = strtoupper($_POST['Nombre']);
+        $fechaInicio = $_POST['fechaInicial'];
+        $fechaFin = $_POST['fechaFinal'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientesPorNombreYFecha($Criterio,$fechaInicio,$fechaFin);
+        //FUNCIONA
+
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && !empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])){
+        $Criterio = strtoupper($_POST['Nombre']);
+        $codigo_paciente = $_POST['codigo'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientesPorNombreYCodigo($Criterio,$codigo_paciente);
+        //QUEDA PENDIENTE RESOLVER
+        
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
+        $fechaInicio = $_POST['fechaInicial'];
+        $fechaFin = $_POST['fechaFinal'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientesPorFecha($fechaInicio,$fechaFin);
+        //FUNCIONA
+
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && !empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
+        $fechaInicio = $_POST['fechaInicial'];
+        $fechaFin = $_POST['fechaFinal'];
+        $codigo_paciente = $_POST['codigo'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarPacientePorFechaYCodigo($fechaInicio,$fechaFin,$codigo_paciente);
+        //FUNCIONA
+
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && !empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])){
+        $Criterio = $_POST['codigo'];
         $Con = conectar();
         $Estudio = new Estudios($Con);
         $result = $Estudio->consultarPacientesPorCodigo($Criterio);
-
-    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])) {
-        $fechaInicial = $_POST['fechaInicial'];
-        $fechaFinal = $_POST['fechaFinal'];
-        $Con = conectar();
-        $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarPacientesPorAno($fechaInicial, $fechaFinal);
-        
+        //FUNCIONA
     }
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
         while ($Fila = mysqli_fetch_assoc($result)) {
         $pacientes[] = $Fila;
          }
+         
     }
+    var_dump($_POST);
     require './vistas/crear.view.php';
 }

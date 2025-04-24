@@ -251,8 +251,19 @@ class Estudios{
 
     //FUNCIONES PARA AGREGAR (Consultas)
 
+    public function consultarPacientes(){
+        $SQL = "SELECT DISTINCT * FROM paciente ORDER BY fecha_registro LIMIT 50";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
 
-    public function consultarPacientes($Criterio){
+    public function consultarPacientesPorNombre($Criterio){
         $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? ORDER BY fecha_registro DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -266,13 +277,55 @@ class Estudios{
         $this->db->close();
     }
 
-    public function consultarPacientesPorAno($fechaInicio, $fechaFin){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? and ? ORDER BY fecha_registro DESC";
+    public function consultarPacientesPorNombreYFecha($Criterio, $fechaInicio, $fechaFin){
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? AND fecha_registro BETWEEN ? and ? ORDER BY fecha_registro DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $stmt->bind_param("sss",$likeCriterio, $fechaInicio, $fechaFin);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarPacientesPorNombreYCodigo($Criterio, $codigo_paciente){
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? AND codigo_paciente LIKE ? ORDER BY fecha_registro";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $likeCriterio = "%$Criterio%";
+        $likeCodigo = "%$codigo_paciente%";
+        $stmt->bind_param("ss, $likeCriterio, $likeCodigo");
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarPacientesPorFecha($fechaInicio, $fechaFin){
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? AND ? ORDER BY fecha_registro DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
         }
         $stmt->bind_param("ss", $fechaInicio, $fechaFin);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    public function consultarPacientePorFechaYCodigo($fechaInicio, $fechaFin, $codigo_paciente){
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? AND ? AND codigo_paciente LIKE ? ORDER BY fecha_registro DESC";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("sss", $fechaInicio, $fechaFin, $codigo_paciente);
         $stmt->execute();
         return $stmt->get_result();
         $stmt->close();
