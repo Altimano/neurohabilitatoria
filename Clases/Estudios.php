@@ -58,7 +58,8 @@ class Estudios{
             die("Error en prepare: " . $this->db->error);
         }
         $likeCriterio = "%$Criterio%";
-        $stmt->bind_param("ss", $likeCriterio, $codigo);
+        $likeCodigo = "%$codigo%";
+        $stmt->bind_param("ss", $likeCriterio, $likeCodigo);
         $stmt->execute();
         return $stmt->get_result();
         $stmt->close();
@@ -66,7 +67,7 @@ class Estudios{
     }
 
     public function consultarTodosLosEstudiosPorFecha($fechaInicio, $fechaFin){
-        $SQL = "SELECT DISTINCT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -108,6 +109,35 @@ class Estudios{
         return $stmt->get_result();
         $stmt->close();
         $this->db->close();
+    }
+
+    //FUNCIONES PARA MODIFICAR
+
+    //Consulta para obtener toda la informacion de un estudio en base a su id
+    public function consultarEstudioPorId($id_terapia_neurohabilitatoria){
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE id_terapia_neurohabilitatoria = ?";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("i", $id_terapia_neurohabilitatoria);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
+    //Funcion para modificar el estudio
+    //Queda pendiente los nombres de las nuevas variables de la bd para terapia neurohabilitatoria
+    public function modificarEstudio($datos){
+        $stmt = $this->db->prepare("UPDATE terapia_neurohabilitatoria SET clave_paciente = ?, nombre_pacinete = ?, eval_subs_fec_eval = ?, eval_subs_edad_eval = ?, eval_subs_edad_eval_meses = ?, eval_subs_edad_eval_dias = ?, eval_subs_edad_eval_semanas = ?, eval_subs_edad_eval_anios = ?, eval_subs_edad_eval_anios_meses = ?, eval_subs_edad_eval_anios_dias = ? WHERE id_terapia_neurohabilitatoria = ?");
+        $stmt->bind_param("issssssssi", $datos['clave_paciente'], $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias'], $datos['id_terapia_neurohabilitatoria']);
+        if ($stmt->execute()) {
+            header("Location: /modificar");
+        } else {
+            echo "Error al modificar la evaluación: " . $stmt->error;
+        }
+        $stmt->close();
     }
 
     //FUNCIONES PARA ELIMINAR
@@ -299,7 +329,7 @@ class Estudios{
         }
         $likeCriterio = "%$Criterio%";
         $likeCodigo = "%$codigo_paciente%";
-        $stmt->bind_param("ss, $likeCriterio, $likeCodigo");
+        $stmt->bind_param("ss", $likeCriterio, $likeCodigo);
         $stmt->execute();
         return $stmt->get_result();
         $stmt->close();
@@ -344,6 +374,21 @@ class Estudios{
         return $stmt->get_result();
         $stmt->close();
         $this->db->close();
+    }
+
+    //FUNCIONES PARA AGREGAR (Insertar en la base de datos)
+
+    //Agrega un estudio a base de el campo post agregado en el formulario inicial
+    public function agregarEstudio($datos){
+        $stmt = $this->db-> prepare("INSERT INTO terapia_neurohabilitatoria (clave_paciente, nombre_pacinete, eval_subs_fec_eval, eval_subs_edad_eval, eval_subs_edad_eval_meses, eval_subs_edad_eval_dias, eval_subs_edad_eval_semanas, eval_subs_edad_eval_anios, eval_subs_edad_eval_anios_meses, eval_subs_edad_eval_anios_dias) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias']);
+        $stmt-> execute();
+        //if ($stmt->execute()) {
+          //  header("Location: /crear");
+        //} else {
+          //  echo "Error al agregar el estudio: " . $stmt->error;
+        //}
+        $stmt->close();
     }
 
 
