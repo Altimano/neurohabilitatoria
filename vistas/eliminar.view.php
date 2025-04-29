@@ -15,7 +15,7 @@
 <body class="bg-gray-100">
 
     <div class="px-6 md:px-10 py-4 flex justify-between items-center bg-custom-header-area shadow-sm">
-        <h1 class="text-2xl font-bold text-custom-title">Consulta de Evaluaciones</h1>
+        <h1 class="text-2xl font-bold text-custom-title">Eliminar Evaluaciones</h1>
         <a href="/inicio" class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
             Salir
         </a> 

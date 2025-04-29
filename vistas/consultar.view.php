@@ -73,6 +73,7 @@
                     type="submit" 
                     class="w-full sm:w-auto bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]" 
                 >
+                <input type="hidden" name="Vacio" value="">
                     Buscar
                 </button>
             </div>
@@ -80,9 +81,9 @@
 
         <form method="post" action="/generarExcel" class="flex flex-col sm:flex-row items-end space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
         <input type="hidden" name="Nombre" value="<?= htmlspecialchars($_POST['Nombre']) ?>">
-        <input type="hidden" name="eval_subs_fec_eval" value="<?= htmlspecialchars($_POST['eval_subs_fec_eval'])?>">
+        <input type="hidden" name="eval_subs_fec_eval" value="<?= htmlspecialchars($_POST['eval_subs_fec_eval']) ?>">
         <input type="hidden" name="clave_paciente" value="<?= htmlspecialchars($_POST['clave_paciente']) ?>">
-        <input type="hidden" name="datosExcel" value="<?= json_encode($pacientes) ?>">
+        <input type="hidden" name="datosExcel" value='<?= json_encode($pacientes, JSON_HEX_APOS | JSON_HEX_QUOT) ?>'>
             <div class="w-full sm:w-auto"> 
                 <button 
                     type="submit" 

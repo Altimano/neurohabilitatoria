@@ -1,40 +1,58 @@
 <?php
 session_start();
-
+//error_reporting(E_ERROR | E_PARSE);
 include './config/db.php';
 include './Clases/Estudios.php';
+$pacientes = [];
 
 if ($_SESSION["session"] === 'okA') {
-    require './vistas/modificar.view.php';
-    if (isset($_POST['Nombre'])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudios();
+    }elseif ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
         $Criterio = strtoupper($_POST['Nombre']);
         $Con = conectar();
-        //QUEDA PENDIENTE QUE DATOS MOSTRAR AL AGREGAR ESTUDIO
-        //QUEDA PENDIENTE EN PRUEBA LOCAL AGREGAR BAYLEY3
-        $Estudios = new Estudios($Con);
-        $result = $Estudios->consultarTodosLosEstudios($Criterio);
-        $TotalFilas = mysqli_num_rows($result);
-        echo "<table border='1'>";
-        echo "<tr><th>Acción</th><th>Clave Paciente</th><th>Nombre</th><th>Fecha de Evaluacion Subsecuente</th></tr>";
-        while ($Fila = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>
-                    <form action='controladores/modificar.php' method='POST' style='display:inline;'>
-                        <input type='hidden' name='row_id' value='" . $Fila["id_terapia_neurohabilitatoria"] . "'>
-                        <button type='submit' onclick='return confirm(\"¿Estás seguro de modificar este estudio?\");'>
-                            Modificar
-                        </button>
-                    </form>
-                  </td>";
-            echo "<td>" . $Fila["clave_paciente"] . "</td>";
-            echo "<td>" . $Fila["nombre_pacinete"] . "</td>";
-            echo "<td>" . $Fila["eval_subs_fec_eval"] . "</td>";
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudiosPorNombre($Criterio);
+        
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
+        $Criterio = strtoupper($_POST['Nombre']);
+        $fechaInicial = $_POST['fechaInicial'];
+        $fechaFinal = $_POST['fechaFinal'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudiosPorNombreyFecha($Criterio,$fechaInicial,$fechaFinal);
 
-            echo "</tr>";
-        }
-
-        echo "</table>";
-        $stmt->close();
-        $Con->close();
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && !empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])){
+        $Criterio = strtoupper($_POST['Nombre']);
+        $codigo = $_POST['codigo'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudiosPorNombreyCodigo($Criterio,$codigo);
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
+        $fechaInicial = $_POST['fechaInicial'];
+        $fechaFinal = $_POST['fechaFinal'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudiosPorFecha($fechaInicial,$fechaFinal);
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && !empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
+        $fechaInicial = $_POST['fechaInicial'];
+        $fechaFinal = $_POST['fechaFinal'];
+        $codigo = $_POST['codigo'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudiosPorFechaYCodigo($fechaInicial,$fechaFinal,$codigo);
+    }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && !empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])){
+        $Criterio = $_POST['codigo'];
+        $Con = conectar();
+        $Estudio = new Estudios($Con);
+        $result = $Estudio->consultarTodosLosEstudiosPorCodigo($Criterio);
     }
+    if ($_SERVER["REQUEST_METHOD"] === "POST"){
+        while ($Fila = mysqli_fetch_assoc($result)) {
+        $pacientes[] = $Fila;
+         }
+    }
+    require './vistas/modificar.view.php';
 }
