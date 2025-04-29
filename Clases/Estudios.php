@@ -129,9 +129,12 @@ class Estudios{
 
     //Funcion para modificar el estudio
     //Queda pendiente los nombres de las nuevas variables de la bd para terapia neurohabilitatoria
+    //Queda pendiente si usar una funcion por seccion o todo junto y corregir con nombres de datos correctos
     public function modificarEstudio($datos){
-        $stmt = $this->db->prepare("UPDATE terapia_neurohabilitatoria SET clave_paciente = ?, nombre_pacinete = ?, eval_subs_fec_eval = ?, eval_subs_edad_eval = ?, eval_subs_edad_eval_meses = ?, eval_subs_edad_eval_dias = ?, eval_subs_edad_eval_semanas = ?, eval_subs_edad_eval_anios = ?, eval_subs_edad_eval_anios_meses = ?, eval_subs_edad_eval_anios_dias = ? WHERE id_terapia_neurohabilitatoria = ?");
-        $stmt->bind_param("issssssssi", $datos['clave_paciente'], $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias'], $datos['id_terapia_neurohabilitatoria']);
+        $stmt = $this->db->prepare("UPDATE terapia_neurohabilitatoria SET subesc_cf = ? , subesc_sobre_ab = ?, subesc_sent_prot_del = ? , subesc_camb_decub = ? , subesc_sent_sin_apoyo = ? , subesc_reac_lat_del = ? , subesc_pos_sed_decub = ? , subesc_patron_arrastre = ? , subesc_pos_hincado = ? , subesc_patron_gateo = ? , subesc_gateo_niveles = ? , 
+        subesc_trans_bipedest = ? , subesc_patr_marcha = ? , subesc_pie_momentaneo = ? , subesc_camina_atras = ? , subesc_camina_solo_cae_frec = ? , subesc_esca_ambas_manos = ? , subesc_patea_pelota = ? , subesc_esc_gateando = ? , subesc_corre_con_rig = ? , subesc_camina_solo_cae_rara = ? , subesc_esc_una_mano = ? , 
+        subesc_lanza_pelota = ? , subesc_salta_sitio = ? , subesc_juega_cuclillas = ? WHERE id_terapia_neurohabilitatoria = ?");
+        $stmt->bind_param("iiiiiiiiiiiiiiiiiiiiiiiiis", $datos['clave_paciente'], $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias'], $datos['id_terapia_neurohabilitatoria']);
         if ($stmt->execute()) {
             header("Location: /modificar");
         } else {

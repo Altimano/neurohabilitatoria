@@ -4,7 +4,7 @@
     include './config/db.php';
     include './Clases/Estudios.php';
 
-    $nombresEvaluaciones = [
+    /*$nombresEvaluaciones = [
         'Control cefálico' => ['id' => 'control_cefalico', 'nombre' => 'Control cefálico'],
         'Control de tronco' => ['id' => 'control_tronco', 'nombre' => 'Control de tronco'], 
         'Sobre el abdomen levanta tórax apoyando brazos' => 'levanta_torax',
@@ -24,11 +24,12 @@
     ];
     foreach ($nombresEvaluaciones as $clave => $valor) {
         echo $clave; 
-    }
+    }*/
     $Con = conectar();
+    var_dump($_POST);
+    //QUEDA PENDIENTE AGREGAR FUNCION PARA IR GUARDANDO TEMPORALMENTE LOS DATOS ENTRE PAGINAS
     $Estudio = new Estudios($Con);
     $result = $Estudio->consultarEstudioPorId($_POST["terapia_id"]);
     $evaluaciones = mysqli_fetch_assoc($result);
-    echo $evaluaciones['id_terapia_neurohabilitatoria'];
     $columnas = mysqli_fetch_fields($result);
     require './vistas/modificarEvaluacion.view.php';
