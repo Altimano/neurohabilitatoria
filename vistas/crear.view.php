@@ -15,7 +15,7 @@
 <body class="bg-gray-100">
 
     <div class="px-6 md:px-10 py-4 flex justify-between items-center bg-custom-header-area shadow-sm">
-        <h1 class="text-2xl font-bold text-custom-title">Consulta para agregar evaluacion para pacientes</h1>
+        <h1 class="text-2xl font-bold text-custom-title">Consulta Para Agregar Evaluacion de Pacientes</h1>
         <a href="/inicio" class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
             Salir
         </a> 
