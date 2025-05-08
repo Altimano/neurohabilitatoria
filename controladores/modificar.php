@@ -30,6 +30,14 @@
     //QUEDA PENDIENTE AGREGAR FUNCION PARA IR GUARDANDO TEMPORALMENTE LOS DATOS ENTRE PAGINAS
     $Estudio = new Estudios($Con);
     $result = $Estudio->consultarEstudioPorId($_POST["terapia_id"]);
+    var_dump($_POST);
+    if (isset($_POST["area"])) {
+        //QUEDA PENDIENTE LLENAR TODOS LOS CAMPOS DE LA FUNCION modificarEstudio();
+        //$Estudio->modificarEstudio();
+      
+    }else {
+        print("NO HAY SUBMIT");
+    }
     $evaluaciones = mysqli_fetch_assoc($result);
     $columnas = mysqli_fetch_fields($result);
     require './vistas/modificarEvaluacion.view.php';

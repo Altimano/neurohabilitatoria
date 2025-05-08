@@ -39,7 +39,18 @@
                     <label class="block text-sm font-medium text-custom-title">Tipo de Terapia</label>
                     <input type="text" name="dat_ter_tipo_terapia" value="<?= htmlspecialchars($evaluaciones['dat_ter_tipo_terapia']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
                 </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Area de Evaluacion</label>
+                    <select id="myselect" name="area" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                        <option value="" disabled selected>Selecciona</option>
+                        <option value="motor">Motor Grueso/Movimientos Posturales</option>
+                        <option value="fino">Motor Fino</option>
+                        <option value="lenguaje">Lenguaje</option>
+                    </select>
+                </div>
                             <!-- EMPIEZA SUBESCALAS DEL MOTOR GRUESO/MOVIMIENTOS POSTURALES-->
+                <div id="motor">
                 <div>
                     <label class="block text-sm font-medium text-custom-title">Control cefálico</label>
                     <input type="number" min="0" max="4"  name="subesc_cf" value="<?= htmlspecialchars($evaluaciones['subesc_cf']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
@@ -164,9 +175,116 @@
                     <label class="block text-sm font-medium text-custom-title">Juega en cuclillas</label>
                     <input type="number" min="0" max="4" name="subesc_juega_cuclillas" value="<?= htmlspecialchars($evaluaciones['subesc_juega_cuclillas']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
                 </div>
-
+                </div>
 
                 <!-- FIN DE SUBESCALAS DE MOTOR GRUESO -->
+
+                <!-- EMPIEZA SUBESCALAS DEL MOTOR FINO -->
+
+                <div id="motorFino">
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Lleva las manos a la línea media</label>
+                    <input type="number" min="0" max="4"  name="subesc_manos_linMedia" value="<?= htmlspecialchars($evaluaciones['subesc_manos_linMedia']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Sostiene y mantiene firmemente un objeto con la mano</label>
+                    <input type="number" min="0" max="4"  name="subesc_firm_obj_mano" value="<?= htmlspecialchars($evaluaciones['subesc_firm_obj_mano']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Se estira para tomar un objeto con ambas manos</label>
+                    <input type="number" min="0" max="4"  name="subesc_obj_ambManos" value="<?= htmlspecialchars($evaluaciones['subesc_obj_ambManos']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Estruja papel, sábanas, ropa, etc.</label>
+                    <input type="number" min="0" max="4"  name="subesc_estruja" value="<?= htmlspecialchars($evaluaciones['subesc_estruja']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Toma un objeto y lo transfiere entre sus manos</label>
+                    <input type="number" min="0" max="4"  name="subesc_transObjeto" value="<?= htmlspecialchars($evaluaciones['subesc_transObjeto']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Toma objetos que están a su alcance y los examina</label>
+                    <input type="number" min="0" max="4"  name="subesc_examObjeto" value="<?= htmlspecialchars($evaluaciones['subesc_examObjeto']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Comienza a desarrollar agarre índice-pulgar</label>
+                    <input type="number" min="0" max="4"  name="subesc_agarre_indPulg" value="<?= htmlspecialchars($evaluaciones['subesc_agarre_indPulg']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Inserta objetos en un agujero grande</label>
+                    <input type="number" min="0" max="4"  name="subesc_inserta_objAgujero" value="<?= htmlspecialchars($evaluaciones['subesc_inserta_objAgujero']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Pinza superior</label>
+                    <input type="number" min="0" max="4"  name="subesc_pinzaSup" value="<?= htmlspecialchars($evaluaciones['subesc_pinzaSup']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Señala con el dedo índice</label>
+                    <input type="number" min="0" max="4"  name="subesc_dedoIndice" value="<?= htmlspecialchars($evaluaciones['subesc_dedoIndice']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Forma una torre de dos cubos</label>
+                    <input type="number" min="0" max="4"  name="subesc_torre_dos" value="<?= htmlspecialchars($evaluaciones['subesc_torre_dos']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Garabatea espontáneamente por imitación</label>
+                    <input type="number" min="0" max="4"  name="subesc_garabImitacion" value="<?= htmlspecialchars($evaluaciones['subesc_garabImitacion']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Toma dos cubos en una mano</label>
+                    <input type="number" min="0" max="4"  name="subesc_dosCubos_mano" value="<?= htmlspecialchars($evaluaciones['subesc_dosCubos_mano']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Forma una torre con tres o cuatro cubos</label>
+                    <input type="number" min="0" max="4"  name="subesc_torre_tresCuatro" value="<?= htmlspecialchars($evaluaciones['subesc_torre_tresCuatro']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Introduce bolitas en la botella</label>
+                    <input type="number" min="0" max="4"  name="subesc_boliBotella" value="<?= htmlspecialchars($evaluaciones['subesc_boliBotella']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Da vuelta a las páginas de un libro (dos o tres a la vez)</label>
+                    <input type="number" min="0" max="4"  name="subesc_vueltaPag" value="<?= htmlspecialchars($evaluaciones['subesc_vueltaPag']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Intenta quitar la rosca o tapa de un frasco pequeño</label>
+                    <input type="number" min="0" max="4"  name="subesc_quitarTapa" value="<?= htmlspecialchars($evaluaciones['subesc_quitarTapa']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Imita trazo vertical </label>
+                    <input type="number" min="0" max="4"  name="subesc_imiTrazo" value="<?= htmlspecialchars($evaluaciones['subesc_imiTrazo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Arma torre de seis cubos</label>
+                    <input type="number" min="0" max="4"  name="subesc_torre_seis" value="<?= htmlspecialchars($evaluaciones['subesc_torre_seis']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Arma tren de tres cubos</label>
+                    <input type="number" min="0" max="4"  name="subesc_tren_tres" value="<?= htmlspecialchars($evaluaciones['subesc_tren_tres']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                </div>
+
+                <!-- FIN DE SUBESCALAS DE MOTOR FINO -->
             </div>
 
             <div class="mt-6">
@@ -188,5 +306,25 @@
             alert("Este campo no puede estar vacío.");
             input.value = ""; 
         }
+    };
+
+    function mostrar() {
+        var select = document.getElementById("myselect");
+        var motor = document.getElementById("motor");
+        var motorFino = document.getElementById("motorFino");
+        if (select.value === "motor") {
+            motor.style.display = "block";
+        } else {
+            motor.style.display = "none";
+        }
+        if (select.value === "fino") {
+            motorFino.style.display = "block";
+        } else {
+            motorFino.style.display = "none";
+        }
     }
+
+    mostrar();
+
+    document.getElementById("myselect").addEventListener("change", mostrar);
 </script>
