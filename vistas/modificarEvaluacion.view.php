@@ -44,12 +44,76 @@
                     <label class="block text-sm font-medium text-custom-title">Area de Evaluacion</label>
                     <select id="myselect" name="area" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
                         <option value="" disabled selected>Selecciona</option>
+                        <option value="maniobras">Maniobras Katona</option>
                         <option value="motor">Motor Grueso/Movimientos Posturales</option>
                         <option value="fino">Motor Fino</option>
-                        <option value="lenguaje">Lenguaje</option>
+                        <option value="tono">Tono Muscular y Ubicacion</option>
+                        <option value="signos">Signos de Alarma (Colocar un 1)</option>
                     </select>
                 </div>
-                            <!-- EMPIEZA SUBESCALAS DEL MOTOR GRUESO/MOVIMIENTOS POSTURALES-->
+
+                <!-- Maniobras Katona EMPIEZAN -->
+
+                <div id="maniobras">
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Elevación de tronco (tracción de manos)</label>
+                    <input type="number" min="0" max="4"  name="maniobra_elevacion_traccion" value="<?= htmlspecialchars($evaluaciones['maniobra_elevacion_traccion']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Elevación de tronco (espalda-cadera)</label>
+                    <input type="number" min="0" max="4" name="maniobra_elevacion_espalda" value="<?= htmlspecialchars($evaluaciones['maniobra_elevacion_espalda']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Sentado al aire</label>
+                    <input type="number" min="0" max="4" name="maniobra_sentado" value="<?= htmlspecialchars($evaluaciones['maniobra_sentado']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Rotación izquierda y derecha</label>
+                    <input type="number" min="0" max="4" name="maniobra_rotacion_izqDer" value="<?= htmlspecialchars($evaluaciones['maniobra_rotacion_izqDer']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Gateo asistido</label>
+                    <input type="number" min="0" max="4" name="maniobra_gateo_asistido" value="<?= htmlspecialchars($evaluaciones['maniobra_gateo_asistido']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Gateo asistido modificado</label>
+                    <input type="number" min="0" max="4" name="maniobra_gateo_asistidoMod" value="<?= htmlspecialchars($evaluaciones['maniobra_gateo_asistidoMod']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Arrastre horizontal</label>
+                    <input type="number" min="0" max="4" name="maniobra_arrastre_horiz" value="<?= htmlspecialchars($evaluaciones['maniobra_arrastre_horiz']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Marcha en plano horizontal</label>
+                    <input type="number" min="0" max="4" name="maniobra_marcha_planoHoriz" value="<?= htmlspecialchars($evaluaciones['maniobra_marcha_planoHoriz']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Marcha en plano ascendente</label>
+                    <input type="number" min="0" max="4" name="maniobra_marcha_planoAsc" value="<?= htmlspecialchars($evaluaciones['maniobra_marcha_planoAsc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Arrastre en plano inclinado descendente</label>
+                    <input type="number" min="0" max="4" name="maniobra_arrastre_inclinadoDesc" value="<?= htmlspecialchars($evaluaciones['maniobra_arrastre_inclinadoDesc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Arrastre en plano inclinado ascendente</label>
+                    <input type="number" min="0" max="4" name="maniobra_arrastre_inclinadoAsc" value="<?= htmlspecialchars($evaluaciones['maniobra_arrastre_inclinadoAsc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+                </div>
+                </div>
+
+                <!-- FIN DE MANIOBRAS KATONA -->
+
+                <!-- EMPIEZA SUBESCALAS DEL MOTOR GRUESO/MOVIMIENTOS POSTURALES-->
                 <div id="motor">
                 <div>
                     <label class="block text-sm font-medium text-custom-title">Control cefálico</label>
@@ -285,6 +349,66 @@
                 </div>
 
                 <!-- FIN DE SUBESCALAS DE MOTOR FINO -->
+
+                <!--Inicia tono muscular y ubicacion-->
+
+                <div id="tono">
+
+                </div>
+
+                <!--Fin tono muscular y ubicacion-->
+
+                <!--Inicia Postura-->
+
+                <div id="postura">
+
+                </div>
+
+                <!--Termina Postura--> 
+
+                <!--Inicia Signos de Alarma-->
+                <div id="signos">
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Aducción de pulgares</label>
+                    <input type="number" min="0" max="1"  name="signos_aduccionPulg" value="<?= htmlspecialchars($evaluaciones['signos_aduccionPulg']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Estrabismo</label>
+                    <input type="number" min="0" max="1"  name="signos_estrabismo" value="<?= htmlspecialchars($evaluaciones['signos_estrabismo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Irritabilidad</label>
+                    <input type="number" min="0" max="1"  name="signos_irritabilidad" value="<?= htmlspecialchars($evaluaciones['signos_irritabilidad']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Marcha en punta</label>
+                    <input type="number" min="0" max="1"  name="signos_marchaPun" value="<?= htmlspecialchars($evaluaciones['signos_marchaPun']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Marcha Cruzada</label>
+                    <input type="number" min="0" max="1"  name="signos_marchaCruz" value="<?= htmlspecialchars($evaluaciones['signos_marchaCruz']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Puños cerrados</label>
+                    <input type="number" min="0" max="1"  name="signos_puCerrado" value="<?= htmlspecialchars($evaluaciones['signos_puCerrado']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Reflejo de hiperextensión</label>
+                    <input type="number" min="0" max="1"  name="signos_reflejoHiper" value="<?= htmlspecialchars($evaluaciones['signos_reflejoHiper']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-custom-title">Lenguaje escaso</label>
+                    <input type="number" min="0" max="1"  name="signos_lenguajeEsc" value="<?= htmlspecialchars($evaluaciones['signos_lenguajeEsc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
+                </div>
+                </div>
+                <!--Termina Signos de Alarma-->
             </div>
 
             <div class="mt-6">
@@ -312,15 +436,51 @@
         var select = document.getElementById("myselect");
         var motor = document.getElementById("motor");
         var motorFino = document.getElementById("motorFino");
-        if (select.value === "motor") {
+        var maniobras = document.getElementById("maniobras");
+        var tono = document.getElementById("tono");
+        var postura = document.getElementById("postura");
+        var signos = document.getElementById("signos");
+        motor.style.display = "none";
+        motorFino.style.display = "none";
+        maniobras.style.display = "none";
+        tono.style.display = "none";
+        postura.style.display = "none";
+        signos.style.display = "none";
+
+        if (select.value === "motor") 
+        {
             motor.style.display = "block";
-        } else {
-            motor.style.display = "none";
-        }
-        if (select.value === "fino") {
+
+        } else if (select.value === "fino")
+        {
             motorFino.style.display = "block";
-        } else {
+
+        }
+        else if (select.value === "maniobras")
+        {
+            maniobras.style.display = "block";
+
+        } else if (select.value === "tono")
+        {
+            tono.style.display = "block";
+
+        } else if (select.value === "postura")
+        {
+            postura.style.display = "block";
+
+        } else if (select.value === "signos")
+        {
+            signos.style.display = "block";
+
+        } 
+        else
+        {
+            motor.style.display = "none";
             motorFino.style.display = "none";
+            maniobras.style.display = "none";
+            tono.style.display = "none";
+            postura.style.display = "none";
+            signos.style.display = "none";
         }
     }
 

@@ -24,7 +24,7 @@ class Estudios{
     }
 
     public function consultarTodosLosEstudiosPorNombre($Criterio){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -38,7 +38,7 @@ class Estudios{
     }
 
     public function consultarTodosLosEstudiosPorNombreyFecha($Criterio, $fechaInicio, $fechaFin){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? AND eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? AND eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -52,7 +52,7 @@ class Estudios{
     }
 
     public function consultarTodosLosEstudiosPorNombreyCodigo($Criterio, $codigo){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? AND clave_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? AND clave_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -67,7 +67,7 @@ class Estudios{
     }
 
     public function consultarTodosLosEstudiosPorFecha($fechaInicio, $fechaFin){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -80,7 +80,7 @@ class Estudios{
     }
 
     public function consultarTodosLosEstudiosPorFechaYCodigo($fechaInicio, $fechaFin, $codigo){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? AND clave_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE eval_subs_fec_eval BETWEEN ? AND ? AND clave_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -96,7 +96,7 @@ class Estudios{
         $SQL = "SELECT * FROM terapia_neurohabilitatoria 
         INNER JOIN paciente 
         ON terapia_neurohabilitatoria.clave_paciente = paciente.clave_paciente
-        WHERE paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -115,7 +115,7 @@ class Estudios{
 
     //Consulta para obtener toda la informacion de un estudio en base a su id
     public function consultarEstudioPorId($id_terapia_neurohabilitatoria){
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE id_terapia_neurohabilitatoria = ?";
+        $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE id_terapia_neurohabilitatoria = ? ";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -170,7 +170,7 @@ class Estudios{
         FROM terapia_neurohabilitatoria
         INNER JOIN paciente
         ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -190,7 +190,7 @@ class Estudios{
         FROM paciente
         INNER JOIN  terapia_neurohabilitatoria
         ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? AND terapia_neurohabilitatoria.eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? AND terapia_neurohabilitatoria.eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -210,7 +210,7 @@ class Estudios{
         FROM terapia_neurohabilitatoria
         INNER JOIN paciente
         ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? AND paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? AND paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -230,7 +230,7 @@ class Estudios{
         FROM terapia_neurohabilitatoria
         INNER JOIN paciente
         ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -249,7 +249,7 @@ class Estudios{
         FROM terapia_neurohabilitatoria
         INNER JOIN paciente
         ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? AND paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? AND paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -268,7 +268,7 @@ class Estudios{
         FROM terapia_neurohabilitatoria
         INNER JOIN paciente
         ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE paciente.codigo_paciente LIKE ? ORDER BY eval_subs_fec_eval DESC";
+        WHERE paciente.codigo_paciente LIKE ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -297,7 +297,7 @@ class Estudios{
     }
 
     public function consultarPacientesPorNombre($Criterio){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? ORDER BY fecha_registro DESC";
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -311,7 +311,7 @@ class Estudios{
     }
 
     public function consultarPacientesPorNombreYFecha($Criterio, $fechaInicio, $fechaFin){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? AND fecha_registro BETWEEN ? and ? ORDER BY fecha_registro DESC";
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? AND fecha_registro BETWEEN ? and ? ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -325,7 +325,7 @@ class Estudios{
     }
 
     public function consultarPacientesPorNombreYCodigo($Criterio, $codigo_paciente){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? AND codigo_paciente LIKE ? ORDER BY fecha_registro";
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE concat_ws(' ',nombre_paciente, apellido_paterno_paciente,apellido_materno_paciente) LIKE ? AND codigo_paciente LIKE ? ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -340,7 +340,7 @@ class Estudios{
     }
 
     public function consultarPacientesPorFecha($fechaInicio, $fechaFin){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? AND ? ORDER BY fecha_registro DESC";
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? AND ? ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -353,7 +353,7 @@ class Estudios{
     }
 
     public function consultarPacientePorFechaYCodigo($fechaInicio, $fechaFin, $codigo_paciente){
-        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? AND ? AND codigo_paciente LIKE ? ORDER BY fecha_registro DESC";
+        $SQL = "SELECT DISTINCT * FROM paciente WHERE fecha_registro BETWEEN ? AND ? AND codigo_paciente LIKE ? ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);
@@ -366,7 +366,7 @@ class Estudios{
     }
 
     public function consultarPacientesPorCodigo($Criterio){
-        $SQL = "SELECT * FROM paciente  WHERE codigo_paciente LIKE ? ORDER BY fecha_registro DESC";
+        $SQL = "SELECT * FROM paciente  WHERE codigo_paciente LIKE ? ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);

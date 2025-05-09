@@ -26,7 +26,6 @@
         echo $clave; 
     }*/
     $Con = conectar();
-    var_dump($_POST);
     //QUEDA PENDIENTE AGREGAR FUNCION PARA IR GUARDANDO TEMPORALMENTE LOS DATOS ENTRE PAGINAS
     $Estudio = new Estudios($Con);
     $result = $Estudio->consultarEstudioPorId($_POST["terapia_id"]);
