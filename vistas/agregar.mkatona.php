@@ -35,86 +35,196 @@
             <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">MANIOBRAS DE KATONA</h1></div>
 
             <div class="legend-text border-b border-gray-400 pb-4 mb-6">
-                <strong>Normal(N), Hipotonía(-), Hipertonía(+), Asimetría(A), M.Sup.(MS), M.Inf.(MI), Facial(F), Cuello(C), Tronco(T), Global(G), Hemicuerpo(H), C.Valgo(Cv), C.Varo(Cvr), Derecha(D), Izquierda(I), Supinador(S), Pronador(Pr), Flexión(Fx), Extensión(Ex), Dudoso(?), Ausente(Au), Dismetrías(Ds)</strong>
+                <strong>Normal(N), Hipotonía(-), Hipertonía(+), Miembros Toracicos(MTs), Miembro Pelvico(MP), Extremidades(E), Hemicuerpo(H), Control Lateral(CL), Derecha(D), Izquierda(I), Ausente(A), Extremidades(E)</strong>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                 <div>
                     <label for="mk_elev_tronco_manos" class="block text-sm font-medium text-gray-700 mb-1">Elevación de tronco (tracción de manos)</label>
-                    <select name="mk_elev_tronco_manos" id="mk_elev_tronco_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="N">N (Normal)</option> <option value="-">- (Hipotonía)</option> <option value="+">+ (Hipertonía)</option> <option value="A">A (Asimetría)</option> <option value="MS">MS (M.Sup.)</option> <option value="MI">MI (M.Inf.)</option> <option value="F">F (Facial)</option> <option value="C">C (Cuello)</option> <option value="T">T (Tronco)</option> <option value="G">G (Global)</option> <option value="H">H (Hemicuerpo)</option> <option value="Cv">Cv (C.Valgo)</option> <option value="Cvr">Cvr (C.Varo)</option> <option value="D">D (Derecha)</option> <option value="I">I (Izquierda)</option> <option value="S">S (Supinador)</option> <option value="Pr">Pr (Pronador)</option> <option value="Fx">Fx (Flexión)</option> <option value="Ex">Ex (Extensión)</option> <option value="?">? (Dudoso)</option> <option value="Au">Au (Ausente)</option> <option value="Ds">Ds (Dismetrías)</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                 <div>
-                    <label for="mk_elev_tronco_espalda" class="block text-sm font-medium text-gray-700 mb-1">Elevación de tronco (espalda-cuello)</label>
-                    <select name="mk_elev_tronco_espalda" id="mk_elev_tronco_espalda" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <label for="mk_elev_tronco_cadera" class="block text-sm font-medium text-gray-700 mb-1">Elevación de tronco (espalda-cadera)</label>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_sentado_aire" class="block text-sm font-medium text-gray-700 mb-1">Sentado al aire</label>
-                    <select name="mk_sentado_aire" id="mk_sentado_aire" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
-                    <label for="mk_marcha_izq_der" class="block text-sm font-medium text-gray-700 mb-1">Marcha izqda y derecha</label>
-                    <select name="mk_marcha_izq_der" id="mk_marcha_izq_der" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <label for="mk_rotacion_izq_der" class="block text-sm font-medium text-gray-700 mb-1">Rotacion izquierda y derecha</label>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_gateo_asistido" class="block text-sm font-medium text-gray-700 mb-1">Gateo asistido</label>
-                    <select name="mk_gateo_asistido" id="mk_gateo_asistido" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_gateo_asistido_mod" class="block text-sm font-medium text-gray-700 mb-1">Gateo asistido modificado</label>
-                    <select name="mk_gateo_asistido_mod" id="mk_gateo_asistido_mod" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_arrastre_horizontal" class="block text-sm font-medium text-gray-700 mb-1">Arrastre horizontal</label>
-                    <select name="mk_arrastre_horizontal" id="mk_arrastre_horizontal" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_marcha_plano_horizontal" class="block text-sm font-medium text-gray-700 mb-1">Marcha en plano horizontal</label>
-                    <select name="mk_marcha_plano_horizontal" id="mk_marcha_plano_horizontal" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                 <div>
                     <label for="mk_marcha_plano_ascendente" class="block text-sm font-medium text-gray-700 mb-1">Marcha en plano ascendente</label>
-                    <select name="mk_marcha_plano_ascendente" id="mk_marcha_plano_ascendente" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_arrastre_inclinado_desc" class="block text-sm font-medium text-gray-700 mb-1">Arrastre en plano inclinado descendente</label>
-                    <select name="mk_arrastre_inclinado_desc" id="mk_arrastre_inclinado_desc" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
                  <div>
                     <label for="mk_arrastre_inclinado_asc" class="block text-sm font-medium text-gray-700 mb-1">Arrastre en plano inclinado ascendente</label>
-                    <select name="mk_arrastre_inclinado_asc" id="mk_arrastre_inclinado_asc" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione</option>
-                         <option value="N">N</option> <option value="-">-</option> <option value="+">+</option> <option value="A">A</option> <option value="MS">MS</option> <option value="MI">MI</option> <option value="F">F</option> <option value="C">C</option> <option value="T">T</option> <option value="G">G</option> <option value="H">H</option> <option value="Cv">Cv</option> <option value="Cvr">Cvr</option> <option value="D">D</option> <option value="I">I</option> <option value="S">S</option> <option value="Pr">Pr</option> <option value="Fx">Fx</option> <option value="Ex">Ex</option> <option value="?">?</option> <option value="Au">Au</option> <option value="Ds">Ds</option>
-                    </select>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="N"><label for="tu_hipotonia_1">Normal(N)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="H-"><label for="tu_hipotonia_2">Hipotonía(-)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="H+"><label for="tu_hipotonia_3">Hipertonía(+)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="MTs"><label for="tu_hipotonia_4">Miembros Toracicos(MTs)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="MP"><label for="tu_hipotonia_5">Membros Pelvicos(MP)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_6">Extremidades(E)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="H"><label for="tu_hipotonia_7">Hemicuerpo(H)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="CL"><label for="tu_hipotonia_D">Control Lateral(CL)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="D"><label for="tu_hipotonia_I">Derecha(D)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="I"><label for="tu_hipotonia_I">Izquierda(I)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="A"><label for="tu_hipotonia_I">Ausente(A)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="E"><label for="tu_hipotonia_I">Extremidades(E)</label></div>
+                    </div>
                 </div>
             </div>
 

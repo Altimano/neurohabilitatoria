@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motor Fino</title>
+    <title>Tono Muscular y Ubicacion</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bg-custom-header-area { background-color: #FFFFFF; }
@@ -32,154 +32,84 @@
                 <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
             </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">MOTOR FINO</h1></div>
-            <div class="border-b border-gray-400 py-5 mb-6"><h2 class="text-base md:text-lg font-semibold text-center text-gray-800 px-2"> No lo logra (0) | Lo intenta pero no lo logra (1) | En proceso (2) | Lo realiza inhábilmente (3) | Normal (4) </h2></div>
+            <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">TONO MUSCULAR Y UBICACIÓN</h1></div>
+            <div class="text-sm text-center text-gray-700 border-b border-gray-400 pb-4 mb-6"><strong>General(1), Axial(2), Extremidades(3), Miembros Toracicos(4), Membros Pelvicos(5), Hemicuerpo(6), Contralateral(7), Derecho(8), Izquierdo(9)</strong></div>
+            <div class="space-y-6 mb-6 text-left">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
+                <div>
+                    <label class="block text-base font-medium text-gray-800 mb-1 text-center border-t pt-2">Hipotonía:</label>
+                    <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="1"><label for="tu_hipotonia_1">General(1)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="2"><label for="tu_hipotonia_2">Axial(2)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="3"><label for="tu_hipotonia_3">Extremidades(3)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="4"><label for="tu_hipotonia_4">Miembros Toracicos(4)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="5"><label for="tu_hipotonia_5">Membros Pelvicos(5)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="6"><label for="tu_hipotonia_6">Hemicuerpo(6)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="7"><label for="tu_hipotonia_7">Contralateral(7)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="8"><label for="tu_hipotonia_D">Derecho(8)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="9"><label for="tu_hipotonia_I">Izquierdo(9)</label></div>
+                    </div>
+                </div>
                  <div>
-                     <label for="mf_manos_linea_media" class="block text-sm font-medium text-gray-700 mb-1">Lleva las manos a la linea media*</label>
-                     <select name="mf_manos_linea_media" id="mf_manos_linea_media" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
+                     <label class="block text-base font-medium text-gray-800 mb-1 text-center border-t pt-2">Hipertonía:</label>
+                     <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="1"><label for="tu_hipotonia_1">General(1)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="2"><label for="tu_hipotonia_2">Axial(2)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="3"><label for="tu_hipotonia_3">Extremidades(3)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="4"><label for="tu_hipotonia_4">Miembros Toracicos(4)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="5"><label for="tu_hipotonia_5">Membros Pelvicos(5)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="6"><label for="tu_hipotonia_6">Hemicuerpo(6)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="7"><label for="tu_hipotonia_7">Contralateral(7)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="8"><label for="tu_hipotonia_D">Derecho(8)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="9"><label for="tu_hipotonia_I">Izquierdo(9)</label></div>
+                    </div>
+                </div>
                  <div>
-                     <label for="mf_mantiene_objeto" class="block text-sm font-medium text-gray-700 mb-1">Tiene y mantiene firmemente un objeto con la mano</label>
-                     <select name="mf_mantiene_objeto" id="mf_mantiene_objeto" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
+                     <label class="block text-base font-medium text-gray-800 mb-1 text-center border-t pt-2">Mixto (Hipotonía + Espasticidad):</label>
+                     <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="1"><label for="tu_hipotonia_1">General(1)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="2"><label for="tu_hipotonia_2">Axial(2)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="3"><label for="tu_hipotonia_3">Extremidades(3)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="4"><label for="tu_hipotonia_4">Miembros Toracicos(4)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="5"><label for="tu_hipotonia_5">Membros Pelvicos(5)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="6"><label for="tu_hipotonia_6">Hemicuerpo(6)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="7"><label for="tu_hipotonia_7">Contralateral(7)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="8"><label for="tu_hipotonia_D">Derecho(8)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="9"><label for="tu_hipotonia_I">Izquierdo(9)</label></div>
+                    </div>
+                </div>
                  <div>
-                     <label for="mf_estira_ambas_manos" class="block text-sm font-medium text-gray-700 mb-1">Se estira para tomar un objeto con ambas manos</label>
-                     <select name="mf_estira_ambas_manos" id="mf_estira_ambas_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
+                     <label class="block text-base font-medium text-gray-800 mb-1 text-center border-t pt-2">Fluctuante:</label>
+                     <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="1"><label for="tu_hipotonia_1">General(1)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="2"><label for="tu_hipotonia_2">Axial(2)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="3"><label for="tu_hipotonia_3">Extremidades(3)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="4"><label for="tu_hipotonia_4">Miembros Toracicos(4)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="5"><label for="tu_hipotonia_5">Membros Pelvicos(5)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="6"><label for="tu_hipotonia_6">Hemicuerpo(6)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="7"><label for="tu_hipotonia_7">Contralateral(7)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="8"><label for="tu_hipotonia_D">Derecho(8)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="9"><label for="tu_hipotonia_I">Izquierdo(9)</label></div>
+                    </div>
+                </div>
                  <div>
-                     <label for="mf_estruja_papel" class="block text-sm font-medium text-gray-700 mb-1">Estruja papel, sabanas, ropa, etc...*</label>
-                     <select name="mf_estruja_papel" id="mf_estruja_papel" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_transfiere_manos" class="block text-sm font-medium text-gray-700 mb-1">Toma un objeto y la tranfiere entre sus manos*</label>
-                     <select name="mf_transfiere_manos" id="mf_transfiere_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_examina_objetos" class="block text-sm font-medium text-gray-700 mb-1">Toma objetos que estan a su alcance y los examina</label>
-                     <select name="mf_examina_objetos" id="mf_examina_objetos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_desarrolla_agarre" class="block text-sm font-medium text-gray-700 mb-1">Comienza a desarrollar agarre indice-pulgar</label>
-                     <select name="mf_desarrolla_agarre" id="mf_desarrolla_agarre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_inserta_agujero" class="block text-sm font-medium text-gray-700 mb-1">Inserta objetos en un agujero grande</label>
-                     <select name="mf_inserta_agujero" id="mf_inserta_agujero" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_pinza_superior" class="block text-sm font-medium text-gray-700 mb-1">Pinza superior*</label>
-                     <select name="mf_pinza_superior" id="mf_pinza_superior" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_senala_indice" class="block text-sm font-medium text-gray-700 mb-1">Señala con el dedo indice</label>
-                     <select name="mf_senala_indice" id="mf_senala_indice" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_torre_2_cubos" class="block text-sm font-medium text-gray-700 mb-1">Forma una torre de 2 cubos*</label>
-                     <select name="mf_torre_2_cubos" id="mf_torre_2_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_garabatea_imitacion" class="block text-sm font-medium text-gray-700 mb-1">Garabatea espontaneamente por imitacion</label>
-                     <select name="mf_garabatea_imitacion" id="mf_garabatea_imitacion" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_toma_2_cubos_mano" class="block text-sm font-medium text-gray-700 mb-1">Toma 2 cubos en una mano</label>
-                     <select name="mf_toma_2_cubos_mano" id="mf_toma_2_cubos_mano" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_torre_3_4_cubos" class="block text-sm font-medium text-gray-700 mb-1">Forma una torre con 3 o 4 cubos</label>
-                     <select name="mf_torre_3_4_cubos" id="mf_torre_3_4_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_introduce_bolitas" class="block text-sm font-medium text-gray-700 mb-1">Introduce bolitas en la botella</label>
-                     <select name="mf_introduce_bolitas" id="mf_introduce_bolitas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_vueltas_paginas" class="block text-sm font-medium text-gray-700 mb-1">Da vueltas a las paginas de un libro(2 o 3 a la vez)</label>
-                     <select name="mf_vueltas_paginas" id="mf_vueltas_paginas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_intenta_quitar_rosca" class="block text-sm font-medium text-gray-700 mb-1">Intenta quitar la rosca o tapa de un frasco pequeño</label>
-                     <select name="mf_intenta_quitar_rosca" id="mf_intenta_quitar_rosca" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_imita_trazo_vertical" class="block text-sm font-medium text-gray-700 mb-1">Imita trazo vertical</label>
-                     <select name="mf_imita_trazo_vertical" id="mf_imita_trazo_vertical" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_torre_6_cubos" class="block text-sm font-medium text-gray-700 mb-1">Arma torre de 6 cubos*</label>
-                     <select name="mf_torre_6_cubos" id="mf_torre_6_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_arma_tren_3_cubos" class="block text-sm font-medium text-gray-700 mb-1">Arma tren de 3 cubos</label>
-                     <select name="mf_arma_tren_3_cubos" id="mf_arma_tren_3_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
+                     <label class="block text-base font-medium text-gray-800 mb-1 text-center border-t pt-2">Normal:</label>
+                     <div class="checkbox-group-container flex flex-wrap justify-center gap-x-4 gap-y-2">
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_1" name="tu_hipotonia[]" value="1"><label for="tu_hipotonia_1">General(1)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_2" name="tu_hipotonia[]" value="2"><label for="tu_hipotonia_2">Axial(2)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_3" name="tu_hipotonia[]" value="3"><label for="tu_hipotonia_3">Extremidades(3)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_4" name="tu_hipotonia[]" value="4"><label for="tu_hipotonia_4">Miembros Toracicos(4)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_5" name="tu_hipotonia[]" value="5"><label for="tu_hipotonia_5">Membros Pelvicos(5)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_6" name="tu_hipotonia[]" value="6"><label for="tu_hipotonia_6">Hemicuerpo(6)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_7" name="tu_hipotonia[]" value="7"><label for="tu_hipotonia_7">Contralateral(7)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_D" name="tu_hipotonia[]" value="8"><label for="tu_hipotonia_D">Derecho(8)</label></div>
+                         <div class="checkbox-item"><input type="checkbox" id="tu_hipotonia_I" name="tu_hipotonia[]" value="9"><label for="tu_hipotonia_I">Izquierdo(9)</label></div>
+                    </div>
+                </div>
             </div>
 
             <div class="flex justify-between mt-8">
-                 <a href="agregar.mgrueso.php">
+                 <a href="agregar.mfino.php">
                      <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                  </a>
                  <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
@@ -226,7 +156,7 @@
                     try {
                         sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
 
-                        window.location.href = 'agregar.tmyubicacion.php';
+                        window.location.href = 'agregar.posturasysignos.php';
 
                     } catch(e) { console.error("Error guardando P4_M Fino:", e); alert("Hubo un error al guardar."); }
                 });
