@@ -28,13 +28,13 @@
         required
       />
 
-      <button type="submit" class="mt-4 w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-800">
+      
+        <button type="submit" class="mt-4 w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-800">
         Iniciar sesión
       </button>
+      </a>
     </div>
   </form>
-
-  <?php require 'partials/modal.php'; ?>
 </body>
 
 

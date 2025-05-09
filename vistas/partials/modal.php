@@ -1,8 +1,10 @@
-
 <body>
-    <button class="bg-blue-300 text-white p-3">Abrir modal</button>
+    <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+    <img src="/assets/img_iconos/buuscar.svg" class="buscar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+    <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+    <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
 
-    <!--componente del modal de eliminar-->
+    <!--componente del modal general-->
     <div id="contenedor-componente-modal" class="hidden fixed inset-0">
         <div class="contenedor-modal-flex flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center 
             sm:block sm:p-0"> 
@@ -19,23 +21,22 @@
                             <img src="/assets/img/advertencia.png" class="h-auto w-auto">
                         </div>
                         <div class="contenido-modal text-center mt-3 sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg font-medium text-gray-900">
-                                Eliminar Paciente
-                            </h3>
+                            <h3 class="text-lg font-medium text-gray-900"></h3>
                         <div class="texto-modal">
-                            <p class="text-gray-500 text-sm">¿Seguro que quieres eliminar este campo?</p>
+                            <p class="text-gray-500 text-sm"></p>
                         </div>
                         </div>
                     </div>
                 </div>
 
+                <!--Componente de modal de advertencia-->
                 <div class="acciones-modal bg-gray-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button id="Cancelar-cerrar" class="w-full inline-flex justify-center rounded-md border border-transparent 
                     shadow-md px-4 py-2 bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none
                     focus:ring-2 focus:ring-offset-2 focus:ring-blue-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cancelar</button>
-                    <button id="Eliminar-seguir" class="w-full inline-flex justify-center rounded-md border border-transparent 
+                    <button id="Seguir" class="w-full inline-flex justify-center rounded-md border border-transparent 
                     shadow-md px-4 py-2 mt-3 bg-red-700 font-medium text-white hover:bg-red-600 focus:outline-none
-                    focus:ring-2 focus:ring-offset-2 focus:ring-red-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Eliminar</button>
+                    focus:ring-2 focus:ring-offset-2 focus:ring-red-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"></button>
                 </div>
             </div>
         </div>
@@ -56,9 +57,7 @@
                             <img src="/assets/img/Exito.png" alt="Logo1" class="h-auto w-auto">
                         </div>
                         <div class="contenido-modal text-center mt-3 sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg font-medium text-gray-900">
-                                Se ha borrado el paciente con exito!
-                            </h3>
+                            <h3 class="text-lg font-medium text-gray-900"></h3>
                         </div>
                     </div>
                 </div>
@@ -73,71 +72,129 @@
     </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const botonAbrir = document.querySelector("button.bg-blue-300");
+document.addEventListener("DOMContentLoaded", () => {
+    const botones = document.querySelectorAll(".agregar, .buscar, .modificar, .eliminar");
+
     const modalOverlay = document.getElementById("contenedor-componente-modal");
     const modal = document.getElementById("contenedor-modal");
     const botonCancelar = document.getElementById("Cancelar-cerrar");
-    const botonCancelarExito = document.getElementById("Cancelar-cerrar-exito");
-    const botonEliminar = document.getElementById("Eliminar-seguir");
+    const botonSeguir = document.getElementById("Seguir");
 
     const modalExitoOverlay = document.getElementById("contenedor-componente-modal-exito");
     const modalExito = modalExitoOverlay.querySelector("#contenedor-modal");
+    const botonCancelarExito = document.getElementById("Cancelar-cerrar-exito");
 
-    // Ocultar ambos modales al inicio
-    modalOverlay.classList.add("hidden");
-    modal.classList.add("opacity-0", "scale-95", "transition-all", "duration-200");
+    const tituloModal = modal.querySelector("h3");
+    const textoModal = modal.querySelector(".texto-modal p");
+    const imagenModal = modal.querySelector(".iconos-modal img");
 
-    modalExitoOverlay.classList.add("hidden");
-    modalExito.classList.add("opacity-0", "scale-95", "transition-all", "duration-200");
+    const tituloExitoModal = modalExito.querySelector("h3");
+    const imagenExitoModal = modalExito.querySelector("img");
 
-    // Abrir primer modal
-    botonAbrir.addEventListener("click", () => {
-        modalOverlay.classList.remove("hidden");
+    // Configuraciones por tipo de botón
+    const config = {
+        agregar: {
+            titulo: "Agregar Paciente",
+            texto: "¿Seguro que quieres agregar este campo?",
+            imagen: "/assets/img/advertencia.png",
+            textoBoton: "Agregar",
+            colorBoton: "bg-blue-700 hover:bg-blue-600 text-white focus:ring-blue-200",
+            tituloExito: "¡Paciente agregado exitosamente!",
+            imagenExito: "/assets/img/Exito.png"
+        },
+        buscar: {
+            titulo: "Buscar Paciente",
+            texto: "¿Seguro que quieres buscar este campo?",
+            imagen: "/assets/img/advertencia.png",
+            textoBoton: "Buscar",
+            colorBoton: "bg-green-700 hover:bg-green-600 text-white focus:ring-green-200",
+            tituloExito: "¡Búsqueda completada!",
+            imagenExito: "/assets/img/Exito.png"
+        },
+        modificar: {
+            titulo: "Modificar Paciente",
+            texto: "¿Seguro que quieres modificar este campo?",
+            imagen: "/assets/img/advertencia.png",
+            textoBoton: "Modificar",
+            colorBoton: "bg-yellow-600 hover:bg-yellow-500 text-white focus:ring-yellow-200",
+            tituloExito: "¡Modificación realizada con éxito!",
+            imagenExito: "/assets/img/Exito.png"
+        },
+        eliminar: {
+            titulo: "Eliminar Paciente",
+            texto: "¿Seguro que quieres eliminar este campo?",
+            imagen: "/assets/img/advertencia.png",
+            textoBoton: "Eliminar",
+            colorBoton: "bg-red-700 hover:bg-red-600 text-white focus:ring-red-200",
+            tituloExito: "¡Paciente eliminado correctamente!",
+            imagenExito: "/assets/img/Exito.png"
+        }
+    };
 
-        setTimeout(() => {
-            modal.classList.remove("opacity-0", "scale-95");
-            modal.classList.add("opacity-100", "scale-100");
-        }, 10);
+    let claseSeleccionada = null;
+
+    botones.forEach(boton => {
+        boton.addEventListener("click", () => {
+            claseSeleccionada = Array.from(boton.classList).find(cls => config[cls]);
+            if (!claseSeleccionada) return;
+
+            const datos = config[claseSeleccionada];
+
+            // Actualiza contenido del primer modal
+            tituloModal.textContent = datos.titulo;
+            textoModal.textContent = datos.texto;
+            imagenModal.src = datos.imagen;
+
+            // Actualiza botón
+            botonSeguir.textContent = datos.textoBoton;
+            botonSeguir.className = `w-full inline-flex justify-center rounded-md border border-transparent 
+                shadow-md px-4 py-2 mt-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 
+                sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ${datos.colorBoton}`;
+
+            // Muestra modal
+            modalOverlay.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.remove("opacity-0", "scale-95");
+                modal.classList.add("opacity-100", "scale-100");
+            }, 10);
+        });
     });
 
-    // Cancelar primer modal
     botonCancelar.addEventListener("click", () => {
         modal.classList.remove("opacity-100", "scale-100");
         modal.classList.add("opacity-0", "scale-95");
-
-        setTimeout(() => {
-            modalOverlay.classList.add("hidden");
-        }, 200);
+        setTimeout(() => modalOverlay.classList.add("hidden"), 200);
     });
 
-    // Eliminar y mostrar modal de éxito
-    botonEliminar.addEventListener("click", () => {
-        // Cerrar el modal de eliminar
+    botonSeguir.addEventListener("click", () => {
+        if (!claseSeleccionada) return;
+
+        const datos = config[claseSeleccionada];
+
+        // Oculta modal de advertencia
         modal.classList.remove("opacity-100", "scale-100");
         modal.classList.add("opacity-0", "scale-95");
 
         setTimeout(() => {
             modalOverlay.classList.add("hidden");
 
-            // Mostrar el modal de éxito
+            // Muestra modal de éxito
+            tituloExitoModal.textContent = datos.tituloExito;
+            imagenExitoModal.src = datos.imagenExito;
+
             modalExitoOverlay.classList.remove("hidden");
             setTimeout(() => {
                 modalExito.classList.remove("opacity-0", "scale-95");
                 modalExito.classList.add("opacity-100", "scale-100");
             }, 10);
         }, 200);
+    });
 
-            // Cerrar el segundo modal
-            botonCancelarExito.addEventListener("click", () => {
-                modalExito.classList.remove("opacity-100", "scale-100");
-                modalExito.classList.add("opacity-0", "scale-95");
-
-                setTimeout(() => {
-                    modalExitoOverlay.classList.add("hidden");
-            }, 200);
-        });
+    botonCancelarExito.addEventListener("click", () => {
+        modalExito.classList.remove("opacity-100", "scale-100");
+        modalExito.classList.add("opacity-0", "scale-95");
+        setTimeout(() => modalExitoOverlay.classList.add("hidden"), 200);
     });
 });
 </script>
-</body>
+
