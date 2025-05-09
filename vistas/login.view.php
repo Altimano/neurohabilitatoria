@@ -12,7 +12,7 @@
       <input 
         type="text" 
         id="usuario" 
-        name="usuario"
+        name="user"
         class="border w-full text-base px-2 py-1 mb-4 focus:outline-none focus:ring-0 focus:border-gray-600 rounded"
         placeholder="Ingresar Usuario"
         required
@@ -22,7 +22,7 @@
       <input 
         type="password" 
         id="contraseña" 
-        name="contraseña"
+        name="password"
         class="border w-full text-base px-2 py-1 mb-4 focus:outline-none focus:ring-0 focus:border-gray-600 rounded"
         placeholder="Ingresar Contraseña"
         required

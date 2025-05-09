@@ -8,6 +8,7 @@ if (!isset($_POST['datosExcel'])) {
 $datos = json_decode($_POST['datosExcel'], true);
 $nombreArchivo = "Evaluaciones_" . date("Y-m-d_H-i-s") . ".xls";
 header("Content-Type: application/vnd.ms-excel");
+
 header("Content-Disposition: attachment; filename=\"$nombreArchivo\"");
 
 echo "<table border='1'>";

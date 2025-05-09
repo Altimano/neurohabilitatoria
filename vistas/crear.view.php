@@ -15,7 +15,7 @@
 <body class="bg-gray-100">
 
     <div class="px-6 md:px-10 py-4 flex justify-between items-center bg-custom-header-area shadow-sm">
-        <h1 class="text-2xl font-bold text-custom-title">Consulta de pacientes</h1>
+        <h1 class="text-2xl font-bold text-custom-title">Consulta Para Agregar Evaluacion de Pacientes</h1>
         <a href="/inicio" class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
             Salir
         </a> 
@@ -105,7 +105,7 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
                     <form action='controladores/crear.php' method='POST' style='display:inline;'>
-                    <input type='hidden' name='codigo_paciente' value='<?php echo htmlspecialchars($paciente["codigo_paciente"] , ENT_QUOTES); ?>'>
+                    <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"] , ENT_QUOTES); ?>'>
                     <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"], ENT_QUOTES); ?>'>
                     <input type='hidden' name='semanas_gestacion' value='<?php  echo htmlspecialchars($paciente["semanas_gestacion"], ENT_QUOTES); ?>'>
                         <button type='submit' onclick='return confirm("¿Estás seguro de agregar un estudio para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
