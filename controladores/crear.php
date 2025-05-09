@@ -26,9 +26,9 @@
     echo $codigo_paciente;
     echo "<br>";
     //calcularEdadCorregidaSemanas();
-     echo calcularEdadCronologicaIngreso($fechaInicioTratamiento, $fechaNacimiento);
+     echo "AQUI ESTA LA EDAD CRONOLOGICA DE INGRESO" .' '.calcularEdadCronologicaIngreso($fechaInicioTratamiento, $fechaNacimiento);
     echo "<br>";
-     echo calcularFechaNacimientoCorregida($fechaNacimiento, $semanasEnGestacion);
+     echo "AQUI ESTA LA FECHA DE NACIMIENTO CORREGIDA PAPOI" .' '. calcularFechaNacimientoCorregida($fechaNacimiento, $semanasEnGestacion);
     echo "<br>";
     var_dump($clave_paciente);
     echo "<br>";
@@ -37,3 +37,4 @@
     }else{
         echo "Primera evaluacion para paciente";
     };
+?>

@@ -104,14 +104,16 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
-                    <form action='controladores/crear.php' method='POST' style='display:inline;'>
-                    <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"] , ENT_QUOTES); ?>'>
-                    <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"], ENT_QUOTES); ?>'>
-                    <input type='hidden' name='semanas_gestacion' value='<?php  echo htmlspecialchars($paciente["semanas_gestacion"], ENT_QUOTES); ?>'>
-                        <button type='submit' onclick='return confirm("¿Estás seguro de agregar un estudio para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
-                            Agregar
-                        </button>
-                    </form></td>
+                <form action='../vistas/agregar.view.php' method='POST' style='display:inline;'>
+                    <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"]); ?>'>
+                    <input type='hidden' name='codigo_paciente' value='<?php echo htmlspecialchars(isset($paciente["codigo_paciente"]) ? $paciente["codigo_paciente"] : ""); ?>'>
+                    <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"]); ?>'>
+                    <input type='hidden' name='semanas_gestacion' value='<?php echo htmlspecialchars($paciente["semanas_gestacion"]); ?>'>
+                    <button type='submit' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
+                        Agregar
+                    </button>
+                </form>
+                </td>
             </tr>
         <?php endforeach; ?>
     <?php else: ?>
