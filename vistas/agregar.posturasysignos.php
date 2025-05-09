@@ -116,7 +116,7 @@
             </div>
 
             <div class="flex justify-between mt-8">
-                 <a href="agregar.mfino.php">
+                 <a href="agregar.tmyubicacion.php">
                      <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                  </a>
                  <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
@@ -160,7 +160,7 @@
 
                     try {
                         sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'siguiente_evaluacion.php';
+                        window.location.href = 'agregar.hitomgrueso.php';
 
                     } catch(e) { console.error("Error guardando P6_PosturaSignos:", e); alert("Hubo un error al guardar."); }
                 });

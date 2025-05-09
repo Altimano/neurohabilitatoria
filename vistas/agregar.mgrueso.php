@@ -141,6 +141,76 @@
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                   </select>
                </div>
+               <div>
+                   <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae frecuencia)</label>
+                   <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="Sube_escaleras_apoyo_manos" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras apoyandose en ambas manos</label>
+                   <select name="Sube_escaleras_apoyo_manos" id="Sube_escaleras_apoyo_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="patea_pelota" class="block text-sm font-medium text-gray-700 mb-1">Patea una pelota</label>
+                   <select name="patea_pelota" id="patea_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="sube_escaleras_gateando" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras gateando</label>
+                   <select name="sube_escaleras_gateando" id="sube_escaleras_gateando" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="corre_rigidez" class="block text-sm font-medium text-gray-700 mb-1">Corre(con rigidez)</label>
+                   <select name="corre_rigidez" id="corre_rigidez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae rara vez)</label>
+                   <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="sube_baja_escaleras" class="block text-sm font-medium text-gray-700 mb-1">Sube y baja escaleras sostenido de una mano</label>
+                   <select name="sube_baja_escaleras" id="sube_baja_escaleras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="lanza_pelota" class="block text-sm font-medium text-gray-700 mb-1">Lanza la pelota</label>
+                   <select name="lanza_pelota" id="lanza_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="salta_sitio" class="block text-sm font-medium text-gray-700 mb-1">Salta en el sitio</label>
+                   <select name="salta_sitio" id="salta_sitio" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
+               <div>
+                   <label for="juega_cuclillas" class="block text-sm font-medium text-gray-700 mb-1">Juega en cunclillas</label>
+                   <select name="juega_cuclillas" id="juega_cuclillas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                       <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                  </select>
+               </div>
                 </div>
 
             <div class="flex justify-between mt-8">
@@ -194,6 +264,7 @@
                      } catch(e) { console.error("Error guardando P3_M grueso:", e); alert("Hubo un error al guardar."); }
                  });
             }
+
         });
     </script>
 </body>

@@ -225,9 +225,7 @@
 
                     try {
                         sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-
                         window.location.href = 'agregar.tmyubicacion.php';
-
                     } catch(e) { console.error("Error guardando P4_M Fino:", e); alert("Hubo un error al guardar."); }
                 });
             }
