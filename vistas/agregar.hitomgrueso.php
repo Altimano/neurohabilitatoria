@@ -88,7 +88,7 @@
             </div>
 
             <div class="flex justify-between mt-8">
-                 <a href="vistas/agregar.posturasysignos.php">
+                 <a href="agregar.posturasysignos.php">
                      <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                  </a>
                  <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>

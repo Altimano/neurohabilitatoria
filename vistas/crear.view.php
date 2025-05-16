@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include 'partials/modal.php'; ?>
     <title>Agregar Estudio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -103,15 +104,15 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_nacimiento_paciente"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2">  
+                <td class="border border-sky-300 px-3">  
                 <form action='../vistas/agregar.view.php' method='POST' style='display:inline;'>
                     <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"]); ?>'>
                     <input type='hidden' name='codigo_paciente' value='<?php echo htmlspecialchars(isset($paciente["codigo_paciente"]) ? $paciente["codigo_paciente"] : ""); ?>'>
                     <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"]); ?>'>
                     <input type='hidden' name='semanas_gestacion' value='<?php echo htmlspecialchars($paciente["semanas_gestacion"]); ?>'>
-                    <button type='submit' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
-                        Agregar
-                    </button>
+                    <div class="flex justify-center">
+                        <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+                    </div>
                 </form>
                 </td>
             </tr>

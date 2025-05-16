@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agregar Evaluación - Paso 1</title>
+    <title>Agregar Evaluación</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .bg-custom-header-area { background-color: #FFFFFF; }
@@ -124,6 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                         <?php endfor; ?>
                     </select>
+                </div>
+
+                <div>
+                    <div class="border-t border-b border-gray-400 py-2 mb-6"><h1>Nombre del Evaluador(a)</h1>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
+                            <div><input></input></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">DATOS DEL PACIENTE</h1></div>
