@@ -48,367 +48,1114 @@
                         <option value="motor">Motor Grueso/Movimientos Posturales</option>
                         <option value="fino">Motor Fino</option>
                         <option value="tono">Tono Muscular y Ubicacion</option>
+                        <option value="postura">Postura (Colocar un 1)</option>
                         <option value="signos">Signos de Alarma (Colocar un 1)</option>
                     </select>
                 </div>
 
-                <!-- Maniobras Katona EMPIEZAN -->
-
-                <div id="maniobras">
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Elevación de tronco (tracción de manos)</label>
-                    <input type="number" min="0" max="4"  name="maniobra_elevacion_traccion" value="<?= htmlspecialchars($evaluaciones['maniobra_elevacion_traccion']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Elevación de tronco (espalda-cadera)</label>
-                    <input type="number" min="0" max="4" name="maniobra_elevacion_espalda" value="<?= htmlspecialchars($evaluaciones['maniobra_elevacion_espalda']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sentado al aire</label>
-                    <input type="number" min="0" max="4" name="maniobra_sentado" value="<?= htmlspecialchars($evaluaciones['maniobra_sentado']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Rotación izquierda y derecha</label>
-                    <input type="number" min="0" max="4" name="maniobra_rotacion_izqDer" value="<?= htmlspecialchars($evaluaciones['maniobra_rotacion_izqDer']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Gateo asistido</label>
-                    <input type="number" min="0" max="4" name="maniobra_gateo_asistido" value="<?= htmlspecialchars($evaluaciones['maniobra_gateo_asistido']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Gateo asistido modificado</label>
-                    <input type="number" min="0" max="4" name="maniobra_gateo_asistidoMod" value="<?= htmlspecialchars($evaluaciones['maniobra_gateo_asistidoMod']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Arrastre horizontal</label>
-                    <input type="number" min="0" max="4" name="maniobra_arrastre_horiz" value="<?= htmlspecialchars($evaluaciones['maniobra_arrastre_horiz']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Marcha en plano horizontal</label>
-                    <input type="number" min="0" max="4" name="maniobra_marcha_planoHoriz" value="<?= htmlspecialchars($evaluaciones['maniobra_marcha_planoHoriz']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Marcha en plano ascendente</label>
-                    <input type="number" min="0" max="4" name="maniobra_marcha_planoAsc" value="<?= htmlspecialchars($evaluaciones['maniobra_marcha_planoAsc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Arrastre en plano inclinado descendente</label>
-                    <input type="number" min="0" max="4" name="maniobra_arrastre_inclinadoDesc" value="<?= htmlspecialchars($evaluaciones['maniobra_arrastre_inclinadoDesc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Arrastre en plano inclinado ascendente</label>
-                    <input type="number" min="0" max="4" name="maniobra_arrastre_inclinadoAsc" value="<?= htmlspecialchars($evaluaciones['maniobra_arrastre_inclinadoAsc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-                </div>
-
-                <!-- FIN DE MANIOBRAS KATONA -->
-
-                <!-- EMPIEZA SUBESCALAS DEL MOTOR GRUESO/MOVIMIENTOS POSTURALES-->
-                <div id="motor">
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Control cefálico</label>
-                    <input type="number" min="0" max="4"  name="subesc_cf" value="<?= htmlspecialchars($evaluaciones['subesc_cf']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sobre el abdomen levanta tórax apoyando brazos</label>
-                    <input type="number" min="0" max="4" name="subesc_sobre_ab" value="<?= htmlspecialchars($evaluaciones['subesc_sobre_ab']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sentado con reacción de protección delantera</label>
-                    <input type="number" min="0" max="4" name="subesc_sent_prot_del" value="<?= htmlspecialchars($evaluaciones['subesc_sent_prot_del']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Cambio de decúbito prono a decúbito supino</label>
-                    <input type="number" min="0" max="4" name="subesc_camb_decub" value="<?= htmlspecialchars($evaluaciones['subesc_camb_decub']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sentado sin apoyo</label>
-                    <input type="number" min="0" max="4" name="subesc_sent_sin_apoyo" value="<?= htmlspecialchars($evaluaciones['subesc_sent_sin_apoyo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Reacciones de protección laterales y delanteras</label>
-                    <input type="number" min="0" max="4" name="subesc_reac_lat_del" value="<?= htmlspecialchars($evaluaciones['subesc_reac_lat_del']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Cambio de posición sedente a decúbito prono</label>
-                    <input type="number" min="0" max="4" name="subesc_pos_sed_decub" value="<?= htmlspecialchars($evaluaciones['subesc_pos_sed_decub']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Patrón de arrastre</label>
-                    <input type="number" min="0" max="4" name="subesc_patron_arrastre" value="<?= htmlspecialchars($evaluaciones['subesc_patron_arrastre']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Cambio de posición cuatro puntos a hincado</label>
-                    <input type="number" min="0" max="4" name="subesc_pos_hincado" value="<?= htmlspecialchars($evaluaciones['subesc_pos_hincado']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Patrón de gateo independiente</label>
-                    <input type="number" min="0" max="4" name="subesc_patron_gateo" value="<?= htmlspecialchars($evaluaciones['subesc_patron_gateo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Gateo en diferentes niveles (colchón, planos, etc.)</label>
-                    <input type="number" min="0" max="4" name="subesc_gateo_niveles" value="<?= htmlspecialchars($evaluaciones['subesc_gateo_niveles']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Transición gateo a bipedestación</label>
-                    <input type="number" min="0" max="4" name="subesc_trans_bipedest" value="<?= htmlspecialchars($evaluaciones['subesc_trans_bipedest']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Comienza el patrón de marcha</label>
-                    <input type="number" min="0" max="4" name="subesc_patr_marcha" value="<?= htmlspecialchars($evaluaciones['subesc_patr_marcha']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Se pone de pie momentáneamente sin apoyarse</label>
-                    <input type="number" min="0" max="4" name="subesc_pie_momentaneo" value="<?= htmlspecialchars($evaluaciones['subesc_pie_momentaneo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Camina hacia atrás</label>
-                    <input type="number" min="0" max="4" name="subesc_camina_atras" value="<?= htmlspecialchars($evaluaciones['subesc_camina_atras']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Camina solo (cae frecuentemente)</label>
-                    <input type="number" min="0" max="4" name="subesc_camina_solo_cae_frec" value="<?= htmlspecialchars($evaluaciones['subesc_camina_solo_cae_frec']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sube escaleras apoyándose en ambas manos</label>
-                    <input type="number" min="0" max="4" name="subesc_esca_ambas_manos" value="<?= htmlspecialchars($evaluaciones['subesc_esca_ambas_manos']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Patea una pelota</label>
-                    <input ttype="number" min="0" max="4" name="subesc_patea_pelota" value="<?= htmlspecialchars($evaluaciones['subesc_patea_pelota']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sube escaleras gateando</label>
-                    <input type="number" min="0" max="4" name="subesc_esc_gateando" value="<?= htmlspecialchars($evaluaciones['subesc_esc_gateando']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Corre (con rigidez)</label>
-                    <input type="number" min="0" max="4" name="subesc_corre_con_rig" value="<?= htmlspecialchars($evaluaciones['subesc_corre_con_rig']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Camina solo (cae rara vez)</label>
-                    <input type="number" min="0" max="4" name="subesc_camina_solo_cae_rara" value="<?= htmlspecialchars($evaluaciones['subesc_camina_solo_cae_rara']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sube y baja escaleras sostenido de una mano</label>
-                    <input type="number" min="0" max="4" name="subesc_esc_una_mano" value="<?= htmlspecialchars($evaluaciones['subesc_esc_una_mano']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Lanza la pelota</label>
-                    <input type="number" min="0" max="4" name="subesc_lanza_pelota" value="<?= htmlspecialchars($evaluaciones['subesc_lanza_pelota']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Salta en el sitio</label>
-                    <input type="number" min="0" max="4" name="subesc_salta_sitio" value="<?= htmlspecialchars($evaluaciones['subesc_salta_sitio']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Juega en cuclillas</label>
-                    <input type="number" min="0" max="4" name="subesc_juega_cuclillas" value="<?= htmlspecialchars($evaluaciones['subesc_juega_cuclillas']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
-                </div>
-                </div>
-
-                <!-- FIN DE SUBESCALAS DE MOTOR GRUESO -->
-
-                <!-- EMPIEZA SUBESCALAS DEL MOTOR FINO -->
-
-                <div id="motorFino">
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Lleva las manos a la línea media</label>
-                    <input type="number" min="0" max="4"  name="subesc_manos_linMedia" value="<?= htmlspecialchars($evaluaciones['subesc_manos_linMedia']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Sostiene y mantiene firmemente un objeto con la mano</label>
-                    <input type="number" min="0" max="4"  name="subesc_firm_obj_mano" value="<?= htmlspecialchars($evaluaciones['subesc_firm_obj_mano']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Se estira para tomar un objeto con ambas manos</label>
-                    <input type="number" min="0" max="4"  name="subesc_obj_ambManos" value="<?= htmlspecialchars($evaluaciones['subesc_obj_ambManos']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Estruja papel, sábanas, ropa, etc.</label>
-                    <input type="number" min="0" max="4"  name="subesc_estruja" value="<?= htmlspecialchars($evaluaciones['subesc_estruja']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Toma un objeto y lo transfiere entre sus manos</label>
-                    <input type="number" min="0" max="4"  name="subesc_transObjeto" value="<?= htmlspecialchars($evaluaciones['subesc_transObjeto']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Toma objetos que están a su alcance y los examina</label>
-                    <input type="number" min="0" max="4"  name="subesc_examObjeto" value="<?= htmlspecialchars($evaluaciones['subesc_examObjeto']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Comienza a desarrollar agarre índice-pulgar</label>
-                    <input type="number" min="0" max="4"  name="subesc_agarre_indPulg" value="<?= htmlspecialchars($evaluaciones['subesc_agarre_indPulg']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Inserta objetos en un agujero grande</label>
-                    <input type="number" min="0" max="4"  name="subesc_inserta_objAgujero" value="<?= htmlspecialchars($evaluaciones['subesc_inserta_objAgujero']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Pinza superior</label>
-                    <input type="number" min="0" max="4"  name="subesc_pinzaSup" value="<?= htmlspecialchars($evaluaciones['subesc_pinzaSup']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Señala con el dedo índice</label>
-                    <input type="number" min="0" max="4"  name="subesc_dedoIndice" value="<?= htmlspecialchars($evaluaciones['subesc_dedoIndice']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Forma una torre de dos cubos</label>
-                    <input type="number" min="0" max="4"  name="subesc_torre_dos" value="<?= htmlspecialchars($evaluaciones['subesc_torre_dos']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Garabatea espontáneamente por imitación</label>
-                    <input type="number" min="0" max="4"  name="subesc_garabImitacion" value="<?= htmlspecialchars($evaluaciones['subesc_garabImitacion']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Toma dos cubos en una mano</label>
-                    <input type="number" min="0" max="4"  name="subesc_dosCubos_mano" value="<?= htmlspecialchars($evaluaciones['subesc_dosCubos_mano']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Forma una torre con tres o cuatro cubos</label>
-                    <input type="number" min="0" max="4"  name="subesc_torre_tresCuatro" value="<?= htmlspecialchars($evaluaciones['subesc_torre_tresCuatro']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Introduce bolitas en la botella</label>
-                    <input type="number" min="0" max="4"  name="subesc_boliBotella" value="<?= htmlspecialchars($evaluaciones['subesc_boliBotella']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Da vuelta a las páginas de un libro (dos o tres a la vez)</label>
-                    <input type="number" min="0" max="4"  name="subesc_vueltaPag" value="<?= htmlspecialchars($evaluaciones['subesc_vueltaPag']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Intenta quitar la rosca o tapa de un frasco pequeño</label>
-                    <input type="number" min="0" max="4"  name="subesc_quitarTapa" value="<?= htmlspecialchars($evaluaciones['subesc_quitarTapa']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Imita trazo vertical </label>
-                    <input type="number" min="0" max="4"  name="subesc_imiTrazo" value="<?= htmlspecialchars($evaluaciones['subesc_imiTrazo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Arma torre de seis cubos</label>
-                    <input type="number" min="0" max="4"  name="subesc_torre_seis" value="<?= htmlspecialchars($evaluaciones['subesc_torre_seis']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Arma tren de tres cubos</label>
-                    <input type="number" min="0" max="4"  name="subesc_tren_tres" value="<?= htmlspecialchars($evaluaciones['subesc_tren_tres']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                </div>
-
-                <!-- FIN DE SUBESCALAS DE MOTOR FINO -->
-
-                <!--Inicia tono muscular y ubicacion-->
-
-                <div id="tono">
-
-                </div>
-
-                <!--Fin tono muscular y ubicacion-->
-
-                <!--Inicia Postura-->
-
-                <div id="postura">
-
-                </div>
-
-                <!--Termina Postura--> 
-
-                <!--Inicia Signos de Alarma-->
-                <div id="signos">
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Aducción de pulgares</label>
-                    <input type="number" min="0" max="1"  name="signos_aduccionPulg" value="<?= htmlspecialchars($evaluaciones['signos_aduccionPulg']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Estrabismo</label>
-                    <input type="number" min="0" max="1"  name="signos_estrabismo" value="<?= htmlspecialchars($evaluaciones['signos_estrabismo']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Irritabilidad</label>
-                    <input type="number" min="0" max="1"  name="signos_irritabilidad" value="<?= htmlspecialchars($evaluaciones['signos_irritabilidad']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Marcha en punta</label>
-                    <input type="number" min="0" max="1"  name="signos_marchaPun" value="<?= htmlspecialchars($evaluaciones['signos_marchaPun']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Marcha Cruzada</label>
-                    <input type="number" min="0" max="1"  name="signos_marchaCruz" value="<?= htmlspecialchars($evaluaciones['signos_marchaCruz']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Puños cerrados</label>
-                    <input type="number" min="0" max="1"  name="signos_puCerrado" value="<?= htmlspecialchars($evaluaciones['signos_puCerrado']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Reflejo de hiperextensión</label>
-                    <input type="number" min="0" max="1"  name="signos_reflejoHiper" value="<?= htmlspecialchars($evaluaciones['signos_reflejoHiper']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-custom-title">Lenguaje escaso</label>
-                    <input type="number" min="0" max="1"  name="signos_lenguajeEsc" value="<?= htmlspecialchars($evaluaciones['signos_lenguajeEsc']) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm num">
-                </div>
-                </div>
-                <!--Termina Signos de Alarma-->
+<!-- Maniobras Katona EMPIEZAN -->
+<div id="maniobras" class="space-y-6">
+
+  <!-- Elevación de tronco (tracción de manos) -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Elevación de tronco (tracción de manos)</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_traccion[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Elevación de tronco (espalda-cadera) -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Elevación de tronco (espalda-cadera)</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_elevacion_espalda[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Sentado al aire -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Sentado al aire</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_sentado[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Rotación izquierda y derecha -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Rotación izquierda y derecha</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_rotacion_izqDer[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Gateo asistido -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Gateo asistido</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistido[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Gateo asistido modificado -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Gateo asistido modificado</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_gateo_asistidoMod[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Arrastre horizontal -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Arrastre horizontal</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_horiz[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Marcha en plano horizontal -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Marcha en plano horizontal</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoHoriz[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Marcha en plano ascendente -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Marcha en plano ascendente</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_marcha_planoAsc[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Arrastre en plano inclinado descendente -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Arrastre en plano inclinado descendente</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoDesc[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Arrastre en plano inclinado ascendente -->
+  <div>
+    <label class="block text-sm font-medium text-custom-title">Arrastre en plano inclinado ascendente</label>
+    <div class="mt-1 block w-full p-2 border bg-white rounded-md shadow-sm">
+      <ul class="list-none space-y-1">
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="N" class="form-checkbox mr-2">Normal (N)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="-" class="form-checkbox mr-2">Hipotonía (–)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="+" class="form-checkbox mr-2">Hipertonía (+)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="MTs" class="form-checkbox mr-2">Miembros Torácicos (MTs)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="MP" class="form-checkbox mr-2">Membros Pélvicos (MP)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="E" class="form-checkbox mr-2">Extremidades (E)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="H" class="form-checkbox mr-2">Hemicuerpo (H)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="CL" class="form-checkbox mr-2">Control Lateral (CL)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="D" class="form-checkbox mr-2">Derecha (D)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="I" class="form-checkbox mr-2">Izquierda (I)</label></li>
+        <li><label class="flex items-center"><input type="checkbox" name="maniobra_arrastre_inclinadoAsc[]" value="A" class="form-checkbox mr-2">Ausente (A)</label></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<!-- FIN DE MANIOBRAS KATONA -->
+
+
+<!-- EMPIEZA SUBESCALAS DEL MOTOR GRUESO/MOVIMIENTOS POSTURALES -->
+<div id="motor" class="space-y-6">
+
+  <div>
+    <label for="subesc_cf" class="block text-sm font-medium text-custom-title mb-1">Control cefálico</label>
+    <select name="subesc_cf" id="subesc_cf" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_sobre_ab" class="block text-sm font-medium text-custom-title mb-1">Sobre el abdomen levanta tórax apoyando brazos</label>
+    <select name="subesc_sobre_ab" id="subesc_sobre_ab" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_sent_prot_del" class="block text-sm font-medium text-custom-title mb-1">Sentado con reacción de protección delantera</label>
+    <select name="subesc_sent_prot_del" id="subesc_sent_prot_del" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_camb_decub" class="block text-sm font-medium text-custom-title mb-1">Cambio de decúbito prono a decúbito supino</label>
+    <select name="subesc_camb_decub" id="subesc_camb_decub" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_sent_sin_apoyo" class="block text-sm font-medium text-custom-title mb-1">Sentado sin apoyo</label>
+    <select name="subesc_sent_sin_apoyo" id="subesc_sent_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_reac_lat_del" class="block text-sm font-medium text-custom-title mb-1">Reacciones de protección laterales y delanteras</label>
+    <select name="subesc_reac_lat_del" id="subesc_reac_lat_del" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_pos_sed_decub" class="block text-sm font-medium text-custom-title mb-1">Cambio de posición sedente a decúbito prono</label>
+    <select name="subesc_pos_sed_decub" id="subesc_pos_sed_decub" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_patron_arrastre" class="block text-sm font-medium text-custom-title mb-1">Patrón de arrastre</label>
+    <select name="subesc_patron_arrastre" id="subesc_patron_arrastre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_pos_hincado" class="block text-sm font-medium text-custom-title mb-1">Cambio de posición cuatro puntos a hincado</label>
+    <select name="subesc_pos_hincado" id="subesc_pos_hincado" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_patron_gateo" class="block text-sm font-medium text-custom-title mb-1">Patrón de gateo independiente</label>
+    <select name="subesc_patron_gateo" id="subesc_patron_gateo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_gateo_niveles" class="block text-sm font-medium text-custom-title mb-1">Gateo en diferentes niveles (colchón, planos, etc.)</label>
+    <select name="subesc_gateo_niveles" id="subesc_gateo_niveles" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_trans_bipedest" class="block text-sm font-medium text-custom-title mb-1">Transición gateo a bipedestación</label>
+    <select name="subesc_trans_bipedest" id="subesc_trans_bipedest" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_patr_marcha" class="block text-sm font-medium text-custom-title mb-1">Comienza el patrón de marcha</label>
+    <select name="subesc_patr_marcha" id="subesc_patr_marcha" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_pie_momentaneo" class="block text-sm font-medium text-custom-title mb-1">Se pone de pie momentáneamente sin apoyarse</label>
+    <select name="subesc_pie_momentaneo" id="subesc_pie_momentaneo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_camina_atras" class="block text-sm font-medium text-custom-title mb-1">Camina hacia atrás</label>
+    <select name="subesc_camina_atras" id="subesc_camina_atras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_camina_solo_cae_frec" class="block text-sm font-medium text-custom-title mb-1">Camina solo (cae frecuentemente)</label>
+    <select name="subesc_camina_solo_cae_frec" id="subesc_camina_solo_cae_frec" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_esca_ambas_manos" class="block text-sm font-medium text-custom-title mb-1">Sube escaleras apoyándose en ambas manos</label>
+    <select name="subesc_esca_ambas_manos" id="subesc_esca_ambas_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_patea_pelota" class="block text-sm font-medium text-custom-title mb-1">Patea una pelota</label>
+    <select name="subesc_patea_pelota" id="subesc_patea_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_esc_gateando" class="block text-sm font-medium text-custom-title mb-1">Sube escaleras gateando</label>
+    <select name="subesc_esc_gateando" id="subesc_esc_gateando" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_corre_con_rig" class="block text-sm font-medium text-custom-title mb-1">Corre (con rigidez)</label>
+    <select name="subesc_corre_con_rig" id="subesc_corre_con_rig" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_camina_solo_cae_rara" class="block text-sm font-medium text-custom-title mb-1">Camina solo (cae rara vez)</label>
+    <select name="subesc_camina_solo_cae_rara" id="subesc_camina_solo_cae_rara" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_esc_una_mano" class="block text-sm font-medium text-custom-title mb-1">Sube y baja escaleras sostenido de una mano</label>
+    <select name="subesc_esc_una_mano" id="subesc_esc_una_mano" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_lanza_pelota" class="block text-sm font-medium text-custom-title mb-1">Lanza la pelota</label>
+    <select name="subesc_lanza_pelota" id="subesc_lanza_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_salta_sitio" class="block text-sm font-medium text-custom-title mb-1">Salta en el sitio</label>
+    <select name="subesc_salta_sitio" id="subesc_salta_sitio" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_juega_cuclillas" class="block text-sm font-medium text-custom-title mb-1">Juega en cuclillas</label>
+    <select name="subesc_juega_cuclillas" id="subesc_juega_cuclillas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+</div>
+<!-- FIN DE SUBESCALAS DE MOTOR GRUESO -->
+
+
+ <!-- EMPIEZA SUBESCALAS DEL MOTOR FINO -->
+<div id="motorFino" class="space-y-6">
+
+  <div>
+    <label for="subesc_manos_linMedia" class="block text-sm font-medium text-custom-title mb-1">
+      Lleva las manos a la línea media
+    </label>
+    <select name="subesc_manos_linMedia" id="subesc_manos_linMedia"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_firm_obj_mano" class="block text-sm font-medium text-custom-title mb-1">
+      Sostiene y mantiene firmemente un objeto con la mano
+    </label>
+    <select name="subesc_firm_obj_mano" id="subesc_firm_obj_mano"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_obj_ambManos" class="block text-sm font-medium text-custom-title mb-1">
+      Se estira para tomar un objeto con ambas manos
+    </label>
+    <select name="subesc_obj_ambManos" id="subesc_obj_ambManos"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_estruja" class="block text-sm font-medium text-custom-title mb-1">
+      Estruja papel, sábanas, ropa, etc.
+    </label>
+    <select name="subesc_estruja" id="subesc_estruja"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_transObjeto" class="block text-sm font-medium text-custom-title mb-1">
+      Toma un objeto y lo transfiere entre sus manos
+    </label>
+    <select name="subesc_transObjeto" id="subesc_transObjeto"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_examObjeto" class="block text-sm font-medium text-custom-title mb-1">
+      Toma objetos que están a su alcance y los examina
+    </label>
+    <select name="subesc_examObjeto" id="subesc_examObjeto"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_agarre_indPulg" class="block text-sm font-medium text-custom-title mb-1">
+      Comienza a desarrollar agarre índice-pulgar
+    </label>
+    <select name="subesc_agarre_indPulg" id="subesc_agarre_indPulg"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_inserta_objAgujero" class="block text-sm font-medium text-custom-title mb-1">
+      Inserta objetos en un agujero grande
+    </label>
+    <select name="subesc_inserta_objAgujero" id="subesc_inserta_objAgujero"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_pinzaSup" class="block text-sm font-medium text-custom-title mb-1">
+      Pinza superior
+    </label>
+    <select name="subesc_pinzaSup" id="subesc_pinzaSup"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_dedoIndice" class="block text-sm font-medium text-custom-title mb-1">
+      Señala con el dedo índice
+    </label>
+    <select name="subesc_dedoIndice" id="subesc_dedoIndice"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_torre_dos" class="block text-sm font-medium text-custom-title mb-1">
+      Forma una torre de dos cubos
+    </label>
+    <select name="subesc_torre_dos" id="subesc_torre_dos"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_garabImitacion" class="block text-sm font-medium text-custom-title mb-1">
+      Garabatea espontáneamente por imitación
+    </label>
+    <select name="subesc_garabImitacion" id="subesc_garabImitacion"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_dosCubos_mano" class="block text-sm font-medium text-custom-title mb-1">
+      Toma dos cubos en una mano
+    </label>
+    <select name="subesc_dosCubos_mano" id="subesc_dosCubos_mano"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_torre_tresCuatro" class="block text-sm font-medium text-custom-title mb-1">
+      Forma una torre con tres o cuatro cubos
+    </label>
+    <select name="subesc_torre_tresCuatro" id="subesc_torre_tresCuatro"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_boliBotella" class="block text-sm font-medium text-custom-title mb-1">
+      Introduce bolitas en la botella
+    </label>
+    <select name="subesc_boliBotella" id="subesc_boliBotella"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_vueltaPag" class="block text-sm font-medium text-custom-title mb-1">
+      Da vuelta a las páginas de un libro (dos o tres a la vez)
+    </label>
+    <select name="subesc_vueltaPag" id="subesc_vueltaPag"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_quitarTapa" class="block text-sm font-medium text-custom-title mb-1">
+      Intenta quitar la rosca o tapa de un frasco pequeño
+    </label>
+    <select name="subesc_quitarTapa" id="subesc_quitarTapa"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_imiTrazo" class="block text-sm font-medium text-custom-title mb-1">
+      Imita trazo vertical
+    </label>
+    <select name="subesc_imiTrazo" id="subesc_imiTrazo"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_torre_seis" class="block text-sm font-medium text-custom-title mb-1">
+      Arma torre de seis cubos
+    </label>
+    <select name="subesc_torre_seis" id="subesc_torre_seis"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="subesc_tren_tres" class="block text-sm font-medium text-custom-title mb-1">
+      Arma tren de tres cubos
+    </label>
+    <select name="subesc_tren_tres" id="subesc_tren_tres"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="0">No lo logra (0)</option>
+      <option value="1">Lo intenta pero no lo logra (1)</option>
+      <option value="2">En proceso (2)</option>
+      <option value="3">Lo realiza inhábilmente (3)</option>
+      <option value="4">Normal (4)</option>
+    </select>
+  </div>
+
+</div>
+<!-- FIN DE SUBESCALAS DE MOTOR FINO -->
+
+
+<!--Inicia tono muscular y ubicacion-->
+<div id="tono" class="space-y-6">
+
+  <h3 class="text-lg font-bold text-custom-title mb-2">Tono muscular y ubicación</h3>
+
+  <div>
+    <label for="tono_hipotonia" class="block text-sm font-medium text-custom-title mb-1">Hipotonía</label>
+    <select name="tono_hipotonia" id="tono_hipotonia"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">General (1)</option>
+      <option value="2">Axial (2)</option>
+      <option value="3">Extremidades (3)</option>
+      <option value="4">Miembros Torácicos (4)</option>
+      <option value="5">Membros Pélvicos (5)</option>
+      <option value="6">Hemicuerpo (6)</option>
+      <option value="7">Contralateral (7)</option>
+      <option value="8">Derecho (8)</option>
+      <option value="9">Izquierdo (9)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="tono_hipertonia" class="block text-sm font-medium text-custom-title mb-1">Hipertonía</label>
+    <select name="tono_hipertonia" id="tono_hipertonia"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">General (1)</option>
+      <option value="2">Axial (2)</option>
+      <option value="3">Extremidades (3)</option>
+      <option value="4">Miembros Torácicos (4)</option>
+      <option value="5">Membros Pélvicos (5)</option>
+      <option value="6">Hemicuerpo (6)</option>
+      <option value="7">Contralateral (7)</option>
+      <option value="8">Derecho (8)</option>
+      <option value="9">Izquierdo (9)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="tono_mixto" class="block text-sm font-medium text-custom-title mb-1">Mixto (Hipotonía + Espasticidad)</label>
+    <select name="tono_mixto" id="tono_mixto"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">General (1)</option>
+      <option value="2">Axial (2)</option>
+      <option value="3">Extremidades (3)</option>
+      <option value="4">Miembros Torácicos (4)</option>
+      <option value="5">Membros Pélvicos (5)</option>
+      <option value="6">Hemicuerpo (6)</option>
+      <option value="7">Contralateral (7)</option>
+      <option value="8">Derecho (8)</option>
+      <option value="9">Izquierdo (9)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="tono_fluctuante" class="block text-sm font-medium text-custom-title mb-1">Fluctuante</label>
+    <select name="tono_fluctuante" id="tono_fluctuante"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">General (1)</option>
+      <option value="2">Axial (2)</option>
+      <option value="3">Extremidades (3)</option>
+      <option value="4">Miembros Torácicos (4)</option>
+      <option value="5">Membros Pélvicos (5)</option>
+      <option value="6">Hemicuerpo (6)</option>
+      <option value="7">Contralateral (7)</option>
+      <option value="8">Derecho (8)</option>
+      <option value="9">Izquierdo (9)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="tono_normal" class="block text-sm font-medium text-custom-title mb-1">Normal</label>
+    <select name="tono_normal" id="tono_normal"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">General (1)</option>
+      <option value="2">Axial (2)</option>
+      <option value="3">Extremidades (3)</option>
+      <option value="4">Miembros Torácicos (4)</option>
+      <option value="5">Membros Pélvicos (5)</option>
+      <option value="6">Hemicuerpo (6)</option>
+      <option value="7">Contralateral (7)</option>
+      <option value="8">Derecho (8)</option>
+      <option value="9">Izquierdo (9)</option>
+    </select>
+  </div>
+
+</div>
+<!--Fin tono muscular y ubicacion-->
+
+<!--Inicia Postura-->
+<div id="postura" class="space-y-6">
+
+  <h3 class="text-lg font-bold text-custom-title mb-2">POSTURA</h3>
+
+  <div>
+    <label for="postura_asimetria" class="block text-sm font-medium text-custom-title mb-1">
+      Asimetría
+    </label>
+    <select name="postura_asimetria" id="postura_asimetria"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+</div>
+<!--Termina Postura-->
+
+
+<!-- Inicia Signos de Alarma -->
+<div id="signos" class="space-y-6">
+  <h3 class="text-lg font-bold text-custom-title mb-2">SIGNOS DE ALARMA</h3>
+
+  <div>
+    <label for="signos_aduccionPulg" class="block text-sm font-medium text-custom-title mb-1">
+      Aducción de pulgares
+    </label>
+    <select name="signos_aduccionPulg" id="signos_aduccionPulg"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_estrabismo" class="block text-sm font-medium text-custom-title mb-1">
+      Estrabismo
+    </label>
+    <select name="signos_estrabismo" id="signos_estrabismo"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_irritabilidad" class="block text-sm font-medium text-custom-title mb-1">
+      Irritabilidad
+    </label>
+    <select name="signos_irritabilidad" id="signos_irritabilidad"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_marchaPun" class="block text-sm font-medium text-custom-title mb-1">
+      Marcha en punta
+    </label>
+    <select name="signos_marchaPun" id="signos_marchaPun"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_marchaCruz" class="block text-sm font-medium text-custom-title mb-1">
+      Marcha Cruzada
+    </label>
+    <select name="signos_marchaCruz" id="signos_marchaCruz"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_puCerrado" class="block text-sm font-medium text-custom-title mb-1">
+      Puños cerrados
+    </label>
+    <select name="signos_puCerrado" id="signos_puCerrado"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_reflejoHiper" class="block text-sm font-medium text-custom-title mb-1">
+      Reflejo de hiperextensión
+    </label>
+    <select name="signos_reflejoHiper" id="signos_reflejoHiper"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="signos_lenguajeEsc" class="block text-sm font-medium text-custom-title mb-1">
+      Lenguaje escaso
+    </label>
+    <select name="signos_lenguajeEsc" id="signos_lenguajeEsc"
+      class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+      <option value="" disabled selected>Seleccione una opción</option>
+      <option value="1">Axial (1)</option>
+      <option value="2">Mentón Clínico (2)</option>
+      <option value="3">Miembro Sup (3)</option>
+      <option value="4">Pelvis (4)</option>
+      <option value="5">Cintura Esc (5)</option>
+      <option value="6">Derecho (6)</option>
+      <option value="7">Izquierdo (7)</option>
+    </select>
+  </div>
+
+</div>
+<!--Termina Signos de Alarma-->
+
             </div>
 
             <div class="mt-6">
