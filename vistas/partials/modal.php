@@ -1,8 +1,9 @@
 <body>
-    <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
-    <img src="/assets/img_iconos/buuscar.svg" class="buscar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
-    <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
-    <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+    <div class="hidden">
+        <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+        <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+        <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+    </div>
 
     <!--componente del modal general-->
     <div id="contenedor-componente-modal" class="hidden fixed inset-0">
@@ -100,15 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
             textoBoton: "Agregar",
             colorBoton: "bg-blue-700 hover:bg-blue-600 text-white focus:ring-blue-200",
             tituloExito: "¡Paciente agregado exitosamente!",
-            imagenExito: "/assets/img/Exito.png"
-        },
-        buscar: {
-            titulo: "Buscar Paciente",
-            texto: "¿Seguro que quieres buscar este campo?",
-            imagen: "/assets/img/advertencia.png",
-            textoBoton: "Buscar",
-            colorBoton: "bg-green-700 hover:bg-green-600 text-white focus:ring-green-200",
-            tituloExito: "¡Búsqueda completada!",
             imagenExito: "/assets/img/Exito.png"
         },
         modificar: {
