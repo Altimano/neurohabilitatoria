@@ -104,15 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tituloExito: "¡Paciente agregado exitosamente!",
             imagenExito: "/assets/img/Exito.png"
         },
-        buscar: {
-            titulo: "Buscar Paciente",
-            texto: "¿Seguro que quieres buscar este campo?",
-            imagen: "/assets/img/advertencia.png",
-            textoBoton: "Buscar",
-            colorBoton: "bg-green-700 hover:bg-green-600 text-white focus:ring-green-200",
-            tituloExito: "¡Búsqueda completada!",
-            imagenExito: "/assets/img/Exito.png"
-        },
         modificar: {
             titulo: "Modificar Paciente",
             texto: "¿Seguro que quieres modificar este campo?",
