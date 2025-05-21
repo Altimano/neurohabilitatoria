@@ -23,6 +23,71 @@ class Estudios{
         $this->db->close();
     }
 
+    public function consultarTodosLosEstudiosv2() {
+    $SQL = "SELECT 
+                t.id_terapia_neurohabilitatoriav2,
+                p.clave_paciente,
+                p.nombre_paciente,
+                t.fecha_inicio_terapia,
+                t.fecha_terapia,
+                pers.nombre_personal AS terapeuta,
+                p.semanas_gestacion
+                
+            FROM 
+                terapia_neurov2 t
+            JOIN 
+                paciente p ON t.clave_paciente = p.clave_paciente
+            JOIN 
+                personal pers ON t.clave_personal = pers.clave_personal
+            ORDER BY 
+                t.fecha_inicio_terapia DESC
+            LIMIT 50";
+    
+    $stmt = $this->db->prepare($SQL);
+    if (!$stmt) {
+        die("Error en prepare: " . $this->db->error);
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    
+    return $result;
+    }
+
+    public function consultarDatosPacientev2($id_terapia){
+        $SQL = "SELECT
+    p.clave_paciente,
+    p.nombre_paciente,
+    t.fecha_inicio_terapia,
+    t.fecha_terapia,
+    t.edad_corregida,
+    p.fecha_nacimiento_paciente,
+    pers.nombre_personal AS 'nombre terapeuta',
+    p.semanas_gestacion ,
+    sbmf.subescala AS 'subescala motor fino',
+    rsbmf.resultado AS resultadosubmf,
+    rk.tono_muscular_topografia AS resultadosKatona,
+    mk.evaluacion AS 'evaluacion katona'
+    FROM terapia_neurov2 t
+    JOIN paciente p ON t.clave_paciente = p.clave_paciente
+    JOIN personal pers ON t.clave_personal = pers.clave_personal
+    LEFT JOIN resultados_sub_mf rsbmf ON rsbmf.id_terapia_neuro = t.id_terapia_neurohabilitatoriav2
+    LEFT JOIN subescalas_mf sbmf ON sbmf.id_sub_fino = rsbmf.id_sub_fino
+    LEFT JOIN resultados_maniobras_katona rk ON rk.id_terapia_neuro = t.id_terapia_neurohabilitatoriav2
+    LEFT JOIN maniobras_Katona mk ON mk.id_katona = rk.id_katona
+    WHERE t.id_terapia_neurohabilitatoriav2 = ?";
+    
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("i", $id_terapia);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
     public function consultarTodosLosEstudiosPorNombre($Criterio){
         $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
