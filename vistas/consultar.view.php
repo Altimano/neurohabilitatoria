@@ -101,10 +101,11 @@
             <table class="w-full border-collapse border border-sky-300 bg-white text-sm">
                 <thead>
                     <tr class="bg-sky-200 text-custom-title">
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Codigo de Paciente</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Clave de Paciente</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Paciente</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de registro</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Edad Corregida</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de terapia</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Personal Encargado</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestacion</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de inicio de tratamiento</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluacion</th>
                         </tr>
@@ -115,11 +116,22 @@
         <?php foreach ($pacientes as $paciente): ?>
             <tr>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_pacinete"]) ?> </td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["edad_corregida"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["dat_ter_fec_ini_tratam_terap"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["eval_subs_fec_eval"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_paciente"]) ?> </td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["terapeuta"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["subescala motor fino"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2">  
+                    <form action='consultarPaciente' method='POST' style='display:inline;'>
+                    <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
+                    <button type='submit' onclick='return confirm("¿Estás seguro de modificar esta evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
+                            Consultar
+                        </button>
+                    <div class="flex justify-center">
+                        <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+                    </img>
+                    </form></td>
+                
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

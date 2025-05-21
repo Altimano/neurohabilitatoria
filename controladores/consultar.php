@@ -9,7 +9,7 @@ if ($_SESSION["session"] === 'okA') {
     if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
         $Con = conectar();
         $Estudio = new Estudios($Con);
-        $result = $Estudio->consultarTodosLosEstudios();
+        $result = $Estudio->consultarTodosLosEstudiosv2();
     }elseif ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
         $Criterio = strtoupper($_POST['Nombre']);
         $Con = conectar();
