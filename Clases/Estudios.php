@@ -55,6 +55,7 @@ class Estudios
     public function consultarDatosPacientev2($id_terapia)
     {
         $SQL = "SELECT
+    t.id_terapia_neurohabilitatoriav2,
     p.clave_paciente,
     CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
     p.fecha_nacimiento_paciente,
@@ -205,6 +206,27 @@ class Estudios
         $stmt->close();
         $this->db->close();
     }
+
+    public function consultarResultadosLenguaje($id_terapia)
+    {
+        $SQL = "SELECT
+        sl.subescala,
+        rsl.resultado
+        FROM terapia_neurov2 t
+        JOIN resultados_sub_leng rsl ON t.id_terapia_neurohabilitatoriav2 = rsl.id_terapia_neuro
+        JOIN subescalas_lenguaje sl ON rsl.id_sub_leng = sl.id_sub_leng
+        WHERE t.id_terapia_neurohabilitatoriav2 = ?";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("i", $id_terapia);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
 
 
 

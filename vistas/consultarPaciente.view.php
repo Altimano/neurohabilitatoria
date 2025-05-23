@@ -22,7 +22,7 @@
     <div class="m-6 bg-custom-main-box rounded-xl shadow-md p-6">
         <h2 class="text-xl font-bold text-custom-title mb-4">Consultar</h2>
         <form method="post" action="/consultarPaciente" class="space-y-6"> 
-            <input type="hidden" name="id_terapia" value="<?= htmlspecialchars($evaluaciones['id_terapia_neurohabilitatoria']) ?>">
+            <input type="hidden" name="id_terapia" value="<?= htmlspecialchars($datosPaciente['id_terapia_neurohabilitatoriav2']) ?>">
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -74,6 +74,7 @@
                         <option value="maniobras">Maniobras Katona</option>
                         <option value="motor">Motor Grueso/Movimientos Posturales</option>
                         <option value="fino">Motor Fino</option>
+                        <option value="lenguaje">Lenguaje</option>
                         <option value="tono">Tono Muscular y Ubicacion</option>
                         <option value="postura">Postura (Colocar un 1)</option>
                         <option value="signos">Signos de Alarma (Colocar un 1)</option>
@@ -108,6 +109,20 @@
   <?php endforeach; ?>
 </div>
 <!-- FIN DE SUBESCALAS DE MOTOR GRUESO -->
+
+
+<!-- EMPIEZA SUBESCALAS DE LENGUAJE -->
+<div id="lenguaje" class="space-y-6">
+  <h3 class="text-lg font-bold text-custom-title mb-2">Subescalas Lenguaje</h3>
+
+<?php foreach ($datosLenguaje as $fila): ?>
+    <div>
+      <label class="block text-sm font-medium text-custom-title"><?= htmlspecialchars($fila[0]) ?></label>
+      <input type="text" name="sub_leng" readonly value="<?= htmlspecialchars($fila[1]) ?>" class="mt-1 block w-full p-2 border rounded-md shadow-sm">
+    </div>
+  <?php endforeach; ?>
+</div>
+<!-- FIN DE SUBESCALAS LENGUAJE -->
 
 
  <!-- EMPIEZA SUBESCALAS DEL MOTOR FINO -->
@@ -204,8 +219,10 @@
         var tono = document.getElementById("tono");
         var postura = document.getElementById("postura");
         var signos = document.getElementById("signos");
+        var lenguaje = document.getElementById("lenguaje")
         motor.style.display = "none";
         motorFino.style.display = "none";
+        lenguaje.style.display = "none";
         maniobras.style.display = "none";
         tono.style.display = "none";
         postura.style.display = "none";
@@ -218,6 +235,10 @@
         } else if (select.value === "fino")
         {
             motorFino.style.display = "block";
+
+        } else if (select.value === "lenguaje")
+        {
+            lenguaje.style.display = "block";
 
         }
         else if (select.value === "maniobras")
