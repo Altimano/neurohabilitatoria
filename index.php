@@ -10,7 +10,9 @@ $rutas = [
     "/consultarPaciente" => "controladores/consultarPaciente.php",
     "/modificar" => "controladores/modificarEvaluacion.php",
     "/modificarEvaluacion" => "controladores/modificar.php",
+    "/realizarModificacion" => "controladores/realizarModificacion.php",
     "/eliminar" => "controladores/eliminar_Estudio.php",
+    "/eliminarEvaluacion" => "controladores/eliminar.php",
     "/salir" => "controladores/salir.php",
     "/generarExcel" => "controladores/generarExcel.php"
 ];

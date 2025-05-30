@@ -65,7 +65,7 @@
                     id="codigo" 
                     name="codigo" 
                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2" 
-                    placeholder="Buscar por codigo..."
+                    placeholder="Buscar por codigo de paciente..."
                     value="">
                 
             </div>
@@ -96,33 +96,27 @@
                         </tr>
                 </thead>
                 <tbody>
-                <?php if (!empty($pacientes)): ?>
+                <?php // Mostrar los resultados de la consulta 
+                if (!empty($pacientes)): ?>
         <?php foreach ($pacientes as $paciente): ?>
             <tr>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["codigo_paciente"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?php 
-                    if (!empty($paciente["nombre_pacinete"])) {
-                        echo htmlspecialchars($paciente["nombre_pacinete"]);
-                    } else {
-                        echo htmlspecialchars($paciente["nombre_paciente"] . " " . $paciente["apellido_materno_paciente"] . " " . $paciente["apellido_paterno_paciente"]);
-                    }
-                    ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_paciente"]) ?> </td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["terapeuta"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?php 
-                    if (!empty($paciente["eval_subs_fec_eval"])) {
-                        echo htmlspecialchars($paciente["eval_subs_fec_eval"]);
-                    } else {
-                        echo htmlspecialchars($paciente["nombre_paciente"] . " " . $paciente["apellido_materno_paciente"] . " " . $paciente["apellido_paterno_paciente"]);
-                    }
-                    ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_inicio_terapia"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
-                    <form action='controladores/eliminar.php' method='POST' style='display:inline;'>
-                    <input type='hidden' name='row_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoria"] , ENT_QUOTES); ?>'>
+                    <form action='eliminarEvaluacion' method='POST' style='display:inline;'>
+                    <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
+                    <button type='submit' onclick='return confirm("¿Estás seguro de eliminar esta evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
+                            Eliminar
+                        </button>
                     <div class="flex justify-center">
-                        <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
-                    </div>
+                        <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+                    </img>
                     </form></td>
+                
             </tr>
         <?php endforeach; ?>
     <?php else: ?>
