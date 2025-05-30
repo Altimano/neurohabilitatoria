@@ -5,10 +5,20 @@ require './Clases/Estudios.php';
 $id_terapia = $_POST["terapia_id"];
 $Con = conectar();
 $Estudio = new Estudios($Con);
-$result = $Estudio->consultarDatosPacientev2($id_terapia);
-$filas = [];
-while ($fila = mysqli_fetch_assoc($result)) {
-    $filas[] = $fila;
-}
-echo $filas[0]["clave_paciente"];
+$resultPaciente = $Estudio->consultarDatosPacientev2($id_terapia);
+$datosPaciente = mysqli_fetch_assoc($resultPaciente);
+$resultKatona = $Estudio->consultarResultadosKatona($id_terapia);
+$datosKatona = mysqli_fetch_all($resultKatona);
+$resultSubMG = $Estudio->consultarResultadosSubMG($id_terapia);
+$datosSubMG = mysqli_fetch_all($resultSubMG);
+$resultSubMF = $Estudio->consultarResultadosSubMF($id_terapia);
+$datosSubMF = mysqli_fetch_all($resultSubMF);
+$resultTono = $Estudio->consultarResultadosTonoMuscUbi($id_terapia);
+$datosTono = mysqli_fetch_all($resultTono);
+$resultSignos = $Estudio->consultarResultadosSignosAlarma($id_terapia);
+$datosSignos = mysqli_fetch_all($resultSignos);
+$resultPostura = $Estudio->consultarResultadosPostura($id_terapia);
+$datosPostura = mysqli_fetch_all($resultPostura);
+$resultLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
+$datosLenguaje = mysqli_fetch_all($resultLenguaje);
 require './vistas/consultarPaciente.view.php';

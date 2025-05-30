@@ -87,36 +87,29 @@
             <table class="w-full border-collapse border border-sky-300 bg-white text-sm">
                 <thead>
                     <tr class="bg-sky-200 text-custom-title">
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Clave del paciente</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Clave de Paciente</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Paciente</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Registro</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de terapia</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Personal Encargado</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestacion</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de inicio de tratamiento</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluacion</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium"></th>
                         </tr>
                 </thead>
                 <tbody>
-                <?php if (!empty($pacientes)): ?>
+                <?php // Mostrar los resultados de la consulta 
+                if (!empty($pacientes)): ?>
         <?php foreach ($pacientes as $paciente): ?>
             <tr>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?php 
-                    if (!empty($paciente["nombre_pacinete"])) {
-                        echo htmlspecialchars($paciente["nombre_pacinete"]);
-                    } else {
-                        echo htmlspecialchars($paciente["nombre_paciente"] . " " . $paciente["apellido_materno_paciente"] . " " . $paciente["apellido_paterno_paciente"]);
-                    }
-                    ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?php 
-                    if (!empty($paciente["eval_subs_fec_eval"])) {
-                        echo htmlspecialchars($paciente["eval_subs_fec_eval"]);
-                    } else {
-                        echo htmlspecialchars($paciente["nombre_paciente"] . " " . $paciente["apellido_materno_paciente"] . " " . $paciente["apellido_paterno_paciente"]);
-                    }
-                    ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_paciente"]) ?> </td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["terapeuta"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_inicio_terapia"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
                     <form action='modificarEvaluacion' method='POST' style='display:inline;'>
-                    <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoria"] , ENT_QUOTES); ?>'>
+                    <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
                     <button type='submit' onclick='return confirm("¿Estás seguro de modificar esta evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
                             Modificar
                         </button>

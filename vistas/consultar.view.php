@@ -107,7 +107,7 @@
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Personal Encargado</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestacion</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de inicio de tratamiento</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluacion</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium"></th>
                         </tr>
                 </thead>
                 <tbody>
@@ -120,7 +120,7 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["terapeuta"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["subescala motor fino"]) ?></td>
+                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_inicio_terapia"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
                     <form action='consultarPaciente' method='POST' style='display:inline;'>
                     <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
