@@ -324,7 +324,7 @@
                     console.log(`Removido: ${clave}`);
                 });
                 console.log("Limpieza de sessionStorage completada.");
-                window.location.href = '/inicio';
+                window.location.href = 'bienvenido.php';
             }
         });
     </script>

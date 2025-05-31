@@ -115,6 +115,9 @@
                     <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"]); ?>'>
                     <input type='hidden' name='semanas_gestacion' value='<?php echo htmlspecialchars($paciente["semanas_gestacion"]); ?>'>
                     <div class="flex justify-center">
+                        <button type='submit' onclick='return confirm("¿Estás seguro de agregar una evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
+                            Agregar
+                        </button>
                         <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
                     </div>
                 </form>
