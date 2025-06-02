@@ -66,7 +66,7 @@
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Talla</label><input type="text" id="dp_talla" name="talla" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Peso</label><input type="text" id="dp_peso" name="peso" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Perimetro Cefalico</label><input type="text" id="dp_perimetro_cefalico" name="perimetro_cefalico" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Evaluación Actual</label><input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_inicio_tratamiento']) ? $datos_paciente_para_mostrar['fecha_inicio_tratamiento'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Evaluación Actual</label><input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Edad Cronológica</label><input type="text" id="dp_edad_cronologica_ingreso_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha Nacimiento Corregida</label><input type="text" id="dp_edad_corregida_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
             </div>
@@ -98,7 +98,7 @@
                 clavesPasos.forEach(clave => sessionStorage.removeItem(clave));
             }
 
-            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar) && !$error_mensaje): ?>
+            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar)): ?>
                 limpiarDatosPasosEvaluacion();
                 try {
                     const datosPacienteActualesPHP = <?php echo json_encode($datos_paciente_para_mostrar); ?>;
@@ -124,7 +124,7 @@
                     document.getElementById('dp_talla').value = pacienteDataParaActualizar.talla || '';
                     document.getElementById('dp_peso').value = pacienteDataParaActualizar.peso || '';
                     document.getElementById('dp_perimetro_cefalico').value = pacienteDataParaActualizar.perimetro_cefalico || '';
-                    document.getElementById('dp_fecha_inicio_tratamiento').value = pacienteDataParaActualizar.fecha_inicio_tratamiento || '';
+                    document.getElementById('dp_fecha_inicio_tratamiento').value = pacienteDataParaActualizar.fecha_terapia || '';
                     document.getElementById('dp_edad_cronologica_ingreso_display').value = pacienteDataParaActualizar.edad_cronologica_ingreso_display || '';
                     document.getElementById('dp_edad_corregida_display').value = pacienteDataParaActualizar.edad_corregida_display || '';
                     document.getElementById('factores_riesgo').value = pacienteDataParaActualizar.factores_de_riesgo || '';
@@ -150,7 +150,7 @@
                     console.error("Error JS: leyendo datosPacienteParaEvaluacion:", e);
                 }
             } else if (formPaso1) {
-                window.location.href = 'crear.view.php?error=datos_paciente_no_cargados';
+              //  window.location.href = 'crear.view.php?error=datos_paciente_no_cargados';
             }
 
             const mesSelector = document.getElementById('mes_seleccionado');

@@ -7,28 +7,62 @@ $datos_paciente_para_mostrar = [];
 $error_mensaje = null;
 $esPrimeraEvaluacion = false;
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["terapia_id"])) {
+    date_default_timezone_set('America/Mexico_City');
+    $Con = conectar();
 
-$id_terapia = $_POST["terapia_id"];
-$Con = conectar();
-$Estudio = new Estudios($Con);
-$resultPaciente = $Estudio->consultarDatosPacientev2($id_terapia);
-$datosPaciente = mysqli_fetch_assoc($resultPaciente);
-$resultKatona = $Estudio->consultarResultadosKatona($id_terapia);
-$datosKatona = mysqli_fetch_all($resultKatona);
-$resultSubMG = $Estudio->consultarResultadosSubMG($id_terapia);
-$datosSubMG = mysqli_fetch_all($resultSubMG);
-$resultSubMF = $Estudio->consultarResultadosSubMF($id_terapia);
-$datosSubMF = mysqli_fetch_all($resultSubMF);
-$resultTono = $Estudio->consultarResultadosTonoMuscUbi($id_terapia);
-$datosTono = mysqli_fetch_all($resultTono);
-$resultSignos = $Estudio->consultarResultadosSignosAlarma($id_terapia);
-$datosSignos = mysqli_fetch_all($resultSignos);
-$resultPostura = $Estudio->consultarResultadosPostura($id_terapia);
-$datosPostura = mysqli_fetch_all($resultPostura);
-$resultLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
-$datosLenguaje = mysqli_fetch_all($resultLenguaje);
-$resultCamposSignos = $Estudio->consultarCamposSignosAlarma();
-$datosCamposSignos = mysqli_fetch_all($resultCamposSignos);
+    $Estudio = new Estudios($Con);
+    $id_terapia = $_POST["terapia_id"];
+    $resultPaciente = $Estudio->consultarDatosPacientev2($id_terapia);
+    $datosPaciente = mysqli_fetch_assoc($resultPaciente);
+    $resultKatona = $Estudio->consultarResultadosKatona($id_terapia);
+    $datosKatona = mysqli_fetch_all($resultKatona);
+    $resultSubMG = $Estudio->consultarResultadosSubMG($id_terapia);
+    $datosSubMG = mysqli_fetch_all($resultSubMG);
+    $resultSubMF = $Estudio->consultarResultadosSubMF($id_terapia);
+    $datosSubMF = mysqli_fetch_all($resultSubMF);
+    $resultTono = $Estudio->consultarResultadosTonoMuscUbi($id_terapia);
+    $datosTono = mysqli_fetch_all($resultTono);
+    $resultSignos = $Estudio->consultarResultadosSignosAlarma($id_terapia);
+    $datosSignos = mysqli_fetch_all($resultSignos);
+    $resultPostura = $Estudio->consultarResultadosPostura($id_terapia);
+    $datosPostura = mysqli_fetch_all($resultPostura);
+    $resultLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
+    $datosLenguaje = mysqli_fetch_all($resultLenguaje);
+    $resultCamposSignos = $Estudio->consultarCamposSignosAlarma();
+    $datosCamposSignos = mysqli_fetch_all($resultCamposSignos);
+
+
+    $datos_paciente_para_mostrar = [
+        'id_terapia'            => $id_terapia,
+        'clave_paciente'        => $datosPaciente['clave_paciente'],
+        'codigo_paciente'       => $datosPaciente['codigo_paciente'],
+        'fecha_terapia'         => $datosPaciente['fecha_terapia'],
+        'nombre_paciente'       => $datosPaciente['nombre_paciente'],
+        'talla'                 => $datosPaciente['talla'],
+        'peso'                  => $datosPaciente['peso'],
+        'perimetro_cefalico'    => $datosPaciente['pc'],
+        'sdg'                   => $datosPaciente['semanas_gestacion'],
+        'fecha_inicio_terapia'   => $datosPaciente['fecha_inicio_terapia'],
+        'fecha_nacimiento'      => $datosPaciente['fecha_nacimiento_paciente'],
+        'edad_corregida'        => $datosPaciente['edad_corregida'] ,
+        'edad_cronologica'     => $datosPaciente['edad_cronologica'] ,
+        'fecha_nacimiento_edad_corregida' => $datosPaciente['dat_ter_fech_nac_edad_correg'],
+        
+        'edad_corregida_display'   => $datosPaciente['edad_corregida'],
+        'edad_cronologica_ingreso_display' => $datosPaciente['edad_cronologica_al_ingr_sem'],
+        'factores_de_riesgo'    => $datosPaciente['factores_riesgo'],
+        'esPrimeraEvaluacion'   => $esPrimeraEvaluacion
+    ];
+} /*else if (isset($_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'])) {
+    $datos_paciente_para_mostrar = $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'];
+    $esPrimeraEvaluacion = isset($datos_paciente_para_mostrar['esPrimeraEvaluacion']) ? $datos_paciente_para_mostrar['esPrimeraEvaluacion'] : false;
+} */
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar)) {
+    $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'] = $datos_paciente_para_mostrar;
+}
+
 $dicKatona = generarDiccionario($datosKatona);
 $dicSubMG = generarDiccionario($datosSubMG);
 $dicSubMF = generarDiccionario($datosSubMF);
@@ -37,33 +71,8 @@ $dicSignos = generarDiccionario($datosSignos);
 $dicPostura = generarDiccionario($datosPostura);
 $dicLenguaje = generarDiccionario($datosLenguaje);
 $dicCamposSignos = generarDiccionario($datosCamposSignos);
-$datos_paciente_para_mostrar = [];
-$error_mensaje = null;
-$esPrimeraEvaluacion = false;
-$_SESSION["dicKatona"] = $dicKatona;
-$_SESSION["dicSubMG"] = $dicSubMG;
-$_SESSION["dicSubMF"] = $dicSubMF;
-$_SESSION["dicTono"] = $dicTono;
-$_SESSION["dicSignos"] = $dicSignos;
-$_SESSION["dicPostura"] = $dicPostura;
-$_SESSION["dicLenguaje"] = $dicLenguaje;
-$_SESSION["dicCamposSignos"] = $dicCamposSignos;
-echo "El array con los datos de Katona es : ";
-print_r($datosKatona);
-foreach ($datosKatona as $dato) {
-    echo "<br>";
-    echo "El dato de Katona es: " . $dato[0] . " con el valor: " . $dato[1] . " y el id: " . $dato[2];
-}
-echo "<br>";
-echo $_SESSION["dicKatona"];
-echo "<br>";
-echo "El diccionario de las evaluaciones en katona que se ha registrado que el paciente ya tiene registrado ";
-var_dump($dicKatona);
-echo "<br>";
-echo "El diccionario de las evaluaciones en subMG que se ha registrado que el paciente ya tiene registrado ";
-var_dump($dicSubMG);
-echo "<br>";
 echo "El array con los contenidos de POST";
 var_dump($_POST);
 echo "<br>";
+echo var_dump($datos_paciente_para_mostrar);
 require './vistas/modificar.datospaciente.php';
