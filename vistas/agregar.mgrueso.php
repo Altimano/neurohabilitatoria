@@ -37,7 +37,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                 <div>
-                    <label for="control_cefalico" class="block text-sm font-medium text-gray-700 mb-1">Control cefálico*</label>
+                    <label for="control_cefalico" class="block text-sm font-medium text-gray-700 mb-1"><strong>Control cefálico*</strong></label>
                     <select name="control_cefalico" id="control_cefalico" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -65,14 +65,14 @@
                    </select>
                 </div>
                 <div>
-                    <label for="sentado_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1">Sentado sin apoyo*</label>
+                    <label for="sentado_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1"><strong>Sentado sin apoyo*</strong></label>
                     <select name="sentado_sin_apoyo" id="sentado_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                    </select>
                 </div>
                 <div>
-                    <label for="reaccion_lateral_delantera" class="block text-sm font-medium text-gray-700 mb-1">Reacciones de protección laterales y delanteras*</label>
+                    <label for="reaccion_lateral_delantera" class="block text-sm font-medium text-gray-700 mb-1"><strong>Reacciones de protección laterales y delanteras*</strong></label>
                     <select name="reaccion_lateral_delantera" id="reaccion_lateral_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -86,7 +86,7 @@
                    </select>
                 </div>
                 <div>
-                    <label for="patron_arrastre" class="block text-sm font-medium text-gray-700 mb-1">Patrón de arrastre*</label>
+                    <label for="patron_arrastre" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de arrastre*</strong></label>
                     <select name="patron_arrastre" id="patron_arrastre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -100,7 +100,7 @@
                    </select>
                 </div>
                  <div>
-                   <label for="patron_gateo_independiente" class="block text-sm font-medium text-gray-700 mb-1">Patrón de gateo independiente*</label>
+                   <label for="patron_gateo_independiente" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de gateo independiente*</strong></label>
                    <select name="patron_gateo_independiente" id="patron_gateo_independiente" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                        <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -114,14 +114,14 @@
                   </select>
                </div>
                 <div>
-                   <label for="transicion_gateo_bipedestacion" class="block text-sm font-medium text-gray-700 mb-1">Transición gateo a bipedestación*</label>
+                   <label for="transicion_gateo_bipedestacion" class="block text-sm font-medium text-gray-700 mb-1"><strong>Transición gateo a bipedestación*</strong></label>
                    <select name="transicion_gateo_bipedestacion" id="transicion_gateo_bipedestacion" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                        <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                   </select>
                </div>
                 <div>
-                   <label for="comienza_patron_marcha" class="block text-sm font-medium text-gray-700 mb-1">Comienza el patrón de marcha*</label>
+                   <label for="comienza_patron_marcha" class="block text-sm font-medium text-gray-700 mb-1"><strong>Comienza el patrón de marcha*</strong></label>
                    <select name="comienza_patron_marcha" id="comienza_patron_marcha" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                        <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -205,7 +205,7 @@
                   </select>
                </div>
                <div>
-                   <label for="juega_cuclillas" class="block text-sm font-medium text-gray-700 mb-1">Juega en cunclillas</label>
+                   <label for="juega_cuclillas" class="block text-sm font-medium text-gray-700 mb-1">Juega en Cuclillas</label>
                    <select name="juega_cuclillas" id="juega_cuclillas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                        <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>

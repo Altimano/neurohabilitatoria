@@ -32,6 +32,32 @@
         return $stmt->num_rows > 0;
     }
 
+    function generarDiccionario($datos) {
+        $diccionario = [];
+        foreach ($datos as $fila) {
+            $diccionario[] = $fila[0]; 
+        }
+        return $diccionario;
+    }
+
+    function limpiarClavesPost($post) {
+    $postLimpio = [];
+    foreach ($post as $clave => $valor) {
+        $claveLimpia = str_replace("_", " ", $clave);
+        // Si el valor también es un array, aplica recursión
+        if (is_array($valor)) {
+            $postLimpio[$claveLimpia] = limpiarClavesPost($valor);
+        } else {
+            $postLimpio[$claveLimpia] = $valor;
+        }
+    }
+    return $postLimpio;
+}
+
+    function compararDiccionarioConPost($diccionario, $post) {
+        $claves = array_keys($post);
+        return array_intersect($claves, $diccionario);
+    }
     /*function validarUsuario($user) {
         include "./config/db.php";
         $Con = conectar();

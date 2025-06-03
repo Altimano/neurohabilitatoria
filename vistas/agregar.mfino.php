@@ -37,7 +37,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                  <div>
-                     <label for="mf_manos_linea_media" class="block text-sm font-medium text-gray-700 mb-1">Lleva las manos a la linea media*</label>
+                     <label for="mf_manos_linea_media" class="block text-sm font-medium text-gray-700 mb-1"><strong>Lleva las manos a la linea media*</strong></label>
                      <select name="mf_manos_linea_media" id="mf_manos_linea_media" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                          <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -58,14 +58,14 @@
                      </select>
                  </div>
                  <div>
-                     <label for="mf_estruja_papel" class="block text-sm font-medium text-gray-700 mb-1">Estruja papel, sabanas, ropa, etc...*</label>
+                     <label for="mf_estruja_papel" class="block text-sm font-medium text-gray-700 mb-1"><strong>Estruja papel, sabanas, ropa, etc...*</strong></label>
                      <select name="mf_estruja_papel" id="mf_estruja_papel" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                      </select>
                  </div>
                  <div>
-                     <label for="mf_transfiere_manos" class="block text-sm font-medium text-gray-700 mb-1">Toma un objeto y la tranfiere entre sus manos*</label>
+                     <label for="mf_transfiere_manos" class="block text-sm font-medium text-gray-700 mb-1"><strong>Toma un objeto y la tranfiere entre sus manos*</strong></label>
                      <select name="mf_transfiere_manos" id="mf_transfiere_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -79,7 +79,7 @@
                      </select>
                  </div>
                  <div>
-                     <label for="mf_desarrolla_agarre" class="block text-sm font-medium text-gray-700 mb-1">Comienza a desarrollar agarre indice-pulgar</label>
+                     <label for="mf_desarrolla_agarre" class="block text-sm font-medium text-gray-700 mb-1"><strong>Comienza a desarrollar agarre indice-pulgar*</strong></label>
                      <select name="mf_desarrolla_agarre" id="mf_desarrolla_agarre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -93,7 +93,7 @@
                      </select>
                  </div>
                  <div>
-                     <label for="mf_pinza_superior" class="block text-sm font-medium text-gray-700 mb-1">Pinza superior*</label>
+                     <label for="mf_pinza_superior" class="block text-sm font-medium text-gray-700 mb-1"><strong>Pinza superior*</strong></label>
                      <select name="mf_pinza_superior" id="mf_pinza_superior" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -107,7 +107,7 @@
                      </select>
                  </div>
                  <div>
-                     <label for="mf_torre_2_cubos" class="block text-sm font-medium text-gray-700 mb-1">Forma una torre de 2 cubos*</label>
+                     <label for="mf_torre_2_cubos" class="block text-sm font-medium text-gray-700 mb-1"><strong>Forma una torre de 2 cubos*</strong></label>
                      <select name="mf_torre_2_cubos" id="mf_torre_2_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -163,7 +163,7 @@
                      </select>
                  </div>
                  <div>
-                     <label for="mf_torre_6_cubos" class="block text-sm font-medium text-gray-700 mb-1">Arma torre de 6 cubos*</label>
+                     <label for="mf_torre_6_cubos" class="block text-sm font-medium text-gray-700 mb-1"><strong>Arma torre de 6 cubos*</strong></label>
                      <select name="mf_torre_6_cubos" id="mf_torre_6_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                           <option value="" disabled selected>Seleccione una opción</option>
                          <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
@@ -192,41 +192,79 @@
             const dateInput = document.getElementById('fecha_evaluacion');
             const sessionKey = 'evaluacionPaso4_mfino';
             const datosGuardados = sessionStorage.getItem(sessionKey);
-             let datosJson = {};
-             if (datosGuardados) { try { datosJson = JSON.parse(datosGuardados); } catch(e) { console.error("Error P4_M Fino:", e); sessionStorage.removeItem(sessionKey); } }
-             if (dateInput) {
-                 if(datosJson.fecha_evaluacion) { dateInput.value = datosJson.fecha_evaluacion; }
-                 else { 
-                      const dP3R = sessionStorage.getItem('evaluacionPaso3_mgrueso');
-                      if(dP3R){ try{ const dP3 = JSON.parse(dP3R); if(dP3.fecha_evaluacion) dateInput.value = dP3.fecha_evaluacion; }catch(e){} }
-                      if(!dateInput.value) { const t = new Date(); dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
-                 }
-             }
+            let datosJson = {};
+            if (datosGuardados) { 
+                try { 
+                    datosJson = JSON.parse(datosGuardados); 
+                } catch(e) { 
+                    console.error("Error P4_M Fino al parsear datos guardados:", e); 
+                    sessionStorage.removeItem(sessionKey); 
+                } 
+            }
+            
+            if (dateInput) {
+                if(datosJson.fecha_evaluacion) { 
+                    dateInput.value = datosJson.fecha_evaluacion; 
+                } else { 
+                    const dP3R = sessionStorage.getItem('evaluacionPaso3_mgrueso');
+                    if(dP3R){ 
+                        try{ 
+                            const dP3 = JSON.parse(dP3R); 
+                            if(dP3.fecha_evaluacion) dateInput.value = dP3.fecha_evaluacion; 
+                        } catch(e){} 
+                    }
+                    if(!dateInput.value) { 
+                        const t = new Date(); 
+                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
+                    }
+                }
+            }
 
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
             const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
             if (datosPaso1Raw) {
-                 try { const dP1 = JSON.parse(datosPaso1Raw); if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; } catch(e){ if(mesDisplay) mesDisplay.textContent = 'Error';}
-             } else if(mesDisplay) { mesDisplay.textContent = 'No disponible'; }
+                try { 
+                    const dP1 = JSON.parse(datosPaso1Raw); 
+                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; 
+                } catch(e){ 
+                    if(mesDisplay) mesDisplay.textContent = 'Error';
+                }
+            } else if(mesDisplay) { 
+                mesDisplay.textContent = 'No disponible'; 
+            }
 
-             const form = document.getElementById('evaluacionMotorFinoForm');
-             if(form && datosJson) {
-                 const selects = form.querySelectorAll('select');
-                 selects.forEach(select => { if(datosJson[select.name]) { select.value = datosJson[select.name]; } });
-             }
+            const form = document.getElementById('evaluacionMotorFinoForm');
+            if(form && datosJson) {
+                const selects = form.querySelectorAll('select');
+                selects.forEach(select => { 
+                    if(datosJson[select.name] !== undefined) {
+                        select.value = datosJson[select.name]; 
+                    } 
+                });
+            }
 
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
                     const formDataFino = new FormData(form);
                     const datosPaso = {};
-                    formDataFino.forEach((value, key) => { datosPaso[key] = value; });
+                    
+                    console.log("Contenido de FormData en agregar.mfino.php:");
+                    for (let [key, value] of formDataFino.entries()) {
+                        console.log(key + ': ' + value);
+                        datosPaso[key] = value; 
+                    }
+
                     if(dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
 
                     try {
+                        console.log(`Datos guardados en ${sessionKey} (Motor Fino):`)
                         sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'agregar.tmyubicacion.php';
-                    } catch(e) { console.error("Error guardando P4_M Fino:", e); alert("Hubo un error al guardar."); }
+                        window.location.href = 'agregar.lenguaje.php';
+                    } catch(e) { 
+                        console.error("Error guardando P4_M Fino:", e); 
+                        alert("Hubo un error al guardar."); 
+                    }
                 });
             }
         });

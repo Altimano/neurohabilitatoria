@@ -55,6 +55,7 @@ class Estudios
     public function consultarDatosPacientev2($id_terapia)
     {
         $SQL = "SELECT
+    t.id_terapia_neurohabilitatoriav2,
     p.clave_paciente,
     CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
     p.fecha_nacimiento_paciente,
@@ -91,7 +92,8 @@ class Estudios
     {
         $SQL = "SELECT
     mk.evaluacion AS evaluacionKatona,
-    rk.tono_muscular_topografia AS resultadosKatona
+    rk.tono_muscular_topografia AS resultadosKatona,
+    rk.id_resultados_katona
     FROM terapia_neurov2 t
     JOIN resultados_maniobras_katona rk ON rk.id_terapia_neuro = t.id_terapia_neurohabilitatoriav2
     JOIN maniobras_Katona mk ON mk.id_katona = rk.id_katona 
@@ -111,7 +113,8 @@ class Estudios
     {
         $SQL = "SELECT
     sbmg.subescala,
-    rsmg.resultado
+    rsmg.resultado,
+    rsmg.id_resultados_sub_mg
     FROM terapia_neurov2 t
     JOIN resultados_sub_mg rsmg ON t.id_terapia_neurohabilitatoriav2 = rsmg.id_terapia_neuro
     JOIN subescalas_mg sbmg ON rsmg.id_sub_grueso = sbmg.id_sub_grueso
@@ -131,7 +134,8 @@ class Estudios
     {
         $SQL = "SELECT
     sbmf.subescala,
-    rsmf.resultado
+    rsmf.resultado,
+    rsmf.id_resultados_sub_mf
     FROM terapia_neurov2 t
     JOIN resultados_sub_mf rsmf ON t.id_terapia_neurohabilitatoriav2 = rsmf.id_terapia_neuro
     JOIN subescalas_mf sbmf ON rsmf.id_sub_fino = sbmf.id_sub_fino
@@ -151,7 +155,8 @@ class Estudios
     {
         $SQL = "SELECT
     tnmu.campos,
-    rstnmu.resultado
+    rstnmu.resultado,
+    rstnmu.id_resultados_tono_muscular
     FROM terapia_neurov2 t
     JOIN resultados_tono_muscular rstnmu ON t.id_terapia_neurohabilitatoriav2 = rstnmu.id_terapia_neuro
     JOIN tono_muscular_ubicacion tnmu ON tnmu.id_tono_muscular_ubicacion = rstnmu.id_tono_muscular_ubicacion
@@ -170,7 +175,8 @@ class Estudios
     public function consultarResultadosSignosAlarma($id_terapia)
     {
         $SQL = "SELECT
-    sgal.campo
+    sgal.campo,
+    rsgal.id_resultados_signos_alarma
     FROM terapia_neurov2 t
     JOIN resultados_signos_alarma rsgal ON t.id_terapia_neurohabilitatoriav2 = rsgal.id_terapia_neuro
     JOIN signos_alarma sgal ON sgal.id_signos_alarma = rsgal.id_signos_alarma
@@ -186,11 +192,24 @@ class Estudios
         $this->db->close();
     }
 
+    public function consultarCamposSignosAlarma(){
+        $SQL = "SELECT campo FROM signos_alarma";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
     public function consultarResultadosPostura($id_terapia)
     {
         $SQL = "SELECT
         p.campo,
-        rp.resultado
+        rp.resultado,
+        rp.id_resultado_postura
         FROM terapia_neurov2 t
         JOIN resultados_postura rp ON t.id_terapia_neurohabilitatoriav2 = rp.id_terapia_neuro
         JOIN postura p ON rp.id_postura = p.id_postura
@@ -205,6 +224,28 @@ class Estudios
         $stmt->close();
         $this->db->close();
     }
+
+    public function consultarResultadosLenguaje($id_terapia)
+    {
+        $SQL = "SELECT
+        sl.subescala,
+        rsl.resultado,
+        rsl.id_resultados_leng
+        FROM terapia_neurov2 t
+        JOIN resultados_sub_leng rsl ON t.id_terapia_neurohabilitatoriav2 = rsl.id_terapia_neuro
+        JOIN subescalas_lenguaje sl ON rsl.id_sub_leng = sl.id_sub_leng
+        WHERE t.id_terapia_neurohabilitatoriav2 = ?";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("i", $id_terapia);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        $this->db->close();
+    }
+
 
 
 
@@ -396,167 +437,27 @@ class Estudios
     //Funcion para modificar el estudio
     //Queda pendiente los nombres de las nuevas variables de la bd para terapia neurohabilitatoria
     //Queda pendiente si usar una funcion por seccion o todo junto y corregir con nombres de datos correctos
-    public function modificarEstudio($datos)
+    
+   public function modificarDatos($id_terapia,$id_rows,$tabla,$datos)
     {
-        $stmt = $this->db->prepare("UPDATE terapia_neurohabilitatoria SET subesc_cf = ? , subesc_sobre_ab = ?, subesc_sent_prot_del = ? , subesc_camb_decub = ? , subesc_sent_sin_apoyo = ? , subesc_reac_lat_del = ? , subesc_pos_sed_decub = ? , subesc_patron_arrastre = ? , subesc_pos_hincado = ? , subesc_patron_gateo = ? , subesc_gateo_niveles = ? , 
-        subesc_trans_bipedest = ? , subesc_patr_marcha = ? , subesc_pie_momentaneo = ? , subesc_camina_atras = ? , subesc_camina_solo_cae_frec = ? , subesc_esca_ambas_manos = ? , subesc_patea_pelota = ? , subesc_esc_gateando = ? , subesc_corre_con_rig = ? , subesc_camina_solo_cae_rara = ? , subesc_esc_una_mano = ? , 
-        subesc_lanza_pelota = ? , subesc_salta_sitio = ? , subesc_juega_cuclillas = ? WHERE id_terapia_neurohabilitatoria = ?");
-        $stmt->bind_param("iiiiiiiiiiiiiiiiiiiiiiiiis", $datos['clave_paciente'], $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias'], $datos['id_terapia_neurohabilitatoria']);
-        if ($stmt->execute()) {
-            header("Location: /modificar");
-        } else {
-            echo "Error al modificar la evaluación: " . $stmt->error;
+
+        foreach ($datos as $dato) {
+            $SQL = "UPDATE $tabla SET $dato[0] = ? WHERE id_resultados_katona = ?";
+            $stmt = $this->db->prepare($SQL);
+            if (!$stmt) {
+                die("Error en prepare: " . $this->db->error);
+            }
+
         }
-        $stmt->close();
+
+        $SQL = "UPDATE ? SET ";
+        $set = [];
+        $ids = implode("AND id_resultados_katona=", $id_rows);
+        $condiciones = " WHERE id_resultados_katona= $ids";
+
     }
 
-    //FUNCIONES PARA ELIMINAR
-
-    public function consultarEstudiosParaEliminar()
-    {
-        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM terapia_neurohabilitatoria
-        JOIN paciente
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-    public function consultarEstudioPorNombreEliminar($Criterio)
-    {
-        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM terapia_neurohabilitatoria
-        INNER JOIN paciente
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $likeCriterio = "%$Criterio%";
-        $stmt->bind_param("s", $likeCriterio);
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-    public function consultarEstudioPorNombreYFechaEliminar($Criterio, $fechaInicio, $fechaFin)
-    {
-        $SQL = "SELECT paciente.clave_paciente, terapia_neurohabilitatoria.clave_paciente,paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion,
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM paciente
-        INNER JOIN  terapia_neurohabilitatoria
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? AND terapia_neurohabilitatoria.eval_subs_fec_eval BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $likeCriterio = "%$Criterio%";
-        $stmt->bind_param("sss", $likeCriterio, $fechaInicio, $fechaFin);
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-    public function consultarEstudioPorNombreYCodigoEliminar($Criterio, $codigo_paciente)
-    {
-        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM terapia_neurohabilitatoria
-        INNER JOIN paciente
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.nombre_pacinete LIKE ? AND paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $likeCriterio = "%$Criterio%";
-        $stmt->bind_param("ss", $likeCriterio, $codigo_paciente);
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-    public function consultarEstudioPorFechaEliminar($fechaInicio, $fechaFin)
-    {
-        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM terapia_neurohabilitatoria
-        INNER JOIN paciente
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $stmt->bind_param("ss", $fechaInicio, $fechaFin);
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-    public function consultarEstudioPorFechaYCodigoEliminar($fechaInicio, $fechaFin, $codigo_paciente)
-    {
-        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM terapia_neurohabilitatoria
-        INNER JOIN paciente
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE terapia_neurohabilitatoria.fecha_registro BETWEEN ? AND ? AND paciente.codigo_paciente = ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $stmt->bind_param("sss", $fechaInicio, $fechaFin, $codigo_paciente);
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-    public function consultarEstudioPorCodigoEliminar($Criterio)
-    {
-        $SQL = "SELECT paciente.codigo_paciente, terapia_neurohabilitatoria.nombre_pacinete,
-        terapia_neurohabilitatoria.fecha_registro, paciente.semanas_gestacion, 
-        terapia_neurohabilitatoria.eval_subs_fec_eval
-        FROM terapia_neurohabilitatoria
-        INNER JOIN paciente
-        ON paciente.clave_paciente = terapia_neurohabilitatoria.clave_paciente
-        WHERE paciente.codigo_paciente LIKE ? ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $likeCriterio = "%$Criterio%";
-        $stmt->bind_param("s", $likeCriterio);
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
-
-    //FUNCIONES PARA AGREGAR (Consultas)
+    //FUNCIONES DE CONSULTA PARA AGREGAR (Consultas)
 
     public function consultarPacientes()
     {
@@ -678,10 +579,10 @@ class Estudios
 
 
     //    Elimina un estudio a base de el campo post agregado en el formulario inicial
-    public function eliminarEstudio($row_id)
+    public function eliminarEstudio($terapia_id)
     {
-        $stmt = $this->db->prepare("DELETE FROM terapia_neurohabilitatoria WHERE id_terapia_neurohabilitatoria = ?");
-        $stmt->bind_param("i", $row_id);
+        $stmt = $this->db->prepare("DELETE FROM terapia_neurov2 WHERE id_terapia_neurohabilitatoriav2 = ?");
+        $stmt->bind_param("i", $terapia_id);
         $stmt->execute();
         if ($stmt->affected_rows > 0) {
             header("Location: /eliminar");
@@ -712,7 +613,7 @@ class Estudios
     //si el paciente ya tiene un estudio en terapia neurohabilitatoria se regresa un true, si no se regresa un false
     public function validarEvaluacionInicial($clave_paciente)
     {
-        $stmt = $this->db->prepare("SELECT  1 FROM terapia_neurohabilitatoria
+        $stmt = $this->db->prepare("SELECT 1 FROM terapia_neurov2
         WHERE clave_paciente = ? LIMIT 1;");
         $stmt->bind_param("s", $clave_paciente);
         $stmt->execute();

@@ -1,6 +1,7 @@
 <body>
     <div class="hidden">
         <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+        <img src="/assets/img_iconos/buuscar.svg" class="buscar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
         <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
         <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
         <button class="consultar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" >
@@ -65,7 +66,7 @@
                 </div>
 
                 <div class="acciones-modal bg-gray-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button id="Cancelar-cerrar-exito" class="w-full inline-flex justify-center rounded-md border border-transparent 
+                    <button href='../agregar.view.php' id="Cancelar-cerrar-exito" class="w-full inline-flex justify-center rounded-md border border-transparent 
                     shadow-md px-4 py-2 bg-white font-medium text-gray-700 hover:bg-gray-50 focus:outline-none
                     focus:ring-2 focus:ring-offset-2 focus:ring-blue-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Cerrar</button>
                 </div>

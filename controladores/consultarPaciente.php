@@ -19,4 +19,6 @@ $resultSignos = $Estudio->consultarResultadosSignosAlarma($id_terapia);
 $datosSignos = mysqli_fetch_all($resultSignos);
 $resultPostura = $Estudio->consultarResultadosPostura($id_terapia);
 $datosPostura = mysqli_fetch_all($resultPostura);
+$resultLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
+$datosLenguaje = mysqli_fetch_all($resultLenguaje);
 require './vistas/consultarPaciente.view.php';
