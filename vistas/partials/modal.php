@@ -3,6 +3,7 @@
         <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
         <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
         <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+        <button class="consultar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" >
     </div>
 
     <!--componente del modal general-->
@@ -74,29 +75,34 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const botones = document.querySelectorAll(".agregar, .buscar, .modificar, .eliminar");
+    // todos los botones de acciones
+    const botones = document.querySelectorAll(".agregar, .consultar, .modificar, .eliminar");
 
+    // Obtiene referencias a los elementos del modal de confirmacion
     const modalOverlay = document.getElementById("contenedor-componente-modal");
     const modal = document.getElementById("contenedor-modal");
     const botonCancelar = document.getElementById("Cancelar-cerrar");
     const botonSeguir = document.getElementById("Seguir");
 
+    // Obteneiene referencias para el modal de exito
     const modalExitoOverlay = document.getElementById("contenedor-componente-modal-exito");
     const modalExito = modalExitoOverlay.querySelector("#contenedor-modal");
     const botonCancelarExito = document.getElementById("Cancelar-cerrar-exito");
 
+    // Elementos del modal principal (título, texto y imagen)
     const tituloModal = modal.querySelector("h3");
     const textoModal = modal.querySelector(".texto-modal p");
     const imagenModal = modal.querySelector(".iconos-modal img");
 
+    // Elementos del modal de exito
     const tituloExitoModal = modalExito.querySelector("h3");
     const imagenExitoModal = modalExito.querySelector("img");
 
-    // Configuraciones por tipo de botón
+    // Configuraciones específicas para cada accion
     const config = {
         agregar: {
             titulo: "Agregar Paciente",
-            texto: "¿Seguro que quieres agregar este campo?",
+            texto: "¿Seguro que quieres agregar este paciente?",
             imagen: "/assets/img/advertencia.png",
             textoBoton: "Agregar",
             colorBoton: "bg-blue-700 hover:bg-blue-600 text-white focus:ring-blue-200",
@@ -105,16 +111,25 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         modificar: {
             titulo: "Modificar Paciente",
-            texto: "¿Seguro que quieres modificar este campo?",
+            texto: "¿Seguro que quieres modificar este paciente?",
             imagen: "/assets/img/advertencia.png",
             textoBoton: "Modificar",
             colorBoton: "bg-yellow-600 hover:bg-yellow-500 text-white focus:ring-yellow-200",
             tituloExito: "¡Modificación realizada con éxito!",
             imagenExito: "/assets/img/Exito.png"
         },
+        consultar: {
+            titulo: "Consultar Paciente",
+            texto: "¿Seguro que quieres consultar este paciente?",
+            imagen: "/assets/img/advertencia.png",
+            textoBoton: "Consultar",
+            colorBoton: "bg-orange-600 hover:bg-yellow-500 text-white focus:ring-orange-200",
+            tituloExito: "Consulta realizada con éxito",
+            imagenExito: "/assets/img/Exito.png"
+        },
         eliminar: {
             titulo: "Eliminar Paciente",
-            texto: "¿Seguro que quieres eliminar este campo?",
+            texto: "¿Seguro que quieres eliminar este paciente?",
             imagen: "/assets/img/advertencia.png",
             textoBoton: "Eliminar",
             colorBoton: "bg-red-700 hover:bg-red-600 text-white focus:ring-red-200",
@@ -123,27 +138,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    let claseSeleccionada = null;
+    // Rutas asociadas a cada acción
+    const ruta = {
+        agregar: "/vistas/agregar.view.php",
+        modificar: "/modificarEvaluacion",
+        consultar: "/consultarPaciente",
+        eliminar: "/eliminar_Estudio"
+    };
 
+    let claseSeleccionada = null; // Accion actualmente seleccionada
+    let ultimoBotonClickeado = null; // Referencia al último boton clickeado
+
+    // Evento para abrir el modal de confirmacion con base en la accion (boton seleccionado)
     botones.forEach(boton => {
-        boton.addEventListener("click", () => {
+        boton.addEventListener("click", (event) => {
+            // Identifica cual de las clases representa la accion
             claseSeleccionada = Array.from(boton.classList).find(cls => config[cls]);
             if (!claseSeleccionada) return;
 
+            ultimoBotonClickeado = event.currentTarget;
+
+            // Aplica la respectiva configuracion segun accion
             const datos = config[claseSeleccionada];
 
-            // Actualiza contenido del primer modal
             tituloModal.textContent = datos.titulo;
             textoModal.textContent = datos.texto;
             imagenModal.src = datos.imagen;
 
-            // Actualiza botón
             botonSeguir.textContent = datos.textoBoton;
             botonSeguir.className = `w-full inline-flex justify-center rounded-md border border-transparent 
                 shadow-md px-4 py-2 mt-3 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 
                 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm ${datos.colorBoton}`;
 
-            // Muestra modal
+            // Mostrar modal de confirmacion
             modalOverlay.classList.remove("hidden");
             setTimeout(() => {
                 modal.classList.remove("opacity-0", "scale-95");
@@ -152,41 +179,136 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Cerrar modal de confirmacion
     botonCancelar.addEventListener("click", () => {
         modal.classList.remove("opacity-100", "scale-100");
         modal.classList.add("opacity-0", "scale-95");
         setTimeout(() => modalOverlay.classList.add("hidden"), 200);
     });
 
+    // Cerrar modal de exito
+    botonCancelarExito.addEventListener("click", () => {
+        modalExito.classList.remove("opacity-100", "scale-100");
+        modalExito.classList.add("opacity-0", "scale-95");
+        setTimeout(() => modalExitoOverlay.classList.add("hidden"), 200);
+    });
+
+    // Confirmar accion desde el modal principal
     botonSeguir.addEventListener("click", () => {
         if (!claseSeleccionada) return;
 
         const datos = config[claseSeleccionada];
 
-        // Oculta modal de advertencia
+        // Ocultar modal de confirmacion
         modal.classList.remove("opacity-100", "scale-100");
         modal.classList.add("opacity-0", "scale-95");
 
         setTimeout(() => {
             modalOverlay.classList.add("hidden");
 
-            // Muestra modal de éxito
-            tituloExitoModal.textContent = datos.tituloExito;
-            imagenExitoModal.src = datos.imagenExito;
+            // Si la acción es eliminar, hacer petición POST vía fetch
+            if (claseSeleccionada === "eliminar") {
+                const data = ultimoBotonClickeado.dataset;
+                fetch(ruta.eliminar, {
+                    method: "POST",
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                    body: new URLSearchParams({
+                        id_terapia: data.id || '',
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Mostrar modal de éxito
+                        tituloExitoModal.textContent = datos.tituloExito;
+                        imagenExitoModal.src = datos.imagenExito;
 
-            modalExitoOverlay.classList.remove("hidden");
-            setTimeout(() => {
-                modalExito.classList.remove("opacity-0", "scale-95");
-                modalExito.classList.add("opacity-100", "scale-100");
-            }, 10);
+                        modalExitoOverlay.classList.remove("hidden");
+                        setTimeout(() => {
+                            modalExito.classList.remove("opacity-0", "scale-95");
+                            modalExito.classList.add("opacity-100", "scale-100");
+                        }, 10);
+                    } else {
+                        alert("Error al eliminar. Intenta nuevamente.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Error al eliminar. Intenta nuevamente.");
+                });
+
+            } else {
+                // Para agregar, consultar o modificar, generar un formulario y enviarlo (solo jala para agregar por su manera de pedir datos)
+                const form = document.createElement("form");
+                form.method = "post";
+                form.action = ruta[claseSeleccionada];
+
+                if (claseSeleccionada !== "agregar" && ultimoBotonClickeado) {
+                    const data = ultimoBotonClickeado.dataset;
+
+                    const campos = {
+                        id_terapia: data.id,
+                        clave_paciente: data.clave,
+                        nombre_paciente: data.nombre,
+                        fecha_terapia: data.fechaTerapia,
+                        terapeuta: data.terapeuta,
+                        semanas_gestacion: data.semanas,
+                        fecha_inicio_terapia: data.fechaInicioterapia
+                    };
+
+                    // Crear campos ocultos con los datos necesarios
+                    for (const [name, value] of Object.entries(campos)) {
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = name;
+                        input.value = value || '';
+                        form.appendChild(input);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit(); //aqui los envia
+            }
         }, 200);
     });
-
-    botonCancelarExito.addEventListener("click", () => {
-        modalExito.classList.remove("opacity-100", "scale-100");
-        modalExito.classList.add("opacity-0", "scale-95");
-        setTimeout(() => modalExitoOverlay.classList.add("hidden"), 200);
-    });
 });
+
+/* esta parte es como la queria hacer para hacerlo por envio de los constructores y despues renderizar en sus respectivas paginas
+            } else {
+                // Para agregar, modificar y consultar: crea y envía un formulario oculto a su respectivo controlador (por el momento solo para consultar)
+                const form = document.createElement("form");
+                form.method = "post";
+                form.action = ruta[claseSeleccionada];
+                const data = ultimoBotonClickeado?.dataset;
+
+                // Cada accion define los campos que se van a enviar
+                if (claseSeleccionada === "modificar" && data) {
+                    const camposModificar = { id_terapia: data.id };
+                    for (const [name, value] of Object.entries(camposModificar)) {
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = name;
+                        input.value = value || '';
+                        form.appendChild(input);
+                    }
+                }
+                else if (claseSeleccionada === "consultar" && data) {
+                    const camposConsulta = {
+                        id_terapia: data.id,
+                        accion: 'consultar' // Para identificar la accion en el constructor
+                    };
+                    for (const [name, value] of Object.entries(camposConsulta)) {
+                        const input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = name;
+                        input.value = value || '';
+                        form.appendChild(input);
+                    }
+                }
+                document.body.appendChild(form);
+                form.submit(); // Envia los datos al constructor
+            }
+        }, 200);
+*/
+
 </script>
 

@@ -117,7 +117,7 @@
                     }
                     ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
-                    <form action='controladores/eliminar.php' method='POST' style='display:inline;'>
+                    <form action='/eliminar_Estudio' method='POST' style='display:inline;'>
                     <input type='hidden' name='row_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoria"] , ENT_QUOTES); ?>'>
                     <div class="flex justify-center">
                         <img src="/assets/img_iconos/eliminaar.svg" class="eliminar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />

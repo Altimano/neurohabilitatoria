@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include 'partials/modal.php'; ?>
     <title>Consultar Evaluaciones</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -122,16 +123,12 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_inicio_terapia"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
-                    <form action='consultarPaciente' method='POST' style='display:inline;'>
                     <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
-                    <button type='submit' onclick='return confirm("¿Estás seguro de modificar esta evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
-                            Consultar
-                        </button>
                     <div class="flex justify-center">
-                        <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
-                    </img>
-                    </form></td>
-                
+                    <button type='submit' class="consultar bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
+                        Consultar
+                    </button>
+                    </form></td>       
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

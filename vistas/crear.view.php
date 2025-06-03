@@ -114,8 +114,16 @@
                     <input type='hidden' name='codigo_paciente' value='<?php echo htmlspecialchars(isset($paciente["codigo_paciente"]) ? $paciente["codigo_paciente"] : ""); ?>'>
                     <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"]); ?>'>
                     <input type='hidden' name='semanas_gestacion' value='<?php echo htmlspecialchars($paciente["semanas_gestacion"]); ?>'>
+                    <?php // Aqui envio los datos igual por htmlspecialschars pero por si las flais dejo el anterior ?>
                     <div class="flex justify-center">
-                        <img src="/assets/img_iconos/agregaar.svg" class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
+                    <img 
+                        src="/assets/img_iconos/agregaar.svg" 
+                        class="agregar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" 
+                        data-clave="<?= htmlspecialchars($paciente["clave_paciente"]) ?>"
+                        data-codigo="<?= htmlspecialchars($paciente["codigo_paciente"]) ?>"
+                        data-fecha-nacimiento="<?= htmlspecialchars($paciente["fecha_nacimiento_paciente"]) ?>"
+                        data-semanas="<?= htmlspecialchars($paciente["semanas_gestacion"]) ?>"
+                    />
                     </div>
                 </form>
                 </td>
