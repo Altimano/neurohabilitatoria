@@ -611,11 +611,11 @@ class Estudios
     }
     //verificar si es el primer estudio del paciente en terapia neurohabilitatoria realizando una consulta a la bd en base a la clave de paciente
     //si el paciente ya tiene un estudio en terapia neurohabilitatoria se regresa un true, si no se regresa un false
-    public function validarEvaluacionInicial($clave_paciente)
+    public function validarEvaluacionInicial($id_terapia)
     {
         $stmt = $this->db->prepare("SELECT 1 FROM terapia_neurov2
-        WHERE clave_paciente = ? LIMIT 1;");
-        $stmt->bind_param("s", $clave_paciente);
+        WHERE id_terapia_neurohabilitatoriav2 = ? LIMIT 1;");
+        $stmt->bind_param("s", $id_terapia);
         $stmt->execute();
         $resultado = $stmt->get_result();
         if ($resultado->num_rows > 0) {

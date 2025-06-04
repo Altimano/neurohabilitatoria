@@ -1,44 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katona</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-header-area { background-color: #FFFFFF; }
-        .bg-custom-main-box { background-color: #E0F2FE; }
-        .bg-custom-button { background-color: #0284C7; }
-        .text-custom-title { color: #0369A1; }
-        input[readonly], textarea[readonly] {
+        .bg-custom-header-area {
+            background-color: #FFFFFF;
+        }
+
+        .bg-custom-main-box {
+            background-color: #E0F2FE;
+        }
+
+        .bg-custom-button {
+            background-color: #0284C7;
+        }
+
+        .text-custom-title {
+            color: #0369A1;
+        }
+
+        input[readonly],
+        textarea[readonly] {
             background-color: #E5E7EB;
             cursor: default;
             border-color: #D1D5DB;
             color: #4B5563;
         }
-        select:not([disabled]) { background-color: #FFFFFF; cursor: pointer; }
+
+        select:not([disabled]) {
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
         .katona-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 1rem;
             font-size: 0.875rem;
         }
-        .katona-table th, .katona-table td {
+
+        .katona-table th,
+        .katona-table td {
             border: 1px solid #D1D5DB;
             padding: 0.5rem;
             text-align: center;
             vertical-align: middle;
         }
+
         .katona-table th {
             background-color: #F3F4F6;
             font-weight: 600;
             white-space: normal;
         }
+
         .katona-table td:first-child {
             text-align: left;
             font-weight: 500;
             white-space: normal;
         }
+
         .katona-table input[type="checkbox"] {
             height: 1.25rem;
             width: 1.25rem;
@@ -49,9 +73,12 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-100">
 
-    <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3></div>
+    <div class="text-center my-6">
+        <h3 class="text-2xl font-bold text-custom-title">Modificar Evaluacion</h3>
+    </div>
 
     <div class="mx-6 md:mx-10 mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
         <form id="evaluacionKatonaForm">
@@ -62,10 +89,12 @@
                 <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
             </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">MANIOBRAS DE KATONA</h1></div>
+            <div class="border-t border-b border-gray-400 py-2 mb-6">
+                <h1 class="text-xl font-semibold text-center text-gray-800">MANIOBRAS DE KATONA</h1>
+            </div>
 
             <div class="text-sm text-center text-gray-700 border-b border-gray-400 pb-4 mb-2">
-                <strong>Normal(N), Hipotonía(-), Hipertonía(+), Miembros Toracicos(MTs), Miembro Pelvico(MP), Extremidades(E), Hemicuerpo(H), Contralateral(CL), Derecha(D), Izquierda(I), Ausente(A)</strong> 
+                <strong>Normal(N), Hipotonía(-), Hipertonía(+), Miembros Toracicos(MTs), Miembro Pelvico(MP), Extremidades(E), Hemicuerpo(H), Contralateral(CL), Derecha(D), Izquierda(I), Ausente(A)</strong>
             </div>
 
             <div class="overflow-x-auto">
@@ -73,36 +102,66 @@
                     <thead>
                         <tr>
                             <th>Maniobra</th>
-                            <th>Normal</th>     <th>Hipotonía</th>  <th>Hipertonía</th>  <th>M. Torácicos</th><th>M. Pélvicos</th> <th>Extremidades</th><th>Hemicuerpo</th>   <th>Contralateral</th>  <th>Derecha</th>     <th>Izquierda</th>   <th>Ausente</th>     </tr>
+                            <th>Normal</th>
+                            <th>Hipotonía</th>
+                            <th>Hipertonía</th>
+                            <th>M. Torácicos</th>
+                            <th>M. Pélvicos</th>
+                            <th>Extremidades</th>
+                            <th>Hemicuerpo</th>
+                            <th>Contralateral</th>
+                            <th>Derecha</th>
+                            <th>Izquierda</th>
+                            <th>Ausente</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr id="mk_elev_tronco_manos_row" value="Elevación de tronco (tracción de manos)">
                             <td>Elevación de tronco (tracción de manos)</td>
                             <td><input type="checkbox" id="mk_elev_tronco_manos_N" name="mk_elev_tronco_manos[]" value="Normal"></td>
                             <td><input type="checkbox" id="mk_elev_tronco_manos_Hneg" name="mk_elev_tronco_manos[]" value="Hipotonía(-)"></td>
                             <td><input type="checkbox" id="mk_elev_tronco_manos_Hpos" name="mk_elev_tronco_manos[]" value="Hipertonía(+)"></td>
-                            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td><input type="checkbox" id="mk_elev_tronco_manos_A" name="mk_elev_tronco_manos[]" value="Ausente(A)"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><input type="checkbox" id="mk_elev_tronco_manos_A" name="mk_elev_tronco_manos[]" value="Ausente(A)"></td>
                         </tr>
 
-                        <tr>
+                        <tr id="mk_elev_tronco_espalda_row" value="Elevación de tronco (espalda-cadera)">
                             <td>Elevación de tronco (espalda-cadera)</td>
                             <td><input type="checkbox" id="mk_elev_tronco_espalda_N" name="mk_elev_tronco_espalda[]" value="Normal"></td>
                             <td><input type="checkbox" id="mk_elev_tronco_espalda_Hip" name="mk_elev_tronco_espalda[]" value="Hipotonía(-)"></td>
                             <td><input type="checkbox" id="mk_elev_tronco_espalda_Hiper" name="mk_elev_tronco_espalda[]" value="Hipertonía(+)"></td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td><input type="checkbox" id="mk_elev_tronco_espalda_A" name="mk_elev_tronco_espalda[]" value="Ausente(A)"></td>
                         </tr>
 
-                        <tr>
+                        <tr id="mk_sentado_aire_row" value="Sentado al aire">
                             <td>Sentado al aire</td>
                             <td><input type="checkbox" id="mk_sentado_aire_N" name="mk_sentado_aire[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_sentado_aire_Hneg" name="mk_sentado_aire[]" value="Hipotonía(-)"></td>
                             <td><input type="checkbox" id="mk_sentado_aire_Hpos" name="mk_sentado_aire[]" value="Hipertonía(+)"></td>
-                            <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td><input type="checkbox" id="mk_sentado_aire_A" name="mk_sentado_aire[]" value="Ausente(A)"></td>
                         </tr>
-                        
-                        <tr>
+
+                        <tr id="mk_rotacion_izq_der_row" value="Rotación izquierda y derecha">
                             <td>Rotacion izquierda y derecha</td>
                             <td><input type="checkbox" id="mk_rotacion_izq_der_N" name="mk_rotacion_izq_der[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_rotacion_izq_der_Hneg" name="mk_rotacion_izq_der[]" value="Hipotonía(-)"></td>
@@ -117,7 +176,7 @@
                             <td><input type="checkbox" id="mk_rotacion_izq_der_A" name="mk_rotacion_izq_der[]" value="Ausente(A)"></td>
                         </tr>
 
-                        <tr>
+                        <tr id="mk_gateo_asistido_row" value="Gateo asistido">
                             <td>Gateo asistido</td>
                             <td><input type="checkbox" id="mk_gateo_asistido_N" name="mk_gateo_asistido[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_gateo_asistido_Hneg" name="mk_gateo_asistido[]" value="Hipotonía(-)"></td>
@@ -130,9 +189,10 @@
                             <td><input type="checkbox" id="mk_gateo_asistido_D" name="mk_gateo_asistido[]" value="Derecha(D)"></td>
                             <td><input type="checkbox" id="mk_gateo_asistido_I" name="mk_gateo_asistido[]" value="Izquierda(I)"></td>
                             <td><input type="checkbox" id="mk_gateo_asistido_A" name="mk_gateo_asistido[]" value="Ausente(A)"></td>
+                            <input type="hidden" id="mk_gateo_asistido_id" name="mk_gateo_asistido[]" value="4">
                         </tr>
-                        
-                        <tr>
+
+                        <tr id="mk_gateo_asistido_mod_row" value="Gateo asistido modificado">
                             <td>Gateo asistido modificado</td>
                             <td><input type="checkbox" id="mk_gateo_asistido_mod_N" name="mk_gateo_asistido_mod[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_gateo_asistido_mod_Hneg" name="mk_gateo_asistido_mod[]" value="Hipotonía(-)"></td>
@@ -147,7 +207,7 @@
                             <td><input type="checkbox" id="mk_gateo_asistido_mod_A" name="mk_gateo_asistido_mod[]" value="Ausente(A)"></td>
                         </tr>
 
-                        <tr>
+                        <tr id="mk_arrastre_horizontal_row" value="Arrastre horizontal">
                             <td>Arrastre horizontal</td>
                             <td><input type="checkbox" id="mk_arrastre_horizontal_N" name="mk_arrastre_horizontal[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_arrastre_horizontal_Hneg" name="mk_arrastre_horizontal[]" value="Hipotonía(-)"></td>
@@ -161,8 +221,8 @@
                             <td><input type="checkbox" id="mk_arrastre_horizontal_I" name="mk_arrastre_horizontal[]" value="Izquierda(I)"></td>
                             <td><input type="checkbox" id="mk_arrastre_horizontal_A" name="mk_arrastre_horizontal[]" value="Ausente(A)"></td>
                         </tr>
-                        
-                        <tr>
+
+                        <tr id="mk_marcha_plano_horizontal_row" value="Marcha en plano horizontal">
                             <td>Marcha en plano horizontal</td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_N" name="mk_marcha_plano_horizontal[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_Hneg" name="mk_marcha_plano_horizontal[]" value="Hipotonía(-)"></td>
@@ -171,13 +231,13 @@
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_MP" name="mk_marcha_plano_horizontal[]" value="Miembro Pelvico(MP)"></td>
                             <td></td>
                             <td></td>
-                            <td>    </td>
+                            <td> </td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_D" name="mk_marcha_plano_horizontal[]" value="Derecha(D)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_I" name="mk_marcha_plano_horizontal[]" value="Izquierda(I)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_A" name="mk_marcha_plano_horizontal[]" value="Ausente(A)"></td>
                         </tr>
 
-                        <tr>
+                        <tr id="mk_marcha_plano_ascendente_row" value="Marcha en plano ascendente">
                             <td>Marcha en plano ascendente</td>
                             <td><input type="checkbox" id="mk_marcha_plano_ascendente_N" name="mk_marcha_plano_ascendente[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_ascendente_Hneg" name="mk_marcha_plano_ascendente[]" value="Hipotonía(-)"></td>
@@ -191,8 +251,8 @@
                             <td><input type="checkbox" id="mk_marcha_plano_ascendente_I" name="mk_marcha_plano_ascendente[]" value="Izquierda(I)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_ascendente_A" name="mk_marcha_plano_ascendente[]" value="Ausente(A)"></td>
                         </tr>
-                        
-                        <tr>
+
+                        <tr id="mk_arrastre_inclinado_desc_row" value="Arrastre en plano inclinado descendente">
                             <td>Arrastre en plano inclinado descendente</td>
                             <td><input type="checkbox" id="mk_arrastre_inclinado_desc_N" name="mk_arrastre_inclinado_desc[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_arrastre_inclinado_desc_Hneg" name="mk_arrastre_inclinado_desc[]" value="Hipotonía(-)"></td>
@@ -207,7 +267,7 @@
                             <td><input type="checkbox" id="mk_arrastre_inclinado_desc_A" name="mk_arrastre_inclinado_desc[]" value="Ausente(A)"></td>
                         </tr>
 
-                        <tr>
+                        <tr id="mk_arrastre_inclinado_asc_row" value="Arrastre en plano inclinado ascendente">
                             <td>Arrastre en plano inclinado ascendente</td>
                             <td><input type="checkbox" id="mk_arrastre_inclinado_asc_N" name="mk_arrastre_inclinado_asc[]" value="Normal(N)"></td>
                             <td><input type="checkbox" id="mk_arrastre_inclinado_asc_Hneg" name="mk_arrastre_inclinado_asc[]" value="Hipotonía(-)"></td>
@@ -226,7 +286,7 @@
             </div>
 
             <div class="flex justify-between mt-8">
-                <a href="/modificarDatosPaciente"> 
+                <a href="/modificarDatosPaciente">
                     <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                 </a>
                 <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
@@ -235,7 +295,44 @@
     </div>
 
     <script>
+        //Importo los datos de PHP a JavaScript
+        const resultadosKatona = <?php echo json_encode($datosKatona); ?>;
         document.addEventListener('DOMContentLoaded', function() {
+        //Usamos map para crear un array de evaluaciones normalizadas pa las comparaciones
+    const evaluaciones = resultadosKatona.map(item => item.evaluacionKatona.trim().toLowerCase());
+
+    // Seleccionamos todas las filas con atributo 'value' Entonces si queremos filtrar agregamos el valor que buscamos en value
+    const filas = document.querySelectorAll('tr[value]');
+
+    filas.forEach(fila => {
+        const filaValue = fila.getAttribute('value').trim().toLowerCase();
+
+        // Verifica si la fila corresponde a una evaluación de la query
+        const resultadoEncontrado = resultadosKatona.find(item => 
+            item.evaluacionKatona.trim().toLowerCase() === filaValue
+        );
+
+        if (resultadoEncontrado) {
+            fila.style.display = ''; // Muestra la fila
+
+            // Obtiene los resultados separados por coma
+            const resultados = resultadoEncontrado.resultadosKatona
+                .split(',')
+                .map(r => r.trim().toLowerCase()); // Normaliza
+
+            // Selecciona todos los inputs de la fila
+            const checkboxes = fila.querySelectorAll('input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                const checkboxValue = checkbox.value.trim().toLowerCase();
+                if (resultados.includes(checkboxValue)) {
+                    checkbox.checked = true;
+                }
+            });
+        } else {
+            fila.style.display = 'none'; // Oculta la fila
+        }
+    });
             const dateInput = document.getElementById('fecha_evaluacion');
             // Define la clave que se usará en sessionStorage para guardar los datos de este paso del formulario.
             const sessionKey = 'evaluacionPaso2_mkatona';
@@ -245,15 +342,15 @@
             let datosJson = {};
 
             // Si se encontraron datos guardados en sessionStorage...
-            if (datosGuardados) { 
-                try { 
+            if (datosGuardados) {
+                try {
                     // Intenta convertir la cadena JSON de sessionStorage a un objeto JavaScript.
-                    datosJson = JSON.parse(datosGuardados); 
-                } catch(e) { 
+                    datosJson = JSON.parse(datosGuardados);
+                } catch (e) {
                     console.error("Error Paso 2 (Katona) al parsear datos guardados:", e);
                 }
             }
-            
+
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
             const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
             // Si se encontraron datos del Paso 1
@@ -268,29 +365,29 @@
                         //No muestra el mes
                         mesDisplay.textContent = 'No disponible';
                     }
-                } catch(e){
-                    if(mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
+                } catch (e) {
+                    if (mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
                     console.error("Error Paso 2 (Katona): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
                 }
-            } else if(mesDisplay) {
+            } else if (mesDisplay) {
                 mesDisplay.textContent = 'No disponible';
             }
 
             if (dateInput) {
-                if(datosJson.fecha_evaluacion) { 
-                    dateInput.value = datosJson.fecha_evaluacion; 
-                } else { 
-                    if(datosPaso1Raw) {
+                if (datosJson.fecha_evaluacion) {
+                    dateInput.value = datosJson.fecha_evaluacion;
+                } else {
+                    if (datosPaso1Raw) {
                         try {
-                            const dP1 = JSON.parse(datosPaso1Raw); 
-                            if(dP1.fecha_evaluacion) dateInput.value = dP1.fecha_evaluacion;
-                        } catch(e) {
+                            const dP1 = JSON.parse(datosPaso1Raw);
+                            if (dP1.fecha_evaluacion) dateInput.value = dP1.fecha_evaluacion;
+                        } catch (e) {
                             console.warn("Advertencia: No se pudo parsear fecha de evaluacionPaso1, se usará la fecha actual si no hay otra.", e);
                         }
                     }
-                    if(!dateInput.value) { 
-                        const t = new Date(); 
-                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
+                    if (!dateInput.value) {
+                        const t = new Date();
+                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
                     }
                 }
             }
@@ -299,21 +396,21 @@
             const form = document.getElementById('evaluacionKatonaForm');
             // Define un array con los nombres de los grupos de checkboxes (para cada maniobra), y debe de coincidir con name.
             const checkboxGroupsNames = [
-                'mk_elev_tronco_manos', 
-                'mk_elev_tronco_espalda', 
+                'mk_elev_tronco_manos',
+                'mk_elev_tronco_espalda',
                 'mk_sentado_aire',
-                'mk_rotacion_izq_der', 
-                'mk_gateo_asistido', 
+                'mk_rotacion_izq_der',
+                'mk_gateo_asistido',
                 'mk_gateo_asistido_mod',
-                'mk_arrastre_horizontal', 
-                'mk_marcha_plano_horizontal', 
+                'mk_arrastre_horizontal',
+                'mk_marcha_plano_horizontal',
                 'mk_marcha_plano_ascendente',
-                'mk_arrastre_inclinado_desc', 
+                'mk_arrastre_inclinado_desc',
                 'mk_arrastre_inclinado_asc'
             ];
 
             // Si el formulario existe y el objeto datosJson tiene al menos una propiedad
-            if(form && Object.keys(datosJson).length > 0) {
+            if (form && Object.keys(datosJson).length > 0) {
                 // Itera sobre cada nombre de grupo de checkboxes.
                 checkboxGroupsNames.forEach(groupName => {
                     if (datosJson[groupName] && Array.isArray(datosJson[groupName])) {
@@ -343,8 +440,8 @@
                 botonSiguiente.addEventListener('click', function() {
                     // Crea un objeto vacío para almacenar los datos de este paso del formulario.
                     const datosPaso2 = {};
-                    if(dateInput) datosPaso2['fecha_evaluacion'] = dateInput.value;
-                    
+                    if (dateInput) datosPaso2['fecha_evaluacion'] = dateInput.value;
+
                     // Itera sobre cada nombre de grupo de checkboxes.
                     checkboxGroupsNames.forEach(groupName => {
                         // Selecciona solo los checkboxes marcados dentro del grupo actual.
@@ -352,10 +449,16 @@
                         // Crea un array vacío para almacenar los valores de los checkboxes marcados.
                         const values = [];
                         // Itera sobre los checkboxes marcados y añade sus valores al array 'values'.
-                        checkedBoxes.forEach(checkbox => { values.push(checkbox.value); });
+                        checkedBoxes.forEach(checkbox => {
+                            values.push(checkbox.value);
+                        });
                         // Asigna el array de valores al nombre del grupo correspondiente en el objeto datosPaso2.
-                        datosPaso2[groupName] = values;
+                        if (values.length > 0) {
+                            // Si hay valores, los asigna al grupo.
+                            datosPaso2[groupName] = values;
+                        }
                     });
+
 
                     // Muestra en la consola los datos que se van a guardar (útil para depuración).
                     console.log(`Datos guardados en ${sessionKey} (Katona):`, datosPaso2);
@@ -366,15 +469,16 @@
                         sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso2));
                         // Redirige al usuario a la siguiente página del formulario.
                         window.location.href = '/modificarGrueso';
-                    } catch(e) { 
+                    } catch (e) {
                         // Si ocurre un error al guardar en sessionStorage (ej. almacenamiento lleno),
                         // lo muestra en consola y alerta al usuario.
                         console.error(`Error guardando datos de ${sessionKey}:`, e);
-                        alert("Hubo un error al guardar los datos de Katona."); 
+                        alert("Hubo un error al guardar los datos de Katona.");
                     }
                 });
             }
         });
     </script>
 </body>
+
 </html>

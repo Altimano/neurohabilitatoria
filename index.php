@@ -15,7 +15,13 @@ $rutas = [
     "/eliminarEvaluacion" => "controladores/eliminar.php",
     "/salir" => "controladores/salir.php",
     "/modificarKatona" => "controladores/modificarKatona.php",
-    "/modificarGrueso" => "controladores/modificarGrueso.php"
+    "/modificarGrueso" => "controladores/modificarGrueso.php",
+    "/modificarFino" => "controladores/modificarFino.php",
+    "/modificarLenguaje" => "controladores/modificarLenguaje.php",
+    "/modificarPostura" => "controladores/modificarPostura.php",
+    "/modificarSignos" => "controladores/modificarSignos.php",
+    "/modificarHitosMG" => "controladores/modificarHitosMG.php",
+    "/modificarHitosMF" => "controladores/modificarHitosMF.php",
 ];
 
 if (array_key_exists($uri, $rutas)) {

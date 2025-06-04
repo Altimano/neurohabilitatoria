@@ -126,7 +126,7 @@
             </div>
 
             <div class="flex justify-between mt-8">
-                <a href="agregar.hitomgrueso.php"> 
+                <a href="/modificarHitosMG" class="inline-block"> 
                     <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                 </a>
                 <button type="button" id="botonFinalizarEvaluacion" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">FINALIZAR EVALUACIÓN</button>
@@ -259,7 +259,10 @@
                     
                     const hitoInputs = form.querySelectorAll('input[type="hidden"]');
                     hitoInputs.forEach(input => {
-                        datosPasoActual[input.name] = input.value;
+                        const valor = input.value;
+                    if (valor !== '' && valor !== 'Aún no se evalúa') {
+                        datosPasoActual[input.name] = valor;
+                    }
                     });
 
                     console.log(`Datos guardados en ${sessionKeyThisStep} (Hitos Motor Fino):`, datosPasoActual);
@@ -324,7 +327,7 @@
                     console.log(`Removido: ${clave}`);
                 });
                 console.log("Limpieza de sessionStorage completada.");
-                window.location.href = 'bienvenido.php';
+                window.location.href = '/inicio';
             }
         });
     </script>

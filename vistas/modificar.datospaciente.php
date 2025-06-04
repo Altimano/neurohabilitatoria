@@ -60,13 +60,13 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Nombre Paciente</label><input type="text" id="dp_nombre_paciente" name="nombre_paciente_display" value="<?= htmlspecialchars($datosPaciente['nombre_paciente']) ?>" class="w-full p-2 border rounded-md" readonly></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Código Paciente</label><input type="text" id="dp_codigo_paciente" name="codigo_paciente_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['codigo_paciente']) ? $datos_paciente_para_mostrar['codigo_paciente'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento</label><input type="date" id="dp_fecha_nacimiento" name="fecha_nacimiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento']) ? $datos_paciente_para_mostrar['fecha_nacimiento'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Semanas de Gestacion(SDG)</label><input type="text" id="dp_sdg" name="sdg" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['sdg']) ? $datos_paciente_para_mostrar['sdg'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Talla</label><input type="text" id="dp_talla" name="talla" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Peso</label><input type="text" id="dp_peso" name="peso" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Clave Paciente</label><input type="text" id="dp_clave_paciente" name="clave_paciente_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['clave_paciente']) ? $datos_paciente_para_mostrar['clave_paciente'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento</label><input type="date"  id="dp_fecha_nacimiento" name="fecha_nacimiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento']) ? $datos_paciente_para_mostrar['fecha_nacimiento'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" readonly></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Semanas de Gestacion(SDG)</label><input type="text" id="dp_sdg" name="sdg" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['sdg']) ? $datos_paciente_para_mostrar['sdg'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" readonly></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Talla</label><input type="text" id="dp_talla" name="talla" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" ></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Peso</label><input type="text" id="dp_peso" name="peso" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" ></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Perimetro Cefalico</label><input type="text" id="dp_perimetro_cefalico" name="perimetro_cefalico" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>></div>
-                <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Evaluación Actual</label><input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
+                <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Evaluación</label><input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Edad Cronológica</label><input type="text" id="dp_edad_cronologica_ingreso_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                 <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha Nacimiento Corregida</label><input type="text" id="dp_edad_corregida_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
             </div>
@@ -116,9 +116,9 @@
                 try {
                     pacienteDataParaActualizar = JSON.parse(datosPacienteGuardados);
                     esPrimeraEvaluacionJS = pacienteDataParaActualizar.esPrimeraEvaluacion || false;
-
+                    
                     document.getElementById('dp_nombre_paciente').value = pacienteDataParaActualizar.nombre_paciente || '';
-                    document.getElementById('dp_codigo_paciente').value = pacienteDataParaActualizar.codigo_paciente || '';
+                    document.getElementById('dp_clave_paciente').value = pacienteDataParaActualizar.clave_paciente || '';
                     document.getElementById('dp_fecha_nacimiento').value = pacienteDataParaActualizar.fecha_nacimiento || '';
                     document.getElementById('dp_sdg').value = pacienteDataParaActualizar.sdg || '';
                     document.getElementById('dp_talla').value = pacienteDataParaActualizar.talla || '';
@@ -131,7 +131,7 @@
 
                     const camposAfectadosPorPrimeraEval = [
                         'dp_talla', 'dp_peso', 'dp_perimetro_cefalico',
-                        'dp_sdg', 'dp_fecha_nacimiento', 'factores_riesgo'
+                        'factores_riesgo'
                     ];
                     camposAfectadosPorPrimeraEval.forEach(idCampo => {
                         const el = document.getElementById(idCampo);
