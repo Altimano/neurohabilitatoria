@@ -327,6 +327,8 @@
                 const checkboxValue = checkbox.value.trim().toLowerCase();
                 if (resultados.includes(checkboxValue)) {
                     checkbox.checked = true;
+                } else {
+                    checkbox.checked = false;
                 }
             });
         } else {
@@ -467,6 +469,8 @@
                         // Intenta guardar el objeto datosPaso2 en sessionStorage.
                         // Primero lo convierte a una cadena JSON porque sessionStorage solo almacena cadenas.
                         sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso2));
+                        const datosKatonaActualizadosPHP = JSON.stringify(datosPaso2);
+                        sessionStorage.setItem('datosKatona', datosKatonaActualizadosPHP);
                         // Redirige al usuario a la siguiente página del formulario.
                         window.location.href = '/modificarGrueso';
                     } catch (e) {

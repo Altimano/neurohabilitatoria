@@ -50,7 +50,7 @@
 <body class="bg-gray-100">
 
     <div class="text-center my-6">
-        <h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3>
+        <h3 class="text-2xl font-bold text-custom-title">Modificar Evaluacion</h3>
     </div>
 
     <div class="max-w-4xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-md p-6">

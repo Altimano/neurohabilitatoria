@@ -221,6 +221,7 @@
         const resultadosPostura = <?php echo json_encode($datosPostura); ?>;
         console.log("Resultados Tono:", resultadosTono);
         console.log("Resultados Postura:", resultadosPostura);
+
         document.addEventListener('DOMContentLoaded', function() {
             const filas = document.querySelectorAll('tr[value]');
 
@@ -228,29 +229,42 @@
                 const filaValue = fila.getAttribute('value').trim().toLowerCase();
 
                 // Filtramos todos los resultados que coincidan con el campo
-                const resultadosTonoFiltrados = resultadosTono.filter(item =>
-                    item.campos.trim().toLowerCase() === filaValue
+                const resultadosTonoEncontrados = resultadosTono.find(item =>
+                    item.campos && item.campos.trim().toLowerCase() === filaValue
                 );
 
-                const resultadosPosturaFiltrados = resultadosPostura.filter(item =>
-                    item.campo.trim().toLowerCase() === filaValue
+                const resultadosPosturaEncontrados = resultadosPostura.find(item =>
+                    item.campo && item.campo.trim().toLowerCase() === filaValue
                 );
 
                 console.log("Fila actual:", filaValue);
-                console.log("Resultados Tono encontrados:", resultadosTonoFiltrados);
-                console.log("Resultados Postura encontrados:", resultadosPosturaFiltrados);
+                console.log("Resultados Tono encontrados:", resultadosTonoEncontrados);
+                console.log("Resultados Postura encontrados:", resultadosPosturaEncontrados);
 
-                if (resultadosTonoFiltrados.length > 0 || resultadosPosturaFiltrados.length > 0) {
+                if (resultadosTonoEncontrados || resultadosPosturaEncontrados) {
                     fila.style.display = '';
 
-                    // Recopilamos todos los resultados
-                    const resultadosTonoArray = resultadosTonoFiltrados.map(item =>
-                        item.resultado.trim().toLowerCase()
-                    );
+                    // Recopilamos todos los resultados con verificaciones
+                    let resultadosTonoArray = [];
+                    if (resultadosTonoEncontrados && resultadosTonoEncontrados.resultado) {
+                        resultadosTonoArray = resultadosTonoEncontrados.resultado
+                            .split(',')
+                            .map(r => r.trim().toLowerCase())
+                            .filter(r => r !== ''); // Filtrar strings vacíos
+                    }
 
-                    const resultadosPosturaArray = resultadosPosturaFiltrados.map(item =>
-                        item.resultado.trim().toLowerCase()
-                    );
+                    let resultadosPosturaArray = [];
+                    if (resultadosPosturaEncontrados && resultadosPosturaEncontrados.resultado) {
+                        resultadosPosturaArray = resultadosPosturaEncontrados.resultado
+                            .split(',')
+                            .map(r => r.trim().toLowerCase())
+                            .filter(r => r !== ''); // Filtrar strings vacíos
+                    }
+
+                    console.log("Arrays procesados:", {
+                        resultadosTonoArray,
+                        resultadosPosturaArray
+                    });
 
                     const checkboxes = fila.querySelectorAll('input[type="checkbox"]');
                     checkboxes.forEach(checkbox => {
@@ -265,7 +279,6 @@
                     fila.style.display = 'none';
                 }
             });
-
             const dateInput = document.getElementById('fecha_evaluacion');
             const sessionKey = 'evaluacionPaso6_posturas_tmyu';
             const datosGuardados = sessionStorage.getItem(sessionKey);

@@ -1,29 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hitos de Desarrollo Motricidad Fina - Finalizar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-header-area { background-color: #FFFFFF; }
-        .bg-custom-main-box { background-color: #E0F2FE; }
-        .bg-custom-button { background-color: #0284C7; } /* Botón primario (Sí) */
-        .bg-custom-button-no { background-color: #6B7280; } /* Botón secundario (No) */
-        .text-custom-title { color: #0369A1; }
-        input[readonly] { background-color: #f3f4f6; cursor: default; }
-        input[type="date"][readonly] { background-color: #f3f4f6; cursor: default; }
+        .bg-custom-header-area {
+            background-color: #FFFFFF;
+        }
+
+        .bg-custom-main-box {
+            background-color: #E0F2FE;
+        }
+
+        .bg-custom-button {
+            background-color: #0284C7;
+        }
+
+        /* Botón primario (Sí) */
+        .bg-custom-button-no {
+            background-color: #6B7280;
+        }
+
+        /* Botón secundario (No) */
+        .text-custom-title {
+            color: #0369A1;
+        }
+
+        input[readonly] {
+            background-color: #f3f4f6;
+            cursor: default;
+        }
+
+        input[type="date"][readonly] {
+            background-color: #f3f4f6;
+            cursor: default;
+        }
+
         .hito-display {
-            padding: 0.5rem; 
-            border: 1px solid #D1D5DB; 
+            padding: 0.5rem;
+            border: 1px solid #D1D5DB;
             border-radius: 0.375rem;
-            background-color: #E5E7EB; 
-            color: #4B5563; 
-            min-height: 2.5rem; 
+            background-color: #E5E7EB;
+            color: #4B5563;
+            min-height: 2.5rem;
             display: flex;
             align-items: center;
             font-size: 0.875rem;
         }
+
         /* Estilos para el Modal */
         .modal-overlay {
             position: fixed;
@@ -37,6 +64,7 @@
             justify-content: center;
             z-index: 1000;
         }
+
         .modal-content {
             background-color: white;
             padding: 2rem;
@@ -46,22 +74,29 @@
             max-width: 400px;
             text-align: center;
         }
-        .modal-icon { 
+
+        .modal-icon {
             font-size: 2.5rem;
-            color: #F59E0B; /* Tailwind amber-500 */
+            color: #F59E0B;
+            /* Tailwind amber-500 */
             margin-bottom: 1rem;
         }
+
         .modal-title {
             font-size: 1.25rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
-            color: #1F2937; /* Tailwind gray-800 */
+            color: #1F2937;
+            /* Tailwind gray-800 */
         }
+
         .modal-message {
             font-size: 1rem;
-            color: #4B5563; /* Tailwind gray-600 */
+            color: #4B5563;
+            /* Tailwind gray-600 */
             margin-bottom: 1.5rem;
         }
+
         .modal-buttons button {
             padding: 0.5rem 1rem;
             border-radius: 0.375rem;
@@ -70,12 +105,20 @@
             margin: 0 0.5rem;
             cursor: pointer;
         }
-        .hidden { display: none; } /* Para ocultar el modal */
+
+        .hidden {
+            display: none;
+        }
+
+        /* Para ocultar el modal */
     </style>
 </head>
+
 <body class="bg-gray-100">
 
-    <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3></div>
+    <div class="text-center my-6">
+        <h3 class="text-2xl font-bold text-custom-title">Modificar Evaluacion</h3>
+    </div>
 
     <div class="max-w-4xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
         <form id="evaluacionHitoMFinoForm" class="text-center">
@@ -86,7 +129,9 @@
                 <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
             </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-2"><h1 class="text-xl font-semibold text-center text-gray-800">HITOS DE DESARROLLO (MOTOR FINO)</h1></div>
+            <div class="border-t border-b border-gray-400 py-2 mb-2">
+                <h1 class="text-xl font-semibold text-center text-gray-800">HITOS DE DESARROLLO (MOTOR FINO)</h1>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6 text-left">
                 <div>
                     <label for="hf_fijacion_ocular_display" class="block text-sm font-medium text-gray-700 mb-1">Fijación Ocular (FO)</label>
@@ -126,7 +171,7 @@
             </div>
 
             <div class="flex justify-between mt-8">
-                <a href="/modificarHitosMG" class="inline-block"> 
+                <a href="/modificarHitosMG" class="inline-block">
                     <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                 </a>
                 <button type="button" id="botonFinalizarEvaluacion" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">FINALIZAR EVALUACIÓN</button>
@@ -149,104 +194,107 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKeyThisStep = 'evaluacionPaso9_hitomfino'; 
-            
+            const sessionKeyThisStep = 'evaluacionPaso9_hitomfino';
+
             const datosGuardadosEstePaso = sessionStorage.getItem(sessionKeyThisStep);
             let datosJsonEstePaso = {};
-            if (datosGuardadosEstePaso) { 
-                try { 
-                    datosJsonEstePaso = JSON.parse(datosGuardadosEstePaso); 
-                } catch(e) { 
+            if (datosGuardadosEstePaso) {
+                try {
+                    datosJsonEstePaso = JSON.parse(datosGuardadosEstePaso);
+                } catch (e) {
                     console.error(`Error Paso 9 (Hito M. Fino) al parsear datos guardados:`, e);
-                    sessionStorage.removeItem(sessionKeyThisStep); 
-                } 
+                    sessionStorage.removeItem(sessionKeyThisStep);
+                }
             }
 
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
             const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) { 
-                try { 
-                    const dP1 = JSON.parse(datosPaso1Raw); 
-                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; 
+            if (datosPaso1Raw) {
+                try {
+                    const dP1 = JSON.parse(datosPaso1Raw);
+                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes;
                     else if (mesDisplay) mesDisplay.textContent = 'No disponible';
-                } catch(e){ 
-                    if(mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
+                } catch (e) {
+                    if (mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
                     console.error("Error Paso 9 (Hito M. Fino): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
-                } 
-            } else if(mesDisplay) { 
-                mesDisplay.textContent = 'No disponible'; 
+                }
+            } else if (mesDisplay) {
+                mesDisplay.textContent = 'No disponible';
             }
 
             if (dateInput) {
-                if(datosJsonEstePaso.fecha_evaluacion) { 
-                    dateInput.value = datosJsonEstePaso.fecha_evaluacion; 
+                if (datosJsonEstePaso.fecha_evaluacion) {
+                    dateInput.value = datosJsonEstePaso.fecha_evaluacion;
                 } else {
-                    const datosPaso8Raw = sessionStorage.getItem('evaluacionPaso8_hitomgrueso'); 
-                    if(datosPaso8Raw){ 
-                        try{ 
-                            const dP8 = JSON.parse(datosPaso8Raw); 
-                            if(dP8.fecha_evaluacion) dateInput.value = dP8.fecha_evaluacion; 
-                        } catch(e){
+                    const datosPaso8Raw = sessionStorage.getItem('evaluacionPaso8_hitomgrueso');
+                    if (datosPaso8Raw) {
+                        try {
+                            const dP8 = JSON.parse(datosPaso8Raw);
+                            if (dP8.fecha_evaluacion) dateInput.value = dP8.fecha_evaluacion;
+                        } catch (e) {
                             console.error("Error Paso 9 (Hito M. Fino): No se pudo parsear JSON de evaluacionPaso8_hitomgrueso.", e);
-                        } 
+                        }
                     }
-                    if(!dateInput.value) { 
-                        const t = new Date(); 
-                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
+                    if (!dateInput.value) {
+                        const t = new Date();
+                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
                     }
                 }
             }
 
             const form = document.getElementById('evaluacionHitoMFinoForm');
-            const datosMfinoRaw = sessionStorage.getItem('evaluacionPaso4_mfino'); 
+            const datosMfinoRaw = sessionStorage.getItem('evaluacionPaso4_mfino');
             let datosMfino = {};
-            if(datosMfinoRaw){ 
-                try{ 
-                    datosMfino = JSON.parse(datosMfinoRaw); 
-                } catch(e){ 
-                    datosMfino = {}; 
+            if (datosMfinoRaw) {
+                try {
+                    datosMfino = JSON.parse(datosMfinoRaw);
+                } catch (e) {
+                    datosMfino = {};
                     console.error("Error Paso 9 (Hito M. Fino): No se pudo parsear JSON de evaluacionPaso4_mfino.", e);
-                } 
+                }
             }
             console.log("Datos de Motor Fino (Paso 4) leídos para Hitos:", datosMfino);
 
             const resultados_mfino = {
-                '0': 'No lo logra (0)', '1': 'Lo intenta pero no lo logra (1)',
-                '2': 'En proceso (2)', '3': 'Lo realiza inhábilmente (3)',
-                '4': 'Normal (4)', '': 'Aún no se evalúa'
+                '0': 'No lo logra (0)',
+                '1': 'Lo intenta pero no lo logra (1)',
+                '2': 'En proceso (2)',
+                '3': 'Lo realiza inhábilmente (3)',
+                '4': 'Normal (4)',
+                '': 'Aún no se evalúa'
             };
 
             function setHitoDisplay(baseId, valorNumericoDelCampoAnterior) {
                 const displayElement = document.getElementById(baseId + '_display');
                 const valueElement = document.getElementById(baseId + '_value');
                 let valorAGuardar = '';
-                let textoAMostrar = resultados_mfino['']; 
+                let textoAMostrar = resultados_mfino[''];
 
                 if (valorNumericoDelCampoAnterior && typeof resultados_mfino[String(valorNumericoDelCampoAnterior)] !== 'undefined') {
                     valorAGuardar = String(valorNumericoDelCampoAnterior);
                     textoAMostrar = resultados_mfino[String(valorNumericoDelCampoAnterior)];
                 }
-                
+
                 if (displayElement && valueElement) {
                     displayElement.textContent = textoAMostrar;
                     valueElement.value = valorAGuardar;
                 }
             }
-            
+
             const mapeoHitosMF = {
-                'hf_fijacion_ocular': datosMfino.mf_manos_linea_media, 
-                'hf_cubito_palmar': datosMfino.mf_estruja_papel, 
-                'hf_presion_r': datosMfino.mf_transfiere_manos, 
-                'hf_pinza_inferior': datosMfino.mf_desarrolla_agarre, 
+                'hf_fijacion_ocular': datosMfino.mf_manos_linea_media,
+                'hf_cubito_palmar': datosMfino.mf_estruja_papel,
+                'hf_presion_r': datosMfino.mf_transfiere_manos,
+                'hf_pinza_inferior': datosMfino.mf_desarrolla_agarre,
                 'hf_pinza_fina': datosMfino.mf_pinza_superior,
-                'hf_abajamiento_voluntario': datosMfino.mf_torre_2_cubos, 
-                'hf_coordinacion_oculomanual': datosMfino.mf_arma_tren_3_cubos 
+                'hf_abajamiento_voluntario': datosMfino.mf_torre_2_cubos,
+                'hf_coordinacion_oculomanual': datosMfino.mf_arma_tren_3_cubos
             };
 
             for (const idHito in mapeoHitosMF) {
                 setHitoDisplay(idHito, mapeoHitosMF[idHito]);
             }
-            
+
             const botonFinalizar = document.getElementById('botonFinalizarEvaluacion');
             const modal = document.getElementById('confirmacionModal');
             const modalBotonSi = document.getElementById('modalBotonSi');
@@ -255,23 +303,23 @@
             if (botonFinalizar && form && modal && modalBotonSi && modalBotonNo) {
                 botonFinalizar.addEventListener('click', function() {
                     const datosPasoActual = {};
-                    if(dateInput) datosPasoActual['fecha_evaluacion'] = dateInput.value;
-                    
+                    if (dateInput) datosPasoActual['fecha_evaluacion'] = dateInput.value;
+
                     const hitoInputs = form.querySelectorAll('input[type="hidden"]');
                     hitoInputs.forEach(input => {
                         const valor = input.value;
-                    if (valor !== '' && valor !== 'Aún no se evalúa') {
-                        datosPasoActual[input.name] = valor;
-                    }
+                        if (valor !== '' && valor !== 'Aún no se evalúa') {
+                            datosPasoActual[input.name] = valor;
+                        }
                     });
 
                     console.log(`Datos guardados en ${sessionKeyThisStep} (Hitos Motor Fino):`, datosPasoActual);
                     try {
                         sessionStorage.setItem(sessionKeyThisStep, JSON.stringify(datosPasoActual));
-                    } catch(e) { 
+                    } catch (e) {
                         console.error(`Error guardando datos de ${sessionKeyThisStep} antes de mostrar modal:`, e);
-                        alert("Hubo un error al guardar los Hitos de Desarrollo Motor Fino actuales."); 
-                        return; 
+                        alert("Hubo un error al guardar los Hitos de Desarrollo Motor Fino actuales.");
+                        return;
                     }
                     modal.classList.remove('hidden');
                 });
@@ -285,6 +333,7 @@
 
                     const todosLosDatos = {};
                     const clavesDePasos = [
+                        'datosPacienteParaEvaluacion',
                         'evaluacionPaso1',
                         'evaluacionPaso2_mkatona',
                         'evaluacionPaso3_mgrueso',
@@ -293,7 +342,7 @@
                         'evaluacionPaso6_posturas_tmyu',
                         'evaluacionPaso7_signos_alarma',
                         'evaluacionPaso8_hitomgrueso',
-                        sessionKeyThisStep 
+                        sessionKeyThisStep
                     ];
 
                     console.log("--- INICIO: RECOLECCIÓN DE TODOS LOS DATOS DE LA EVALUACIÓN ---");
@@ -305,7 +354,10 @@
                                 console.log(`Datos para ${clave}:`, todosLosDatos[clave]);
                             } catch (e) {
                                 console.error(`Error parseando datos para ${clave}:`, e, datosGuardados);
-                                todosLosDatos[clave] = { error: "No se pudieron parsear los datos", raw: datosGuardados };
+                                todosLosDatos[clave] = {
+                                    error: "No se pudieron parsear los datos",
+                                    raw: datosGuardados
+                                };
                             }
                         } else {
                             console.warn(`No se encontraron datos para ${clave} en sessionStorage.`);
@@ -315,8 +367,46 @@
                     console.log("--- Objeto consolidado con TODOS LOS DATOS DE LA EVALUACIÓN: ---", todosLosDatos);
                     console.log("--- FIN: RECOLECCIÓN DE TODOS LOS DATOS DE LA EVALUACIÓN ---");
                     //aqui poner la coneccion 
-                    
-                    limpiarSessionStorageYRedirigir(clavesDePasos);
+                    // Preparar los datos
+                    const datosParaEnviar = {
+                        DatosPaciente: todosLosDatos.datosPacienteParaEvaluacion,
+                        evaluacionPaso2_mkatona: todosLosDatos.evaluacionPaso2_mkatona,
+                        evaluacionPaso3_mgrueso: todosLosDatos.evaluacionPaso3_mgrueso,
+                        evaluacionPaso4_mfino: todosLosDatos.evaluacionPaso4_mfino,
+                        evaluacionPaso5_lenguaje: todosLosDatos.evaluacionPaso5_lenguaje,
+                        evaluacionPaso6_posturas_tmyu: todosLosDatos.evaluacionPaso6_posturas_tmyu,
+                        evaluacionPaso7_signos_alarma: todosLosDatos.evaluacionPaso7_signos_alarma,
+                        evaluacionPaso8_hitomgrueso: todosLosDatos.evaluacionPaso8_hitomgrueso,
+                        evaluacionPaso9_hitomfino: todosLosDatos[sessionKeyThisStep]
+                    };
+
+                    function enviarDatosEvaluacion(datos) {
+                        console.log("Enviando datos de evaluación al servidor...");
+                        http = new XMLHttpRequest();
+                        http.open("POST", "/realizarModificacion", true);
+                        http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        http.send(JSON.stringify(datos));
+                        http.onreadystatechange = function() {
+                            if (http.readyState === 4) {
+                                // Mostrar la respuesta completa del servidor
+                                console.log("Respuesta completa del servidor:", http.responseText);
+
+                                if (http.status === 200) {
+                                    console.log("Datos enviados correctamente.");
+                                    alert("Evaluación modificada exitosamente.");
+                                } else {
+                                    console.error("Error al enviar los datos:", http.status, http.statusText);
+                                    console.error("Respuesta de error:", http.responseText);
+                                    alert("Hubo un error al modificar la evaluación. Por favor, inténtalo de nuevo más tarde.");
+                                }
+                            }
+                        };
+                    }
+
+                    enviarDatosEvaluacion(datosParaEnviar);
+                    console.log("Datos de evaluación enviados al servidor:", datosParaEnviar);
+
+                    //limpiarSessionStorageYRedirigir(clavesDePasos);
                 });
             }
 
@@ -332,4 +422,5 @@
         });
     </script>
 </body>
+
 </html>

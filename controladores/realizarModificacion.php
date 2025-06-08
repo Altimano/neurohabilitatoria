@@ -1,128 +1,77 @@
 <?php
-session_start();
-include './config/db.php';
-include './Clases/Estudios.php';
-include './funciones/funciones.php';
+$json_input = file_get_contents('php://input');
+$datos_recibidos = json_decode($json_input, true);
+var_dump($datos_recibidos); 
+$mapeo_campos_id = [
+    'mk_elev_tronco_manos' => 1,
+    'mk_elev_tronco_espalda' => 2,
+    'mk_sentado_aire' => 3,
+    'mk_rotacion_izq_der' => 4,
+    'mk_gateo_asistido' => 5,
+    'mk_gateo_asistido_mod' => 6,
+    'mk_arrastre_horizontal' => 7,
+    'mk_marcha_plano_horizontal' => 8,
+    'mk_marcha_plano_ascendente' => 9,
+    'mk_arrastre_inclinado_desc' => 10,
+    'mk_arrastre_inclinado_asc' => 11,
+    
 
-$Con = conectar();
-$Estudio = new Estudios($Con);
-$id_terapia = $_POST["terapia_id"];
-$postLimpio = limpiarClavesPost($_POST);
-/*$dicKatona = $_SESSION["dicKatona"];
-$dicSubMG = $_SESSION["dicSubMG"];
-$dicSubMF = $_SESSION["dicSubMF"];
-$dicTono = $_SESSION["dicTono"];
-$dicSignos = $_SESSION["dicSignos"];
-$dicPostura = $_SESSION["dicPostura"];
-$dicLenguaje = $_SESSION["dicLenguaje"];
-$dicCamposSignos = $_SESSION["dicCamposSignos"];
-$postLimpio = limpiarClavesPost($_POST);
-$valoresParaModificar = [];
-$coincidenciasKatona = compararDiccionarioConPost($dicKatona, $postLimpio);
-$coincidenciasSubMG = compararDiccionarioConPost($dicSubMG, $postLimpio);
-$coincidenciasSubMF = compararDiccionarioConPost($dicSubMF, $postLimpio);
-$coincidenciasTono = compararDiccionarioConPost($dicTono, $postLimpio);
-$coincidenciasSignos = compararDiccionarioConPost($dicSignos, $postLimpio);
-$coincidenciasPostura = compararDiccionarioConPost($dicPostura, $postLimpio);
-$coincidenciasLenguaje = compararDiccionarioConPost($dicLenguaje, $postLimpio);
-$coincidenciasCamposSignos = compararDiccionarioConPost($dicCamposSignos, $postLimpio);
-$subMFSeparado = implode(" ", $dicSubMF);
-$subKatonaSeparado = implode(" ", $dicKatona);
-//MEJOR DEJAR LAS COINCIDENCIAS POR SEPARADO, ASÍ SE PUEDE SABER QUÉ VALORES SE VAN A MODIFICAR EN CADA EVALUACIÓN
-$valoresParaModificar = array_merge($valoresParaModificar, $coincidenciasKatona, $coincidenciasSubMG, $coincidenciasSubMF, $coincidenciasTono, $coincidenciasSignos, $coincidenciasPostura, $coincidenciasLenguaje, $coincidenciasCamposSignos);
-/*echo "<br>";
-echo "Los valores a modificar son: "; var_dump($valoresParaModificar);
-echo "<br>";
-echo "El diccionario de SubMG es: "; var_dump($dicSubMG);
-echo "<br>";
-echo "El diccionario de Katona separado es: " . $subKatonaSeparado;
-echo "<br>";
-echo "Coincidencias encontradas en Katona: "; echo var_dump($coincidenciasKatona);
-echo "<br>";
-echo "Coincidencias encontradas en SubMG: "; echo var_dump($coincidenciasSubMG);
-echo "<br>";
-echo "El diccionario de las evaluaciones en katona que se ha registrado que el paciente ya tiene registrado "; var_dump($dicKatona);
-echo "<br>";
-echo "El array con los contenidos de POST "; var_dump($_POST);
-echo "<br>";
-*/
-//echo "El array con los contenidos de POST limpio "; var_dump($postLimpio);
-echo "<br>";
-echo "El Post sin arreglar es"; print_r($_POST);
-echo "<br>";
-$idCambiarKatona = [];
-$idCambiarSubMG = [];
-$idCambiarLenguaje = [];
-$idCambiarSubMF = [];
-$idCambiarTono = [];
-$idCambiarSignos = [];
-$idCambiarPostura = [];
-if (isset($_POST['id_resultados_submg'])) {
-    foreach ($_POST['id_resultados_sub_mg'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarSubMG[] = $id;
-        }
-    }
-}
-echo "Los ids de subMG que se van a cambiar son: "; print_r($idCambiarSubMG);
-if (isset($_POST['id_resultados_sub_mf'])) {
-    foreach ($_POST['id_resultados_sub_mf'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarSubMF[] = $id;
-        }
-    }
-}
-echo "Los ids de subMF que se van a cambiar son: "; print_r($idCambiarSubMF);
-if (isset($_POST['id_resultados_tono_muscular'])) {
-    foreach ($_POST['id_resultados_tono_muscular'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarTono[] = $id;
-        }
-    }
-}
-echo "Los ids de tono que se van a cambiar son: "; print_r($idCambiarTono);
-if (isset($_POST['id_resultados_signos_alarma'])) {
-    foreach ($_POST['id_resultados_signos_alarma'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarSignos[] = $id;
-        }
-    }
-}
-echo "Los ids de signos que se van a cambiar son: "; print_r($idCambiarSignos);
-if (isset($_POST['id_resultado_postura'])) {
-    foreach ($_POST['id_resultado_postura'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarPostura[] = $id;
-        }
-    }
-}
-echo "Los ids de postura que se van a cambiar son: "; print_r($idCambiarPostura);
-if (isset($_POST['id_resultados_lenguaje'])) {
-    foreach ($_POST['id_resultados_lenguaje'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarLenguaje[] = $id;
-        }
-    }
-}
-echo "Los ids de lenguaje que se van a cambiar son: "; print_r($idCambiarLenguaje);
-if (isset($_POST['id_resultados_katona'])) {
-    foreach ($_POST['id_resultados_katona'] as $id) {
-        if (is_numeric($id)) {
-            $idCambiarKatona[] = $id;
-        }
-    }
-}
-echo "Los ids de katona que se van a cambiar son: "; print_r($idCambiarKatona);
-if (isset($_POST['modified_ids'])) {
-  $modifiedIds = json_decode($_POST['modified_ids'], true);
-  // Ejemplo de uso:
-  foreach ($modifiedIds as $id) {
-    // Procesa solo el id_resultado modificado
-    // (Aquí puedes aplicar tu lógica de actualización)
-    echo "ID modificado: " . htmlspecialchars($id) . "<br>";
-  }
-}
-echo "<br>";
-echo "Los id en implode se ven asi" . implode("AND id_resultados_katona=", $idCambiarKatona) . "<br>";
 
-    require './vistas/modificarEvaluacion.view.php';
+];
+
+if(isset($datos_recibidos)){
+    echo "Datos recibidos correctamente.\n";
+} else {
+    echo "No se recibieron datos válidos.\n";
+}
+if (isset($datos_recibidos['evaluacionPaso2_mkatona'])) {
+    $mkatonaData = $datos_recibidos['evaluacionPaso2_mkatona'];
+
+    foreach ($datos_recibidos as $evaluacion => $campos) {
+       foreach ($campos as $nombreEvaluacion => $resultados) {
+            $campo_id = $mapeo_campos_id[$nombreEvaluacion];
+            if (isset($mapeo_campos_id[$nombreEvaluacion])) {
+                if(is_array($resultados)){
+                    $resultado_final = implode(', ', $resultados);
+                }
+                echo "Campo: $nombreEvaluacion, Resultado: $resultado_final ID: $campo_id\n";
+            } else {
+                echo "Campo: $nombreEvaluacion no encontrado en el mapeo.\n";
+            }
+        }
+    }
+    
+    foreach ($mkatonaData as $campo => $valor) {
+        if ($campo === 'fecha_evaluacion') continue; // Saltar fecha
+        
+        if (isset($mapeo_campos_id[$campo])) {
+            $campo_id = $mapeo_campos_id[$campo];
+            
+            // Procesar el valor dependiendo si es array o no
+            if (is_array($valor)) {
+                // Si es array, convertir a string separado por comas
+                $valor_final = implode(', ', $valor);
+                echo "Campo: $campo, ID: $campo_id, Valores: $valor_final\n";
+                
+                // O si prefieres procesar cada valor por separado:
+                foreach ($valor as $index => $item) {
+                    echo "Campo: $campo, ID: $campo_id, Índice: $index, Valor: $item\n";
+                }
+            } else {
+                // Si no es array, usar directamente
+                echo "Campo: $campo, ID: $campo_id, Valor: $valor\n";
+            }
+        }
+    }
+}else {
+    echo "No se encontraron datos de mkatona en la solicitud.\n";
+}
+$log_data = [
+    //'timestamp' => date('Y-m-d H:i:s'),
+    'datos_recibidos' => $datos_recibidos,
+    'json_crudo' => $json_input
+];
+
+file_put_contents('debug_ajax.log', print_r($log_data, true), FILE_APPEND);
+
+?>
