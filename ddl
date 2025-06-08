@@ -131,7 +131,7 @@ create table subescalas_mg
 (
     id_sub_grueso int         not null
         primary key,
-    subescala     varchar(50) not null
+    subescala     varchar(80) not null
 )
     comment 'Tabla catalogo subescalas motor grueso' engine = InnoDB;
 

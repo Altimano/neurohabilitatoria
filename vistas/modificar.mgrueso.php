@@ -227,7 +227,7 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae frecuencia)</label>
+                    <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo (cae frecuentemente)</label>
                     <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
@@ -238,7 +238,7 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="Sube_escaleras_apoyo_manos" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras apoyandose en ambas manos</label>
+                    <label for="Sube_escaleras_apoyo_manos" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras apoyándose en ambas manos</label>
                     <select name="Sube_escaleras_apoyo_manos" id="Sube_escaleras_apoyo_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
@@ -271,7 +271,7 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="corre_rigidez" class="block text-sm font-medium text-gray-700 mb-1">Corre(con rigidez)</label>
+                    <label for="corre_rigidez" class="block text-sm font-medium text-gray-700 mb-1">Corre (con rigidez)</label>
                     <select name="corre_rigidez" id="corre_rigidez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
@@ -282,8 +282,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae rara vez)</label>
-                    <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="camina_solo_rara" class="block text-sm font-medium text-gray-700 mb-1">Camina solo (cae rara vez)</label>
+                    <select name="camina_solo_rara" id="camina_solo_rara" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
