@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="vng" content="width=device-width, initial-scale=1.0">
     <title>Lenguaje</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -50,7 +50,7 @@
 
             <div class="mb-6 text-center">
                 <label for="fecha_evaluacion" class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Evaluacion</label>
-                <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
+                <input type="date" name="fngaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
             </div>
 
             <div class="border-t border-b border-gray-400 py-2 mb-6">
@@ -62,8 +62,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                 <div class="subescala">
-                    <label for="lenguaje_atencion_conjunta" class="block text-sm font-medium text-gray-700 mb-1">Atención conjunta</label>
-                    <select name="lenguaje_atencion_conjunta" id="lenguaje_atencion_conjunta" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_atencion_conjunta" class="block text-sm font-medium text-gray-700 mb-1">Atención conjunta</label>
+                    <select name="lng_atencion_conjunta" id="lng_atencion_conjunta" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -73,8 +73,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_realiza_voca_uao" class="block text-sm font-medium text-gray-700 mb-1">Realización de vocalizaciones u, a, o</label>
-                    <select name="lenguaje_realiza_voca_uao" id="lenguaje_realiza_voca_uao" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_realiza_voca_uao" class="block text-sm font-medium text-gray-700 mb-1">Realización de vocalizaciones u, a, o</label>
+                    <select name="lng_realiza_voca_uao" id="lng_realiza_voca_uao" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -84,8 +84,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_juego_vocalico" class="block text-sm font-medium text-gray-700 mb-1">Juego vocálico</label>
-                    <select name="lenguaje_juego_vocalico" id="lenguaje_juego_vocalico" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_juego_vocalico" class="block text-sm font-medium text-gray-700 mb-1">Juego vocálico</label>
+                    <select name="lng_juego_vocalico" id="lng_juego_vocalico" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -95,8 +95,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_mama_baba" class="block text-sm font-medium text-gray-700 mb-1">Balbuceo reduplicativo /mama/baba/</label>
-                    <select name="lenguaje_mama_baba" id="lenguaje_mama_baba" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_mama_baba" class="block text-sm font-medium text-gray-700 mb-1">Balbuceo reduplicativo /mama/baba/</label>
+                    <select name="lng_mama_baba" id="lng_mama_baba" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -106,8 +106,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_emergencia_gestos" class="block text-sm font-medium text-gray-700 mb-1">Emergencia de gestos deícticos (dar, mostrar, señalar)</label>
-                    <select name="lenguaje_emergencia_gestos" id="lenguaje_emergencia_gestos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_emergencia_gestos" class="block text-sm font-medium text-gray-700 mb-1">Emergencia de gestos deícticos (dar, mostrar, señalar)</label>
+                    <select name="lng_emergencia_gestos" id="lng_emergencia_gestos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -117,8 +117,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_comprende_NO" class="block text-sm font-medium text-gray-700 mb-1">Comprende la palabra NO acompañada del gesto</label>
-                    <select name="lenguaje_comprende_NO" id="lenguaje_comprende_NO" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_comprende_NO" class="block text-sm font-medium text-gray-700 mb-1">Comprende la palabra NO acompañada del gesto</label>
+                    <select name="lng_comprende_NO" id="lng_comprende_NO" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -128,8 +128,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_primera_palabra" class="block text-sm font-medium text-gray-700 mb-1">Aparece la primera palabra (solo si se designa a un objeto)</label>
-                    <select name="lenguaje_primera_palabra" id="lenguaje_primera_palabra" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_primera_palabra" class="block text-sm font-medium text-gray-700 mb-1">Aparece la primera palabra (solo si se designa a un objeto)</label>
+                    <select name="lng_primera_palabra" id="lng_primera_palabra" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -139,8 +139,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_gestos_reconocimiento" class="block text-sm font-medium text-gray-700 mb-1">Emplea gestos de reconocimientos</label>
-                    <select name="lenguaje_gestos_reconocimiento" id="lenguaje_gestos_reconocimiento" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_gestos_reconocimiento" class="block text-sm font-medium text-gray-700 mb-1">Emplea gestos de reconocimientos</label>
+                    <select name="lng_gestos_reconocimiento" id="lng_gestos_reconocimiento" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -150,8 +150,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_emplea_palabras" class="block text-sm font-medium text-gray-700 mb-1">Emplea por lo menos tres palabras (papá, mamá, sopa, agua)</label>
-                    <select name="lenguaje_emplea_palabras" id="lenguaje_emplea_palabras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_emplea_palabras" class="block text-sm font-medium text-gray-700 mb-1">Emplea por lo menos tres palabras (papá, mamá, sopa, agua)</label>
+                    <select name="lng_emplea_palabras" id="lng_emplea_palabras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -161,8 +161,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_forma_frases_2" class="block text-sm font-medium text-gray-700 mb-1">Forma frases de dos palabras</label>
-                    <select name="lenguaje_forma_frases_2" id="lenguaje_forma_frases_2" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_forma_frases_2" class="block text-sm font-medium text-gray-700 mb-1">Forma frases de dos palabras</label>
+                    <select name="lng_forma_frases_2" id="lng_forma_frases_2" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -172,8 +172,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_dice_nombre" class="block text-sm font-medium text-gray-700 mb-1">Dice su nombre</label>
-                    <select name="lenguaje_dice_nombre" id="lenguaje_dice_nombre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_dice_nombre" class="block text-sm font-medium text-gray-700 mb-1">Dice su nombre</label>
+                    <select name="lng_dice_nombre" id="lng_dice_nombre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -183,8 +183,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lenguaje_forma_frases_3" class="block text-sm font-medium text-gray-700 mb-1">Forma frases de tres palabras</label>
-                    <select name="lenguaje_forma_frases_3" id="lenguaje_forma_frases_3" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="lng_forma_frases_3" class="block text-sm font-medium text-gray-700 mb-1">Forma frases de tres palabras</label>
+                    <select name="lng_forma_frases_3" id="lng_forma_frases_3" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>

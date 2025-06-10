@@ -62,8 +62,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                 <div class="subescala">
-                    <label for="control_cefalico" class="block text-sm font-medium text-gray-700 mb-1"><strong>Control cefálico*</strong></label>
-                    <select name="control_cefalico" id="control_cefalico" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_control_cefalico" class="block text-sm font-medium text-gray-700 mb-1"><strong>Control cefálico*</strong></label>
+                    <select name="mg_control_cefalico" id="mg_control_cefalico" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -73,8 +73,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="levanta_torax" class="block text-sm font-medium text-gray-700 mb-1">Sobre el abdomen levanta tórax apoyando brazos</label>
-                    <select name="levanta_torax" id="levanta_torax" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_levanta_torax" class="block text-sm font-medium text-gray-700 mb-1">Sobre el abdomen levanta tórax apoyando brazos</label>
+                    <select name="mg_levanta_torax" id="mg_levanta_torax" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -84,8 +84,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="reaccion_delantera" class="block text-sm font-medium text-gray-700 mb-1">Sentado con reacción de protección delantera</label>
-                    <select name="reaccion_delantera" id="reaccion_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_reaccion_delantera" class="block text-sm font-medium text-gray-700 mb-1">Sentado con reacción de protección delantera</label>
+                    <select name="mg_reaccion_delantera" id="mg_reaccion_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -95,8 +95,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="cambio_decubito_prono_supino" class="block text-sm font-medium text-gray-700 mb-1">Cambio de decúbito prono a decúbito supino</label>
-                    <select name="cambio_decubito_prono_supino" id="cambio_decubito_prono_supino" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_cambio_decubito_prono_supino" class="block text-sm font-medium text-gray-700 mb-1">Cambio de decúbito prono a decúbito supino</label>
+                    <select name="mg_cambio_decubito_prono_supino" id="mg_cambio_decubito_prono_supino" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -106,8 +106,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="sentado_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1"><strong>Sentado sin apoyo*</strong></label>
-                    <select name="sentado_sin_apoyo" id="sentado_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_sentado_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1"><strong>Sentado sin apoyo*</strong></label>
+                    <select name="mg_sentado_sin_apoyo" id="mg_sentado_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -117,8 +117,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="reaccion_lateral_delantera" class="block text-sm font-medium text-gray-700 mb-1"><strong>Reacciones de protección laterales y delanteras*</strong></label>
-                    <select name="reaccion_lateral_delantera" id="reaccion_lateral_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_reaccion_lateral_delantera" class="block text-sm font-medium text-gray-700 mb-1"><strong>Reacciones de protección laterales y delanteras*</strong></label>
+                    <select name="mg_reaccion_lateral_delantera" id="mg_reaccion_lateral_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -128,8 +128,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="cambio_posicion_sedente_prono" class="block text-sm font-medium text-gray-700 mb-1">Cambio de posición sedente a decúbito prono</label>
-                    <select name="cambio_posicion_sedente_prono" id="cambio_posicion_sedente_prono" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_cambio_posicion_sedente_prono" class="block text-sm font-medium text-gray-700 mb-1">Cambio de posición sedente a decúbito prono</label>
+                    <select name="mg_cambio_posicion_sedente_prono" id="mg_cambio_posicion_sedente_prono" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -139,8 +139,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="patron_arrastre" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de arrastre*</strong></label>
-                    <select name="patron_arrastre" id="patron_arrastre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_patron_arrastre" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de arrastre*</strong></label>
+                    <select name="mg_patron_arrastre" id="mg_patron_arrastre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -150,8 +150,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="cambio_posicion_cuatro_hincado" class="block text-sm font-medium text-gray-700 mb-1">Cambio de posición cuatro puntos a hincado</label>
-                    <select name="cambio_posicion_cuatro_hincado" id="cambio_posicion_cuatro_hincado" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_cambio_posicion_cuatro_hincado" class="block text-sm font-medium text-gray-700 mb-1">Cambio de posición cuatro puntos a hincado</label>
+                    <select name="mg_cambio_posicion_cuatro_hincado" id="mg_cambio_posicion_cuatro_hincado" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -161,8 +161,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="patron_gateo_independiente" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de gateo independiente*</strong></label>
-                    <select name="patron_gateo_independiente" id="patron_gateo_independiente" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_patron_gateo_independiente" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de gateo independiente*</strong></label>
+                    <select name="mg_patron_gateo_independiente" id="mg_patron_gateo_independiente" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -172,8 +172,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="gateo_niveles" class="block text-sm font-medium text-gray-700 mb-1">Gateo en diferentes niveles (colchón, planos, etc.)</label>
-                    <select name="gateo_niveles" id="gateo_niveles" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_gateo_niveles" class="block text-sm font-medium text-gray-700 mb-1">Gateo en diferentes niveles (colchón, planos, etc.)</label>
+                    <select name="mg_gateo_niveles" id="mg_gateo_niveles" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -183,8 +183,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="transicion_gateo_bipedestacion" class="block text-sm font-medium text-gray-700 mb-1"><strong>Transición gateo a bipedestación*</strong></label>
-                    <select name="transicion_gateo_bipedestacion" id="transicion_gateo_bipedestacion" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_transicion_gateo_bipedestacion" class="block text-sm font-medium text-gray-700 mb-1"><strong>Transición gateo a bipedestación*</strong></label>
+                    <select name="mg_transicion_gateo_bipedestacion" id="mg_transicion_gateo_bipedestacion" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -194,8 +194,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="comienza_patron_marcha" class="block text-sm font-medium text-gray-700 mb-1"><strong>Comienza el patrón de marcha*</strong></label>
-                    <select name="comienza_patron_marcha" id="comienza_patron_marcha" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_comienza_patron_marcha" class="block text-sm font-medium text-gray-700 mb-1"><strong>Comienza el patrón de marcha*</strong></label>
+                    <select name="mg_comienza_patron_marcha" id="mg_comienza_patron_marcha" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -205,8 +205,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="pone_pie_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1">Se pone de pie momentáneamente sin apoyarse</label>
-                    <select name="pone_pie_sin_apoyo" id="pone_pie_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_pone_pie_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1">Se pone de pie momentáneamente sin apoyarse</label>
+                    <select name="mg_pone_pie_sin_apoyo" id="mg_pone_pie_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -216,8 +216,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="camina_atras" class="block text-sm font-medium text-gray-700 mb-1">Camina hacia atrás</label>
-                    <select name="camina_atras" id="camina_atras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_camina_atras" class="block text-sm font-medium text-gray-700 mb-1">Camina hacia atrás</label>
+                    <select name="mg_camina_atras" id="mg_camina_atras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -227,8 +227,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo (cae frecuentemente)</label>
-                    <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo (cae frecuentemente)</label>
+                    <select name="mg_camina_solo" id="mg_camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -238,8 +238,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="Sube_escaleras_apoyo_manos" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras apoyándose en ambas manos</label>
-                    <select name="Sube_escaleras_apoyo_manos" id="Sube_escaleras_apoyo_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_sube_escaleras_apoyo_manos" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras apoyándose en ambas manos</label>
+                    <select name="mg_sube_escaleras_apoyo_manos" id="mg_sube_escaleras_apoyo_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -249,8 +249,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="patea_pelota" class="block text-sm font-medium text-gray-700 mb-1">Patea una pelota</label>
-                    <select name="patea_pelota" id="patea_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_patea_pelota" class="block text-sm font-medium text-gray-700 mb-1">Patea una pelota</label>
+                    <select name="mg_patea_pelota" id="mg_patea_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -260,8 +260,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="sube_escaleras_gateando" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras gateando</label>
-                    <select name="sube_escaleras_gateando" id="sube_escaleras_gateando" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_sube_escaleras_gateando" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras gateando</label>
+                    <select name="mg_sube_escaleras_gateando" id="mg_sube_escaleras_gateando" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -271,8 +271,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="corre_rigidez" class="block text-sm font-medium text-gray-700 mb-1">Corre (con rigidez)</label>
-                    <select name="corre_rigidez" id="corre_rigidez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_corre_rigidez" class="block text-sm font-medium text-gray-700 mb-1">Corre (con rigidez)</label>
+                    <select name="mg_corre_rigidez" id="mg_corre_rigidez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -282,8 +282,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="camina_solo_rara" class="block text-sm font-medium text-gray-700 mb-1">Camina solo (cae rara vez)</label>
-                    <select name="camina_solo_rara" id="camina_solo_rara" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_camina_solo_rara" class="block text-sm font-medium text-gray-700 mb-1">Camina solo (cae rara vez)</label>
+                    <select name="mg_camina_solo_rara" id="mg_camina_solo_rara" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -293,8 +293,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="sube_baja_escaleras" class="block text-sm font-medium text-gray-700 mb-1">Sube y baja escaleras sostenido de una mano</label>
-                    <select name="sube_baja_escaleras" id="sube_baja_escaleras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_sube_baja_escaleras" class="block text-sm font-medium text-gray-700 mb-1">Sube y baja escaleras sostenido de una mano</label>
+                    <select name="mg_sube_baja_escaleras" id="mg_sube_baja_escaleras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -304,8 +304,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="lanza_pelota" class="block text-sm font-medium text-gray-700 mb-1">Lanza la pelota</label>
-                    <select name="lanza_pelota" id="lanza_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_lanza_pelota" class="block text-sm font-medium text-gray-700 mb-1">Lanza la pelota</label>
+                    <select name="mg_lanza_pelota" id="mg_lanza_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -315,8 +315,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="salta_sitio" class="block text-sm font-medium text-gray-700 mb-1">Salta en el sitio</label>
-                    <select name="salta_sitio" id="salta_sitio" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_salta_sitio" class="block text-sm font-medium text-gray-700 mb-1">Salta en el sitio</label>
+                    <select name="mg_salta_sitio" id="mg_salta_sitio" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -326,8 +326,8 @@
                     </select>
                 </div>
                 <div class="subescala">
-                    <label for="juega_cuclillas" class="block text-sm font-medium text-gray-700 mb-1">Juega en Cuclillas</label>
-                    <select name="juega_cuclillas" id="juega_cuclillas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="mg_juega_cuclillas" class="block text-sm font-medium text-gray-700 mb-1">Juega en Cuclillas</label>
+                    <select name="mg_juega_cuclillas" id="mg_juega_cuclillas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option>
                         <option value="1">1</option>

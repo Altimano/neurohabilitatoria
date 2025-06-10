@@ -12,7 +12,7 @@
       <h1>Terapia Neurohabilitatoria</h1>
     </div>
 
-    <form action="/" method="post" class="bg-[#1f7BB8] p-6 rounded-xl shadow-lg">
+    <form action="/" method="post" autocomplete="off" class="bg-[#1f7BB8] p-6 rounded-xl shadow-lg">
       <label for="usuario" class="block text-base mb-2 text-white">Usuario</label>
       <input 
         type="text" 

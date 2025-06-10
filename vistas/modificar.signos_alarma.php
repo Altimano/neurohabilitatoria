@@ -71,33 +71,24 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                 <div class="signos">
-                    <label for="ps_aduccion_pulgares" class="block text-sm font-medium text-gray-700 mb-1">Aducción de pulgares</label>
-                    <select name="ps_aduccion_pulgares" id="ps_aduccion_pulgares" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_aduccion_pulgares" class="block text-sm font-medium text-gray-700 mb-1">Aducción de pulgares</label>
+                    <select name="sa_aduccion_pulgares" id="sa_aduccion_pulgares" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </div>
                 <div class="signos">
-                    <label for="ps_estrabismo" class="block text-sm font-medium text-gray-700 mb-1">Estrabismo</label>
-                    <select name="ps_estrabismo" id="ps_estrabismo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_estrabismo" class="block text-sm font-medium text-gray-700 mb-1">Estrabismo</label>
+                    <select name="sa_estrabismo" id="sa_estrabismo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </div>
                 <div class="signos">
-                    <label for="ps_irritabilidad" class="block text-sm font-medium text-gray-700 mb-1">Irritabilidad</label>
-                    <select name="ps_irritabilidad" id="ps_irritabilidad" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-
-                <div class="signos">
-                    <label for="ps_marcha_en_punta_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha en punta</label>
-                    <select name="ps_marcha_en_punta_presencia" id="ps_marcha_en_punta_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_irritabilidad" class="block text-sm font-medium text-gray-700 mb-1">Irritabilidad</label>
+                    <select name="sa_irritabilidad" id="sa_irritabilidad" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -105,8 +96,8 @@
                 </div>
 
                 <div class="signos">
-                    <label for="ps_marcha_cruzada_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha Cruzada</label>
-                    <select name="ps_marcha_cruzada_presencia" id="ps_marcha_cruzada_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_marcha_en_punta_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha en punta</label>
+                    <select name="sa_marcha_en_punta_presencia" id="sa_marcha_en_punta_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -114,8 +105,8 @@
                 </div>
 
                 <div class="signos">
-                    <label for="ps_punos_cerrados_presencia" class="block text-sm font-medium text-gray-700 mb-1">Puños cerrados</label>
-                    <select name="ps_punos_cerrados_presencia" id="ps_punos_cerrados_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_marcha_cruzada_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha Cruzada</label>
+                    <select name="sa_marcha_cruzada_presencia" id="sa_marcha_cruzada_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
@@ -123,16 +114,25 @@
                 </div>
 
                 <div class="signos">
-                    <label for="ps_reflejo_hiperextension" class="block text-sm font-medium text-gray-700 mb-1">Reflejo de hiperextensión</label>
-                    <select name="ps_reflejo_hiperextension" id="ps_reflejo_hiperextension" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_punos_cerrados_presencia" class="block text-sm font-medium text-gray-700 mb-1">Puños cerrados</label>
+                    <select name="sa_punos_cerrados_presencia" id="sa_punos_cerrados_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                    </select>
+                </div>
+
+                <div class="signos">
+                    <label for="sa_reflejo_hiperextension" class="block text-sm font-medium text-gray-700 mb-1">Reflejo de hiperextensión</label>
+                    <select name="sa_reflejo_hiperextension" id="sa_reflejo_hiperextension" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
                 </div>
                 <div class="signos">
-                    <label for="ps_lenguaje_escaso" class="block text-sm font-medium text-gray-700 mb-1">Lenguaje escaso</label>
-                    <select name="ps_lenguaje_escaso" id="ps_lenguaje_escaso" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <label for="sa_lenguaje_escaso" class="block text-sm font-medium text-gray-700 mb-1">Lenguaje escaso</label>
+                    <select name="sa_lenguaje_escaso" id="sa_lenguaje_escaso" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>

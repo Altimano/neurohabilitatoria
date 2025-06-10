@@ -194,14 +194,14 @@
                     <tbody>
                         <tr id="Asimetria" value="Asimetría">
                             <td>Asimetría</td>
-                            <td><input type="checkbox" id="Asimetria_opt1" name="Asimetria[]" value="Axial"></td>
-                            <td><input type="checkbox" id="Asimetria_opt2" name="Asimetria[]" value="Miembro(s)Torácico(s)"></td>
-                            <td><input type="checkbox" id="Asimetria_opt3" name="Asimetria[]" value="Miembro(s)Pélvico(s)"></td>
-                            <td><input type="checkbox" id="Asimetria_opt4" name="Asimetria[]" value="Hemicuerpo"></td>
-                            <td><input type="checkbox" id="Asimetria_opt5" name="Asimetria[]" value="Contralateral"></td>
-                            <td><input type="checkbox" id="Asimetria_opt6" name="Asimetria[]" value="Derecha"></td>
-                            <td><input type="checkbox" id="Asimetria_opt7" name="Asimetria[]" value="Izquierda"></td>
-                            <td><input type="checkbox" id="Asimetria_opt8" name="Asimetria[]" value="Normal"></td>
+                            <td><input type="checkbox" id="Asimetria_opt1" name="pt_Asimetria[]" value="Axial"></td>
+                            <td><input type="checkbox" id="Asimetria_opt2" name="pt_Asimetria[]" value="Miembro(s)Torácico(s)"></td>
+                            <td><input type="checkbox" id="Asimetria_opt3" name="pt_Asimetria[]" value="Miembro(s)Pélvico(s)"></td>
+                            <td><input type="checkbox" id="Asimetria_opt4" name="pt_Asimetria[]" value="Hemicuerpo"></td>
+                            <td><input type="checkbox" id="Asimetria_opt5" name="pt_Asimetria[]" value="Contralateral"></td>
+                            <td><input type="checkbox" id="Asimetria_opt6" name="pt_Asimetria[]" value="Derecha"></td>
+                            <td><input type="checkbox" id="Asimetria_opt7" name="pt_Asimetria[]" value="Izquierda"></td>
+                            <td><input type="checkbox" id="Asimetria_opt8" name="pt_Asimetria[]" value="Normal"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -337,7 +337,7 @@
                 'tu_hipertonia',
                 'tu_mixto',
                 'tu_fluctuante',
-                'Asimetria' // Asegúrate que este 'Asimetria' coincida con el name="Asimetria[]"
+                'pt_Asimetria' // Asegúrate que este 'Asimetria' coincida con el name="Asimetria[]"
                 // Si tenías un grupo 'tu_normal[]' separado y lo quieres, añádelo aquí.
             ];
 

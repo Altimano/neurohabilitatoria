@@ -204,13 +204,13 @@
         }
 
         const mapeoHitosMG = {
-            'hg_control_cefalico': datosMgrueso.control_cefalico,
-            'hg_posicion_sentado': datosMgrueso.sentado_sin_apoyo,
-            'hg_reacciones_proteccion': datosMgrueso.reaccion_lateral_delantera,
-            'hg_patron_arrastre': datosMgrueso.patron_arrastre,
-            'hg_patron_gateo': datosMgrueso.patron_gateo_independiente,
-            'hg_mov_posturales_autonomos': datosMgrueso.transicion_gateo_bipedestacion,
-            'hg_patron_marcha_independiente': datosMgrueso.comienza_patron_marcha
+            'hg_control_cefalico': datosMgrueso.mg_control_cefalico,
+            'hg_posicion_sentado': datosMgrueso.mg_sentado_sin_apoyo,
+            'hg_reacciones_proteccion': datosMgrueso.mg_reaccion_lateral_delantera,
+            'hg_patron_arrastre': datosMgrueso.mg_patron_arrastre,
+            'hg_patron_gateo': datosMgrueso.mg_patron_gateo_independiente,
+            'hg_mov_posturales_autonomos': datosMgrueso.mg_transicion_gateo_bipedestacion,
+            'hg_patron_marcha_independiente': datosMgrueso.mg_comienza_patron_marcha
         };
 
         for (const idHito in mapeoHitosMG) {
