@@ -146,20 +146,40 @@ try {
     // Obtiene el ID del registro recién insertado para usarlo en tablas relacionadas.
     $id_terapia_neuro_generado = $Con->insert_id; 
 
-    // --- Maniobras de Katona ---
+    // --- Maniobras de Katona ---    
     if (isset($data['katona']) && is_array($data['katona'])) {
         foreach ($evaluation_maps['katona'] as $key => $id_katona) {
             $tono_muscular_topografia_sql = 'NULL'; 
-            if (isset($data['katona'][$key]) && (is_array($data['katona'][$key]) && !empty($data['katona'][$key]) || (!is_array($data['katona'][$key]) && !empty($data['katona'][$key])))) {
-                $value = is_array($data['katona'][$key]) ? $data['katona'][$key][0] : $data['katona'][$key];
-                $tono_muscular_topografia_sql = "'" . $Con->real_escape_string($value) . "'";
+            
+            if (isset($data['katona'][$key])) {
+                $katona_values = $data['katona'][$key];
+                
+                // Asegurar que sea un array
+                if (!is_array($katona_values)) {
+                    $katona_values = [$katona_values];
+                }
+                
+                // Filtrar valores vacíos y concatenar con separador
+                $katona_values = array_filter($katona_values, function($val) { 
+                    return !empty($val); 
+                });
+                
+                if (!empty($katona_values)) {
+                    $concatenated_values = implode(' | ', $katona_values);
+                    $tono_muscular_topografia_sql = "'" . $Con->real_escape_string($concatenated_values) . "'";
+                }
             }
-            $sql_katona = "INSERT INTO `resultados_maniobras_katona` (`id_terapia_neuro`, `id_katona`, `tono_muscular_topografia`) VALUES ({$id_terapia_neuro_generado}, {$id_katona}, {$tono_muscular_topografia_sql})";
+            
+            $sql_katona = "INSERT INTO `resultados_maniobras_katona` 
+                        (`id_terapia_neuro`, `id_katona`, `tono_muscular_topografia`) 
+                        VALUES ({$id_terapia_neuro_generado}, {$id_katona}, {$tono_muscular_topografia_sql})";
+                        
             if (!$Con->query($sql_katona)) {
                 $response['message'] .= " Error al guardar Katona {$key}: " . $Con->error . ".";
             }
         }
     }
+    
 
     // --- Motor Grueso ---
     if (isset($data['mgrueso']) && is_array($data['mgrueso'])) {
@@ -205,27 +225,57 @@ try {
 
     // --- Postura y Tono Muscular ---
     if (isset($data['posturas_tmyu']) && is_array($data['posturas_tmyu'])) {
-        // Guarda Asimetría en la tabla 'resultados_postura'.
+        // Guarda Asimetría en la tabla 'resultados_postura' con concatenación.
         if (isset($data['posturas_tmyu']['Asimetria'])) {
             $id_postura = $evaluation_maps['postura']['Asimetria'];
             $resultado_postura = 'NULL';
-            if (is_array($data['posturas_tmyu']['Asimetria']) && !empty($data['posturas_tmyu']['Asimetria'])) {
-                $resultado_postura = "'" . $Con->real_escape_string($data['posturas_tmyu']['Asimetria'][0]) . "'";
-            } else if (!is_array($data['posturas_tmyu']['Asimetria']) && !empty($data['posturas_tmyu']['Asimetria'])) {
-                $resultado_postura = "'" . $Con->real_escape_string($data['posturas_tmyu']['Asimetria']) . "'";
+            
+            if (isset($data['posturas_tmyu']['Asimetria'])) {
+                $asimetria_values = $data['posturas_tmyu']['Asimetria'];
+                
+                // Asegurar que sea un array
+                if (!is_array($asimetria_values)) {
+                    $asimetria_values = [$asimetria_values];
+                }
+                
+                // Filtrar valores vacíos y concatenar con separador
+                $asimetria_values = array_filter($asimetria_values, function($val) {
+                    return !empty($val);
+                });
+                
+                if (!empty($asimetria_values)) {
+                    $concatenated_values = implode(' | ', $asimetria_values);
+                    $resultado_postura = "'" . $Con->real_escape_string($concatenated_values) . "'";
+                }
             }
+            
             $sql_postura = "INSERT INTO `resultados_postura` (`id_terapia_neuro`, `id_postura`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_postura}, {$resultado_postura})";
             if (!$Con->query($sql_postura)) {
                 $response['message'] .= " Error al guardar Postura (Asimetria): " . $Con->error . ".";
             }
         }
 
-        // Guarda los tipos de tono muscular.
+        // Guarda los tipos de tono muscular con concatenación.
         foreach ($evaluation_maps['tono_muscular_tipos'] as $key => $id_tono_muscular_ubicacion) {
             $resultado_tono_muscular = 'NULL';
-            if (isset($data['posturas_tmyu'][$key]) && (is_array($data['posturas_tmyu'][$key]) && !empty($data['posturas_tmyu'][$key]) || (!is_array($data['posturas_tmyu'][$key]) && !empty($data['posturas_tmyu'][$key])))) {
-                $value = is_array($data['posturas_tmyu'][$key]) ? $data['posturas_tmyu'][$key][0] : $data['posturas_tmyu'][$key];
-                $resultado_tono_muscular = "'" . $Con->real_escape_string($value) . "'";
+            
+            if (isset($data['posturas_tmyu'][$key])) {
+                $tono_values = $data['posturas_tmyu'][$key];
+                
+                // Asegurar que sea un array
+                if (!is_array($tono_values)) {
+                    $tono_values = [$tono_values];
+                }
+                
+                // Filtrar valores vacíos y concatenar con separador
+                $tono_values = array_filter($tono_values, function($val) {
+                    return !empty($val);
+                });
+                
+                if (!empty($tono_values)) {
+                    $concatenated_values = implode(' | ', $tono_values);
+                    $resultado_tono_muscular = "'" . $Con->real_escape_string($concatenated_values) . "'";
+                }
             }
             $sql_tono_muscular = "INSERT INTO `resultados_tono_muscular` (`id_terapia_neuro`, `id_tono_muscular_ubicacion`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_tono_muscular_ubicacion}, {$resultado_tono_muscular})";
             if (!$Con->query($sql_tono_muscular)) {
