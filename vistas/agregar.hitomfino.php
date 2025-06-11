@@ -10,23 +10,281 @@
     <title>Hitos de Desarrollo Motricidad Fina</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-header-area { background-color: #FFFFFF; }
-        .bg-custom-main-box { background-color: #E0F2FE; }
-        .bg-custom-button { background-color: #0284C7; }
-        .bg-custom-button-no { background-color: #6B7280; }
-        .text-custom-title { color: #0369A1; }
-        input[readonly] { background-color: #f3f4f6; cursor: default; }
-        input[type="date"][readonly] { background-color: #f3f4f6; cursor: default; }
-        .hito-display {
-            padding: 0.5rem;
-            border: 1px solid #D1D5DB;
-            border-radius: 0.375rem;
-            background-color: #E5E7EB;
+        .bg-custom-header-area {
+            background-color: #FFFFFF;
+        }
+        .bg-custom-main-box {
+            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+        }
+        .bg-custom-button {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+        }
+        .bg-custom-button-no {
+            background-color: #6B7280; 
+        }
+        .text-custom-title {
+            color: #0369A1;
+        }
+        input[readonly],
+        textarea[readonly] {
+            background-color: #F3F4F6;
+            cursor: default;
+            border-color: #D1D5DB;
             color: #4B5563;
-            min-height: 2.5rem;
+        }
+        .select-wrapper {
+            position: relative;
+        }
+        .select-custom {
+            appearance: none; 
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            background-color: white;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            padding: 0.875rem 1rem;
+        }
+        .select-custom:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        .select-custom:hover {
+            border-color: #0284C7;
+            background-color: #F8FAFC;
+        }
+        .evaluation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease-in-out;
+        }
+        .evaluation-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+        .evaluation-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: block;
+            line-height: 1.4;
+        }
+        .evaluation-label.required::after {
+            content: " *";
+            color: #DC2626;
+        }
+        .floating-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .progress-indicator {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease-in-out;
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
+            height: 1px;
+            margin: 2rem 0;
+        }
+        .scale-legend {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            margin-bottom: 2rem;
+        }
+        .navigation-buttons {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
+            margin-top: 2rem;
+        }
+        .btn-navigation {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+        .btn-navigation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            background: linear-gradient(135deg, #0369A1 0%, #1E40AF 100%);
+        }
+        .btn-navigation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+        }
+        .btn-navigation:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3B82F6, 0 6px 20px rgba(2, 132, 199, 0.35);
+        }
+        .date-input {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .date-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        .abbreviation-tag {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0.125rem;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .evaluation-card {
+                padding: 1rem;
+            }
+            .navigation-buttons {
+                padding: 1.5rem;
+            }
+            .btn-navigation {
+                min-width: 100px;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .section-title {
+                padding: 1rem 1.5rem;
+            }
+            .abbreviation-tag {
+                font-size: 0.7rem;
+            }
+        }
+        .evaluation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+        .evaluation-table th, .evaluation-table td {
+            border: 1px solid #E5E7EB;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            vertical-align: middle;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .evaluation-table th {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            font-weight: 700;
+            white-space: normal; 
+            color: #334155;
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+        .evaluation-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            white-space: normal;
+            background: linear-gradient(135deg, #FEFEFE 0%, #F8FAFC 100%);
+            color: #1E293B;
+            padding-left: 1rem;
+        }
+        .evaluation-table tbody tr:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        .evaluation-table input[type="checkbox"] {
+            height: 1.25rem;
+            width: 1.25rem;
+            color: #2563EB;
+            border-color: #9CA3AF;
+            border-radius: 4px;
+            display: block; 
+            margin: auto;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .evaluation-table input[type="checkbox"]:hover {
+            transform: scale(1.1);
+            border-color: #2563EB;
+        }
+        .evaluation-table input[type="checkbox"]:checked {
+            background-color: #2563EB;
+            border-color: #2563EB;
+            transform: scale(1.05);
+        }
+        @media (max-width: 640px) {
+            .evaluation-table {
+                font-size: 0.7rem;
+            }
+            .evaluation-table th,
+            .evaluation-table td {
+                padding: 0.375rem 0.25rem;
+            }
+        }
+        .radio-group-laterality { 
+            display: none; 
+            margin-top: 0.5rem; 
+            padding-left: 1rem;
+        }
+        .radio-group-laterality label { 
+            margin-left: 0.25rem; 
+            margin-right: 0.75rem; 
+            font-weight: normal;
+        }
+        .hito-display {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            color: #4B5563;
+            min-height: 3rem; 
             display: flex;
             align-items: center;
-            font-size: 0.875rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         .modal-overlay {
             position: fixed;
@@ -73,7 +331,9 @@
             margin: 0 0.5rem;
             cursor: pointer;
         }
-        .hidden { display: none; }
+        .hidden { 
+            display: none; 
+        }
         #statusMessage {
             margin-top: 20px;
             padding: 10px;
@@ -93,7 +353,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
 
     <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluación</h3></div>
 
@@ -172,53 +432,55 @@
         const dateInput = document.getElementById('fecha_evaluacion');
         const sessionKey = 'evaluacionP9_hitomfino'; // Clave para los datos de Hitos de Desarrollo Motricidad Fina
 
+        // Función para cargar datos de sessionStorage de forma segura.
         const loadSessionData = (key) => {
             try {
                 const data = sessionStorage.getItem(key);
                 return data ? JSON.parse(data) : {};
             } catch (e) {
                 console.error(`Error al parsear datos de sessionStorage para ${key}:`, e);
-                sessionStorage.removeItem(key);
+                sessionStorage.removeItem(key); // Limpia datos corruptos.
                 return {};
             }
         };
 
-        // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+        // 1. Recupera el objeto principal de datos del paciente.
         const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
         let datosPaciente = {};
         if (datosPacienteRaw) {
             try {
                 datosPaciente = JSON.parse(datosPacienteRaw);
             } catch (e) {
-                console.error("Error al parsear datosPacienteParaEvaluacion en Hitos Motricidad Fina:", e);
+                console.error("Error al cargar datos del paciente:", e);
                 window.location.href = 'agregar.view.php?error=datos_corruptos';
                 return;
             }
         } else {
-            console.error("No se encontraron datos del paciente en sessionStorage en Hitos Motricidad Fina. Redirigiendo...");
+            console.error("No se encontraron datos del paciente. Redirigiendo...");
             window.location.href = 'agregar.view.php?error=datos_faltantes';
             return;
         }
 
-        // 2. Recupera los datos específicos de Hitos Motricidad Fina para este paso (si existen)
+        // 2. Recupera los datos específicos de Hitos Motricidad Fina para este paso.
         const datosHitoMfinoGuardados = loadSessionData(sessionKey);
         
-        // Cargar la fecha de evaluación
+        // Carga la fecha de evaluación.
         if (dateInput) {
             if (datosHitoMfinoGuardados.fecha_evaluacion) { 
                 dateInput.value = datosHitoMfinoGuardados.fecha_evaluacion; 
             } else {
-                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
+                // Si no hay fecha guardada para este paso, usa la fecha del inicio de tratamiento del paciente.
                 if (datosPaciente.fecha_inicio_tratamiento) {
                     dateInput.value = datosPaciente.fecha_inicio_tratamiento;
-                } else { // Si aún no hay fecha, usar la fecha actual
+                } else { 
+                    // Si no hay fecha en ninguna parte, usa la fecha actual.
                     const t = new Date(); 
                     dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                 }
             }
         }
 
-        // Lógica para cargar el mes de evaluación
+        // Muestra el mes de la evaluación.
         const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
         if (mesDisplay && datosPaciente.mes) { 
             mesDisplay.textContent = datosPaciente.mes;
@@ -228,19 +490,20 @@
 
         const form = document.getElementById('evaluacionHitoMFinoForm');
         
-        // --- CAMBIO CLAVE: Obtener los datos del Paso 4 (Motricidad Fina) aquí y mapearlos. ---
+        // Obtiene los datos de Motor Fino del paso anterior para precargar los hitos.
         const datosMotorFinoPasoAnterior = loadSessionData('evaluacionP4_mfino'); 
-        console.log("DEBUG (JS - al cargar la página - Hitos Motricidad Fina): Datos de Motor Fino (Paso 4) leídos para Hitos:", datosMotorFinoPasoAnterior);
 
+        // Mapeo de valores numéricos a descripciones legibles para la visualización.
         const resultados_mfino_display = {
             '0': 'No lo logra (0)', '1': 'Lo intenta pero no lo logra (1)',
             '2': 'En proceso (2)', '3': 'Lo realiza inhábilmente (3)',
             '4': 'Normal (4)', '': 'Aún no se evalúa' 
         };
 
+        // Función para actualizar los elementos de display y los campos hidden con los valores de los hitos.
         const setHitoDisplay = (baseId, valorNumericoDelCampoAnterior) => {
             const displayElement = document.getElementById(baseId + '_display');
-            const valueElement = document.getElementById(baseId + '_value'); // Este es el input hidden
+            const valueElement = document.getElementById(baseId + '_value'); 
             if (displayElement && valueElement) {
                 const valorParaInput = (valorNumericoDelCampoAnterior === null || typeof valorNumericoDelCampoAnterior === 'undefined' || valorNumericoDelCampoAnterior === '') 
                                         ? '' 
@@ -253,26 +516,21 @@
             }
         };
 
-        // Mapeo EXACTO de los IDs de los elementos HTML con los nombres de las claves en datosMotorFinoPasoAnterior
-        // según las equivalencias que proporcionaste.
+        // Mapeo de los IDs de los elementos HTML con los nombres de las claves en datosMotorFinoPasoAnterior.
         const mapeoHitosMFParaDisplay = {
-            'hf_fijacion_ocular': datosMotorFinoPasoAnterior.mf_manos_linea_media, // "Fijación Ocular(FO) = lleva las manos a la linea media*"
-            'hf_cubito_palmar': datosMotorFinoPasoAnterior.mf_estruja_papel, // "Cúbito Palmar(CP) = Estruja papel,sabanas, ropa,etc...*"
-            'hf_presion_r': datosMotorFinoPasoAnterior.mf_transfiere_manos, // "Prensión "Rascado"(PR) = Toma un objeto y lo transfiere entre sus manos*"
-            'hf_pinza_inferior': datosMotorFinoPasoAnterior.mf_desarrolla_agarre, // "Pinza Inferior(PI) = Comienza a desarrollar agarre indice-pulgar*"
-            'hf_pinza_fina': datosMotorFinoPasoAnterior.mf_pinza_superior, // "Pinza Fina(PF) = Pinza Superior"
-            'hf_abajamiento_voluntario': datosMotorFinoPasoAnterior.mf_torre_2_cubos, // "Aflojamiento Voluntario(AV) = Forma Torre de 2 cubos*"
-            'hf_coordinacion_oculomanual': datosMotorFinoPasoAnterior.mf_torre_6_cubos // "Coordinación Aculomanual(CO) = Arma torre de 6 cubos*"
+            'hf_fijacion_ocular': datosMotorFinoPasoAnterior.mf_manos_linea_media, 
+            'hf_cubito_palmar': datosMotorFinoPasoAnterior.mf_estruja_papel, 
+            'hf_presion_r': datosMotorFinoPasoAnterior.mf_transfiere_manos, 
+            'hf_pinza_inferior': datosMotorFinoPasoAnterior.mf_desarrolla_agarre, 
+            'hf_pinza_fina': datosMotorFinoPasoAnterior.mf_pinza_superior, 
+            'hf_abajamiento_voluntario': datosMotorFinoPasoAnterior.mf_torre_2_cubos, 
+            'hf_coordinacion_oculomanual': datosMotorFinoPasoAnterior.mf_torre_6_cubos 
         };
         
+        // Recorrer el mapeo y actualizar los displays y hidden inputs.
         for (const idHito in mapeoHitosMFParaDisplay) {
             setHitoDisplay(idHito, mapeoHitosMFParaDisplay[idHito]);
         }
-
-        // --- Console.log para ver los datos cargados al inicio de la página ---
-        console.log('DEBUG (JS - al cargar la página - Hitos Motricidad Fina): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
-        console.log('DEBUG (JS - al cargar la página - Hitos Motricidad Fina): datosHitoMfino (específico de este paso):', datosHitoMfinoGuardados);
-        // --- Fin Console.log ---
 
         const botonFinalizar = document.getElementById('botonFinalizarEvaluacion');
         const modal = document.getElementById('confirmacionModal');
@@ -280,23 +538,18 @@
         const modalBotonNo = document.getElementById('modalBotonNo');
         const statusMessageDiv = document.getElementById('statusMessage');
 
+        // Función para enviar todos los datos de la evaluación al servidor.
         function enviarDatosEvaluacion(datos) {
-            console.log("Enviando datos de evaluación al servidor...");
             const http = new XMLHttpRequest();
             http.open("POST", "../controladores/guardarEvaluacionCompleta.php", true); 
             http.setRequestHeader("Content-Type", "application/json"); 
-            const jsonToSend = JSON.stringify(datos);
-            console.log("JSON final enviado por XHR:", jsonToSend);
-
-            http.send(jsonToSend);
+            http.send(JSON.stringify(datos));
 
             http.onreadystatechange = function() {
                 if (http.readyState === 4) {
                     if (http.status === 200) {
                         try {
                             const responseData = JSON.parse(http.responseText);
-                            console.log("Respuesta del servidor:", responseData);
-
                             if (responseData.success) {
                                 statusMessageDiv.textContent = responseData.message || "Evaluación guardada exitosamente.";
                                 statusMessageDiv.className = 'status-message success';
@@ -322,53 +575,42 @@
             };
         }
 
+        // Claves de sessionStorage a limpiar después de la finalización exitosa.
         const clavesDePasos = [
             'datosPacienteParaEvaluacion',
             'evaluacionPaso1',
             'evaluacionPaso2_mkatona',
             'evaluacionPaso3_mgrueso',
-            'evaluacionPaso4_mfino',
-            'evaluacionPaso5_lenguaje',
-            'evaluacionPaso6_posturas_tmyu',
-            'evaluacionPaso7_signos_alarma',
-            'evaluacionPaso8_hitomgrueso',
-            sessionKey // Este paso también se limpia
+            'evaluacionP4_mfino',
+            'evaluacionP5_lenguaje',
+            'evaluacionP6_posturas_tmyu',
+            'evaluacionP7_signos_alarma',
+            'evaluacionP8_hitomgrueso',
+            sessionKey 
         ];
 
         if (botonFinalizar && form && modal && modalBotonSi && modalBotonNo && statusMessageDiv) {
             botonFinalizar.addEventListener('click', function() {
                 const currentHitoMfinoData = {};
-                // La fecha de evaluación es del Paso 9
+                // La fecha de evaluación es del Paso 9.
                 if(dateInput) currentHitoMfinoData['fecha_evaluacion'] = dateInput.value;
 
-                // Recolectar los valores de los campos hidden
+                // Recopila los valores de los campos hidden, guardando solo si el valor es "4".
                 const hitoInputs = form.querySelectorAll('input[type="hidden"]');
                 hitoInputs.forEach(input => {
-                    // Guardar solo si el valor es "4" (Normal)
                     if (input.value === '4') {
                         currentHitoMfinoData[input.name] = input.value;
                     } 
-                    // No se incluye si el valor no es '4', tal como se solicitó.
                 });
 
-                // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                // Fusiona los datos del paso actual con el objeto principal del paciente.
                 datosPaciente.hitomfino = currentHitoMfinoData; 
 
-                // 8. console.log para verificar los datos ANTES de guardar en sessionStorage
-                console.log('DEBUG (JS - Botón Finalizar - Hitos Motricidad Fina): datosPaciente (fusionado) A PUNTO DE GUARDAR EN SESSIONSTORAGE:', datosPaciente);
-                console.log('DEBUG (JS - Botón Finalizar - Hitos Motricidad Fina): currentHitoMfinoData (este paso, a guardar por separado):', currentHitoMfinoData);
-
-
                 try {
-                    // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                    // Guarda los datos actualizados del paciente en sessionStorage.
                     sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
-                    
-                    // 10. Guarda los datos de Hitos Motricidad Fina por separado
+                    // Guarda los datos específicos de Hitos Motricidad Fina por separado.
                     sessionStorage.setItem(sessionKey, JSON.stringify(currentHitoMfinoData)); 
-
-                    // 11. console.log para verificar los datos DESPUÉS de guardar
-                    const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
-                    console.log('DEBUG (JS - Botón Finalizar - Hitos Motricidad Fina): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
 
                 } catch(e) {
                     console.error(`Error guardando datos de ${sessionKey} antes de mostrar modal:`, e);
@@ -386,20 +628,16 @@
                 statusMessageDiv.className = 'status-message';
                 statusMessageDiv.style.display = 'block';
 
-                // La forma más correcta de obtener todos los datos para el envío final
-                // es tomar el 'datosPacienteParaEvaluacion' del sessionStorage, ya que este
-                // es el objeto que hemos estado acumulando en cada paso.
+                // Obtiene todos los datos consolidados del sessionStorage para el envío final.
                 const finalDataToSend = loadSessionData('datosPacienteParaEvaluacion');
 
-                console.log("--- Objeto consolidado con TODOS LOS DATOS DE LA EVALUACIÓN (para envío): ---", finalDataToSend);
                 enviarDatosEvaluacion(finalDataToSend);
             });
         }
 
+        // Función para limpiar sessionStorage y redirigir.
         function limpiarSessionStorageYRedirigir(claves) {
-            console.log("Limpiando datos de sessionStorage...");
             claves.forEach(clave => sessionStorage.removeItem(clave));
-            console.log("Limpieza de sessionStorage completada.");
             setTimeout(() => {
                 window.location.href = '/inicio'; 
             }, 1500);

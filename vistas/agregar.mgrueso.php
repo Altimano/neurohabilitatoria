@@ -10,256 +10,682 @@
     <title>Motor Grueso</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-header-area { background-color: #FFFFFF; }
-        .bg-custom-main-box { background-color: #E0F2FE; }
-        .bg-custom-button { background-color: #0284C7; }
-        .text-custom-title { color: #0369A1; }
-        input[readonly], textarea[readonly] {
-             background-color: #E5E7EB;
-             cursor: default;
-             border-color: #D1D5DB;
-             color: #4B5563;
+        .bg-custom-header-area {
+            background-color: #FFFFFF;
         }
-        select:not([disabled]) { background-color: #FFFFFF; cursor: pointer; }
+        .bg-custom-main-box {
+            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+        }
+        .bg-custom-button {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+        }
+        .text-custom-title {
+            color: #0369A1;
+        }
+        input[readonly],
+        textarea[readonly] {
+            background-color: #F3F4F6;
+            cursor: default;
+            border-color: #D1D5DB;
+            color: #4B5563;
+        }
+                .select-wrapper {
+            position: relative;
+        }
+        .select-custom {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            background-color: white;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            padding: 0.875rem 1rem;
+        }
+        .select-custom:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        .select-custom:hover {
+            border-color: #0284C7;
+            background-color: #F8FAFC;
+        }
+        .evaluation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease-in-out;
+        }
+        .evaluation-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+        .evaluation-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: block;
+            line-height: 1.4;
+        }
+        .evaluation-label.required::after {
+            content: " *";
+            color: #DC2626;
+        }
+        .floating-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .progress-indicator {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease-in-out;
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
+            height: 1px;
+            margin: 2rem 0;
+        }
+        .scale-legend {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            margin-bottom: 2rem;
+        }
+        .navigation-buttons {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
+            margin-top: 2rem;
+        }
+        .btn-navigation {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+        .btn-navigation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            background: linear-gradient(135deg, #0369A1 0%, #1E40AF 100%);
+        }
+        .btn-navigation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+        }
+        .btn-navigation:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3B82F6, 0 6px 20px rgba(2, 132, 199, 0.35);
+        }
+        .date-input {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .date-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        .abbreviation-tag {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0.125rem;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .evaluation-card {
+                padding: 1rem;
+            }
+            .navigation-buttons {
+                padding: 1.5rem;
+            }
+            .btn-navigation {
+                min-width: 100px;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .section-title {
+                padding: 1rem 1.5rem;
+            }
+            .abbreviation-tag {
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
 
-    <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3></div>
-
-    <div class="mx-6 md:mx-10 mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
-    <form id="evaluacionMotorGruesoForm">
-            <p class="text-center text-gray-600 mb-4">Evaluación para el mes: <strong id="mesSeleccionadoDisplay">...</strong></p>
-
-            <div class="mb-6 text-center">
-                <label for="fecha_evaluacion" class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Evaluacion</label>
-                <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
+    <div class="floating-header sticky top-0 z-10 py-4 mb-6">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-custom-title text-center">
+                Motor Grueso
+            </h3>
+            <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
+                <div class="progress-indicator w-1/2"></div> 
             </div>
+        </div>
+    </div>
 
-            <div class="border-t border-b border-gray-400 py-5 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">MOTOR GRUESO/MOVIMIENTOS POSTURALES</h1></div>
-            <div class="border-b border-gray-400 py-5 mb-6"><h2 class="text-base md:text-lg font-semibold text-center text-gray-800 px-2"> No lo logra (0) | Lo intenta pero no lo logra (1) | En proceso (2) | Lo realiza inhábilmente (3) | Normal (4) </h2></div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
-                <div>
-                    <label for="control_cefalico" class="block text-sm font-medium text-gray-700 mb-1"><strong>Control cefálico*</strong></label>
-                    <select name="control_cefalico" id="control_cefalico" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                    </select>
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
+            <form id="evaluacionMotorGruesoForm">
+                <div class="info-card text-center">
+                    <p class="text-lg text-gray-700">
+                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
+                    </p>
                 </div>
-                <div>
-                    <label for="levanta_torax" class="block text-sm font-medium text-gray-700 mb-1">Sobre el abdomen levanta tórax apoyando brazos</label>
-                    <select name="levanta_torax" id="levanta_torax" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                    </select>
+                <div class="mb-8 text-center">
+                    <label for="fecha_evaluacion" class="evaluation-label text-lg">
+                        Fecha de la Evaluación
+                    </label>
+                    <input type="date"
+                        name="fecha_evaluacion"
+                        id="fecha_evaluacion"
+                        class="date-input"
+                        readonly>
                 </div>
-                <div>
-                     <label for="reaccion_delantera" class="block text-sm font-medium text-gray-700 mb-1">Sentado con reacción de protección delantera</label>
-                     <select name="reaccion_delantera" id="reaccion_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
+                <div class="section-title text-center">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                        MOTOR GRUESO / MOVIMIENTOS POSTURALES
+                    </h1>
                 </div>
-                <div>
-                    <label for="cambio_decubito_prono_supino" class="block text-sm font-medium text-gray-700 mb-1">Cambio de decúbito prono a decúbito supino</label>
-                    <select name="cambio_decubito_prono_supino" id="cambio_decubito_prono_supino" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                   </select>
+                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
+                    <h2 class="text-lg font-bold text-gray-800 mb-3">
+                        Escala de Puntuación
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-red-600">0</div>
+                            <div>No lo logra</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-orange-600">1</div>
+                            <div>Lo intenta pero no lo logra</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-yellow-600">2</div>
+                            <div>En proceso</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-blue-600">3</div>
+                            <div>Lo realiza inhábilmente</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-green-600">4</div>
+                            <div>Normal</div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="sentado_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1"><strong>Sentado sin apoyo*</strong></label>
-                    <select name="sentado_sin_apoyo" id="sentado_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                   </select>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="subescala evaluation-card">
+                        <label for="control_cefalico" class="evaluation-label required">
+                            Control cefálico
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="control_cefalico" id="control_cefalico" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="levanta_torax" class="evaluation-label">
+                            Sobre el abdomen levanta tórax apoyando brazos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="levanta_torax" id="levanta_torax" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="reaccion_delantera" class="evaluation-label">
+                           Sentado con reacción de protección delantera
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="reaccion_delantera" id="reaccion_delantera" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="cambio_decubito_prono_supino" class="evaluation-label">
+                            Cambio de decúbito prono a decúbito supino
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="cambio_decubito_prono_supino" id="cambio_decubito_prono_supino" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="sentado_sin_apoyo" class="evaluation-label required">
+                            Sentado sin apoyo
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sentado_sin_apoyo" id="sentado_sin_apoyo" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="reaccion_lateral_delantera" class="evaluation-label required">
+                            Reacciones de protección laterales y delanteras
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="reaccion_lateral_delantera" id="reaccion_lateral_delantera" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="cambio_posicion_sedente_prono" class="evaluation-label">
+                            Cambio de posición sedente a decúbito prono
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="cambio_posicion_sedente_prono" id="cambio_posicion_sedente_prono" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="patron_arrastre" class="evaluation-label required">
+                            Patrón de arrastre
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="patron_arrastre" id="patron_arrastre" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="cambio_posicion_cuatro_hincado" class="evaluation-label">
+                            Cambio de posición cuatro puntos a hincado
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="cambio_posicion_cuatro_hincado" id="cambio_posicion_cuatro_hincado" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="patron_gateo_independiente" class="evaluation-label required">
+                           Patrón de gateo independiente
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="patron_gateo_independiente" id="patron_gateo_independiente" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="gateo_niveles" class="evaluation-label">
+                           Gateo en diferentes niveles (colchón, planos, etc.)
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="gateo_niveles" id="gateo_niveles" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="transicion_gateo_bipedestacion" class="evaluation-label required">
+                           Transición gateo a bipedestación
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="transicion_gateo_bipedestacion" id="transicion_gateo_bipedestacion" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="comienza_patron_marcha" class="evaluation-label required">
+                           Comienza el patrón de marcha
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="comienza_patron_marcha" id="comienza_patron_marcha" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="pone_pie_sin_apoyo" class="evaluation-label">
+                           Se pone de pie momentáneamente sin apoyarse
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="pone_pie_sin_apoyo" id="pone_pie_sin_apoyo" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="camina_atras" class="evaluation-label">
+                           Camina hacia atrás
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="camina_atras" id="camina_atras" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="camina_solo_cae_frecuencia" class="evaluation-label">
+                           Camina solo (cae frecuentemente)
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="camina_solo_cae_frecuencia" id="camina_solo_cae_frecuencia" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="Sube_escaleras_apoyo_manos" class="evaluation-label">
+                           Sube escaleras apoyándose en ambas manos
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="Sube_escaleras_apoyo_manos" id="Sube_escaleras_apoyo_manos" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="patea_pelota" class="evaluation-label">
+                           Patea una pelota
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="patea_pelota" id="patea_pelota" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="sube_escaleras_gateando" class="evaluation-label">
+                           Sube escaleras gateando
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="sube_escaleras_gateando" id="sube_escaleras_gateando" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="corre_rigidez" class="evaluation-label">
+                           Corre (con rigidez)
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="corre_rigidez" id="corre_rigidez" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="camina_solo_cae_raravez" class="evaluation-label">
+                           Camina solo (cae rara vez)
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="camina_solo_cae_raravez" id="camina_solo_cae_raravez" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="sube_baja_escaleras" class="evaluation-label">
+                           Sube y baja escaleras sostenido de una mano
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="sube_baja_escaleras" id="sube_baja_escaleras" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="lanza_pelota" class="evaluation-label">
+                           Lanza la pelota
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="lanza_pelota" id="lanza_pelota" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="salta_sitio" class="evaluation-label">
+                           Salta en el sitio
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="salta_sitio" id="salta_sitio" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                       <label for="juega_cuclillas" class="evaluation-label">
+                           Juega en Cuclillas
+                       </label>
+                       <div class="select-wrapper">
+                           <select name="juega_cuclillas" id="juega_cuclillas" class="select-custom">
+                               <option value="" disabled selected>Seleccione una opción</option>
+                               <option value="0">0 - No lo logra</option>
+                               <option value="1">1 - Lo intenta pero no lo logra</option>
+                               <option value="2">2 - En proceso</option>
+                               <option value="3">3 - Lo realiza inhábilmente</option>
+                               <option value="4">4 - Normal</option>
+                           </select>
+                       </div>
+                    </div>
                 </div>
-                <div>
-                    <label for="reaccion_lateral_delantera" class="block text-sm font-medium text-gray-700 mb-1"><strong>Reacciones de protección laterales y delanteras*</strong></label>
-                    <select name="reaccion_lateral_delantera" id="reaccion_lateral_delantera" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                   </select>
+                <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <a href="agregar.mkatona.php" class="btn-navigation">
+                        ← ANTERIOR
+                    </a>
+                    <div class="text-sm text-gray-600 text-center hidden sm:block">
+                        Paso 3 de 6 - Motor Grueso
+                    </div>
+                    <button type="button" id="botonSiguientePaso" class="btn-navigation">
+                        SIGUIENTE →
+                    </button>
                 </div>
-                <div>
-                    <label for="cambio_posicion_sedente_prono" class="block text-sm font-medium text-gray-700 mb-1">Cambio de posición sedente a decúbito prono</label>
-                    <select name="cambio_posicion_sedente_prono" id="cambio_posicion_sedente_prono" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                   </select>
-                </div>
-                <div>
-                    <label for="patron_arrastre" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de arrastre*</strong></label>
-                    <select name="patron_arrastre" id="patron_arrastre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                   </select>
-                </div>
-                <div>
-                    <label for="cambio_posicion_cuatro_hincado" class="block text-sm font-medium text-gray-700 mb-1">Cambio de posición cuatro puntos a hincado</label>
-                    <select name="cambio_posicion_cuatro_hincado" id="cambio_posicion_cuatro_hincado" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                   </select>
-                </div>
-                 <div>
-                   <label for="patron_gateo_independiente" class="block text-sm font-medium text-gray-700 mb-1"><strong>Patrón de gateo independiente*</strong></label>
-                   <select name="patron_gateo_independiente" id="patron_gateo_independiente" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="gateo_niveles" class="block text-sm font-medium text-gray-700 mb-1">Gateo en diferentes niveles (colchón, planos, etc.)</label>
-                   <select name="gateo_niveles" id="gateo_niveles" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-                <div>
-                   <label for="transicion_gateo_bipedestacion" class="block text-sm font-medium text-gray-700 mb-1"><strong>Transición gateo a bipedestación*</strong></label>
-                   <select name="transicion_gateo_bipedestacion" id="transicion_gateo_bipedestacion" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-                <div>
-                   <label for="comienza_patron_marcha" class="block text-sm font-medium text-gray-700 mb-1"><strong>Comienza el patrón de marcha*</strong></label>
-                   <select name="comienza_patron_marcha" id="comienza_patron_marcha" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="pone_pie_sin_apoyo" class="block text-sm font-medium text-gray-700 mb-1">Se pone de pie momentáneamente sin apoyarse</label>
-                   <select name="pone_pie_sin_apoyo" id="pone_pie_sin_apoyo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="camina_atras" class="block text-sm font-medium text-gray-700 mb-1">Camina hacia atrás</label>
-                   <select name="camina_atras" id="camina_atras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="camina_solo_cae_frecuencia" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae frecuencia)</label>
-                   <select name="camina_solo_cae_frecuencia" id="camina_solo_cae_frecuencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="Sube_escaleras_apoyo_manos" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras apoyandose en ambas manos</label>
-                   <select name="Sube_escaleras_apoyo_manos" id="Sube_escaleras_apoyo_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="patea_pelota" class="block text-sm font-medium text-gray-700 mb-1">Patea una pelota</label>
-                   <select name="patea_pelota" id="patea_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="sube_escaleras_gateando" class="block text-sm font-medium text-gray-700 mb-1">Sube escaleras gateando</label>
-                   <select name="sube_escaleras_gateando" id="sube_escaleras_gateando" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="corre_rigidez" class="block text-sm font-medium text-gray-700 mb-1">Corre(con rigidez)</label>
-                   <select name="corre_rigidez" id="corre_rigidez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="camina_solo_cae_raravez" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae rara vez)</label>
-                   <select name="camina_solo_cae_raravez" id="camina_solo_cae_raravez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="sube_baja_escaleras" class="block text-sm font-medium text-gray-700 mb-1">Sube y baja escaleras sostenido de una mano</label>
-                   <select name="sube_baja_escaleras" id="sube_baja_escaleras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="lanza_pelota" class="block text-sm font-medium text-gray-700 mb-1">Lanza la pelota</label>
-                   <select name="lanza_pelota" id="lanza_pelota" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="salta_sitio" class="block text-sm font-medium text-gray-700 mb-1">Salta en el sitio</label>
-                   <select name="salta_sitio" id="salta_sitio" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-               <div>
-                   <label for="juega_cuclillas" class="block text-sm font-medium text-gray-700 mb-1">Juega en Cuclillas</label>
-                   <select name="juega_cuclillas" id="juega_cuclillas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                       <option value="" disabled selected>Seleccione una opción</option>
-                        <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                  </select>
-               </div>
-                </div>
-
-            <div class="flex justify-between mt-8">
-                <a href="agregar.mkatona.php">
-                    <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
-                </a>
-                <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionP3_mgrueso'; // Clave para los datos de Motor Grueso
+            const sessionKey = 'evaluacionP3_mgrueso'; // Clave para los datos de Motor Grueso en sessionStorage
 
-            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            // Recupera los datos del paciente principal
             const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
             let datosPaciente = {};
             if (datosPacienteRaw) {
                 try {
                     datosPaciente = JSON.parse(datosPacienteRaw);
                 } catch (e) {
-                    console.error("Error al parsear datosPacienteParaEvaluacion en Motor Grueso:", e);
-                    window.location.href = 'agregar.view.php?error=datos_corruptos'; // Redirige si los datos base están corruptos
+                    console.error("Error al cargar datos del paciente:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos'; 
                     return;
                 }
             } else {
-                console.error("No se encontraron datos del paciente en sessionStorage en Motor Grueso. Redirigiendo...");
-                window.location.href = 'agregar.view.php?error=datos_faltantes'; // Redirige si faltan los datos base
+                console.error("No se encontraron datos del paciente. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes'; 
                 return;
             }
 
-            // 2. Recupera los datos específicos de Motor Grueso para este paso (si existen)
+            // Recupera los datos específicos de Motor Grueso para este paso (si existen)
             const datosMgresoGuardados = sessionStorage.getItem(sessionKey);
             let datosMgreso = {};
             if (datosMgresoGuardados) { 
                 try { 
                     datosMgreso = JSON.parse(datosMgresoGuardados); 
                 } catch(e) { 
-                    console.error("Error Paso 3 (Motor Grueso) al parsear datos guardados:", e);
+                    console.error("Error al cargar datos de Motor Grueso:", e);
                 }
             }
             
-            // 3. Muestra el mes seleccionado (del Paso 1)
+            // Muestra el mes seleccionado (del Paso 1)
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
             if (mesDisplay && datosPaciente.mes) { 
                 mesDisplay.textContent = datosPaciente.mes;
@@ -267,12 +693,11 @@
                 mesDisplay.textContent = 'No disponible'; 
             }
 
-            // 4. Establece la fecha de evaluación
+            // Establece la fecha de evaluación.
             if (dateInput) {
                 if(datosMgreso.fecha_evaluacion) { 
                     dateInput.value = datosMgreso.fecha_evaluacion; 
                 } 
-                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
                 else if (datosPaciente.fecha_inicio_tratamiento) {
                     dateInput.value = datosPaciente.fecha_inicio_tratamiento;
                 }
@@ -282,9 +707,9 @@
                 }
             }
 
-            // 5. Precarga los valores de los <select> si existen datos guardados
+            // Precarga los valores de los <select> si existen datos guardados.
             const form = document.getElementById('evaluacionMotorGruesoForm');
-            if(form && Object.keys(datosMgreso).length > 0) { // Asegúrate de que datosMgreso tiene propiedades
+            if(form && Object.keys(datosMgreso).length > 0) { 
                 const selects = form.querySelectorAll('select');
                 selects.forEach(select => { 
                     if(datosMgreso[select.name] !== undefined) { 
@@ -295,52 +720,35 @@
                 });
             }
 
-            // --- Console.log para ver los datos cargados al inicio de la página ---
-            console.log('DEBUG (JS - al cargar la página - Motor Grueso): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
-            console.log('DEBUG (JS - al cargar la página - Motor Grueso): datosMgreso (específico de este paso):', datosMgreso);
-            // --- Fin Console.log ---
-
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
-                    // 6. Recopila los datos del formulario de Motor Grueso
-                    const formData = new FormData(form);
+                    // Recopila los datos del formulario de Motor Grueso.
                     const currentMotorGruesoData = {};
                     
-                    // Iterar sobre todos los selects y guardar sus valores, seleccionados o no
+                    // Incluye la fecha de evaluación del formulario.
+                    if(dateInput) currentMotorGruesoData['fecha_evaluacion'] = dateInput.value;
+
+                    // Itera sobre todos los selects y guarda sus valores.
                     const allSelects = form.querySelectorAll('select');
                     allSelects.forEach(select => {
                         currentMotorGruesoData[select.name] = select.value;
                     });
                     
-                    // Asegúrate de incluir la fecha de evaluación del formulario en los datos del paso actual
-                    if(dateInput) currentMotorGruesoData['fecha_evaluacion'] = dateInput.value;
-
-                    // NOTA: La validación de campos obligatorios ha sido ELIMINADA según tu solicitud.
-                    // Los campos se guardarán independientemente de si fueron seleccionados o no.
-
-
-                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    // Fusiona los datos del paso actual con el objeto principal del paciente.
                     datosPaciente.mgrueso = currentMotorGruesoData; 
 
-                    // 8. console.log para verificar los datos ANTES de guardarlos
-                    console.log('DEBUG (JS - Botón Siguiente - Motor Grueso): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
-
                     try {
-                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        // Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage.
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
                         
-                        // 10. Opcional: guardar los datos de Motor Grueso por separado
+                        // Guarda los datos específicos de Motor Grueso por separado (opcional).
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentMotorGruesoData)); 
 
-                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
-                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
-                        console.log('DEBUG (JS - Botón Siguiente - Motor Grueso): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
-
-
-                        window.location.href = 'agregar.mfino.php'; // Redirige al siguiente paso
+                        // Redirige al siguiente paso de la evaluación.
+                        window.location.href = 'agregar.mfino.php'; 
                     } catch(e) { 
-                        console.error("Error al guardar datos en sessionStorage (Motor Grueso):", e);
+                        console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los datos de Motor Grueso."); 
                     }
                 });

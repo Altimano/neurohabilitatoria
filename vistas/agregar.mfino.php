@@ -10,221 +10,614 @@
     <title>Motor Fino</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-header-area { background-color: #FFFFFF; }
-        .bg-custom-main-box { background-color: #E0F2FE; }
-        .bg-custom-button { background-color: #0284C7; }
-        .text-custom-title { color: #0369A1; }
-        input[readonly], textarea[readonly] {
-             background-color: #E5E7EB;
-             cursor: default;
-             border-color: #D1D5DB;
-             color: #4B5563;
+        .bg-custom-header-area {
+            background-color: #FFFFFF;
         }
-        select:not([disabled]) { background-color: #FFFFFF; cursor: pointer; }
+        .bg-custom-main-box {
+            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+        }
+        .bg-custom-button {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+        }
+        .text-custom-title {
+            color: #0369A1;
+        }
+        input[readonly],
+        textarea[readonly] {
+            background-color: #F3F4F6;
+            cursor: default;
+            border-color: #D1D5DB;
+            color: #4B5563;
+        }
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-custom {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            background-color: white;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            padding: 0.875rem 1rem;
+        }
+        .select-custom:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        .select-custom:hover {
+            border-color: #0284C7;
+            background-color: #F8FAFC;
+        }
+        .evaluation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease-in-out;
+        }
+        .evaluation-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+        .evaluation-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: block;
+            line-height: 1.4;
+        }
+        .evaluation-label.required::after {
+            content: " *";
+            color: #DC2626;
+        }
+        .floating-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+        .progress-indicator {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease-in-out;
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
+            height: 1px;
+            margin: 2rem 0;
+        }
+        .scale-legend {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            margin-bottom: 2rem;
+        }
+        .navigation-buttons {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
+            margin-top: 2rem;
+        }
+        .btn-navigation {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+        .btn-navigation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            background: linear-gradient(135deg, #0369A1 0%, #1E40AF 100%);
+        }
+        .btn-navigation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+        }
+        .btn-navigation:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3B82F6, 0 6px 20px rgba(2, 132, 199, 0.35);
+        }
+        .date-input {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .date-input:focus {
+            outline: none;
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            transform: translateY(-1px);
+        }
+        .abbreviation-tag {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0.125rem;
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .evaluation-card {
+                padding: 1rem;
+            }
+            .navigation-buttons {
+                padding: 1.5rem;
+            }
+            .btn-navigation {
+                min-width: 100px;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .section-title {
+                padding: 1rem 1.5rem;
+            }
+            .abbreviation-tag {
+                font-size: 0.7rem;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
 
-    <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3></div>
-
-    <div class="mx-6 md:mx-10 mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
-    <form id="evaluacionMotorFinoForm" action="?" method="post">
-            <p class="text-center text-gray-600 mb-4">Evaluación para el mes: <strong id="mesSeleccionadoDisplay">...</strong></p>
-
-            <div class="mb-6 text-center">
-                <label for="fecha_evaluacion" class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Evaluacion</label>
-                <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
+    <div class="floating-header sticky top-0 z-10 py-4 mb-6">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-custom-title text-center">
+                Motor Fino
+            </h3>
+            <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
+                <div class="progress-indicator w-3/4"></div> 
             </div>
+        </div>
+    </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">MOTOR FINO</h1></div>
-            <div class="border-b border-gray-400 py-5 mb-6"><h2 class="text-base md:text-lg font-semibold text-center text-gray-800 px-2"> No lo logra (0) | Lo intenta pero no lo logra (1) | En proceso (2) | Lo realiza inhábilmente (3) | Normal (4) </h2></div>
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
+            <form id="evaluacionMotorFinoForm">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
-                 <div>
-                     <label for="mf_manos_linea_media" class="block text-sm font-medium text-gray-700 mb-1"><strong>Lleva las manos a la linea media*</strong></label>
-                     <select name="mf_manos_linea_media" id="mf_manos_linea_media" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                         <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_mantiene_objeto" class="block text-sm font-medium text-gray-700 mb-1">Tiene y mantiene firmemente un objeto con la mano</label>
-                     <select name="mf_mantiene_objeto" id="mf_mantiene_objeto" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_estira_ambas_manos" class="block text-sm font-medium text-gray-700 mb-1">Se estira para tomar un objeto con ambas manos</label>
-                     <select name="mf_estira_ambas_manos" id="mf_estira_ambas_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_estruja_papel" class="block text-sm font-medium text-gray-700 mb-1"><strong>Estruja papel, sabanas, ropa, etc...*</strong></label>
-                     <select name="mf_estruja_papel" id="mf_estruja_papel" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_transfiere_manos" class="block text-sm font-medium text-gray-700 mb-1"><strong>Toma un objeto y la tranfiere entre sus manos*</strong></label>
-                     <select name="mf_transfiere_manos" id="mf_transfiere_manos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_examina_objetos" class="block text-sm font-medium text-gray-700 mb-1">Toma objetos que estan a su alcance y los examina</label>
-                     <select name="mf_examina_objetos" id="mf_examina_objetos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_desarrolla_agarre" class="block text-sm font-medium text-gray-700 mb-1"><strong>Comienza a desarrollar agarre indice-pulgar*</strong></label>
-                     <select name="mf_desarrolla_agarre" id="mf_desarrolla_agarre" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_inserta_agujero" class="block text-sm font-medium text-gray-700 mb-1">Inserta objetos en un agujero grande</label>
-                     <select name="mf_inserta_agujero" id="mf_inserta_agujero" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_pinza_superior" class="block text-sm font-medium text-gray-700 mb-1"><strong>Pinza superior*</strong></label>
-                     <select name="mf_pinza_superior" id="mf_pinza_superior" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_senala_indice" class="block text-sm font-medium text-gray-700 mb-1">Señala con el dedo indice</label>
-                     <select name="mf_senala_indice" id="mf_senala_indice" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_torre_2_cubos" class="block text-sm font-medium text-gray-700 mb-1"><strong>Forma una torre de 2 cubos*</strong></label>
-                     <select name="mf_torre_2_cubos" id="mf_torre_2_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_garabatea_imitacion" class="block text-sm font-medium text-gray-700 mb-1">Garabatea espontaneamente por imitacion</label>
-                     <select name="mf_garabatea_imitacion" id="mf_garabatea_imitacion" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_toma_2_cubos_mano" class="block text-sm font-medium text-gray-700 mb-1">Toma 2 cubos en una mano</label>
-                     <select name="mf_toma_2_cubos_mano" id="mf_toma_2_cubos_mano" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_torre_3_4_cubos" class="block text-sm font-medium text-gray-700 mb-1">Forma una torre con 3 o 4 cubos</label>
-                     <select name="mf_torre_3_4_cubos" id="mf_torre_3_4_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_introduce_bolitas" class="block text-sm font-medium text-gray-700 mb-1">Introduce bolitas en la botella</label>
-                     <select name="mf_introduce_bolitas" id="mf_introduce_bolitas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_vueltas_paginas" class="block text-sm font-medium text-gray-700 mb-1">Da vueltas a las paginas de un libro(2 o 3 a la vez)</label>
-                     <select name="mf_vueltas_paginas" id="mf_vueltas_paginas" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_intenta_quitar_rosca" class="block text-sm font-medium text-gray-700 mb-1">Intenta quitar la rosca o tapa de un frasco pequeño</label>
-                     <select name="mf_intenta_quitar_rosca" id="mf_intenta_quitar_rosca" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_imita_trazo_vertical" class="block text-sm font-medium text-gray-700 mb-1">Imita trazo vertical</label>
-                     <select name="mf_imita_trazo_vertical" id="mf_imita_trazo_vertical" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_torre_6_cubos" class="block text-sm font-medium text-gray-700 mb-1"><strong>Arma torre de 6 cubos*</strong></label>
-                     <select name="mf_torre_6_cubos" id="mf_torre_6_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-                 <div>
-                     <label for="mf_arma_tren_3_cubos" class="block text-sm font-medium text-gray-700 mb-1">Arma tren de 3 cubos</label>
-                     <select name="mf_arma_tren_3_cubos" id="mf_arma_tren_3_cubos" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                          <option value="" disabled selected>Seleccione una opción</option>
-                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                     </select>
-                 </div>
-            </div>
+                <div class="info-card text-center">
+                    <p class="text-lg text-gray-700">
+                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
+                    </p>
+                </div>
 
-            <div class="flex justify-between mt-8">
-                 <a href="agregar.mgrueso.php">
-                     <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
-                 </a>
-                 <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
-            </div>
-        </form>
+                <div class="mb-8 text-center">
+                    <label for="fecha_evaluacion" class="evaluation-label text-lg">
+                        Fecha de la Evaluación
+                    </label>
+                    <input type="date"
+                        name="fecha_evaluacion"
+                        id="fecha_evaluacion"
+                        class="date-input"
+                        readonly>
+                </div>
+
+                <div class="section-title text-center">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                        MOTOR FINO
+                    </h1>
+                </div>
+
+                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
+                    <h2 class="text-lg font-bold text-gray-800 mb-3">
+                        Escala de Puntuación
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-sm">
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-red-600">0</div>
+                            <div>No lo logra</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-orange-600">1</div>
+                            <div>Lo intenta pero no lo logra</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-yellow-600">2</div>
+                            <div>En proceso</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-blue-600">3</div>
+                            <div>Lo realiza inhábilmente</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-green-600">4</div>
+                            <div>Normal</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="subescala evaluation-card">
+                        <label for="mf_manos_linea_media" class="evaluation-label required">
+                            Lleva las manos a la linea media
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_manos_linea_media" id="mf_manos_linea_media" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_mantiene_objeto" class="evaluation-label">
+                            Tiene y mantiene firmemente un objeto con la mano
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_mantiene_objeto" id="mf_mantiene_objeto" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_estira_ambas_manos" class="evaluation-label">
+                            Se estira para tomar un objeto con ambas manos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_estira_ambas_manos" id="mf_estira_ambas_manos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_estruja_papel" class="evaluation-label required">
+                            Estruja papel, sabanas, ropa, etc...
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_estruja_papel" id="mf_estruja_papel" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_transfiere_manos" class="evaluation-label required">
+                            Toma un objeto y la tranfiere entre sus manos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_transfiere_manos" id="mf_transfiere_manos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_examina_objetos" class="evaluation-label">
+                            Toma objetos que estan a su alcance y los examina
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_examina_objetos" id="mf_examina_objetos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_desarrolla_agarre" class="evaluation-label required">
+                            Comienza a desarrollar agarre indice-pulgar
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_desarrolla_agarre" id="mf_desarrolla_agarre" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_inserta_agujero" class="evaluation-label">
+                            Inserta objetos en un agujero grande
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_inserta_agujero" id="mf_inserta_agujero" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_pinza_superior" class="evaluation-label required">
+                            Pinza superior
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_pinza_superior" id="mf_pinza_superior" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_senala_indice" class="evaluation-label">
+                            Señala con el dedo indice
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_senala_indice" id="mf_senala_indice" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_torre_2_cubos" class="evaluation-label required">
+                            Forma una torre de 2 cubos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_torre_2_cubos" id="mf_torre_2_cubos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_garabatea_imitacion" class="evaluation-label">
+                            Garabatea espontaneamente por imitacion
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_garabatea_imitacion" id="mf_garabatea_imitacion" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_toma_2_cubos_mano" class="evaluation-label">
+                            Toma 2 cubos en una mano
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_toma_2_cubos_mano" id="mf_toma_2_cubos_mano" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_torre_3_4_cubos" class="evaluation-label">
+                            Forma una torre con 3 o 4 cubos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_torre_3_4_cubos" id="mf_torre_3_4_cubos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_introduce_bolitas" class="evaluation-label">
+                            Introduce bolitas en la botella
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_introduce_bolitas" id="mf_introduce_bolitas" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_vueltas_paginas" class="evaluation-label">
+                            Da vueltas a las paginas de un libro (2 o 3 a la vez)
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_vueltas_paginas" id="mf_vueltas_paginas" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_intenta_quitar_rosca" class="evaluation-label">
+                            Intenta quitar la rosca o tapa de un frasco pequeño
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_intenta_quitar_rosca" id="mf_intenta_quitar_rosca" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_imita_trazo_vertical" class="evaluation-label">
+                            Imita trazo vertical
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_imita_trazo_vertical" id="mf_imita_trazo_vertical" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_torre_6_cubos" class="evaluation-label required">
+                            Arma torre de 6 cubos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_torre_6_cubos" id="mf_torre_6_cubos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="subescala evaluation-card">
+                        <label for="mf_arma_tren_3_cubos" class="evaluation-label">
+                            Arma tren de 3 cubos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_arma_tren_3_cubos" id="mf_arma_tren_3_cubos" class="select-custom">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <a href="agregar.mgrueso.php" class="btn-navigation">
+                        ← ANTERIOR
+                    </a>
+                    <div class="text-sm text-gray-600 text-center hidden sm:block">
+                        Paso 4 de 6 - Motor Fino
+                    </div>
+                    <button type="button" id="botonSiguientePaso" class="btn-navigation">
+                        SIGUIENTE →
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionP4_mfino'; // Clave para los datos de Motor Fino
+            const sessionKey = 'evaluacionP4_mfino'; // Clave para los datos de Motor Fino en sessionStorage
 
-            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            // Recupera el objeto de datos del paciente principal
             const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
             let datosPaciente = {};
             if (datosPacienteRaw) {
                 try {
                     datosPaciente = JSON.parse(datosPacienteRaw);
                 } catch (e) {
-                    console.error("Error al parsear datosPacienteParaEvaluacion en Motor Fino:", e);
-                    window.location.href = 'agregar.view.php?error=datos_corruptos'; // Redirige si los datos base están corruptos
+                    console.error("Error al cargar datos del paciente:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos'; 
                     return;
                 }
             } else {
-                console.error("No se encontraron datos del paciente en sessionStorage en Motor Fino. Redirigiendo...");
-                window.location.href = 'agregar.view.php?error=datos_faltantes'; // Redirige si faltan los datos base
+                console.error("No se encontraron datos del paciente. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes'; 
                 return;
             }
 
-            // 2. Recupera los datos específicos de Motor Fino para este paso (si existen)
+            // Recupera los datos específicos de Motor Fino para este paso (si existen)
             const datosMfinoGuardados = sessionStorage.getItem(sessionKey);
             let datosMfino = {};
             if (datosMfinoGuardados) { 
                 try { 
                     datosMfino = JSON.parse(datosMfinoGuardados); 
                 } catch(e) { 
-                    console.error("Error Paso 4 (Motor Fino) al parsear datos guardados:", e);
+                    console.error("Error al cargar datos de Motor Fino:", e);
                 }
             }
             
-            // 3. Muestra el mes seleccionado (del Paso 1)
+            // Muestra el mes seleccionado (del Paso 1)
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
             if (mesDisplay && datosPaciente.mes) { 
                 mesDisplay.textContent = datosPaciente.mes;
@@ -232,12 +625,11 @@
                 mesDisplay.textContent = 'No disponible'; 
             }
 
-            // 4. Establece la fecha de evaluación
+            // Establece la fecha de evaluación.
             if (dateInput) {
                 if(datosMfino.fecha_evaluacion) { 
                     dateInput.value = datosMfino.fecha_evaluacion; 
                 } 
-                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
                 else if (datosPaciente.fecha_inicio_tratamiento) {
                     dateInput.value = datosPaciente.fecha_inicio_tratamiento;
                 }
@@ -247,12 +639,12 @@
                 }
             }
 
-            // 5. Precarga los valores de los <select> si existen datos guardados
+            // Precarga los valores de los <select> si existen datos guardados.
             const form = document.getElementById('evaluacionMotorFinoForm');
-            if(form && Object.keys(datosMfino).length > 0) { // Asegúrate de que datosMfino tiene propiedades
+            if(form && Object.keys(datosMfino).length > 0) { 
                 const selects = form.querySelectorAll('select');
                 selects.forEach(select => { 
-                    if(datosMfino[select.name] !== undefined) { // Usa !== undefined para aceptar valores como 0
+                    if(datosMfino[select.name] !== undefined) { 
                         select.value = datosMfino[select.name]; 
                     } else {
                         select.value = ""; 
@@ -260,48 +652,35 @@
                 });
             }
 
-            // --- Console.log para ver los datos cargados al inicio de la página ---
-            console.log('DEBUG (JS - al cargar la página - Motor Fino): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
-            console.log('DEBUG (JS - al cargar la página - Motor Fino): datosMfino (específico de este paso):', datosMfino);
-            // --- Fin Console.log ---
-
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
-                    // 6. Recopila los datos del formulario de Motor Fino
-                    const formDataFino = new FormData(form);
+                    // Recopila los datos del formulario de Motor Fino.
                     const currentMotorFinoData = {};
                     
-                    // Iterar sobre todos los selects y guardar sus valores, seleccionados o no
+                    // Incluye la fecha de evaluación del formulario.
+                    if(dateInput) currentMotorFinoData['fecha_evaluacion'] = dateInput.value;
+
+                    // Itera sobre todos los selects y guarda sus valores.
                     const allSelects = form.querySelectorAll('select');
                     allSelects.forEach(select => {
                         currentMotorFinoData[select.name] = select.value;
                     });
-
-                    // Asegúrate de incluir la fecha de evaluación del formulario en los datos del paso actual
-                    if(dateInput) currentMotorFinoData['fecha_evaluacion'] = dateInput.value;
-
-                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    
+                    // Fusiona los datos del paso actual con el objeto principal del paciente.
                     datosPaciente.mfino = currentMotorFinoData; 
 
-                    // 8. console.log para verificar los datos ANTES de guardarlos
-                    console.log('DEBUG (JS - Botón Siguiente - Motor Fino): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
-
                     try {
-                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        // Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage.
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
                         
-                        // 10. Opcional: guardar los datos de Motor Fino por separado
+                        // Guarda los datos específicos de Motor Fino por separado (opcional).
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentMotorFinoData)); 
 
-                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
-                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
-                        console.log('DEBUG (JS - Botón Siguiente - Motor Fino): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
-
-
-                        window.location.href = 'agregar.lenguaje.php'; // Redirige al siguiente paso
+                        // Redirige al siguiente paso de la evaluación.
+                        window.location.href = 'agregar.lenguaje.php'; 
                     } catch(e) { 
-                        console.error("Error al guardar datos en sessionStorage (Motor Fino):", e);
+                        console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los datos de Motor Fino."); 
                     }
                 });
