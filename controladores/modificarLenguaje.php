@@ -11,9 +11,9 @@ $Con = conectar();
 $Estudio = new Estudios($Con);
 $resultadosLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
 $datosLenguaje = mysqli_fetch_all($resultadosLenguaje, MYSQLI_ASSOC);
-echo "<br>";
+/*echo "<br>";
 echo "Prueba de Fino " . $datosLenguaje[1]['resultadosKatona'];
 echo "<br>";
-echo var_dump($datosLenguaje);
+echo var_dump($datosLenguaje);*/
 
     require './vistas/modificar.lenguaje.php';

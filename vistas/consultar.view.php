@@ -83,7 +83,7 @@
 
         </form>
 
-        <form method="post" action="/generarExcel" class="flex flex-col sm:flex-row items-end space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+      <!--  <form method="post" action="/generarExcel" class="flex flex-col sm:flex-row items-end space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
         <input type="hidden" name="Nombre" value="<?= htmlspecialchars($_POST['Nombre']) ?>">
         <input type="hidden" name="eval_subs_fec_eval" value="<?= htmlspecialchars($_POST['eval_subs_fec_eval']) ?>">
         <input type="hidden" name="clave_paciente" value="<?= htmlspecialchars($_POST['clave_paciente']) ?>">
@@ -95,7 +95,7 @@
                     Generar Excel
                 </button>
             </div>
-        </form>
+        </form> -->
 
         <div class="overflow-x-auto"> <?php // Permite scroll horizontal en pantallas pequeñas ?>
             <table class="w-full border-collapse border border-sky-300 bg-white text-sm">
@@ -128,8 +128,6 @@
                             Consultar
                         </button>
                     <div class="flex justify-center">
-                        <img src="/assets/img_iconos/mooodificar.svg" class="modificar w-24 h-24 hover:scale-110 hover:brightness-75 transition-all" />
-                    </img>
                     </form></td>
                 
             </tr>

@@ -30,9 +30,9 @@ if ($_SESSION["session"] === 'okA') {
         $Con = conectar();
         $Estudio = new Estudios($Con);
         $result = $Estudio->consultarDatosPacienteNombreyClave($Criterio,$codigo);
-        echo $Criterio;
-        echo $codigo;
-        echo $_POST;
+        //echo $Criterio;
+        //echo $codigo;
+        //echo $_POST;
     }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && !empty($_POST['fechaInicial']) && !empty($_POST['fechaFinal'])){
         $fechaInicial = $_POST['fechaInicial'];
         $fechaFinal = $_POST['fechaFinal'];

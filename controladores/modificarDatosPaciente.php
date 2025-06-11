@@ -63,8 +63,8 @@ $dicLenguaje = generarDiccionario($datosLenguaje);
 $dicCamposSignos = generarDiccionario($datosCamposSignos);
 */
 //Solo para ver si algo se esta filtrando por post y si los datos estan llegando correctamente
-echo "El array con los contenidos de POST";
+/*echo "El array con los contenidos de POST";
 var_dump($_POST);
 echo "<br>";
-echo var_dump($datos_paciente_para_mostrar);
+echo var_dump($datos_paciente_para_mostrar);*/
 require './vistas/modificar.datospaciente.php';

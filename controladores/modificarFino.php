@@ -11,9 +11,9 @@ $Con = conectar();
 $Estudio = new Estudios($Con);
 $resultadosSubMF = $Estudio->consultarResultadosSubMF($id_terapia);
 $datosFinos = mysqli_fetch_all($resultadosSubMF, MYSQLI_ASSOC);
-echo "<br>";
+/*echo "<br>";
 echo "Prueba de Fino " . $datosFinos[1]['resultadosKatona'];
 echo "<br>";
-echo var_dump($datosFinos);
+echo var_dump($datosFinos);*/
 
 require './vistas/modificar.mfino.php';

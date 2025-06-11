@@ -11,9 +11,9 @@ $Con = conectar();
 $Estudio = new Estudios($Con);
 $resultadosSubMG = $Estudio->consultarResultadosSubMG($id_terapia);
 $datosGruesos = mysqli_fetch_all($resultadosSubMG, MYSQLI_ASSOC);
-echo "<br>";
+/*echo "<br>";
 echo "Prueba de Grueso " . $datosGruesos[1]['resultadosKatona'];
 echo "<br>";
-echo var_dump($datosGruesos);
+echo var_dump($datosGruesos);*/
 
 require './vistas/modificar.mgrueso.php';

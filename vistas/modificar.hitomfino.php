@@ -12,43 +12,215 @@
         }
 
         .bg-custom-main-box {
-            background-color: #E0F2FE;
+            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
         }
 
         .bg-custom-button {
-            background-color: #0284C7;
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
         }
 
-        /* Botón primario (Sí) */
-        .bg-custom-button-no {
-            background-color: #6B7280;
-        }
-
-        /* Botón secundario (No) */
         .text-custom-title {
             color: #0369A1;
         }
 
-        input[readonly] {
-            background-color: #f3f4f6;
+        input[readonly],
+        textarea[readonly] {
+            background-color: #F3F4F6;
             cursor: default;
+            border-color: #D1D5DB;
+            color: #4B5563;
         }
 
-        input[type="date"][readonly] {
-            background-color: #f3f4f6;
-            cursor: default;
+        .evaluation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .evaluation-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .evaluation-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: block;
+            line-height: 1.4;
         }
 
         .hito-display {
-            padding: 0.5rem;
-            border: 1px solid #D1D5DB;
-            border-radius: 0.375rem;
-            background-color: #E5E7EB;
-            color: #4B5563;
-            min-height: 2.5rem;
+            padding: 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            color: #374151;
+            min-height: 3rem;
             display: flex;
             align-items: center;
             font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .hito-display em {
+            color: #6B7280;
+            font-style: italic;
+        }
+
+        .progress-indicator {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
+            height: 1px;
+            margin: 2rem 0;
+        }
+
+        .scale-legend {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.3);
+        }
+
+        .floating-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        @media (max-width: 768px) {
+            .evaluation-card {
+                padding: 1rem;
+            }
+        }
+
+        .navigation-buttons {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
+            margin-top: 2rem;
+        }
+
+        .btn-navigation {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+        }
+
+        .btn-navigation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            background: linear-gradient(135deg, #0369A1 0%, #1E40AF 100%);
+        }
+
+        .btn-navigation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+        }
+
+        .btn-navigation:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3B82F6, 0 6px 20px rgba(2, 132, 199, 0.35);
+        }
+
+        .btn-finalizar {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px;
+        }
+
+        .btn-finalizar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #DBEAFE 0%, #EBF8FF 100%);
+            border: 1px solid #93C5FD;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-logrado {
+            background-color: #D1FAE5;
+            color: #065F46;
+            border: 1px solid #A7F3D0;
+        }
+
+        .status-proceso {
+            background-color: #FEF3C7;
+            color: #92400E;
+            border: 1px solid #FDE68A;
+        }
+
+        .status-no-logra {
+            background-color: #FEE2E2;
+            color: #991B1B;
+            border: 1px solid #FECACA;
+        }
+
+        .status-pendiente {
+            background-color: #F3F4F6;
+            color: #4B5563;
+            border: 1px solid #D1D5DB;
         }
 
         /* Estilos para el Modal */
@@ -63,130 +235,286 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            backdrop-filter: blur(4px);
         }
 
         .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
             width: 90%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
+            border: 1px solid #E5E7EB;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
         .modal-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #F59E0B;
-            /* Tailwind amber-500 */
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
         .modal-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
             color: #1F2937;
-            /* Tailwind gray-800 */
         }
 
         .modal-message {
             font-size: 1rem;
             color: #4B5563;
-            /* Tailwind gray-600 */
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
         }
 
         .modal-buttons button {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
             color: white;
-            margin: 0 0.5rem;
             cursor: pointer;
+            border: none;
+            transition: all 0.2s ease-in-out;
+            min-width: 80px;
+        }
+
+        .modal-btn-si {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+        }
+
+        .modal-btn-si:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .modal-btn-no {
+            background: linear-gradient(135deg, #6B7280 0%, #4B5563 100%);
+            box-shadow: 0 2px 8px rgba(107, 114, 128, 0.2);
+        }
+
+        .modal-btn-no:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(107, 114, 128, 0.3);
         }
 
         .hidden {
             display: none;
         }
 
-        /* Para ocultar el modal */
+        @media (max-width: 640px) {
+            .navigation-buttons {
+                padding: 1.5rem;
+            }
+
+            .btn-navigation, .btn-finalizar {
+                min-width: 100px;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+
+            .modal-buttons button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
 
-    <div class="text-center my-6">
-        <h3 class="text-2xl font-bold text-custom-title">Modificar Evaluacion</h3>
+    <!-- Header flotante mejorado -->
+    <div class="floating-header sticky top-0 z-10 py-4 mb-6">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-custom-title text-center">
+                Modificar Evaluación - Hitos Motor Fino
+            </h3>
+            <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
+                <div class="progress-indicator bg-green-500 h-2 rounded-full" style="width: 100%;"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="max-w-4xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
-        <form id="evaluacionHitoMFinoForm" class="text-center">
-            <p class="text-center text-gray-600 mb-4">Evaluación para el mes: <strong id="mesSeleccionadoDisplay">...</strong></p>
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
+            <form id="evaluacionHitoMFinoForm">
 
-            <div class="mb-6 text-center">
-                <label for="fecha_evaluacion" class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Evaluacion</label>
-                <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
-            </div>
+                <!-- Información del mes -->
+                <div class="text-center mb-8 p-4 bg-white rounded-xl shadow-sm">
+                    <p class="text-lg text-gray-700">
+                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
+                    </p>
+                </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-2">
-                <h1 class="text-xl font-semibold text-center text-gray-800">HITOS DE DESARROLLO (MOTOR FINO)</h1>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6 text-left">
-                <div>
-                    <label for="hf_fijacion_ocular_display" class="block text-sm font-medium text-gray-700 mb-1">Fijación Ocular (FO)</label>
-                    <p id="hf_fijacion_ocular_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_fijacion_ocular" id="hf_fijacion_ocular_value">
+                <!-- Fecha de evaluación -->
+                <div class="mb-8 text-center">
+                    <label for="fecha_evaluacion" class="evaluation-label text-lg">
+                        Fecha de la Evaluación
+                    </label>
+                    <input type="date"
+                        name="fecha_evaluacion"
+                        id="fecha_evaluacion"
+                        class="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+                        readonly>
                 </div>
-                <div>
-                    <label for="hf_cubito_palmar_display" class="block text-sm font-medium text-gray-700 mb-1">Cubito-Palmar (CP)</label>
-                    <p id="hf_cubito_palmar_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_cubito_palmar" id="hf_cubito_palmar_value">
-                </div>
-                <div>
-                    <label for="hf_presion_r_display" class="block text-sm font-medium text-gray-700 mb-1">Prensión "Rascado" (PR)</label>
-                    <p id="hf_presion_r_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_presion_r" id="hf_presion_r_value">
-                </div>
-                <div>
-                    <label for="hf_pinza_inferior_display" class="block text-sm font-medium text-gray-700 mb-1">Pinza Inferior (PI)</label>
-                    <p id="hf_pinza_inferior_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_pinza_inferior" id="hf_pinza_inferior_value">
-                </div>
-                <div>
-                    <label for="hf_pinza_fina_display" class="block text-sm font-medium text-gray-700 mb-1">Pinza Fina (PF)*</label>
-                    <p id="hf_pinza_fina_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_pinza_fina" id="hf_pinza_fina_value">
-                </div>
-                <div>
-                    <label for="hf_abajamiento_voluntario_display" class="block text-sm font-medium text-gray-700 mb-1">Alojamiento Voluntario (AV)</label>
-                    <p id="hf_abajamiento_voluntario_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_abajamiento_voluntario" id="hf_abajamiento_voluntario_value">
-                </div>
-                <div>
-                    <label for="hf_coordinacion_oculomanual_display" class="block text-sm font-medium text-gray-700 mb-1">Coordinación Oculomanual (CO)</label>
-                    <p id="hf_coordinacion_oculomanual_display" class="hito-display"><em>...</em></p>
-                    <input type="hidden" name="hf_coordinacion_oculomanual" id="hf_coordinacion_oculomanual_value">
-                </div>
-            </div>
 
-            <div class="flex justify-between mt-8">
-                <a href="/modificarHitosMG" class="inline-block">
-                    <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
-                </a>
-                <button type="button" id="botonFinalizarEvaluacion" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">FINALIZAR EVALUACIÓN</button>
-            </div>
-        </form>
+                <!-- Título de la sección -->
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-white rounded-2xl px-8 py-4 shadow-lg">
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                            HITOS DE DESARROLLO (MOTOR FINO)
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Información sobre los hitos -->
+                <div class="info-card mb-8">
+                    <div class="flex items-center mb-2">
+                        <svg class="w-5 h-5 text-blue-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        <h3 class="text-lg font-semibold text-blue-900">
+                            Información sobre Hitos de Desarrollo
+                        </h3>
+                    </div>
+                    <p class="text-blue-800 text-sm leading-relaxed">
+                        Los hitos mostrados a continuación se basan en las evaluaciones previas de Motor Fino. 
+                        Estos representan logros importantes en el desarrollo de la motricidad fina del paciente.
+                    </p>
+                </div>
+
+                <!-- Grid de hitos -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+
+                    <div class="evaluation-card">
+                        <label for="hf_fijacion_ocular_display" class="evaluation-label">
+                            Fijación Ocular (FO)
+                        </label>
+                        <div class="hito-display" id="hf_fijacion_ocular_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_fijacion_ocular" id="hf_fijacion_ocular_value">
+                    </div>
+
+                    <div class="evaluation-card">
+                        <label for="hf_cubito_palmar_display" class="evaluation-label">
+                            Cubito-Palmar (CP)
+                        </label>
+                        <div class="hito-display" id="hf_cubito_palmar_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_cubito_palmar" id="hf_cubito_palmar_value">
+                    </div>
+
+                    <div class="evaluation-card">
+                        <label for="hf_presion_r_display" class="evaluation-label">
+                            Prensión "Rascado" (PR)
+                        </label>
+                        <div class="hito-display" id="hf_presion_r_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_presion_r" id="hf_presion_r_value">
+                    </div>
+
+                    <div class="evaluation-card">
+                        <label for="hf_pinza_inferior_display" class="evaluation-label">
+                            Pinza Inferior (PI)
+                        </label>
+                        <div class="hito-display" id="hf_pinza_inferior_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_pinza_inferior" id="hf_pinza_inferior_value">
+                    </div>
+
+                    <div class="evaluation-card">
+                        <label for="hf_pinza_fina_display" class="evaluation-label">
+                            Pinza Fina (PF)*
+                        </label>
+                        <div class="hito-display" id="hf_pinza_fina_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_pinza_fina" id="hf_pinza_fina_value">
+                    </div>
+
+                    <div class="evaluation-card">
+                        <label for="hf_abajamiento_voluntario_display" class="evaluation-label">
+                            Alojamiento Voluntario (AV)
+                        </label>
+                        <div class="hito-display" id="hf_abajamiento_voluntario_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_abajamiento_voluntario" id="hf_abajamiento_voluntario_value">
+                    </div>
+
+                    <div class="evaluation-card md:col-span-2 lg:col-span-1">
+                        <label for="hf_coordinacion_oculomanual_display" class="evaluation-label">
+                            Coordinación Oculomanual (CO)
+                        </label>
+                        <div class="hito-display" id="hf_coordinacion_oculomanual_display">
+                            <em>Cargando...</em>
+                        </div>
+                        <input type="hidden" name="hf_coordinacion_oculomanual" id="hf_coordinacion_oculomanual_value">
+                    </div>
+
+                </div>
+
+                <!-- Botones de navegación -->
+                <div class="navigation-buttons">
+                    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <a href="/modificarHitosMG" class="btn-navigation">
+                            ← ANTERIOR
+                        </a>
+                        <div class="text-sm text-gray-600 text-center hidden sm:block">
+                            Paso 9 de 9 - Finalizar Evaluación
+                        </div>
+                        <button type="button" id="botonFinalizarEvaluacion" class="btn-finalizar">
+                            ✓ FINALIZAR EVALUACIÓN
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
     </div>
 
+    <!-- Modal mejorado -->
     <div id="confirmacionModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <div class="modal-icon">⚠️</div>
+            <span class="modal-icon">⚠️</span>
             <h3 class="modal-title">Finalizar Evaluación</h3>
-            <p class="modal-message">¿Seguro que quieres finalizar la evaluación?</p>
+            <p class="modal-message">¿Está seguro que desea finalizar y guardar la evaluación?<br>Esta acción no se puede deshacer.</p>
             <div class="modal-buttons">
-                <button id="modalBotonSi" class="bg-custom-button">Sí</button>
-                <button id="modalBotonNo" class="bg-custom-button-no">No</button>
+                <button id="modalBotonSi" class="modal-btn-si">Sí, Finalizar</button>
+                <button id="modalBotonNo" class="modal-btn-no">Cancelar</button>
             </div>
         </div>
     </div>
@@ -276,8 +604,21 @@
                 }
 
                 if (displayElement && valueElement) {
-                    displayElement.textContent = textoAMostrar;
+                    displayElement.innerHTML = textoAMostrar === 'Aún no se evalúa' ? 
+                        '<em>Aún no se evalúa</em>' : textoAMostrar;
                     valueElement.value = valorAGuardar;
+
+                    // Agregar clase de estado visual
+                    displayElement.className = 'hito-display';
+                    if (valorNumericoDelCampoAnterior === '4') {
+                        displayElement.classList.add('status-logrado');
+                    } else if (valorNumericoDelCampoAnterior === '2' || valorNumericoDelCampoAnterior === '3') {
+                        displayElement.classList.add('status-proceso');
+                    } else if (valorNumericoDelCampoAnterior === '0' || valorNumericoDelCampoAnterior === '1') {
+                        displayElement.classList.add('status-no-logra');
+                    } else {
+                        displayElement.classList.add('status-pendiente');
+                    }
                 }
             }
 
@@ -393,11 +734,11 @@
 
                                 if (http.status === 200) {
                                     console.log("Datos enviados correctamente.");
-                                    alert("Evaluación modificada exitosamente.");
+                                    //alert("Evaluación modificada exitosamente.");
                                 } else {
                                     console.error("Error al enviar los datos:", http.status, http.statusText);
                                     console.error("Respuesta de error:", http.responseText);
-                                    alert("Hubo un error al modificar la evaluación. Por favor, inténtalo de nuevo más tarde.");
+                                    //alert("Hubo un error al modificar la evaluación. Por favor, inténtalo de nuevo más tarde.");
                                 }
                             }
                         };
@@ -406,7 +747,7 @@
                     enviarDatosEvaluacion(datosParaEnviar);
                     console.log("Datos de evaluación enviados al servidor:", datosParaEnviar);
 
-                    //limpiarSessionStorageYRedirigir(clavesDePasos);
+                    limpiarSessionStorageYRedirigir(clavesDePasos);
                 });
             }
 

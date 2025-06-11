@@ -12,11 +12,11 @@
         }
 
         .bg-custom-main-box {
-            background-color: #E0F2FE;
+            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
         }
 
         .bg-custom-button {
-            background-color: #0284C7;
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
         }
 
         .text-custom-title {
@@ -25,127 +25,383 @@
 
         input[readonly],
         textarea[readonly] {
-            background-color: #E5E7EB;
+            background-color: #F3F4F6;
             cursor: default;
             border-color: #D1D5DB;
             color: #4B5563;
         }
 
-        select:not([disabled]) {
-            background-color: #FFFFFF;
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-custom {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .select-custom:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+        }
+
+        .select-custom:hover {
+            border-color: #0284C7;
+            background-color: #F8FAFC;
+        }
+
+        .evaluation-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E5E7EB;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .evaluation-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .evaluation-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .evaluation-label.required {
+            color: #DC2626;
+        }
+
+        .progress-indicator {
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            height: 4px;
+            border-radius: 2px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .evaluation-label.required::after {
+            content: " *";
+            color: #DC2626;
+        }
+
+
+        .section-divider {
+            background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
+            height: 1px;
+            margin: 2rem 0;
+        }
+
+        .scale-legend {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid #F59E0B;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.3);
+        }
+
+        .floating-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        @media (max-width: 768px) {
+            .evaluation-card {
+                padding: 1rem;
+            }
+        }
+
+        .navigation-buttons {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
+            margin-top: 2rem;
+        }
+
+        .btn-navigation {
+            background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
             cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
         }
 
-        .radio-group-laterality {
-            display: none;
-            margin-top: 0.5rem;
-            padding-left: 1rem;
+        .btn-navigation:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            background: linear-gradient(135deg, #0369A1 0%, #1E40AF 100%);
         }
 
-        .radio-group-laterality label {
-            margin-left: 0.25rem;
-            margin-right: 0.75rem;
-            font-weight: normal;
+        .btn-navigation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.2);
+        }
+
+        .btn-navigation:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3B82F6, 0 6px 20px rgba(2, 132, 199, 0.35);
+        }
+
+
+        @media (max-width: 640px) {
+            .navigation-buttons {
+                padding: 1.5rem;
+            }
+
+            .btn-navigation {
+                min-width: 100px;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
 
-    <div class="text-center my-6">
-        <h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3>
+    <!-- Header flotante mejorado -->
+    <div class="floating-header sticky top-0 z-10 py-4 mb-6">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-custom-title text-center">
+                Modificar Evaluación - Signos de Alarma
+            </h3>
+            <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
+                <div class="progress-indicator bg-blue-500 h-2 rounded-full" style="width: 77%;"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="mx-6 md:mx-10 mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
-        <form id="evaluacionSignosAlarmaForm">
-            <p class="text-center text-gray-600 mb-4">Evaluación para el mes: <strong id="mesSeleccionadoDisplay">...</strong></p>
+    <div class="container mx-auto px-4 max-w-7xl">
+        <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
+            <form id="evaluacionSignosAlarmaForm">
 
-            <div class="mb-6 text-center">
-                <label for="fecha_evaluacion" class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Evaluacion</label>
-                <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
-            </div>
-
-            <div class="section-title border-t border-b border-gray-400 py-2 mb-6">
-                <h1 class="text-xl font-semibold text-center text-gray-800">SIGNOS DE ALARMA</h1>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
-                <div class="signos">
-                    <label for="sa_aduccion_pulgares" class="block text-sm font-medium text-gray-700 mb-1">Aducción de pulgares</label>
-                    <select name="sa_aduccion_pulgares" id="sa_aduccion_pulgares" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-                <div class="signos">
-                    <label for="sa_estrabismo" class="block text-sm font-medium text-gray-700 mb-1">Estrabismo</label>
-                    <select name="sa_estrabismo" id="sa_estrabismo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-                <div class="signos">
-                    <label for="sa_irritabilidad" class="block text-sm font-medium text-gray-700 mb-1">Irritabilidad</label>
-                    <select name="sa_irritabilidad" id="sa_irritabilidad" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
+                <!-- Información del mes -->
+                <div class="text-center mb-8 p-4 bg-white rounded-xl shadow-sm">
+                    <p class="text-lg text-gray-700">
+                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
+                    </p>
                 </div>
 
-                <div class="signos">
-                    <label for="sa_marcha_en_punta_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha en punta</label>
-                    <select name="sa_marcha_en_punta_presencia" id="sa_marcha_en_punta_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
+                <!-- Fecha de evaluación -->
+                <div class="mb-8 text-center">
+                    <label for="fecha_evaluacion" class="evaluation-label text-lg">
+                        Fecha de la Evaluación
+                    </label>
+                    <input type="date"
+                        name="fecha_evaluacion"
+                        id="fecha_evaluacion"
+                        class="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
+                        readonly>
                 </div>
 
-                <div class="signos">
-                    <label for="sa_marcha_cruzada_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha Cruzada</label>
-                    <select name="sa_marcha_cruzada_presencia" id="sa_marcha_cruzada_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
+                <!-- Título de la sección -->
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-white rounded-2xl px-8 py-4 shadow-lg">
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                            SIGNOS DE ALARMA
+                        </h1>
+                    </div>
                 </div>
 
-                <div class="signos">
-                    <label for="sa_punos_cerrados_presencia" class="block text-sm font-medium text-gray-700 mb-1">Puños cerrados</label>
-                    <select name="sa_punos_cerrados_presencia" id="sa_punos_cerrados_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
+                <!-- Leyenda de puntuación -->
+                <div class="scale-legend rounded-xl p-6 mb-8">
+                    <h2 class="text-lg font-bold text-gray-800 mb-3 text-center">
+                        Leyenda
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 text-sm">
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-red-600">0</div>
+                            <div>No lo tiene</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-3 text-center shadow-sm">
+                            <div class="font-bold text-green-600">1</div>
+                            <div>Lo tiene</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="signos">
-                    <label for="sa_reflejo_hiperextension" class="block text-sm font-medium text-gray-700 mb-1">Reflejo de hiperextensión</label>
-                    <select name="sa_reflejo_hiperextension" id="sa_reflejo_hiperextension" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-                <div class="signos">
-                    <label for="sa_lenguaje_escaso" class="block text-sm font-medium text-gray-700 mb-1">Lenguaje escaso</label>
-                    <select name="sa_lenguaje_escaso" id="sa_lenguaje_escaso" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                    </select>
-                </div>
-            </div>
+                <!-- Grid de evaluaciones -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
 
-            <div class="flex justify-between mt-8">
-                <a href="/modificarPostura">
-                    <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
-                </a>
-                <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
-            </div>
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_aduccion_pulgares" class="evaluation-label">
+                            Aducción de pulgares
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_aduccion_pulgares"
+                                id="sa_aduccion_pulgares"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_estrabismo" class="evaluation-label">
+                            Estrabismo
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_estrabismo"
+                                id="sa_estrabismo"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_irritabilidad" class="evaluation-label">
+                            Irritabilidad
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_irritabilidad"
+                                id="sa_irritabilidad"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_marcha_en_punta_presencia" class="evaluation-label">
+                            Marcha en punta
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_marcha_en_punta_presencia"
+                                id="sa_marcha_en_punta_presencia"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_marcha_cruzada_presencia" class="evaluation-label">
+                            Marcha Cruzada
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_marcha_cruzada_presencia"
+                                id="sa_marcha_cruzada_presencia"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_punos_cerrados_presencia" class="evaluation-label">
+                            Puños cerrados
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_punos_cerrados_presencia"
+                                id="sa_punos_cerrados_presencia"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_reflejo_hiperextension" class="evaluation-label">
+                            Reflejo de hiperextensión
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_reflejo_hiperextension"
+                                id="sa_reflejo_hiperextension"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="subescala evaluation-card">
+                        <div class="signos">
+                        <label for="sa_lenguaje_escaso" class="evaluation-label">
+                            Lenguaje escaso
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="sa_lenguaje_escaso"
+                                id="sa_lenguaje_escaso"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="navigation-buttons">
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                            <a href="/modificarPostura" class="btn-navigation">
+                                ← ANTERIOR
+                            </a>
+                            <div class="text-sm text-gray-600 text-center hidden sm:block">
+                                Paso 7 de 9 - Signos de Alarma
+                            </div>
+                            <button type="button" id="botonSiguientePaso" class="btn-navigation">
+                                SIGUIENTE →
+                            </button>
+                        </div>
+                    </div>
         </form>
     </div>
 
@@ -156,7 +412,7 @@
             const signos = $resultadosSignos.map(item => item.campo.trim().toLowerCase());
             console.log("Signos de Alarma:", signos);
 
-            const divs = document.querySelectorAll('div.signos');
+            const divs = document.querySelectorAll('div.subescala.evaluation-card');
             divs.forEach(div => {
                 const select = div.querySelector('select');
                 const label = div.querySelector('label');
@@ -249,7 +505,7 @@
                 }
             ];
 
-            function toggleLateralityGroup(selectElement, radioGroupId) {
+            /*function toggleLateralityGroup(selectElement, radioGroupId) {
                 const radioGroup = document.getElementById(radioGroupId);
                 if (selectElement.value === '1') {
                     radioGroup.style.display = 'block';
@@ -258,28 +514,13 @@
                     const radios = form.querySelectorAll(`input[name="${selectElement.id.replace('_presencia', '_lado')}"]`);
                     radios.forEach(radio => radio.checked = false);
                 }
-            }
+            }*/
 
             if (form && Object.keys(datosJson).length > 0) {
                 const selects = form.querySelectorAll('select');
                 selects.forEach(select => {
                     if (datosJson[select.name] !== undefined) {
                         select.value = datosJson[select.name];
-                    }
-                });
-
-                camposConLateralidad.forEach(campo => {
-                    const selectElement = document.getElementById(campo.selectId);
-                    if (selectElement.value === '1') {
-                        toggleLateralityGroup(selectElement, campo.radioGroupId);
-                        const ladoGuardado = datosJson[campo.radioName];
-                        if (ladoGuardado) {
-                            const radioToCheck = form.querySelector(`input[name="${campo.radioName}"][value="${ladoGuardado}"]`);
-                            if (radioToCheck) radioToCheck.checked = true;
-                        }
-                    } else {
-                        const radioGroup = document.getElementById(campo.radioGroupId);
-                        if (radioGroup) radioGroup.style.display = 'none';
                     }
                 });
             } else {
