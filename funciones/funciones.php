@@ -136,4 +136,13 @@
         return ($puntuacionTotal * 100) / $puntuacionMaxima;
     }
 
+    function calcularFechaEnSemana($fechaEvaluacion, $fechaNacimientoCorregida){
+        $fechaEvaluacion = new DateTime(($fechaEvaluacion));
+        $fechaNacimientoCorregida = new DateTime(($fechaNacimientoCorregida));
+        $diferencia = $fechaEvaluacion->diff($fechaNacimientoCorregida);
+        $diasDiferencias = $diferencia->days;
+        $fechaEnSemanas = floor($diasDiferencias / 7);
+        return $fechaEnSemanas;
+    }
+
 

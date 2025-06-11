@@ -3,7 +3,10 @@ session_start();
 $json_input = file_get_contents('php://input');
 $datos_recibidos = json_decode($json_input, true);
 require './config/db.php';
+require './funciones/funciones.php';
+require './Clases/Estudios.php';
 //var_dump($datos_recibidos);
+date_default_timezone_set('America/Mexico_City');
 $mapeo_campos_id = [
     'mk_elev_tronco_manos' => 1,
     'mk_elev_tronco_espalda' => 2,
@@ -77,7 +80,7 @@ $mapeo_campos_id = [
     'tu_hipertonia' => 2,
     'tu_mixto' => 3,
     'tu_fluctuante' => 4,
-    //Queda pendiente tu Nomral? => 5
+    // tu Nomral? => 5
     'pt_Asimetria' => 1,
     'sa_aduccion_pulgares' => 1,
     'sa_estrabismo' => 2,
@@ -124,6 +127,7 @@ $datosHitoMF = [];
 if (isset($datos_recibidos)) {
     echo "Datos recibidos correctamente.\n";
 
+
     foreach ($datos_recibidos as $evaluacion => $campos) {
 
         foreach ($campos as $nombreEvaluacion => $resultados) {
@@ -138,10 +142,6 @@ if (isset($datos_recibidos)) {
                 echo "Campo no encontrado: " . $nombreEvaluacion . "\n";
             }
             if ($nombreEvaluacion === 'fecha_evaluacion') continue; // Saltar fecha
-
-            //$datosPaciente[] = [
-            //    'talla' =>
-            //]
 
             $campo_id = $mapeo_campos_id[$nombreEvaluacion];
             if (isset($mapeo_campos_id[$nombreEvaluacion])) {
@@ -217,7 +217,7 @@ if (isset($datos_recibidos)) {
         'json_crudo' => $json_input
     ];
 
-    echo "Datos Finales del Paciente: ";
+    /*echo "Datos Finales del Paciente: ";
     print_r($datosPaciente);
     echo "Datos Finales para Katona:";
     print_r($datosKatonaConID);
@@ -247,7 +247,7 @@ if (isset($datos_recibidos)) {
     print_r($datosHitoMG);
     echo "\n";
     echo "Datos Finales para HF:";
-    print_r($datosHitoMF);
+    print_r($datosHitoMF);*/
 
     $tabla = '';
     $nombreEval = '';
@@ -258,13 +258,13 @@ if (isset($datos_recibidos)) {
     $id_evaluacion = '';
     $Con = conectar();
 
-    if(isset($datosPaciente)) {
+    if (isset($datosPaciente)) {
         $tabla = 'terapia_neurov2';
         foreach ($datosPaciente as $item) {
             $campo = $item['campo'];
             $resultado = mysqli_real_escape_string($Con, $item['resultados']);
             $sql = "UPDATE $tabla SET $campo = '$resultado' WHERE id_terapia_neurohabilitatoriav2 = $terapia_id";
-            echo $sql . "\n";
+            //echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
     }
@@ -277,7 +277,7 @@ if (isset($datos_recibidos)) {
             $resultado = mysqli_real_escape_string($Con, $datosKatona['resultado']);
             $id_evaluacion = $datosKatona['campo_id'];
             $sql = "UPDATE $tabla SET $columnaResultados = '$resultado' WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-            echo $sql . "\n";
+            //echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
     }
@@ -290,7 +290,7 @@ if (isset($datos_recibidos)) {
             $resultado = mysqli_real_escape_string($Con, $datosMGID['resultado']);
             $id_evaluacion = $datosMGID['campo_id'];
             $sql = "UPDATE $tabla SET $columnaResultados = '$resultado' WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-            echo $sql . "\n";
+            // echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
     }
@@ -303,10 +303,9 @@ if (isset($datos_recibidos)) {
             $resultado = mysqli_real_escape_string($Con, $datosMFID['resultado']);
             $id_evaluacion = $datosMFID['campo_id'];
             $sql = "UPDATE $tabla SET $columnaResultados = '$resultado' WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-            echo $sql . "\n";
+            // echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
-
     }
 
     if (isset($datosLenguaje)) {
@@ -317,7 +316,7 @@ if (isset($datos_recibidos)) {
             $resultado = mysqli_real_escape_string($Con, $datosLenguajeID['resultado']);
             $id_evaluacion = $datosLenguajeID['campo_id'];
             $sql = "UPDATE $tabla SET $columnaResultados = '$resultado' WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-            echo $sql . "\n";
+            // echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
     }
@@ -330,7 +329,7 @@ if (isset($datos_recibidos)) {
             $resultado = mysqli_real_escape_string($Con, $datosPosturaID['resultado']);
             $id_evaluacion = $datosPosturaID['campo_id'];
             $sql = "UPDATE $tabla SET $columnaResultados = '$resultado' WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-            echo $sql . "\n";
+            // echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
     }
@@ -343,7 +342,7 @@ if (isset($datos_recibidos)) {
             $resultado = mysqli_real_escape_string($Con, $datosTonoID['resultado']);
             $id_evaluacion = $datosTonoID['campo_id'];
             $sql = "UPDATE $tabla SET $columnaResultados = '$resultado' WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-            echo $sql . "\n";
+            // echo $sql . "\n";
             Ejecutar($Con, $sql);
         }
     }
@@ -357,51 +356,84 @@ if (isset($datos_recibidos)) {
             $id_evaluacion = $datosSignoID['campo_id'];
             if ($resultado === '0') {
                 $sql = "DELETE FROM $tabla  WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
-                echo $sql . "\n";
+                //  echo $sql . "\n";
                 Ejecutar($Con, $sql);
             }
         }
     }
 
-    /*    if (isset($datosHitoMG)) {
-            $tabla = 'resultados_hitos_mg';
-            $columnaResultados = 'resultado';
-            $columnaEvaluacion = 'id_hito_motor_grueso';
-            foreach ($datosHitoMG as $datosHitoMGID) {
-                $resultado = mysqli_real_escape_string($Con, $datosHitoMGID['resultado']);
-                $id_evaluacion = $datosHitoMGID['campo_id'];
-                if($resultado === '4'){
-                    $sql = "INSERT INTO $tabla "
+    $datosPacienteSession = $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'];
+    $fechaEvaluacion = $datosPacienteSession['fecha_terapia'];
+    $fechaNacimientoCorregida = $datosPacienteSession['fecha_nacimiento_edad_corregida'];
+    echo "Fecha de Evaluación: " . $fechaEvaluacion . "\n";
+    echo "Fecha de Nacimiento Corregida: " . $fechaNacimientoCorregida . "\n";
+    $fechaEnSemana = calcularFechaEnSemana($fechaEvaluacion, $fechaNacimientoCorregida);
+    $prueba = calcularFechaEnSemana('2023-10-01', '2023-01-01');
+    echo $fechaEnSemana;
+    $Estudio = new Estudios($Con);
+
+    if (isset($datosHitoMG)) {
+        $tabla = 'resultados_hitos_mg';
+        $columnaEvaluacion = 'id_hito_motor_grueso';
+        foreach ($datosHitoMG as $datosHitoMGID) {
+            $resultado = mysqli_real_escape_string($Con, $datosHitoMGID['resultado']);
+            $id_evaluacion = $datosHitoMGID['campo_id'];
+            if ($Estudio->verificarEvaluacionesRepetidas($tabla, $terapia_id, $columnaEvaluacion, $id_evaluacion) === false) {
+                if ($resultado === '4') {
+                    $sql = "INSERT INTO $tabla (id_terapia_neuro, $columnaEvaluacion, fecha_consolidacion, fecha_consolidacion_semanas) VALUES ($terapia_id,$id_evaluacion,'$fechaEvaluacion',$fechaEnSemana)";
+                    echo $sql . "\n";
+                    Ejecutar($Con, $sql);
+                } else {
+                    $sql = "DELETE FROM $tabla WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
+                    echo $sql . "\n";
+                    Ejecutar($Con, $sql);
+                }
+            } else {
+                if ($resultado === '4') {
+                    echo "Ya hay un hito en la bd con ese mismo id";
+                } else {
+                    $sql = "DELETE FROM $tabla WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
+                    echo $sql . "\n";
+                    Ejecutar($Con, $sql);
+                }
+            }
+        }
+    }
+
+        if (isset($datosHitoMF)) {
+            $tabla = 'resultados_hitos_mf';
+            $columnaEvaluacion = 'id_hito_mf';
+            foreach ($datosHitoMF as $datosHitoMFID) {
+                $resultado = mysqli_real_escape_string($Con, $datosHitoMFID['resultado']);
+                $id_evaluacion = $datosHitoMFID['campo_id'];
+                if($Estudio->verificarEvaluacionesRepetidas($tabla,$terapia_id,$columnaEvaluacion,$id_evaluacion) === false){
+                    if($resultado === '4'){
+                        $sql = "INSERT INTO $tabla (id_terapia_neuro, $columnaEvaluacion, fecha_consolidacion, fecha_consolidacion_semanas) VALUES ($terapia_id,$id_evaluacion,'$fechaEvaluacion',$fechaEnSemana)";
+                        echo $sql . "\n";
+                        Ejecutar($Con,$sql);
+                    }else{
+                        $sql = "DELETE FROM $tabla WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
+                        echo $sql . "\n";
+                        Ejecutar($Con,$sql);
+                    }
                 }else{
-                    $sql = "DELETE FROM $tabla WHERE id_terapia_neuro = $terapia_id AND $columnaResultados = '$resultado'";
+                    if($resultado === '4'){
+                        echo "Ya hay un hito en la bd con ese mismo id";
+                    }else{
+                        $sql = "DELETE FROM $tabla WHERE id_terapia_neuro = $terapia_id AND $columnaEvaluacion = $id_evaluacion";
+                        echo $sql . "\n";
+                        Ejecutar($Con,$sql);
+                    }
                 }
             }
         }
 
-        if (isset($datosHitoMF)) {
-            $tabla = 'resultados_hitos_mf';
-            $columnaResultados = 'resultado';
-            $columnaEvaluacion = 'id_hito_mf';
-            foreach ($datosHitoMF as $datosHitoMFID) {
-                $resultado = mysqli_real_escape_string($Con, $datosHitoMFID['resultado']);
-                $id_evaluacion = $datosHitoMGID['campo_id'];
-                if($resultado === '4'){
-                    $sql = "INSERT INTO $tabla "
-                }else{
-                    $sql = "DELETE FROM $tabla WHERE id_terapia_neuro = $terapia_id AND $columnaResultados = '$resultado'";
-                }
-            }
-        }
-    */
+
 
 
     Cerrar($Con);
 
     file_put_contents('debug_ajax.log', print_r($log_data, true), FILE_APPEND);
-
-
 } else {
     echo "No se recibieron datos válidos.\n";
 }
-
-?>

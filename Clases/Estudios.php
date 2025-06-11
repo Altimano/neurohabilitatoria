@@ -626,6 +626,19 @@ class Estudios
         $stmt->close();
     }
 
+    public function verificarEvaluacionesRepetidas($tabla,$id_terapia,$nombre_id_catalogo,$id_catalogo){
+        $stmt = $this->db->prepare("SELECT 1 FROM $tabla WHERE id_terapia_neuro = ? AND $nombre_id_catalogo = ?");
+        $stmt->bind_param("ss",$id_terapia,$id_catalogo);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        if ($resultado->num_rows > 0) {
+            return true; 
+        } else {
+            return false; 
+        }
+        $stmt->close();
+    }
+
     /*public function validarPorFiltrosPacientes($filtros) {
         $parametros = [];
         $condiciones = [];
