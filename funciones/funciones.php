@@ -41,18 +41,18 @@
     }
 
     function limpiarClavesPost($post) {
-    $postLimpio = [];
-    foreach ($post as $clave => $valor) {
-        $claveLimpia = str_replace("_", " ", $clave);
-        // Si el valor también es un array, aplica recursión
-        if (is_array($valor)) {
-            $postLimpio[$claveLimpia] = limpiarClavesPost($valor);
-        } else {
-            $postLimpio[$claveLimpia] = $valor;
+        $postLimpio = [];
+        foreach ($post as $clave => $valor) {
+            $claveLimpia = str_replace("_", " ", $clave);
+            // Si el valor también es un array, aplica recursión
+            if (is_array($valor)) {
+                $postLimpio[$claveLimpia] = limpiarClavesPost($valor);
+            } else {
+                $postLimpio[$claveLimpia] = $valor;
+            }
         }
+        return $postLimpio;
     }
-    return $postLimpio;
-}
 
     function compararDiccionarioConPost($diccionario, $post) {
         $claves = array_keys($post);
@@ -89,7 +89,7 @@
         $stmt->store_result();
         return $stmt->num_rows > 0;
     }
-        */
+    */
 
     function cerrar_sesion() {
         session_start();
@@ -97,28 +97,62 @@
         header("Location: /");
     }
 
-//    Funciones para agregar estudios / formato pdf
-    function calcularFechaNacimientoCorregida($fechaNacimiento, $semanasEnGestacion)
+    // Funciones para agregar estudios / formato pdf (las que tú modificaste/añadiste)
+    function calcularFechaNacimientoCorregida($fechaNacimientoRealStr, $semanasGestacion)
     {
-        $semanasEnGestacion = (39-$semanasEnGestacion)*7;
-        $fechaNacimientoCorregida = date("Y-m-d", strtotime($fechaNacimiento . " + $semanasEnGestacion week"));
-        return $fechaNacimientoCorregida;
-
+        $fechaNacimientoReal = new DateTime($fechaNacimientoRealStr);
+        $semanasTermino = 40;
+        $semanasPrematuro = $semanasTermino - $semanasGestacion;
+        
+        // Si el bebé no fue prematuro, la fecha corregida es la misma que la real.
+        if ($semanasPrematuro <= 0) {
+            return $fechaNacimientoReal->format('Y-m-d');
+        }
+        
+        $diasCorreccion = $semanasPrematuro * 7;
+        $fechaCorregida = clone $fechaNacimientoReal;
+        $fechaCorregida->modify("-$diasCorreccion days");
+        return $fechaCorregida->format('Y-m-d');
     }
 
-    function calcularEdadCronologicaIngreso($fechaInicioTratamiento, $fechaNacimiento)
+    function calcularEdadCronologicaIngreso($fechaInicioTratamientoStr, $fechaNacimientoStr)
     {
-        $fechaInicio = new DateTime($fechaInicioTratamiento);
-        $fechaNacimiento = new DateTime($fechaNacimiento);
+        $fechaInicio = new DateTime($fechaInicioTratamientoStr);
+        $fechaNacimiento = new DateTime($fechaNacimientoStr);
         $diferencia = $fechaInicio->diff($fechaNacimiento);
         $edadAnios = $diferencia->y;
         $edadMeses = $diferencia->m;
-        return "$edadAnios A $edadMeses M";
-
+        // Agregado el cálculo de días para una salida más precisa como en tus ejemplos de log
+        $edadDias = $diferencia->d; 
+        return "$edadAnios A $edadMeses M $edadDias D"; 
     }
 
-//    QUEDA PENDIENTE REVISAR COMO AJUSTAR LA EDAD CRONOLOGICA DE INGRESO PARA CALCULAR LA EDAD CORREGIDA EN SEMANAS
-//    EDAD CORREGIDA SEMANAS SE PUEDEN PONER LA PURA CANTIDAD DE SEMANAS?
+    function calcularEdadCorregidaEnTexto($fechaActualStr, $fechaNacimientoRealStr, $semanasGestacion) {
+        $fechaActual = new DateTime($fechaActualStr);
+        $fechaNacimientoReal = new DateTime($fechaNacimientoRealStr);
+
+        $semanasTermino = 37; //preguntarle a mi hermana
+        $semanasPrematuro = $semanasTermino - $semanasGestacion;
+        
+        // Convertir semanas a días para la corrección
+        $diasCorreccion = $semanasPrematuro * 7;
+
+        // Aplicar la corrección a la fecha de nacimiento real para obtener la fecha de nacimiento CORREGIDA
+        $fechaNacimientoCorregidaObj = clone $fechaNacimientoReal;
+        $fechaNacimientoCorregidaObj->modify("-$diasCorreccion days");
+
+        // Calcular la edad corregida usando la fecha de nacimiento corregida y la fecha actual
+        $intervaloCorregido = $fechaNacimientoCorregidaObj->diff($fechaActual);
+        $aniosCorregidos = $intervaloCorregido->y;
+        $mesesCorregidos = $intervaloCorregido->m;
+        $diasCorregidos = $intervaloCorregido->d;
+
+        // Formato de salida (ej. "0A 9M" o "1A 2M")
+        return $aniosCorregidos . 'A ' . $mesesCorregidos . 'M' . $diasCorregidos . 'D';
+    }
+
+    // QUEDA PENDIENTE REVISAR COMO AJUSTAR LA EDAD CRONOLOGICA DE INGRESO PARA CALCULAR LA EDAD CORREGIDA EN SEMANAS
+    // EDAD CORREGIDA SEMANAS SE PUEDEN PONER LA PURA CANTIDAD DE SEMANAS?
     function calcularEdadCorregidaSemanas($edadCronologicaIngreso, $semanasEnGestacion)
     {
         $semanasEnGestacion = (39-$semanasEnGestacion);
@@ -145,4 +179,4 @@
         return $fechaEnSemanas;
     }
 
-
+?>

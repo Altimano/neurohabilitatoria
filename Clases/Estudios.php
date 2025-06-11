@@ -8,8 +8,6 @@ class Estudios
         $this->db = $db;
     }
 
-
-
     //    FUNCIONES PARA LA CONSULTA 
 
     public function consultarTodosLosEstudios()
@@ -591,40 +589,9 @@ class Estudios
         }
         $this->db->close();
     }
-    //Funciones para agregar Evaluaciones
-    public function agregarEvaluacion($datos)
-    {
-        $stmt = $this->db->prepare("INSERT INTO terapia_neurohabilitatoria (clave_paciente, nombre_pacinete, eval_subs_fec_eval, eval_subs_edad_eval, eval_subs_edad_eval_meses, eval_subs_edad_eval_dias, eval_subs_edad_eval_semanas, eval_subs_edad_eval_anios, eval_subs_edad_eval_anios_meses, eval_subs_edad_eval_anios_dias) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("issssssss", $datos['clave_paciente'], $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias']);
-        if ($stmt->execute()) {
-            header("Location: /crear");
-        } else {
-            echo "Error al agregar la evaluación: " . $stmt->error;
-        }
-        $stmt->close();
-    }
 
-    public function regresarDatosInicialesPaciente($codigo_paciente)
-    {
-        $stmt = $this->db->prepare("SELECT fecha_nacimiento_paciente FROM paciente WHERE codigo_paciente = ?");
-        $stmt->bind_param("s", $codigo_paciente);
-    }
     //verificar si es el primer estudio del paciente en terapia neurohabilitatoria realizando una consulta a la bd en base a la clave de paciente
     //si el paciente ya tiene un estudio en terapia neurohabilitatoria se regresa un true, si no se regresa un false
-    public function validarEvaluacionInicial($id_terapia)
-    {
-        $stmt = $this->db->prepare("SELECT 1 FROM terapia_neurov2
-        WHERE id_terapia_neurohabilitatoriav2 = ? LIMIT 1;");
-        $stmt->bind_param("s", $id_terapia);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        if ($resultado->num_rows > 0) {
-            return true; // El paciente ya tiene una evaluación en terapia neurohabilitatoria
-        } else {
-            return false; // El paciente no tiene ninguna evaluación en terapia neurohabilitatoria
-        }
-        $stmt->close();
-    }
 
     public function verificarEvaluacionesRepetidas($tabla,$id_terapia,$nombre_id_catalogo,$id_catalogo){
         $stmt = $this->db->prepare("SELECT 1 FROM $tabla WHERE id_terapia_neuro = ? AND $nombre_id_catalogo = ?");
@@ -693,6 +660,71 @@ class Estudios
         $resultado = $stmt->get_result();
         $stmt->close();
         return $resultado;
+    }*/
+
+    //Funciones para agregar Evaluaciones
+    public function agregarEvaluacion($datos)
+    {
+        $stmt = $this->db->prepare("INSERT INTO terapia_neurohabilitatoria (clave_paciente, nombre_pacinete, eval_subs_fec_eval, eval_subs_edad_eval, eval_subs_edad_eval_meses, eval_subs_edad_eval_dias, eval_subs_edad_eval_semanas, eval_subs_edad_eval_anios, eval_subs_edad_eval_anios_meses, eval_subs_edad_eval_anios_dias) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("issssssss", $datos['clave_paciente'], $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias']);
+        if ($stmt->execute()) {
+            header("Location: /crear");
+        } else {
+            echo "Error al agregar la evaluación: " . $stmt->error;
+        }
+        $stmt->close();
     }
-    */
+    
+    public function regresarDatosInicialesPaciente($codigo_paciente)
+    {
+        $stmt = $this->db->prepare("SELECT fecha_nacimiento_paciente FROM paciente WHERE codigo_paciente = ?");
+        if (!$stmt) {
+            error_log("Error en preparación de consulta (regresarDatosInicialesPaciente): " . $this->db->error);
+            return null; // Devuelve null en caso de error
+        }
+        $stmt->bind_param("s", $codigo_paciente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc(); // Obtiene la fila como array asociativo
+        $stmt->close();
+        return $data; // Devuelve los datos o null si no se encuentra
+    }
+    
+    public function obtenerUltimaEvaluacionPaciente($clave_paciente)
+    {
+        $SQL = "SELECT talla, peso, pc, factores_riesgo, fecha_inicio_terapia 
+                FROM terapia_neurov2 
+                WHERE clave_paciente = ? 
+                ORDER BY fecha_inicio_terapia DESC, id_terapia_neurohabilitatoriav2 DESC 
+                LIMIT 1";
+        
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            error_log("Error en preparación de consulta (obtenerUltimaEvaluacionPaciente): " . $this->db->error);
+            return null;
+        }
+        $stmt->bind_param("i", $clave_paciente);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
+        $stmt->close();
+        
+        return $data;
+    }
+
+    public function validarEvaluacionInicial($clave_paciente)
+    {
+        $stmt = $this->db->prepare("SELECT 1 FROM terapia_neurov2 WHERE clave_paciente = ? LIMIT 1;");
+        if (!$stmt) {
+            error_log("Error en preparación de consulta (validarEvaluacionInicial): " . $this->db->error);
+            return false;
+        }
+        $stmt->bind_param("i", $clave_paciente);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $stmt->close();
+        return $resultado->num_rows > 0; 
+    }
+
 }
+?>

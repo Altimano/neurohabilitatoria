@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -142,8 +146,8 @@
                   </select>
                </div>
                <div>
-                   <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae frecuencia)</label>
-                   <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                   <label for="camina_solo_cae_frecuencia" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae frecuencia)</label>
+                   <select name="camina_solo_cae_frecuencia" id="camina_solo_cae_frecuencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                        <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                   </select>
@@ -177,8 +181,8 @@
                   </select>
                </div>
                <div>
-                   <label for="camina_solo" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae rara vez)</label>
-                   <select name="camina_solo" id="camina_solo" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                   <label for="camina_solo_cae_raravez" class="block text-sm font-medium text-gray-700 mb-1">Camina solo(cae rara vez)</label>
+                   <select name="camina_solo_cae_raravez" id="camina_solo_cae_raravez" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                        <option value="" disabled selected>Seleccione una opción</option>
                         <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
                   </select>
@@ -225,46 +229,122 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionPaso3_mgrueso';
-            const datosGuardados = sessionStorage.getItem(sessionKey);
-            let datosJson = {};
-             if (datosGuardados) { try { datosJson = JSON.parse(datosGuardados); } catch(e) { console.error("Error P3_M grueso:", e); sessionStorage.removeItem(sessionKey);} }
-             if (dateInput) {
-                if(datosJson.fecha_evaluacion) { dateInput.value = datosJson.fecha_evaluacion; }
-                else {
-                     const dP2R = sessionStorage.getItem('evaluacionPaso2_mkatona');
-                     if(dP2R){ try{ const dP2 = JSON.parse(dP2R); if(dP2.fecha_evaluacion) dateInput.value = dP2.fecha_evaluacion; }catch(e){} }
-                     if(!dateInput.value) { const t = new Date(); dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
+            const sessionKey = 'evaluacionP3_mgrueso'; // Clave para los datos de Motor Grueso
+
+            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
+                try {
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion en Motor Grueso:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos'; // Redirige si los datos base están corruptos
+                    return;
+                }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage en Motor Grueso. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes'; // Redirige si faltan los datos base
+                return;
+            }
+
+            // 2. Recupera los datos específicos de Motor Grueso para este paso (si existen)
+            const datosMgresoGuardados = sessionStorage.getItem(sessionKey);
+            let datosMgreso = {};
+            if (datosMgresoGuardados) { 
+                try { 
+                    datosMgreso = JSON.parse(datosMgresoGuardados); 
+                } catch(e) { 
+                    console.error("Error Paso 3 (Motor Grueso) al parsear datos guardados:", e);
+                }
+            }
+            
+            // 3. Muestra el mes seleccionado (del Paso 1)
+            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
+            if (mesDisplay && datosPaciente.mes) { 
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) { 
+                mesDisplay.textContent = 'No disponible'; 
+            }
+
+            // 4. Establece la fecha de evaluación
+            if (dateInput) {
+                if(datosMgreso.fecha_evaluacion) { 
+                    dateInput.value = datosMgreso.fecha_evaluacion; 
+                } 
+                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
+                else if (datosPaciente.fecha_inicio_tratamiento) {
+                    dateInput.value = datosPaciente.fecha_inicio_tratamiento;
+                }
+                else { 
+                    const t = new Date(); 
+                    dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                 }
             }
 
-            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) {
-                try { const dP1 = JSON.parse(datosPaso1Raw); if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; } catch(e){ if(mesDisplay) mesDisplay.textContent = 'Error';}
-            } else if(mesDisplay) { mesDisplay.textContent = 'No disponible'; }
-
+            // 5. Precarga los valores de los <select> si existen datos guardados
             const form = document.getElementById('evaluacionMotorGruesoForm');
-            if(form && datosJson) {
+            if(form && Object.keys(datosMgreso).length > 0) { // Asegúrate de que datosMgreso tiene propiedades
                 const selects = form.querySelectorAll('select');
-                selects.forEach(select => { if(datosJson[select.name]) { select.value = datosJson[select.name]; } });
+                selects.forEach(select => { 
+                    if(datosMgreso[select.name] !== undefined) { 
+                        select.value = datosMgreso[select.name]; 
+                    } else {
+                        select.value = ""; 
+                    }
+                });
             }
+
+            // --- Console.log para ver los datos cargados al inicio de la página ---
+            console.log('DEBUG (JS - al cargar la página - Motor Grueso): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
+            console.log('DEBUG (JS - al cargar la página - Motor Grueso): datosMgreso (específico de este paso):', datosMgreso);
+            // --- Fin Console.log ---
 
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
-                 botonSiguiente.addEventListener('click', function() {
-                     const formData = new FormData(form);
-                     const datosPaso = {};
-                     formData.forEach((value, key) => { datosPaso[key] = value; });
-                     if(dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
+                botonSiguiente.addEventListener('click', function() {
+                    // 6. Recopila los datos del formulario de Motor Grueso
+                    const formData = new FormData(form);
+                    const currentMotorGruesoData = {};
+                    
+                    // Iterar sobre todos los selects y guardar sus valores, seleccionados o no
+                    const allSelects = form.querySelectorAll('select');
+                    allSelects.forEach(select => {
+                        currentMotorGruesoData[select.name] = select.value;
+                    });
+                    
+                    // Asegúrate de incluir la fecha de evaluación del formulario en los datos del paso actual
+                    if(dateInput) currentMotorGruesoData['fecha_evaluacion'] = dateInput.value;
 
-                     try {
-                        sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'agregar.mfino.php';
-                     } catch(e) { console.error("Error guardando P3_M grueso:", e); alert("Hubo un error al guardar."); }
-                 });
+                    // NOTA: La validación de campos obligatorios ha sido ELIMINADA según tu solicitud.
+                    // Los campos se guardarán independientemente de si fueron seleccionados o no.
+
+
+                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    datosPaciente.mgrueso = currentMotorGruesoData; 
+
+                    // 8. console.log para verificar los datos ANTES de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Motor Grueso): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
+
+                    try {
+                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // 10. Opcional: guardar los datos de Motor Grueso por separado
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentMotorGruesoData)); 
+
+                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
+                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
+                        console.log('DEBUG (JS - Botón Siguiente - Motor Grueso): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
+
+
+                        window.location.href = 'agregar.mfino.php'; // Redirige al siguiente paso
+                    } catch(e) { 
+                        console.error("Error al guardar datos en sessionStorage (Motor Grueso):", e);
+                        alert("Hubo un error al guardar los datos de Motor Grueso."); 
+                    }
+                });
             }
-
         });
     </script>
 </body>

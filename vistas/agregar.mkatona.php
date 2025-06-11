@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -65,7 +69,7 @@
             <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">MANIOBRAS DE KATONA</h1></div>
 
             <div class="text-sm text-center text-gray-700 border-b border-gray-400 pb-4 mb-2">
-                <strong>Normal(N), Hipotonía(-), Hipertonía(+), Miembros Toracicos(MTs), Miembro Pelvico(MP), Extremidades(E), Hemicuerpo(H), Contralateral(CL), Derecha(D), Izquierda(I), Ausente(A)</strong> 
+                <strong>Normal(N), Hipotonía(-), Hipertonía(+), Miembros Torácicos(MTs), Miembro Pélvico(MP), Extremidades(E), Hemicuerpo(H), Contralateral(CL), Derecha(D), Izquierda(I), Ausente(A)</strong> 
             </div>
 
             <div class="overflow-x-auto">
@@ -73,7 +77,7 @@
                     <thead>
                         <tr>
                             <th>Maniobra</th>
-                            <th>Normal</th>     <th>Hipotonía</th>  <th>Hipertonía</th>  <th>M. Torácicos</th><th>M. Pélvicos</th> <th>Extremidades</th><th>Hemicuerpo</th>   <th>Contralateral</th>  <th>Derecha</th>     <th>Izquierda</th>   <th>Ausente</th>     </tr>
+                            <th>Normal</th>     <th>Hipotonía</th>  <th>Hipertonía</th>   <th>M. Torácicos</th><th>M. Pélvicos</th>  <th>Extremidades</th><th>Hemicuerpo</th>    <th>Contralateral</th>   <th>Derecha</th>     <th>Izquierda</th>   <th>Ausente</th>     </tr>
                     </thead>
                     <tbody>
                         <tr>
@@ -171,7 +175,7 @@
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_MP" name="mk_marcha_plano_horizontal[]" value="Miembro Pelvico(MP)"></td>
                             <td></td>
                             <td></td>
-                            <td>    </td>
+                            <td></td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_D" name="mk_marcha_plano_horizontal[]" value="Derecha(D)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_I" name="mk_marcha_plano_horizontal[]" value="Izquierda(I)"></td>
                             <td><input type="checkbox" id="mk_marcha_plano_horizontal_A" name="mk_marcha_plano_horizontal[]" value="Ausente(A)"></td>
@@ -237,98 +241,82 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            // Define la clave que se usará en sessionStorage para guardar los datos de este paso del formulario.
-            const sessionKey = 'evaluacionPaso2_mkatona';
-            // Intenta obtener los datos previamente guardados en sessionStorage para esta clave.
-            const datosGuardados = sessionStorage.getItem(sessionKey);
-            // Inicializa un objeto vacío para almacenar los datos del formulario parseados desde JSON.
-            let datosJson = {};
+            const sessionKey = 'evaluacionP2_mkatona'; // Clave para los datos de Katona en sessionStorage
 
-            // Si se encontraron datos guardados en sessionStorage...
-            if (datosGuardados) { 
+            // Recupera todos los datos del paciente (Paso 1)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
+                try {
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion:", e);
+                    // Opcional: redirigir o mostrar un error fatal si los datos base están corruptos
+                    window.location.href = 'agregar.view.php?error=datos_corruptos';
+                    return;
+                }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes';
+                return;
+            }
+
+            // Recupera los datos específicos de Katona para este paso (si existen)
+            const datosKatonaGuardados = sessionStorage.getItem(sessionKey);
+            let datosKatona = {};
+            if (datosKatonaGuardados) { 
                 try { 
-                    // Intenta convertir la cadena JSON de sessionStorage a un objeto JavaScript.
-                    datosJson = JSON.parse(datosGuardados); 
+                    datosKatona = JSON.parse(datosKatonaGuardados); 
                 } catch(e) { 
                     console.error("Error Paso 2 (Katona) al parsear datos guardados:", e);
                 }
             }
             
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            // Si se encontraron datos del Paso 1
-            if (datosPaso1Raw) {
-                try {
-                    // Parsea los datos del Paso 1.
-                    const dP1 = JSON.parse(datosPaso1Raw);
-                    if (mesDisplay && dP1.mes) {
-                        // Muestra el mes.
-                        mesDisplay.textContent = dP1.mes;
-                    } else if (mesDisplay) {
-                        //No muestra el mes
-                        mesDisplay.textContent = 'No disponible';
-                    }
-                } catch(e){
-                    if(mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
-                    console.error("Error Paso 2 (Katona): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
-                }
-            } else if(mesDisplay) {
+            if (mesDisplay && datosPaciente.mes) { // Usa datosPaciente.mes
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) {
                 mesDisplay.textContent = 'No disponible';
             }
 
             if (dateInput) {
-                if(datosJson.fecha_evaluacion) { 
-                    dateInput.value = datosJson.fecha_evaluacion; 
-                } else { 
-                    if(datosPaso1Raw) {
-                        try {
-                            const dP1 = JSON.parse(datosPaso1Raw); 
-                            if(dP1.fecha_evaluacion) dateInput.value = dP1.fecha_evaluacion;
-                        } catch(e) {
-                            console.warn("Advertencia: No se pudo parsear fecha de evaluacionPaso1, se usará la fecha actual si no hay otra.", e);
-                        }
-                    }
-                    if(!dateInput.value) { 
-                        const t = new Date(); 
-                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
-                    }
+                // Si ya hay una fecha guardada para Katona, úsala
+                if(datosKatona.fecha_evaluacion) { 
+                    dateInput.value = datosKatona.fecha_evaluacion; 
+                } 
+                // Si no hay fecha para Katona, pero hay una fecha de inicio de tratamiento del Paso 1, úsala
+                else if(datosPaciente.fecha_inicio_tratamiento) {
+                    dateInput.value = datosPaciente.fecha_inicio_tratamiento;
+                }
+                // Si ninguna de las anteriores, usa la fecha actual
+                else { 
+                    const t = new Date(); 
+                    dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                 }
             }
 
-            // Obtiene la referencia al formulario.
             const form = document.getElementById('evaluacionKatonaForm');
-            // Define un array con los nombres de los grupos de checkboxes (para cada maniobra), y debe de coincidir con name.
             const checkboxGroupsNames = [
-                'mk_elev_tronco_manos', 
-                'mk_elev_tronco_espalda', 
-                'mk_sentado_aire',
-                'mk_rotacion_izq_der', 
-                'mk_gateo_asistido', 
-                'mk_gateo_asistido_mod',
-                'mk_arrastre_horizontal', 
-                'mk_marcha_plano_horizontal', 
-                'mk_marcha_plano_ascendente',
-                'mk_arrastre_inclinado_desc', 
-                'mk_arrastre_inclinado_asc'
+                'mk_elev_tronco_manos', 'mk_elev_tronco_espalda', 'mk_sentado_aire',
+                'mk_rotacion_izq_der', 'mk_gateo_asistido', 'mk_gateo_asistido_mod',
+                'mk_arrastre_horizontal', 'mk_marcha_plano_horizontal', 'mk_marcha_plano_ascendente',
+                'mk_arrastre_inclinado_desc', 'mk_arrastre_inclinado_asc'
             ];
 
-            // Si el formulario existe y el objeto datosJson tiene al menos una propiedad
-            if(form && Object.keys(datosJson).length > 0) {
-                // Itera sobre cada nombre de grupo de checkboxes.
+            // Rellenar checkboxes con datos previamente guardados para Katona
+            if(form && Object.keys(datosKatona).length > 0) { // Asegúrate de que datosKatona tiene propiedades
                 checkboxGroupsNames.forEach(groupName => {
-                    if (datosJson[groupName] && Array.isArray(datosJson[groupName])) {
+                    if (datosKatona[groupName] && Array.isArray(datosKatona[groupName])) {
                         const checkboxesInGroup = form.querySelectorAll(`input[name="${groupName}[]"]`);
                         checkboxesInGroup.forEach(checkbox => {
-                            if (datosJson[groupName].includes(checkbox.value)) {
-                                // Marca el checkbox.
+                            if (datosKatona[groupName].includes(checkbox.value)) {
                                 checkbox.checked = true;
                             } else {
-                                // Desmarca el checkbox.
                                 checkbox.checked = false;
                             }
                         });
                     } else {
-                        // se asegura de que todos los checkboxes de este grupo estén desmarcados.
+                        // Si no hay datos guardados para este grupo, asegúrate de que todos estén desmarcados
                         const checkboxesInGroup = form.querySelectorAll(`input[name="${groupName}[]"]`);
                         checkboxesInGroup.forEach(checkbox => {
                             checkbox.checked = false;
@@ -337,39 +325,37 @@
                 });
             }
 
-            // Obtiene la referencia al botón 'Siguiente'.
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
-                    // Crea un objeto vacío para almacenar los datos de este paso del formulario.
-                    const datosPaso2 = {};
-                    if(dateInput) datosPaso2['fecha_evaluacion'] = dateInput.value;
+                    // Recopila los datos específicos de Katona
+                    const currentKatonaData = {};
+                    currentKatonaData['fecha_evaluacion'] = dateInput.value;
                     
-                    // Itera sobre cada nombre de grupo de checkboxes.
                     checkboxGroupsNames.forEach(groupName => {
-                        // Selecciona solo los checkboxes marcados dentro del grupo actual.
                         const checkedBoxes = form.querySelectorAll(`input[name="${groupName}[]"]:checked`);
-                        // Crea un array vacío para almacenar los valores de los checkboxes marcados.
                         const values = [];
-                        // Itera sobre los checkboxes marcados y añade sus valores al array 'values'.
                         checkedBoxes.forEach(checkbox => { values.push(checkbox.value); });
-                        // Asigna el array de valores al nombre del grupo correspondiente en el objeto datosPaso2.
-                        datosPaso2[groupName] = values;
+                        currentKatonaData[groupName] = values;
                     });
 
-                    // Muestra en la consola los datos que se van a guardar (útil para depuración).
-                    console.log(`Datos guardados en ${sessionKey} (Katona):`, datosPaso2);
+                    // Fusiona los datos del paciente (Paso 1) con los datos de Katona (Paso 2)
+                    // datosPaciente ya contiene los datos del Paso 1, ahora le agregamos los de Katona
+                    Object.assign(datosPaciente, { katona: currentKatonaData }); // Opcional: encapsular Katona en una propiedad 'katona'
+
+                    // console.log para verificar los datos antes de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Katona): datosPaciente (fusionado) a guardar:', datosPaciente);
 
                     try {
-                        // Intenta guardar el objeto datosPaso2 en sessionStorage.
-                        // Primero lo convierte a una cadena JSON porque sessionStorage solo almacena cadenas.
-                        sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso2));
-                        // Redirige al usuario a la siguiente página del formulario.
-                        window.location.href = 'agregar.mgrueso.php';
+                        // Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // Opcional: guardar los datos de Katona por separado si necesitas acceder a ellos directamente
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentKatonaData)); 
+
+                        window.location.href = 'agregar.mgrueso.php'; // Redirige al siguiente paso
                     } catch(e) { 
-                        // Si ocurre un error al guardar en sessionStorage (ej. almacenamiento lleno),
-                        // lo muestra en consola y alerta al usuario.
-                        console.error(`Error guardando datos de ${sessionKey}:`, e);
+                        console.error("Error al guardar datos en sessionStorage (Katona):", e);
                         alert("Hubo un error al guardar los datos de Katona."); 
                     }
                 });

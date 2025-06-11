@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,6 +21,7 @@
             color: #4B5563;
         }
         select:not([disabled]) { background-color: #FFFFFF; cursor: pointer; }
+        /* Mantener display:none por defecto para ocultar los grupos de lateralidad */
         .radio-group-laterality { display: none; margin-top: 0.5rem; padding-left: 1rem;}
         .radio-group-laterality label { margin-left: 0.25rem; margin-right: 0.75rem; font-weight: normal;}
     </style>
@@ -69,45 +74,30 @@
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
-                    <div id="ps_marcha_en_punta_lado_group" class="radio-group-laterality">
-                        <input type="radio" id="mep_izq" name="ps_marcha_en_punta_lado" value="izquierdo"><label for="mep_izq">Izquierdo</label>
-                        <input type="radio" id="mep_der" name="ps_marcha_en_punta_lado" value="derecho"><label for="mep_der">Derecho</label>
-                        <input type="radio" id="mep_ambos" name="ps_marcha_en_punta_lado" value="ambos"><label for="mep_ambos">Ambos</label>
                     </div>
-                </div>
 
                 <div>
                     <label for="ps_marcha_cruzada_presencia" class="block text-sm font-medium text-gray-700 mb-1">Marcha Cruzada</label>
-                     <select name="ps_marcha_cruzada_presencia" id="ps_marcha_cruzada_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <select name="ps_marcha_cruzada_presencia" id="ps_marcha_cruzada_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
-                    <div id="ps_marcha_cruzada_lado_group" class="radio-group-laterality">
-                        <input type="radio" id="mc_izq" name="ps_marcha_cruzada_lado" value="izquierdo"><label for="mc_izq">Izquierdo</label>
-                        <input type="radio" id="mc_der" name="ps_marcha_cruzada_lado" value="derecho"><label for="mc_der">Derecho</label>
-                        <input type="radio" id="mc_ambos" name="ps_marcha_cruzada_lado" value="ambos"><label for="mc_ambos">Ambos</label>
                     </div>
-                </div>
 
                 <div>
                     <label for="ps_punos_cerrados_presencia" class="block text-sm font-medium text-gray-700 mb-1">Puños cerrados</label>
-                     <select name="ps_punos_cerrados_presencia" id="ps_punos_cerrados_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <select name="ps_punos_cerrados_presencia" id="ps_punos_cerrados_presencia" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                         <option value="" disabled selected>Seleccione</option>
                         <option value="0">0</option>
                         <option value="1">1</option>
                     </select>
-                    <div id="ps_punos_cerrados_lado_group" class="radio-group-laterality">
-                        <input type="radio" id="pc_izq" name="ps_punos_cerrados_lado" value="izquierdo"><label for="pc_izq">Izquierdo</label>
-                        <input type="radio" id="pc_der" name="ps_punos_cerrados_lado" value="derecho"><label for="pc_der">Derecho</label>
-                        <input type="radio" id="pc_ambos" name="ps_punos_cerrados_lado" value="ambos"><label for="pc_ambos">Ambos</label>
                     </div>
-                </div>
 
                 <div>
                     <label for="ps_reflejo_hiperextension" class="block text-sm font-medium text-gray-700 mb-1">Reflejo de hiperextensión</label>
                     <select name="ps_reflejo_hiperextension" id="ps_reflejo_hiperextension" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
+                        <option value="" disabled selected>Seleccione</option> 
                         <option value="0">0</option> 
                         <option value="1">1</option>
                     </select>
@@ -115,7 +105,7 @@
                 <div>
                     <label for="ps_lenguaje_escaso" class="block text-sm font-medium text-gray-700 mb-1">Lenguaje escaso</label>
                     <select name="ps_lenguaje_escaso" id="ps_lenguaje_escaso" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione</option>
+                        <option value="" disabled selected>Seleccione</option> 
                         <option value="0">0</option> 
                         <option value="1">1</option>
                     </select>
@@ -134,47 +124,61 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionPaso7_signos_alarma'; 
-            const datosGuardados = sessionStorage.getItem(sessionKey);
-            let datosJson = {};
+            const sessionKey = 'evaluacionP7_signos_alarma'; // Clave para los datos de Signos de Alarma
 
-            if (datosGuardados) { 
+            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
+                try {
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion en Signos de Alarma:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos';
+                    return;
+                }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage en Signos de Alarma. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes';
+                return;
+            }
+
+            // 2. Recupera los datos específicos de Signos de Alarma para este paso (si existen)
+            const datosSignosAlarmaGuardados = sessionStorage.getItem(sessionKey);
+            let datosSignosAlarma = {};
+            if (datosSignosAlarmaGuardados) { 
                 try { 
-                    datosJson = JSON.parse(datosGuardados); 
+                    datosSignosAlarma = JSON.parse(datosSignosAlarmaGuardados); 
                 } catch(e) { 
                     console.error(`Error Paso 7 (Signos Alarma) al parsear datos guardados:`, e); 
                     sessionStorage.removeItem(sessionKey); 
                 } 
             }
             
+            // 3. Muestra el mes seleccionado (del Paso 1)
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) {
-                try {
-                    const dP1 = JSON.parse(datosPaso1Raw);
-                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes;
-                    else if (mesDisplay) mesDisplay.textContent = 'No disponible';
-                } catch(e){
-                    if(mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
-                    console.error("Error Paso 7 (Signos Alarma): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
-                }
-            } else if(mesDisplay) {
-                mesDisplay.textContent = 'No disponible';
+            if (mesDisplay && datosPaciente.mes) { 
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) { 
+                mesDisplay.textContent = 'No disponible'; 
             }
 
+            // 4. Establece la fecha de evaluación
             if (dateInput) {
-                if(datosJson.fecha_evaluacion) { 
-                    dateInput.value = datosJson.fecha_evaluacion; 
+                if(datosSignosAlarma.fecha_evaluacion) { 
+                    dateInput.value = datosSignosAlarma.fecha_evaluacion; 
                 } else { 
-                    const datosPaso6Raw = sessionStorage.getItem('evaluacionPaso6_posturas_tmyu'); 
+                    // Obtener fecha de la evaluación del paso anterior si no está guardada aquí
+                    const datosPaso6Raw = sessionStorage.getItem('evaluacionP6_posturas_tmyu'); 
                     if(datosPaso6Raw){ 
                         try{ 
                             const dP6 = JSON.parse(datosPaso6Raw); 
                             if(dP6.fecha_evaluacion) dateInput.value = dP6.fecha_evaluacion; 
                         } catch(e){
-                            console.error("Error Paso 7 (Signos Alarma): No se pudo parsear JSON de evaluacionPaso6_posturas_tmyu.", e);
+                            console.error("Error Paso 7 (Signos Alarma): No se pudo parsear JSON de evaluacionP6_posturas_tmyu para la fecha.", e);
                         } 
                     }
+                    // Si aún no hay fecha, usar la fecha actual
                     if(!dateInput.value) { 
                         const t = new Date(); 
                         dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
@@ -184,93 +188,121 @@
 
             const form = document.getElementById('evaluacionSignosAlarmaForm');
             
+            // Define los selectores para los campos de lateralidad. Los radios quedarán deshabilitados para guardar.
             const camposConLateralidad = [
                 { selectId: 'ps_marcha_en_punta_presencia', radioGroupId: 'ps_marcha_en_punta_lado_group', radioName: 'ps_marcha_en_punta_lado' },
                 { selectId: 'ps_marcha_cruzada_presencia', radioGroupId: 'ps_marcha_cruzada_lado_group', radioName: 'ps_marcha_cruzada_lado' },
                 { selectId: 'ps_punos_cerrados_presencia', radioGroupId: 'ps_punos_cerrados_lado_group', radioName: 'ps_punos_cerrados_lado' }
             ];
 
+            // Función para mostrar u ocultar el grupo de radios de lateralidad
             function toggleLateralityGroup(selectElement, radioGroupId) {
                 const radioGroup = document.getElementById(radioGroupId);
-                if (selectElement.value === '1') {
-                    radioGroup.style.display = 'block';
-                } else {
-                    radioGroup.style.display = 'none';
-                    const radios = form.querySelectorAll(`input[name="${selectElement.id.replace('_presencia', '_lado')}"]`);
-                    radios.forEach(radio => radio.checked = false);
+                if (radioGroup) {
+                    if (selectElement.value === '1') {
+                        // radioGroup.style.display = 'block'; // Puedes mantenerlo visible si quieres que el usuario interactúe
+                                                              // aunque no se guarde. Si quieres que se muestre pero no se guarde,
+                                                              // comentar la lógica de guardado de los radios.
+                        radioGroup.style.display = 'none'; // Ocultar si queremos desactivar la interacción
+                    } else {
+                        radioGroup.style.display = 'none';
+                        // No es necesario desmarcar los radios si no se van a guardar
+                        // const radios = radioGroup.querySelectorAll(`input[name="${selectElement.id.replace('_presencia', '_lado')}"]`);
+                        // radios.forEach(radio => radio.checked = false);
+                    }
                 }
             }
 
-            if(form && Object.keys(datosJson).length > 0 ) {
-                const selects = form.querySelectorAll('select');
-                selects.forEach(select => { 
-                    if(datosJson[select.name] !== undefined) { 
-                        select.value = datosJson[select.name]; 
+            // Cargar datos al iniciar la página
+            if(form && Object.keys(datosSignosAlarma).length > 0 ) {
+                // Cargar valores de todos los selects
+                const allSelects = form.querySelectorAll('select');
+                allSelects.forEach(select => { 
+                    if(datosSignosAlarma[select.name] !== undefined) { 
+                        select.value = datosSignosAlarma[select.name]; 
                     } 
                 });
 
-                camposConLateralidad.forEach(campo => {
-                    const selectElement = document.getElementById(campo.selectId);
-                    if (selectElement.value === '1') {
-                        toggleLateralityGroup(selectElement, campo.radioGroupId);
-                        const ladoGuardado = datosJson[campo.radioName];
-                        if (ladoGuardado) {
-                            const radioToCheck = form.querySelector(`input[name="${campo.radioName}"][value="${ladoGuardado}"]`);
-                            if (radioToCheck) radioToCheck.checked = true;
-                        }
-                    } else {
-                         const radioGroup = document.getElementById(campo.radioGroupId);
-                         if(radioGroup) radioGroup.style.display = 'none';
-                    }
-                });
+                // NO cargar valores de radios de lateralidad ni mostrar/ocultar dinámicamente si la funcionalidad está deshabilitada
+                // El CSS '.radio-group-laterality { display: none; }' se encarga de ocultarlos
             } else { 
-                 camposConLateralidad.forEach(campo => {
-                    const radioGroup = document.getElementById(campo.radioGroupId);
-                    if(radioGroup) radioGroup.style.display = 'none';
-                });
+                // Si no hay datos guardados, asegurarse de que los grupos de radio estén ocultos por defecto (ya lo hace el CSS)
+                // camposConLateralidad.forEach(campo => {
+                //     const radioGroup = document.getElementById(campo.radioGroupId);
+                //     if(radioGroup) radioGroup.style.display = 'none';
+                // });
             }
 
-            camposConLateralidad.forEach(campo => {
-                const selectElement = document.getElementById(campo.selectId);
-                if (selectElement) {
-                    selectElement.addEventListener('change', function() {
-                        toggleLateralityGroup(this, campo.radioGroupId);
-                    });
-                }
-            });
+            // Añadir event listeners para los selects que controlan la lateralidad
+            // Comentados para desactivar la interacción dinámica con los radios, si se desea
+            // camposConLateralidad.forEach(campo => {
+            //     const selectElement = document.getElementById(campo.selectId);
+            //     if (selectElement) {
+            //         selectElement.addEventListener('change', function() {
+            //             toggleLateralityGroup(this, campo.radioGroupId); // Esta función ahora solo oculta
+            //         });
+            //     }
+            // });
+
+            // --- Console.log para ver los datos cargados al inicio de la página ---
+            console.log('DEBUG (JS - al cargar la página - Signos de Alarma): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
+            console.log('DEBUG (JS - al cargar la página - Signos de Alarma): datosSignosAlarma (específico de este paso):', datosSignosAlarma);
+            // --- Fin Console.log ---
 
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
-                    const datosPaso = {};
-                    if(dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
+                    // 6. Recopila los datos del formulario (solo los valores de los select)
+                    const currentSignosAlarmaData = {};
+                    if(dateInput) currentSignosAlarmaData['fecha_evaluacion'] = dateInput.value;
 
+                    // Recolectar todos los valores de los select
                     const allSelects = form.querySelectorAll('select');
                     allSelects.forEach(select => {
-                        datosPaso[select.name] = select.value;
+                        currentSignosAlarmaData[select.name] = select.value;
                     });
 
-                    camposConLateralidad.forEach(campo => {
-                        const selectElement = document.getElementById(campo.selectId);
-                        if (selectElement.value === '1') { 
-                            const radioChecked = form.querySelector(`input[name="${campo.radioName}"]:checked`);
-                            if (radioChecked) {
-                                datosPaso[campo.radioName] = radioChecked.value;
-                            } else {
-                                datosPaso[campo.radioName] = ""; 
-                            }
-                        } else {
-                             datosPaso[campo.radioName] = ""; 
-                        }
-                    });
+                    // >>> LÓGICA PARA RADIOS DE LATERALIDAD COMENTADA PARA NO GUARDAR <<<
+                    // No se recolectan los valores de los radios de lateralidad
+                    // camposConLateralidad.forEach(campo => {
+                    //     const selectElement = document.getElementById(campo.selectId);
+                    //     if (selectElement && selectElement.value === '1') { 
+                    //         const radioChecked = form.querySelector(`input[name="${campo.radioName}"]:checked`);
+                    //         if (radioChecked) {
+                    //             currentSignosAlarmaData[campo.radioName] = radioChecked.value;
+                    //         } else {
+                    //             currentSignosAlarmaData[campo.radioName] = ""; 
+                    //         }
+                    //     } else {
+                    //         currentSignosAlarmaData[campo.radioName] = ""; 
+                    //     }
+                    // });
+                    // >>> FIN LÓGICA PARA RADIOS DE LATERALIDAD COMENTADA <<<
                     
-                    console.log(`Datos guardados en ${sessionKey} (Signos de Alarma):`, datosPaso);
+                    // NOTA: No hay validación de campos obligatorios en este paso,
+                    // se guardarán todos los valores de los selects (incluidos los vacíos).
+
+                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    datosPaciente.signos_alarma = currentSignosAlarmaData; 
+
+                    // 8. console.log para verificar los datos ANTES de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Signos de Alarma): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
 
                     try {
-                        sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'agregar.hitomgrueso.php';
+                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // 10. Opcional: guardar los datos de Signos de Alarma por separado
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentSignosAlarmaData)); 
+
+                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
+                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
+                        console.log('DEBUG (JS - Botón Siguiente - Signos de Alarma): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
+
+
+                        window.location.href = 'agregar.hitomgrueso.php'; // Redirige al siguiente paso
                     } catch(e) { 
-                        console.error(`Error guardando datos de ${sessionKey}:`, e); 
+                        console.error("Error al guardar datos en sessionStorage (Signos de Alarma):", e);
                         alert("Hubo un error al guardar los Signos de Alarma."); 
                     }
                 });

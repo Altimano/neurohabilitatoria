@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -38,7 +42,7 @@
                 <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
             </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-2"><h1 class="text-xl font-semibold text-center text-gray-800">HITOS DE DESARROLLO (MOTOR GRUESO)</h1></div>
+            <div class="border-t border-b border-gray-400 py-2 mb-2"><h1 class="text-xl font-semibold text-center text-gray-800">HITOS DE DESARROLLO MOTOR GRUESO</h1></div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6 text-left">
                 <div>
@@ -90,126 +94,165 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKeyThisStep = 'evaluacionPaso8_hitomgrueso'; 
+            const sessionKey = 'evaluacionP8_hitomgrueso'; // Clave para los datos de Hitos de Desarrollo Motor Grueso
             
-            const datosGuardadosEstePaso = sessionStorage.getItem(sessionKeyThisStep);
-            let datosJsonEstePaso = {};
-            if (datosGuardadosEstePaso) { 
+            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
+                try {
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion en Hitos Motor Grueso:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos';
+                    return;
+                }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage en Hitos Motor Grueso. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes';
+                return;
+            }
+
+            // 2. Recupera los datos específicos de Hitos Motor Grueso para este paso (si existen)
+            const datosHitoMgruesoGuardados = sessionStorage.getItem(sessionKey);
+            let datosHitoMgrueso = {};
+            if (datosHitoMgruesoGuardados) { 
                 try { 
-                    datosJsonEstePaso = JSON.parse(datosGuardadosEstePaso); 
+                    datosHitoMgrueso = JSON.parse(datosHitoMgruesoGuardados); 
                 } catch(e) { 
                     console.error(`Error Paso 8 (Hito M. Grueso) al parsear datos guardados:`, e);
-                    sessionStorage.removeItem(sessionKeyThisStep); 
+                    sessionStorage.removeItem(sessionKey); 
                 } 
             }
 
+            // Lógica para cargar la fecha de evaluación
             if (dateInput) {
-                if(datosJsonEstePaso.fecha_evaluacion) { 
-                    dateInput.value = datosJsonEstePaso.fecha_evaluacion; 
+                if(datosHitoMgrueso.fecha_evaluacion) { 
+                    dateInput.value = datosHitoMgrueso.fecha_evaluacion; 
                 } else {
-                    const datosPaso7Raw = sessionStorage.getItem('evaluacionPaso7_signos_alarma'); 
-                    if(datosPaso7Raw){ 
-                        try{ 
-                            const dP7 = JSON.parse(datosPaso7Raw); 
-                            if(dP7.fecha_evaluacion) dateInput.value = dP7.fecha_evaluacion; 
-                        } catch(e){
-                             console.error("Error Paso 8 (Hito M. Grueso): No se pudo parsear JSON de evaluacionPaso7_signos_alarma.", e);
-                        } 
-                    }
-                    if(!dateInput.value) { 
+                    // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
+                    if (datosPaciente.fecha_inicio_tratamiento) {
+                        dateInput.value = datosPaciente.fecha_inicio_tratamiento;
+                    } else { // Si aún no hay fecha, usar la fecha actual
                         const t = new Date(); 
                         dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                     }
                 }
             }
 
+            // Lógica para cargar el mes de evaluación
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) { 
-                try { 
-                    const dP1 = JSON.parse(datosPaso1Raw); 
-                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; 
-                    else if (mesDisplay) mesDisplay.textContent = 'No disponible';
-                } catch(e){ 
-                    if(mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
-                    console.error("Error Paso 8 (Hito M. Grueso): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
-                } 
-            } else if(mesDisplay) { 
+            if (mesDisplay && datosPaciente.mes) { 
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) { 
                 mesDisplay.textContent = 'No disponible'; 
             }
 
             const form = document.getElementById('evaluacionHitoMGruesoForm');
             
-            const datosMgruesoRaw = sessionStorage.getItem('evaluacionPaso3_mgrueso'); // Esto es correcto, toma datos del Paso 3 original
-            let datosMgrueso = {};
-            if(datosMgruesoRaw){ 
-                try{ 
-                    datosMgrueso = JSON.parse(datosMgruesoRaw); 
-                } catch(e){ 
-                    datosMgrueso = {}; 
-                    console.error("Error Paso 8 (Hito M. Grueso): No se pudo parsear JSON de evaluacionPaso3_mgrueso.", e);
-                } 
-            }
-
-            const resultados_mgrueso = {
+            // Cargar los datos del Paso 3 (Motor Grueso) para precargar los hitos
+            // Es crucial que 'datosPaciente.mgrueso' contenga los datos de Motor Grueso del paso anterior
+            let datosMotorGruesoPasoAnterior = datosPaciente.mgrueso || {}; 
+            
+            // Mapeo de valores numéricos a descripciones legibles
+            const resultados_mgrueso_display = {
                 '0': 'No lo logra (0)',
                 '1': 'Lo intenta pero no lo logra (1)',
                 '2': 'En proceso (2)',
                 '3': 'Lo realiza inhábilmente (3)',
                 '4': 'Normal (4)',
-                '': 'Aún no se evalúa' 
+                '': 'Aún no se evalúa' // Para casos donde el valor es nulo o indefinido
             };
 
+            // Función para actualizar los elementos de display y los campos hidden
             function setHitoDisplay(baseId, valorNumericoDelCampoAnterior) {
                 const displayElement = document.getElementById(baseId + '_display');
                 const valueElement = document.getElementById(baseId + '_value');
-                let valorAGuardar = '';
-                let textoAMostrar = resultados_mgrueso['']; 
-
-                if (valorNumericoDelCampoAnterior && typeof resultados_mgrueso[String(valorNumericoDelCampoAnterior)] !== 'undefined') {
-                    valorAGuardar = String(valorNumericoDelCampoAnterior);
-                    textoAMostrar = resultados_mgrueso[String(valorNumericoDelCampoAnterior)];
-                }
                 
+                let valorAGuardar = '';
+                let textoAMostrar = resultados_mgrueso_display['']; // Default a 'Aún no se evalúa'
+
+                // Primero, intentar precargar desde los datos de este paso si ya están guardados
+                if (datosHitoMgrueso[baseId]) {
+                    valorAGuardar = datosHitoMgrueso[baseId];
+                    textoAMostrar = resultados_mgrueso_display[String(datosHitoMgrueso[baseId])] || resultados_mgrueso_display[''];
+                } 
+                // Si no hay datos guardados para este paso, usar los del paso anterior (Motor Grueso)
+                else if (valorNumericoDelCampoAnterior !== undefined && valorNumericoDelCampoAnterior !== null && typeof resultados_mgrueso_display[String(valorNumericoDelCampoAnterior)] !== 'undefined') {
+                    valorAGuardar = String(valorNumericoDelCampoAnterior);
+                    textoAMostrar = resultados_mgrueso_display[String(valorNumericoDelCampoAnterior)];
+                }
+
                 if (displayElement && valueElement) {
                     displayElement.textContent = textoAMostrar;
                     valueElement.value = valorAGuardar;
                 }
             }
             
+            // Mapeo de los IDs de los elementos HTML con los nombres de las claves en datosMotorGruesoPasoAnterior
             const mapeoHitosMG = {
-                'hg_control_cefalico': datosMgrueso.control_cefalico,
-                'hg_posicion_sentado': datosMgrueso.sentado_sin_apoyo,
-                'hg_reacciones_proteccion': datosMgrueso.reaccion_lateral_delantera,
-                'hg_patron_arrastre': datosMgrueso.patron_arrastre,
-                'hg_patron_gateo': datosMgrueso.patron_gateo_independiente,
-                'hg_mov_posturales_autonomos': datosMgrueso.transicion_gateo_bipedestacion,
-                'hg_patron_marcha_independiente': datosMgrueso.comienza_patron_marcha
+                'hg_control_cefalico': datosMotorGruesoPasoAnterior.control_cefalico,
+                'hg_posicion_sentado': datosMotorGruesoPasoAnterior.sentado_sin_apoyo,
+                'hg_reacciones_proteccion': datosMotorGruesoPasoAnterior.reaccion_lateral_delantera,
+                'hg_patron_arrastre': datosMotorGruesoPasoAnterior.patron_arrastre,
+                'hg_patron_gateo': datosMotorGruesoPasoAnterior.patron_gateo_independiente,
+                'hg_mov_posturales_autonomos': datosMotorGruesoPasoAnterior.transicion_gateo_bipedestacion,
+                'hg_patron_marcha_independiente': datosMotorGruesoPasoAnterior.comienza_patron_marcha
             };
 
+            // Recorrer el mapeo y actualizar los displays y hidden inputs
             for (const idHito in mapeoHitosMG) {
                 setHitoDisplay(idHito, mapeoHitosMG[idHito]);
             }
-            
+
+            // --- Console.log para ver los datos cargados al inicio de la página ---
+            console.log('DEBUG (JS - al cargar la página - Hitos Motor Grueso): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
+            console.log('DEBUG (JS - al cargar la página - Hitos Motor Grueso): datosHitoMgrueso (específico de este paso):', datosHitoMgrueso);
+            console.log('DEBUG (JS - al cargar la página - Hitos Motor Grueso): datosMotorGruesoPasoAnterior (del paso 3):', datosMotorGruesoPasoAnterior);
+            // --- Fin Console.log ---
+
+            // Lógica para guardar datos al hacer clic en "Siguiente"
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
-                    const datosPasoActual = {};
-                    if(dateInput) datosPasoActual['fecha_evaluacion'] = dateInput.value;
+                    const currentHitoMgruesoData = {};
+                    if(dateInput) currentHitoMgruesoData['fecha_evaluacion'] = dateInput.value;
                     
+                    // Recolectar los valores de los campos hidden
                     const hitoInputs = form.querySelectorAll('input[type="hidden"]');
                     hitoInputs.forEach(input => {
-                        datosPasoActual[input.name] = input.value;
+                        // Guardar solo si el valor es "4" (Normal)
+                        if (input.value === '4') {
+                            currentHitoMgruesoData[input.name] = input.value;
+                        } else {
+                            // Si el valor no es 4, guardarlo como vacío o simplemente no incluirlo
+                            // Decidamos no incluirlo si no es '4' para evitar valores vacíos innecesarios.
+                            // Si necesitas un placeholder para valores no "4", puedes poner:
+                            // currentHitoMgruesoData[input.name] = ''; 
+                        }
                     });
 
-                    // CONSOLE LOG PARA VER DATOS ANTES DE GUARDAR
-                    console.log(`Datos guardados en ${sessionKeyThisStep} (Hitos Motor Grueso):`, datosPasoActual);
+                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    datosPaciente.hitomgrueso = currentHitoMgruesoData; 
+
+                    // 8. console.log para verificar los datos ANTES de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Hitos Motor Grueso): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
 
                     try {
-                        sessionStorage.setItem(sessionKeyThisStep, JSON.stringify(datosPasoActual));
-                        window.location.href = 'agregar.hitomfino.php';
+                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // 10. Opcional: guardar los datos de Hitos Motor Grueso por separado
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentHitoMgruesoData)); 
+
+                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
+                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
+                        console.log('DEBUG (JS - Botón Siguiente - Hitos Motor Grueso): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
+
+
+                        window.location.href = 'agregar.hitomfino.php'; // Redirige al siguiente paso
                     } catch(e) { 
-                        console.error(`Error guardando datos de ${sessionKeyThisStep}:`, e);
+                        console.error("Error al guardar datos en sessionStorage (Hitos Motor Grueso):", e);
                         alert("Hubo un error al guardar los Hitos de Desarrollo Motor Grueso."); 
                     }
                 });

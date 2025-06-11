@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -65,7 +69,7 @@
 
         <div class="border-t border-b border-gray-400 py-2 mb-2 mt-6"><h1 class="text-xl font-semibold text-center text-gray-800">TONO MUSCULAR Y UBICACIÓN</h1></div>
         <div class="text-sm text-center text-gray-700 pb-4 mb-2">
-            <strong>Leyenda: General(1), Axial(2), Extremidades(3), Miembros Torácicos(4), Miembros Pélvicos(5), Hemicuerpo(6), Contralateral(7), Derecho(8), Izquierdo(9), Normal</strong>
+            <strong><h1>General(1), Axial(2), Extremidades(3), Miembros Torácicos(4), Miembros Pélvicos(5), Hemicuerpo(6), Contralateral(7), Derecho(8), Izquierdo(9), Normal</h1></strong>
         </div>
         <div class="overflow-x-auto">
             <table class="evaluation-table">
@@ -143,7 +147,7 @@
 
         <div class="section-title border-t border-b border-gray-400 py-2 mb-2 mt-6"><h1 class="text-xl font-semibold text-center text-gray-800">POSTURA</h1></div>
         <div class="text-sm text-center text-gray-700 pb-4 mb-2">
-            <strong>Leyenda: Axial(1), Miembros Torácicos(2), Miembro Pélvicos(3), Hemicuerpo(4), Contralateral(5), Derecho(6), Izquierdo(7), Normal</strong>
+            <strong><h1>Axial(1), Miembros Torácicos(2), Miembro Pélvicos(3), Hemicuerpo(4), Contralateral(5), Derecho(6), Izquierdo(7), Normal</h1></strong>
         </div>
         <div class="overflow-x-auto">
             <table class="evaluation-table">
@@ -188,79 +192,83 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionPaso6_posturas_tmyu'; 
-            const datosGuardados = sessionStorage.getItem(sessionKey);
-            let datosJson = {};
+            const sessionKey = 'evaluacionP6_posturas_tmyu'; // Clave para los datos de Postura, Tono Muscular y Ubicación
 
-            if (datosGuardados) {
+            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
                 try {
-                    datosJson = JSON.parse(datosGuardados);
-                } catch(e) {
-                    console.error("Error Paso 6 (Posturas TMyU) al parsear datos guardados:", e);
-                    sessionStorage.removeItem(sessionKey);
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion en Postura TMyU:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos';
+                    return;
                 }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage en Postura TMyU. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes';
+                return;
             }
 
-            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) {
+            // 2. Recupera los datos específicos de Postura, Tono Muscular y Ubicación para este paso (si existen)
+            const datosTmyuGuardados = sessionStorage.getItem(sessionKey);
+            let datosTmyu = {};
+            if (datosTmyuGuardados) {
                 try {
-                    const dP1 = JSON.parse(datosPaso1Raw);
-                    if (mesDisplay && dP1.mes) {
-                        mesDisplay.textContent = dP1.mes;
-                    } else if (mesDisplay) {
-                        mesDisplay.textContent = 'No disponible';
-                    }
-                } catch(e){
-                    if(mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
-                    console.error("Error Paso 6 (Posturas TMyU): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
+                    datosTmyu = JSON.parse(datosTmyuGuardados);
+                } catch(e) {
+                    console.error("Error Paso 6 (Posturas TMyU) al parsear datos guardados:", e);
                 }
-            } else if(mesDisplay) {
+            }
+            
+            // 3. Muestra el mes seleccionado (del Paso 1)
+            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
+            if (mesDisplay && datosPaciente.mes) {
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) {
                 mesDisplay.textContent = 'No disponible';
             }
 
+            // 4. Establece la fecha de evaluación
             if (dateInput) {
-                if(datosJson.fecha_evaluacion) {
-                    dateInput.value = datosJson.fecha_evaluacion;
-                } else { 
-                    const datosPaso5Raw = sessionStorage.getItem('evaluacionPaso5_lenguaje'); 
-                    if(datosPaso5Raw){
-                        try{
-                            const dP5 = JSON.parse(datosPaso5Raw);
-                            if(dP5.fecha_evaluacion) dateInput.value = dP5.fecha_evaluacion;
-                        } catch(e) {
-                            console.error("Error Paso 6 (Posturas TMyU): No se pudo parsear JSON de evaluacionPaso5_lenguaje.", e);
-                        }
-                    }
-                    if(!dateInput.value) {
-                        const t = new Date();
-                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
-                    }
+                if(datosTmyu.fecha_evaluacion) {
+                    dateInput.value = datosTmyu.fecha_evaluacion;
+                }
+                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
+                else if (datosPaciente.fecha_inicio_tratamiento) {
+                    dateInput.value = datosPaciente.fecha_inicio_tratamiento;
+                }
+                else {
+                    const t = new Date();
+                    dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
                 }
             }
 
+            // --- Console.log para ver los datos cargados al inicio de la página ---
+            console.log('DEBUG (JS - al cargar la página - Posturas TMyU): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
+            console.log('DEBUG (JS - al cargar la página - Posturas TMyU): datosTmyu (específico de este paso):', datosTmyu);
+            // --- Fin Console.log ---
+
+            // 5. Precarga los valores de los checkboxes
             const form = document.getElementById('evaluacionTonoUbicacionForm');
             const checkboxGroupNames = [
-                'tu_hipotonia', 
-                'tu_hipertonia', 
-                'tu_mixto', 
-                'tu_fluctuante',
-                'Asimetria' // Asegúrate que este 'Asimetria' coincida con el name="Asimetria[]"
-                            // Si tenías un grupo 'tu_normal[]' separado y lo quieres, añádelo aquí.
+                'tu_hipotonia', 'tu_hipertonia', 'tu_mixto', 'tu_fluctuante', 'Asimetria'
             ];
 
-            if(form && Object.keys(datosJson).length > 0) {
+            if(form && Object.keys(datosTmyu).length > 0) { // Asegúrate de que datosTmyu tiene propiedades
                 checkboxGroupNames.forEach(groupName => {
-                    if (datosJson[groupName] && Array.isArray(datosJson[groupName])) {
+                    if (datosTmyu[groupName] && Array.isArray(datosTmyu[groupName])) {
                         const checkboxesInGroup = form.querySelectorAll(`input[name="${groupName}[]"]`);
                         checkboxesInGroup.forEach(checkbox => {
-                            if (datosJson[groupName].includes(checkbox.value)) {
+                            if (datosTmyu[groupName].includes(checkbox.value)) {
                                 checkbox.checked = true;
                             } else {
                                 checkbox.checked = false; 
                             }
                         });
                     } else {
+                        // Si no hay datos guardados para este grupo, asegúrate de que todos estén desmarcados
                         const checkboxesInGroup = form.querySelectorAll(`input[name="${groupName}[]"]`);
                         checkboxesInGroup.forEach(checkbox => {
                             checkbox.checked = false;
@@ -272,24 +280,39 @@
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
-                    const datosPaso = {};
-                    if(dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
+                    // 6. Recopila los datos del formulario (solo los seleccionados de checkboxes)
+                    const currentTmyuData = {};
+                    if(dateInput) currentTmyuData['fecha_evaluacion'] = dateInput.value;
 
                     checkboxGroupNames.forEach(groupName => {
                         const checkedBoxes = form.querySelectorAll(`input[name="${groupName}[]"]:checked`);
                         const values = [];
                         checkedBoxes.forEach(checkbox => { values.push(checkbox.value); });
-                        datosPaso[groupName] = values;
+                        currentTmyuData[groupName] = values; // Guardará un array de los valores seleccionados (o un array vacío si no se selecciona nada)
                     });
 
-                    console.log(`Datos guardados en ${sessionKey} (Posturas TMyU):`, datosPaso);
+                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    datosPaciente.posturas_tmyu = currentTmyuData; 
+
+                    // 8. console.log para verificar los datos ANTES de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Posturas TMyU): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
 
                     try {
-                        sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'agregar.signos_alarma.php';
-                    } catch(e) {
-                        console.error(`Error guardando datos de ${sessionKey}:`, e);
-                        alert("Hubo un error al guardar los datos de Postura, Tono Muscular y Ubicación.");
+                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // 10. Opcional: guardar los datos de Postura TMyU por separado
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentTmyuData)); 
+
+                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
+                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
+                        console.log('DEBUG (JS - Botón Siguiente - Posturas TMyU): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
+
+
+                        window.location.href = 'agregar.signos_alarma.php'; // Redirige al siguiente paso
+                    } catch(e) { 
+                        console.error("Error al guardar datos en sessionStorage (Posturas TMyU):", e);
+                        alert("Hubo un error al guardar los datos de Postura, Tono Muscular y Ubicación."); 
                     }
                 });
             }

@@ -28,4 +28,4 @@
     function Cerrar($Con){
         mysqli_close($Con);
     }
-    ?>
+?>

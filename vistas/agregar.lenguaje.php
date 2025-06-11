@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -71,13 +75,6 @@
                 </select>
             </div>
             <div>
-                <label for="lenguaje_comprension_palabras" class="block text-sm font-medium text-gray-700 mb-1">Comprensió  n aproximada de 17 palabras</label>
-                <select name="lenguaje_comprension_palabras" id="lenguaje_comprension_palabras" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                    <option value="" disabled selected>Seleccione una opción</option>
-                    <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-                </select>
-            </div>
-            <div>
                 <label for="lenguaje_comprende_NO" class="block text-sm font-medium text-gray-700 mb-1">Comprende la palabra NO acompañada del gesto</label>
                 <select name="lenguaje_comprende_NO" id="lenguaje_comprende_NO" class="w-full p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
                     <option value="" disabled selected>Seleccione una opción</option>
@@ -139,85 +136,117 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionPaso5_lenguaje'; 
-            const datosGuardados = sessionStorage.getItem(sessionKey);
-            let datosJson = {};
+            const sessionKey = 'evaluacionP5_lenguaje'; // Clave para los datos de Lenguaje
 
-            if (datosGuardados) { 
+            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
+                try {
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion en Lenguaje:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos'; // Redirige si los datos base están corruptos
+                    return;
+                }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage en Lenguaje. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes'; // Redirige si faltan los datos base
+                return;
+            }
+
+            // 2. Recupera los datos específicos de Lenguaje para este paso (si existen)
+            const datosLenguajeGuardados = sessionStorage.getItem(sessionKey);
+            let datosLenguaje = {};
+            if (datosLenguajeGuardados) { 
                 try { 
-                    datosJson = JSON.parse(datosGuardados); 
+                    datosLenguaje = JSON.parse(datosLenguajeGuardados); 
                 } catch(e) { 
-                    console.error("Error Paso 5 (Lenguaje) al parsear datos guardados:", e); 
-                    sessionStorage.removeItem(sessionKey); 
-                } 
+                    console.error("Error Paso 5 (Lenguaje) al parsear datos guardados:", e);
+                }
             }
             
-            if (dateInput) {
-                if(datosJson.fecha_evaluacion) { 
-                    dateInput.value = datosJson.fecha_evaluacion; 
-                } else { 
-                    const datosPaso4Raw = sessionStorage.getItem('evaluacionPaso4_mfino'); 
-                    if(datosPaso4Raw){ 
-                        try{ 
-                            const dP4 = JSON.parse(datosPaso4Raw); 
-                            if(dP4.fecha_evaluacion) dateInput.value = dP4.fecha_evaluacion; 
-                        } catch(e){
-                            console.error("Error Paso 5 (Lenguaje): No se pudo parsear JSON de evaluacionPaso4_mfino.", e);
-                        } 
-                    }
-                    if(!dateInput.value) { 
-                        const t = new Date(); 
-                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
-                    }
-                }
-            }
-
+            // 3. Muestra el mes seleccionado (del Paso 1)
             const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) {
-                try { 
-                    const dP1 = JSON.parse(datosPaso1Raw); 
-                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; 
-                } catch(e){ 
-                    if(mesDisplay) mesDisplay.textContent = 'Error';
-                    console.error("Error Paso 5 (Lenguaje): No se pudo parsear JSON de evaluacionPaso1.", e);
-                }
-            } else if(mesDisplay) { 
+            if (mesDisplay && datosPaciente.mes) { 
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) { 
                 mesDisplay.textContent = 'No disponible'; 
             }
 
+            // 4. Establece la fecha de evaluación
+            if (dateInput) {
+                if(datosLenguaje.fecha_evaluacion) { 
+                    dateInput.value = datosLenguaje.fecha_evaluacion; 
+                } 
+                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
+                else if (datosPaciente.fecha_inicio_tratamiento) {
+                    dateInput.value = datosPaciente.fecha_inicio_tratamiento;
+                }
+                else { 
+                    const t = new Date(); 
+                    dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
+                }
+            }
+
+            // 5. Precarga los valores de los <select> si existen datos guardados
             const form = document.getElementById('evaluacionLenguajeForm'); 
-            if(form && datosJson) {
+            if(form && Object.keys(datosLenguaje).length > 0) { // Asegúrate de que datosLenguaje tiene propiedades
                 const selects = form.querySelectorAll('select');
                 selects.forEach(select => { 
-                    if(datosJson[select.name] !== undefined) {
-                        select.value = datosJson[select.name]; 
-                    } 
+                    if(datosLenguaje[select.name] !== undefined) { // Usa !== undefined para aceptar valores como 0
+                        select.value = datosLenguaje[select.name]; 
+                    } else {
+                        select.value = ""; 
+                    }
                 });
             }
+
+            // --- Console.log para ver los datos cargados al inicio de la página ---
+            console.log('DEBUG (JS - al cargar la página - Lenguaje): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
+            console.log('DEBUG (JS - al cargar la página - Lenguaje): datosLenguaje (específico de este paso):', datosLenguaje);
+            // --- Fin Console.log ---
 
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
+                    // 6. Recopila los datos del formulario de Lenguaje
                     const formDataLenguaje = new FormData(form);
-                    const datosPaso = {};
+                    const currentLenguajeData = {};
                     
-                    // CONSOLE LOG PARA VERIFICAR DATOS RECOLECTADOS
-                    console.log("Contenido de FormData en agregar.lenguaje.php:");
-                    for (let [key, value] of formDataLenguaje.entries()) {
-                        datosPaso[key] = value; 
-                    }
+                    // Iterar sobre todos los selects y guardar sus valores
+                    const allSelects = form.querySelectorAll('select');
+                    allSelects.forEach(select => {
+                        currentLenguajeData[select.name] = select.value;
+                    });
 
-                    if(dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
-                    
-                    // CONSOLE LOG PARA VER DATOS ANTES DE GUARDAR
-                    console.log(`Datos guardados en ${sessionKey}:`, datosPaso);
+                    // Asegúrate de incluir la fecha de evaluación del formulario en los datos del paso actual
+                    if(dateInput) currentLenguajeData['fecha_evaluacion'] = dateInput.value;
+
+                    // NOTA: No hay validación de campos obligatorios en este paso,
+                    // se guardarán todos los valores de los selects (incluidos los vacíos).
+
+                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    datosPaciente.lenguaje = currentLenguajeData; 
+
+                    // 8. console.log para verificar los datos ANTES de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Lenguaje): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
 
                     try {
-                        sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'agregar.posturas_tmyu.php'; 
+                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // 10. Opcional: guardar los datos de Lenguaje por separado
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentLenguajeData)); 
+
+                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
+                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
+                        console.log('DEBUG (JS - Botón Siguiente - Lenguaje): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
+
+
+                        window.location.href = 'agregar.posturas_tmyu.php'; // Redirige al siguiente paso
                     } catch(e) { 
-                        console.error(`Error guardando datos de ${sessionKey}:`, e); 
+                        console.error("Error al guardar datos en sessionStorage (Lenguaje):", e);
                         alert("Hubo un error al guardar los datos de Lenguaje."); 
                     }
                 });

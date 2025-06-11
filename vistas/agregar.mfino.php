@@ -1,3 +1,7 @@
+<?php
+//para verificacion de la version descomentar
+//phpinfo();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -190,80 +194,115 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
-            const sessionKey = 'evaluacionPaso4_mfino';
-            const datosGuardados = sessionStorage.getItem(sessionKey);
-            let datosJson = {};
-            if (datosGuardados) { 
-                try { 
-                    datosJson = JSON.parse(datosGuardados); 
-                } catch(e) { 
-                    console.error("Error P4_M Fino al parsear datos guardados:", e); 
-                    sessionStorage.removeItem(sessionKey); 
-                } 
-            }
-            
-            if (dateInput) {
-                if(datosJson.fecha_evaluacion) { 
-                    dateInput.value = datosJson.fecha_evaluacion; 
-                } else { 
-                    const dP3R = sessionStorage.getItem('evaluacionPaso3_mgrueso');
-                    if(dP3R){ 
-                        try{ 
-                            const dP3 = JSON.parse(dP3R); 
-                            if(dP3.fecha_evaluacion) dateInput.value = dP3.fecha_evaluacion; 
-                        } catch(e){} 
-                    }
-                    if(!dateInput.value) { 
-                        const t = new Date(); 
-                        dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
-                    }
+            const sessionKey = 'evaluacionP4_mfino'; // Clave para los datos de Motor Fino
+
+            // 1. Recupera el objeto de datos del paciente principal (acumulado hasta ahora)
+            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
+            let datosPaciente = {};
+            if (datosPacienteRaw) {
+                try {
+                    datosPaciente = JSON.parse(datosPacienteRaw);
+                } catch (e) {
+                    console.error("Error al parsear datosPacienteParaEvaluacion en Motor Fino:", e);
+                    window.location.href = 'agregar.view.php?error=datos_corruptos'; // Redirige si los datos base están corruptos
+                    return;
                 }
+            } else {
+                console.error("No se encontraron datos del paciente en sessionStorage en Motor Fino. Redirigiendo...");
+                window.location.href = 'agregar.view.php?error=datos_faltantes'; // Redirige si faltan los datos base
+                return;
             }
 
-            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Raw) {
+            // 2. Recupera los datos específicos de Motor Fino para este paso (si existen)
+            const datosMfinoGuardados = sessionStorage.getItem(sessionKey);
+            let datosMfino = {};
+            if (datosMfinoGuardados) { 
                 try { 
-                    const dP1 = JSON.parse(datosPaso1Raw); 
-                    if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes; 
-                } catch(e){ 
-                    if(mesDisplay) mesDisplay.textContent = 'Error';
+                    datosMfino = JSON.parse(datosMfinoGuardados); 
+                } catch(e) { 
+                    console.error("Error Paso 4 (Motor Fino) al parsear datos guardados:", e);
                 }
-            } else if(mesDisplay) { 
+            }
+            
+            // 3. Muestra el mes seleccionado (del Paso 1)
+            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
+            if (mesDisplay && datosPaciente.mes) { 
+                mesDisplay.textContent = datosPaciente.mes;
+            } else if (mesDisplay) { 
                 mesDisplay.textContent = 'No disponible'; 
             }
 
+            // 4. Establece la fecha de evaluación
+            if (dateInput) {
+                if(datosMfino.fecha_evaluacion) { 
+                    dateInput.value = datosMfino.fecha_evaluacion; 
+                } 
+                // Prioriza la fecha del Paso 1 (fecha_inicio_tratamiento) si no hay fecha guardada para este paso
+                else if (datosPaciente.fecha_inicio_tratamiento) {
+                    dateInput.value = datosPaciente.fecha_inicio_tratamiento;
+                }
+                else { 
+                    const t = new Date(); 
+                    dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
+                }
+            }
+
+            // 5. Precarga los valores de los <select> si existen datos guardados
             const form = document.getElementById('evaluacionMotorFinoForm');
-            if(form && datosJson) {
+            if(form && Object.keys(datosMfino).length > 0) { // Asegúrate de que datosMfino tiene propiedades
                 const selects = form.querySelectorAll('select');
                 selects.forEach(select => { 
-                    if(datosJson[select.name] !== undefined) {
-                        select.value = datosJson[select.name]; 
-                    } 
+                    if(datosMfino[select.name] !== undefined) { // Usa !== undefined para aceptar valores como 0
+                        select.value = datosMfino[select.name]; 
+                    } else {
+                        select.value = ""; 
+                    }
                 });
             }
+
+            // --- Console.log para ver los datos cargados al inicio de la página ---
+            console.log('DEBUG (JS - al cargar la página - Motor Fino): datosPacienteParaEvaluacion (acumulado):', datosPaciente);
+            console.log('DEBUG (JS - al cargar la página - Motor Fino): datosMfino (específico de este paso):', datosMfino);
+            // --- Fin Console.log ---
 
             const botonSiguiente = document.getElementById('botonSiguientePaso');
             if (botonSiguiente && form) {
                 botonSiguiente.addEventListener('click', function() {
+                    // 6. Recopila los datos del formulario de Motor Fino
                     const formDataFino = new FormData(form);
-                    const datosPaso = {};
+                    const currentMotorFinoData = {};
                     
-                    console.log("Contenido de FormData en agregar.mfino.php:");
-                    for (let [key, value] of formDataFino.entries()) {
-                        console.log(key + ': ' + value);
-                        datosPaso[key] = value; 
-                    }
+                    // Iterar sobre todos los selects y guardar sus valores, seleccionados o no
+                    const allSelects = form.querySelectorAll('select');
+                    allSelects.forEach(select => {
+                        currentMotorFinoData[select.name] = select.value;
+                    });
 
-                    if(dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
+                    // Asegúrate de incluir la fecha de evaluación del formulario en los datos del paso actual
+                    if(dateInput) currentMotorFinoData['fecha_evaluacion'] = dateInput.value;
+
+                    // 7. Fusiona los datos del paso actual con el objeto principal del paciente
+                    datosPaciente.mfino = currentMotorFinoData; 
+
+                    // 8. console.log para verificar los datos ANTES de guardarlos
+                    console.log('DEBUG (JS - Botón Siguiente - Motor Fino): datosPaciente (fusionado) A PUNTO DE GUARDAR:', datosPaciente);
 
                     try {
-                        console.log(`Datos guardados en ${sessionKey} (Motor Fino):`)
-                        sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                        window.location.href = 'agregar.lenguaje.php';
+                        // 9. Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage
+                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                        
+                        // 10. Opcional: guardar los datos de Motor Fino por separado
+                        sessionStorage.setItem(sessionKey, JSON.stringify(currentMotorFinoData)); 
+
+                        // 11. console.log para verificar los datos DESPUÉS de guardarlos
+                        const datosVerificados = sessionStorage.getItem('datosPacienteParaEvaluacion');
+                        console.log('DEBUG (JS - Botón Siguiente - Motor Fino): datosPaciente (RECUPERADO DE SESSIONSTORAGE DESPUÉS DE GUARDAR):', JSON.parse(datosVerificados));
+
+
+                        window.location.href = 'agregar.lenguaje.php'; // Redirige al siguiente paso
                     } catch(e) { 
-                        console.error("Error guardando P4_M Fino:", e); 
-                        alert("Hubo un error al guardar."); 
+                        console.error("Error al guardar datos en sessionStorage (Motor Fino):", e);
+                        alert("Hubo un error al guardar los datos de Motor Fino."); 
                     }
                 });
             }
