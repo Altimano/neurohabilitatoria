@@ -459,7 +459,7 @@ class Estudios
 
     public function consultarPacientes()
     {
-        $SQL = "SELECT DISTINCT * FROM paciente ORDER BY fecha_registro LIMIT 50";
+        $SQL = "SELECT DISTINCT * FROM paciente ORDER BY fecha_registro DESC LIMIT 50";
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
             die("Error en prepare: " . $this->db->error);

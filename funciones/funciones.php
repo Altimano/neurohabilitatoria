@@ -16,20 +16,17 @@
         return $stmt->num_rows > 0;
     }
 
-    function tomarClavePersonal(){
-        include "./config/db.php";
+    function tomarClavePersonal($user){
         $Con = conectar();
-        $stmt = $Con -> prepare("SELECT clave_personal FROM personal WHERE nombre_usuario_personal = ? AND `contraseña_personal` = ?");
-        $stmt -> bind_param("ss", $user, $password);
-
+        $stmt = $Con -> prepare("SELECT clave_personal FROM personal WHERE nombre_usuario_personal = ?");
+        $stmt -> bind_param("s", $user);
         if (!$stmt) {
             die("Error en la preparación de la consulta: " . $Con->error);
-        }
-    
-        $stmt->bind_param("ss", $user, $password);
+        }   
         $stmt->execute();
-        $stmt->store_result();
-        return $stmt->num_rows > 0;
+        $resultado = $stmt->get_result();
+        $resultadoAssoc = mysqli_fetch_assoc($resultado);
+        return $resultadoAssoc['clave_personal'];
     }
 
     function generarDiccionario($datos) {

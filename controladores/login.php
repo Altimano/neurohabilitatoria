@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (validarAcceso($user, $password)) {
         $_SESSION["user"] = $user;
         $_SESSION["session"] = 'okA';
+        $_SESSION["clave_personal"] = tomarClavePersonal($user);
         header("Location: /inicio");
         exit();
     } else {

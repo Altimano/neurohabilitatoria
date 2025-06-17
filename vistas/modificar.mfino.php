@@ -336,6 +336,25 @@
                     </div>
 
                     <div class="subescala evaluation-card">
+                        <label for="mf_transfiere_manos" class="evaluation-label required">
+                            Toma un objeto y lo transfiere entre sus manos
+                        </label>
+                        <div class="select-wrapper">
+                            <select name="mf_transfiere_manos"
+                                id="mf_transfiere_manos"
+                                class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                <option value="0">0 - No lo logra</option>
+                                <option value="1">1 - Lo intenta pero no lo logra</option>
+                                <option value="2">2 - En proceso</option>
+                                <option value="3">3 - Lo realiza inhábilmente</option>
+                                <option value="4">4 - Normal</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="subescala evaluation-card">
                         <label for="mf_examina_objetos" class="evaluation-label required">
                             Toma objetos que están a su alcance y los examina
                         </label>

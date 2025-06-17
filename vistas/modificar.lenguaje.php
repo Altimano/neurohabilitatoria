@@ -320,7 +320,7 @@
 
                     <div class="subescala evaluation-card">
                         <label for="lng_mama_baba" class="evaluation-label">
-                            Balbuceo reduplicativo /mama/baba
+                            Balbuceo reduplicativo /mama/baba/
                         </label>
                         <div class="select-wrapper">
                             <select name="lng_mama_baba"

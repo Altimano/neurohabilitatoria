@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
                     'factores_de_riesgo'         => '', // Se inicializan vacíos
                     'esPrimeraEvaluacion'        => $esPrimeraEvaluacion,
                     // --- AÑADIDO: clave_personal para ser enviado al SessionStorage ---
-                    'clave_personal'             => 60 // ¡IMPORTANTE! Reemplaza este valor con la clave real del personal logueado
+                    'clave_personal'             => $_SESSION['clave_personal'] // ¡IMPORTANTE! Reemplaza este valor con la clave real del personal logueado
                     // --- FIN AÑADIDO ---
                 ];
 

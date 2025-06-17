@@ -629,7 +629,7 @@
                 'hf_pinza_inferior': datosMfino.mf_desarrolla_agarre,
                 'hf_pinza_fina': datosMfino.mf_pinza_superior,
                 'hf_abajamiento_voluntario': datosMfino.mf_torre_2_cubos,
-                'hf_coordinacion_oculomanual': datosMfino.mf_arma_tren_3_cubos
+                'hf_coordinacion_oculomanual': datosMfino.mf_torre_6_cubos
             };
 
             for (const idHito in mapeoHitosMF) {
@@ -747,7 +747,7 @@
                     enviarDatosEvaluacion(datosParaEnviar);
                     console.log("Datos de evaluación enviados al servidor:", datosParaEnviar);
 
-                    limpiarSessionStorageYRedirigir(clavesDePasos);
+                   // limpiarSessionStorageYRedirigir(clavesDePasos);
                 });
             }
 

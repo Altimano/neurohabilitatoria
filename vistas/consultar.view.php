@@ -124,7 +124,7 @@
                 <td class="border border-sky-300 px-3 py-2">  
                     <form action='consultarPaciente' method='POST' style='display:inline;'>
                     <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
-                    <button type='submit' onclick='return confirm("¿Estás seguro de modificar esta evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
+                    <button type='submit'  class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">
                             Consultar
                         </button>
                     <div class="flex justify-center">

@@ -252,7 +252,7 @@
                     <div class="text-center mb-8">
                         <div class="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl px-8 py-4 shadow-lg">
                             <h1 class="text-2xl md:text-3xl font-bold">
-                                👤 DATOS DEL PACIENTE
+                                 DATOS DEL PACIENTE
                             </h1>
                         </div>
                     </div>
@@ -324,7 +324,7 @@
                                    name="perimetro_cefalico" 
                                    value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>" 
                                    class="form-field w-full" 
-                                   <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>>
+                                   >
                         </div>
 
                         <div>
@@ -367,7 +367,7 @@
                                   rows="4" 
                                   class="form-field textarea-field w-full" 
                                   placeholder="Describir los factores de riesgo relevantes..."
-                                  <?php if (!$esPrimeraEvaluacion) echo 'readonly'; ?>><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['factores_de_riesgo']) ? $datos_paciente_para_mostrar['factores_de_riesgo'] : ''); ?></textarea>
+                                  ><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['factores_de_riesgo']) ? $datos_paciente_para_mostrar['factores_de_riesgo'] : ''); ?></textarea>
                     </div>
                 </div>
 
@@ -437,10 +437,14 @@
                     document.getElementById('dp_edad_corregida_display').value = pacienteDataParaActualizar.edad_corregida_display || '';
                     document.getElementById('factores_riesgo').value = pacienteDataParaActualizar.factores_de_riesgo || '';
 
+                    console.log("Datos del paciente cargados desde sessionStorage:", pacienteDataParaActualizar);
+                    console.log("Es primera evaluación:", esPrimeraEvaluacionJS);;
+
                     const camposAfectadosPorPrimeraEval = [
                         'dp_talla', 'dp_peso', 'dp_perimetro_cefalico',
                         'factores_riesgo'
                     ];
+                    /*
                     camposAfectadosPorPrimeraEval.forEach(idCampo => {
                         const el = document.getElementById(idCampo);
                         if (el) {
@@ -453,7 +457,7 @@
                                 el.classList.add('bg-white');
                             }
                         }
-                    });
+                    });*/
                 } catch (e) {
                     console.error("Error JS: leyendo datosPacienteParaEvaluacion:", e);
                 }
@@ -494,7 +498,7 @@
                         mes: mesSeleccionado
                     };
 
-                    if (pacienteDataParaActualizar.esPrimeraEvaluacion) {
+                    if (pacienteDataParaActualizar) {
                         pacienteDataParaActualizar.talla = document.getElementById('dp_talla').value;
                         pacienteDataParaActualizar.peso = document.getElementById('dp_peso').value;
                         pacienteDataParaActualizar.perimetro_cefalico = document.getElementById('dp_perimetro_cefalico').value;

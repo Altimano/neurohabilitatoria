@@ -435,14 +435,14 @@
                         <tbody>
                             <tr id="Asimetria" value="Asimetría">
                                 <td>Asimetría</td>
-                                <td><input type="checkbox" id="Asimetria_opt1" name="pt_Asimetria[]" value="Axial"></td>
-                                <td><input type="checkbox" id="Asimetria_opt2" name="pt_Asimetria[]" value="Miembro(s)Torácico(s)"></td>
-                                <td><input type="checkbox" id="Asimetria_opt3" name="pt_Asimetria[]" value="Miembro(s)Pélvico(s)"></td>
-                                <td><input type="checkbox" id="Asimetria_opt4" name="pt_Asimetria[]" value="Hemicuerpo"></td>
-                                <td><input type="checkbox" id="Asimetria_opt5" name="pt_Asimetria[]" value="Contralateral"></td>
-                                <td><input type="checkbox" id="Asimetria_opt6" name="pt_Asimetria[]" value="Derecha"></td>
-                                <td><input type="checkbox" id="Asimetria_opt7" name="pt_Asimetria[]" value="Izquierda"></td>
-                                <td><input type="checkbox" id="Asimetria_opt8" name="pt_Asimetria[]" value="Normal"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt1" name="pt_Asimetria[]" value="Axial"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt2" name="pt_Asimetria[]" value="Miembro(s)Torácico(s)"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt3" name="pt_Asimetria[]" value="Miembro(s)Pélvico(s)"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt4" name="pt_Asimetria[]" value="Hemicuerpo"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt5" name="pt_Asimetria[]" value="Contralateral"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt6" name="pt_Asimetria[]" value="Derecha"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt7" name="pt_Asimetria[]" value="Izquierda"></td>
+                                <td><input type="checkbox" id="pt_Asimetria_opt8" name="pt_Asimetria[]" value="Normal"></td>
                             </tr>
                         </tbody>
                         </table>
@@ -586,9 +586,17 @@
                     'tu_hipertonia',
                     'tu_mixto',
                     'tu_fluctuante',
-                    'pt_Asimetria' // Asegúrate que este 'Asimetria' coincida con el name="Asimetria[]"
-                    // Si tenías un grupo 'tu_normal[]' separado y lo quieres, añádelo aquí.
+                    'pt_Asimetria'
                 ];
+
+                 console.log("Checkbox groups a procesar:", checkboxGroupNames[4]);
+                 console.log("Datos JSON cargados:", datosJson);
+
+                 // Verificar si encuentra los checkboxes
+console.log('Checkboxes encontrados:', document.querySelectorAll('input[name="pt_Asimetria[]"]'));
+
+// Verificar estructura de datos
+console.log('Datos:', datosJson.pt_Asimetria);
 
                 if (form && Object.keys(datosJson).length > 0) {
                     checkboxGroupNames.forEach(groupName => {
@@ -597,14 +605,17 @@
                             checkboxesInGroup.forEach(checkbox => {
                                 if (datosJson[groupName].includes(checkbox.value)) {
                                     checkbox.checked = true;
+                                    console.log(`Checkbox ${checkbox.value} en grupo ${groupName} marcado.`);
                                 } else {
                                     checkbox.checked = false;
+                                    console.log(`Checkbox ${checkbox.value} en grupo ${groupName} no marcado.`);
                                 }
                             });
                         } else {
                             const checkboxesInGroup = form.querySelectorAll(`input[name="${groupName}[]"]`);
                             checkboxesInGroup.forEach(checkbox => {
                                 checkbox.checked = false;
+                                console.log(`Checkbox ${checkbox.value} en grupo ${groupName} no marcado (no hay datos).`);
                             });
                         }
                     });
@@ -631,7 +642,7 @@
 
                         try {
                             sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                            window.location.href = '/modificarSignos';
+                            //window.location.href = '/modificarSignos';
                         } catch (e) {
                             console.error(`Error guardando datos de ${sessionKey}:`, e);
                             alert("Hubo un error al guardar los datos de Postura, Tono Muscular y Ubicación.");
