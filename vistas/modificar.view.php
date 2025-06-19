@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php include 'partials/modal.php'; ?>
     <title>Modificar Evaluaciones</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/assets/output.css" rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -27,7 +26,7 @@
 </head>
 
 <body class="bg-gray-100">
-
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
     <div class="px-6 md:px-10 py-4 flex justify-between items-center bg-custom-header-area shadow-sm">
         <h1 class="text-2xl font-bold text-custom-title">Modificar</h1>
         <a href="/inicio" class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">

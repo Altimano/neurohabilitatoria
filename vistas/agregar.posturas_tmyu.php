@@ -298,23 +298,7 @@
                         TONO MUSCULAR Y UBICACIÓN
                     </h1>
                 </div>
-                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
-                    <h2 class="text-lg font-bold text-gray-800 mb-3">
-                        Leyenda de Ubicación para Tono Muscular
-                    </h2>
-                    <div class="flex flex-wrap justify-center gap-2 text-sm">
-                        <span class="abbreviation-tag">General (1)</span>
-                        <span class="abbreviation-tag">Axial (2)</span>
-                        <span class="abbreviation-tag">Extremidades (3)</span>
-                        <span class="abbreviation-tag">Miembros Torácicos (4)</span>
-                        <span class="abbreviation-tag">Miembros Pélvicos (5)</span>
-                        <span class="abbreviation-tag">Hemicuerpo (6)</span>
-                        <span class="abbreviation-tag">Contralateral (7)</span>
-                        <span class="abbreviation-tag">Derecho (8)</span>
-                        <span class="abbreviation-tag">Izquierdo (9)</span>
-                        <span class="abbreviation-tag">Normal</span>
-                    </div>
-                </div>
+                
                 <div class="table-container">
                     <div class="overflow-x-auto">
                         <table class="evaluation-table">
@@ -395,21 +379,7 @@
                         POSTURA
                     </h1>
                 </div>
-                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
-                    <h2 class="text-lg font-bold text-gray-800 mb-3">
-                        Leyenda de Ubicación para Postura
-                    </h2>
-                    <div class="flex flex-wrap justify-center gap-2 text-sm">
-                        <span class="abbreviation-tag">Axial (1)</span>
-                        <span class="abbreviation-tag">Miembros Torácicos (2)</span>
-                        <span class="abbreviation-tag">Miembros Pélvicos (3)</span>
-                        <span class="abbreviation-tag">Hemicuerpo (4)</span>
-                        <span class="abbreviation-tag">Contralateral (5)</span>
-                        <span class="abbreviation-tag">Derecho (6)</span>
-                        <span class="abbreviation-tag">Izquierdo (7)</span>
-                        <span class="abbreviation-tag">Normal</span>
-                    </div>
-                </div>
+                
                 <div class="table-container">
                     <div class="overflow-x-auto">
                         <table class="evaluation-table">

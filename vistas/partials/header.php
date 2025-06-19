@@ -1,12 +1,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Tailwind CSS y Flowbite por CDN -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <link href="/assets/output.css" rel="stylesheet" />
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+    
 </head>
 
 <header class="bg-white text-black w-full shadow-lg">

@@ -642,7 +642,7 @@ console.log('Datos:', datosJson.pt_Asimetria);
 
                         try {
                             sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                            //window.location.href = '/modificarSignos';
+                            window.location.href = '/modificarSignos';
                         } catch (e) {
                             console.error(`Error guardando datos de ${sessionKey}:`, e);
                             alert("Hubo un error al guardar los datos de Postura, Tono Muscular y Ubicación.");

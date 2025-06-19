@@ -747,7 +747,7 @@
                     enviarDatosEvaluacion(datosParaEnviar);
                     console.log("Datos de evaluación enviados al servidor:", datosParaEnviar);
 
-                   // limpiarSessionStorageYRedirigir(clavesDePasos);
+                    limpiarSessionStorageYRedirigir(clavesDePasos);
                 });
             }
 

@@ -5,23 +5,23 @@
     <div class="relative h-screen overflow-hidden">
          <!-- Item 1 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide1.png" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src="/assets/fotoscarrusel/Slide1.webp" class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 2 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide2.png" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src="/assets/fotoscarrusel/Slide2.webp" class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 3 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide3.png" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src="/assets/fotoscarrusel/Slide3.webp" class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 4 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide4.png" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src="/assets/fotoscarrusel/Slide4.webp" class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 5 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide5.png" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src="/assets/fotoscarrusel/Slide5.webp" class="absolute w-full h-full object-cover top-0 left-0">
         </div>
     </div>
     <!-- Slider indicators -->

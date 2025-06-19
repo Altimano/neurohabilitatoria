@@ -1,12 +1,10 @@
     <!-- Tailwind CSS y Flowbite por CDN -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <link href="/assets/output.css" rel="stylesheet" />
 
 <body class="bg-[#BBD6DE] flex items-center justify-center min-h-screen">
-
+ <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
   <div class="w-full max-w-md mb-12">
     <div class="text-4xl mb-6 text-center text-[#1f7BB8] font-semibold">
       <h1>Terapia Neurohabilitatoria</h1>

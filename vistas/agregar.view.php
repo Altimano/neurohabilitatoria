@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
             $error_mensaje = "Error en preparación de consulta: " . $Con->error;
         } else {
             // Asegúrate de que clave_paciente es un entero si lo es en tu BD
-            // ¡Importante!: Si clave_paciente es un INT en la BD, usa "i" en bind_param
+            // ¡Importante!: Si clave_paciente es un INT en la BD, usa "i" en bind_param 
             $stmt->bind_param("i", $clave_paciente); // Cambiado a "i" (integer) asumiendo que clave_paciente es INT
             $stmt->execute();
             $result = $stmt->get_result();

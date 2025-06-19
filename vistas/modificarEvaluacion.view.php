@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Editar Evaluación</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="/assets/output.css" rel="stylesheet"/>
   <style>
     .bg-custom-main-box {
       background-color: #E0F2FE;
