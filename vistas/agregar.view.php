@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
             $error_mensaje = "Error en preparación de consulta: " . $Con->error;
         } else {
             // Asegúrate de que clave_paciente es un entero si lo es en tu BD
-            // ¡Importante!: Si clave_paciente es un INT en la BD, usa "i" en bind_param 
+            // ¡Importante!: Si clave_paciente es un INT en la BD, usa "i" en bind_param
             $stmt->bind_param("i", $clave_paciente); // Cambiado a "i" (integer) asumiendo que clave_paciente es INT
             $stmt->execute();
             $result = $stmt->get_result();
@@ -132,7 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
 <body class="bg-gray-100">
 
     <script>
-        // Este console.log se ejecutará tan pronto como la página se cargue en el navegador.
         // Mostrará los datos que PHP preparó antes de enviarlos al cliente.
         console.log('DEBUG (PHP a JS): datos_paciente_para_mostrar (al cargar la página):', <?php echo json_encode($datos_paciente_para_mostrar); ?>);
         console.log('DEBUG (PHP a JS): esPrimeraEvaluacion (desde PHP al cargar la página):', <?php echo json_encode($esPrimeraEvaluacion); ?>);
@@ -200,11 +199,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
             function limpiarDatosPasosEvaluacion() {
                 const clavesPasos = [
                     'evaluacionPaso1', 'evaluacionPaso2_mkatona', 'evaluacionPaso3_mgrueso',
-                    'evaluacionPaso4_mfino', 'evaluacionPaso5_lenguaje', // Corregido: lenguaje es el paso 5
-                    'evaluacionPaso6_posturas_tmyu', // Corregido: posturas_tmyu es el paso 6
-                    'evaluacionPaso7_signos_alarma', // Corregido: signos_alarma es el paso 7
+                    'evaluacionPaso4_mfino', 'evaluacionPaso5_lenguaje',
+                    'evaluacionPaso6_posturas_tmyu',
+                    'evaluacionPaso7_signos_alarma',
                     'evaluacionPaso8_hitomgrueso',
-                    'evaluacionPaso9_hitomfino' // Añadido el último paso
+                    'evaluacionPaso9_hitomfino'
                 ];
                 clavesPasos.forEach(clave => sessionStorage.removeItem(clave));
             }
@@ -329,7 +328,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     }
 
                     // Crear el objeto para el Paso 1
-                    // AHORA INCLUYE TODOS LOS DATOS RELEVANTES DE TERAPIA_NEUROV2 Y OTROS CALCULADOS/OBTENIDOS
                     const datosPaso1 = {
                         mes: mesSeleccionado,
                         clave_paciente: pacienteDataParaActualizar.clave_paciente,
@@ -341,11 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                         edad_corregida: pacienteDataParaActualizar.edad_corregida_display, 
                         edad_cronologica: pacienteDataParaActualizar.edad_cronologica_ingreso_display,
                         
-                        // Los campos dat_ter_fech_nac_edad_correg, edad_cronologica_al_ingr_sem,
-                        // edad_correg_al_ingr_sem deben ir con los valores correctos para la DB.
-                        // Según tu esquema, 'dat_ter_fech_nac_edad_correg' es DATE.
-                        // 'edad_cronologica_al_ingr_sem' y 'edad_correg_al_ingr_sem' son VARCHAR(4).
-                        dat_ter_fech_nac_edad_correg: pacienteDataParaActualizar.fecha_nacimiento, // Fecha de Nacimiento original, si es la que va en ese campo DATE
+                        dat_ter_fech_nac_edad_correg: pacienteDataParaActualizar.fecha_nacimiento, // Fecha de Nacimiento original
                         edad_cronologica_al_ingr_sem: pacienteDataParaActualizar.sdg.toString(), // Convertir a string para VARCHAR
                         edad_correg_al_ingr_sem: pacienteDataParaActualizar.sdg.toString(), // Convertir a string para VARCHAR
                         

@@ -298,7 +298,20 @@
                         TONO MUSCULAR Y UBICACIÓN
                     </h1>
                 </div>
-                
+                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
+                    <div class="flex flex-wrap justify-center gap-2 text-sm">
+                        <span class="abbreviation-tag">General (1)</span>
+                        <span class="abbreviation-tag">Axial (2)</span>
+                        <span class="abbreviation-tag">Extremidades (3)</span>
+                        <span class="abbreviation-tag">Miembros Torácicos (4)</span>
+                        <span class="abbreviation-tag">Miembros Pélvicos (5)</span>
+                        <span class="abbreviation-tag">Hemicuerpo (6)</span>
+                        <span class="abbreviation-tag">Contralateral (7)</span>
+                        <span class="abbreviation-tag">Derecho (8)</span>
+                        <span class="abbreviation-tag">Izquierdo (9)</span>
+                        <span class="abbreviation-tag">Normal</span>
+                    </div>
+                </div>
                 <div class="table-container">
                     <div class="overflow-x-auto">
                         <table class="evaluation-table">
@@ -379,7 +392,18 @@
                         POSTURA
                     </h1>
                 </div>
-                
+                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
+                    <div class="flex flex-wrap justify-center gap-2 text-sm">
+                        <span class="abbreviation-tag">Axial (1)</span>
+                        <span class="abbreviation-tag">Miembros Torácicos (2)</span>
+                        <span class="abbreviation-tag">Miembros Pélvicos (3)</span>
+                        <span class="abbreviation-tag">Hemicuerpo (4)</span>
+                        <span class="abbreviation-tag">Contralateral (5)</span>
+                        <span class="abbreviation-tag">Derecho (6)</span>
+                        <span class="abbreviation-tag">Izquierdo (7)</span>
+                        <span class="abbreviation-tag">Normal</span>
+                    </div>
+                </div>
                 <div class="table-container">
                     <div class="overflow-x-auto">
                         <table class="evaluation-table">
@@ -417,7 +441,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 6 de 6 - Postura, Tono Muscular y Ubicacion
+                        Paso 5 de 8 - Postura, Tono Muscular y Ubicacion
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →

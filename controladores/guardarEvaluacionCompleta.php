@@ -182,46 +182,62 @@ try {
     
 
     // --- Motor Grueso ---
-    if (isset($data['mgrueso']) && is_array($data['mgrueso'])) {
-        foreach ($evaluation_maps['mgrueso'] as $key => $id_sub_grueso) {
-            $resultado_sql = 'NULL'; 
-            if (isset($data['mgrueso'][$key]) && (is_numeric($data['mgrueso'][$key]) || !empty($data['mgrueso'][$key]))) {
-                $resultado_sql = (int)$data['mgrueso'][$key];
-            }
+if (isset($data['mgrueso']) && is_array($data['mgrueso'])) {
+    foreach ($evaluation_maps['mgrueso'] as $key => $id_sub_grueso) {
+
+        // Verificamos si existe un valor y no es una cadena vacía
+        if (isset($data['mgrueso'][$key]) && $data['mgrueso'][$key] !== '') {
+            
+            // Preparamos el valor numérico
+            $resultado_sql = (int)$data['mgrueso'][$key];
+
+            // Construimos y ejecutamos la consulta SOLO SI hay un valor válido
             $sql_mgrueso = "INSERT INTO `resultados_sub_mg` (`id_terapia_neuro`, `id_sub_grueso`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_sub_grueso}, {$resultado_sql})";
+
             if (!$Con->query($sql_mgrueso)) {
                 $response['message'] .= " Error al guardar Motor Grueso {$key}: " . $Con->error . ".";
             }
         }
     }
+}
 
     // --- Motor Fino ---
-    if (isset($data['mfino']) && is_array($data['mfino'])) {
-        foreach ($evaluation_maps['mfino'] as $key => $id_sub_fino) {
-            $resultado_sql = 'NULL'; 
-            if (isset($data['mfino'][$key]) && (is_numeric($data['mfino'][$key]) || !empty($data['mfino'][$key]))) {
-                $resultado_sql = (int)$data['mfino'][$key];
-            }
+if (isset($data['mfino']) && is_array($data['mfino'])) {
+    foreach ($evaluation_maps['mfino'] as $key => $id_sub_fino) {
+        
+        // Verificamos si existe un valor y no es una cadena vacía
+        if (isset($data['mfino'][$key]) && $data['mfino'][$key] !== '') {
+            
+            // Preparamos el valor numérico
+            $resultado_sql = (int)$data['mfino'][$key];
+
+            // Construimos y ejecutamos la consulta SOLO SI hay un valor válido
             $sql_mfino = "INSERT INTO `resultados_sub_mf` (`id_terapia_neuro`, `id_sub_fino`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_sub_fino}, {$resultado_sql})";
             if (!$Con->query($sql_mfino)) {
                 $response['message'] .= " Error al guardar Motor Fino {$key}: " . $Con->error . ".";
             }
         }
     }
+}
 
-    // --- Lenguaje ---
-    if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
-        foreach ($evaluation_maps['lenguaje'] as $key => $id_sub_leng) {
-            $resultado_sql = 'NULL'; 
-            if (isset($data['lenguaje'][$key]) && (is_numeric($data['lenguaje'][$key]) || !empty($data['lenguaje'][$key]))) {
-                $resultado_sql = (int)$data['lenguaje'][$key];
-            }
+// --- Lenguaje ---
+if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
+    foreach ($evaluation_maps['lenguaje'] as $key => $id_sub_leng) {
+
+        // Verificamos si existe un valor y no es una cadena vacía
+        if (isset($data['lenguaje'][$key]) && $data['lenguaje'][$key] !== '') {
+
+            // Preparamos el valor numérico
+            $resultado_sql = (int)$data['lenguaje'][$key];
+
+            // Construimos y ejecutamos la consulta SOLO SI hay un valor válido
             $sql_lenguaje = "INSERT INTO `resultados_sub_leng` (`id_terapia_neuro`, `id_sub_leng`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_sub_leng}, {$resultado_sql})";
             if (!$Con->query($sql_lenguaje)) {
                 $response['message'] .= " Error al guardar Lenguaje {$key}: " . $Con->error . ".";
             }
         }
     }
+}
 
     // --- Postura y Tono Muscular ---
     if (isset($data['posturas_tmyu']) && is_array($data['posturas_tmyu'])) {
@@ -298,50 +314,66 @@ try {
     }
 
     // --- Hitos Motor Grueso ---
-    if (isset($data['hitomgrueso']) && is_array($data['hitomgrueso'])) {
-        $fecha_evaluacion_hitos_mg = isset($data['hitomgrueso']['fecha_evaluacion']) && !empty($data['hitomgrueso']['fecha_evaluacion']) 
-                                    ? "'" . $Con->real_escape_string($data['hitomgrueso']['fecha_evaluacion']) . "'" : 'NULL';
+if (isset($data['hitomgrueso']) && is_array($data['hitomgrueso'])) {
+    // Se obtiene la fecha de evaluación general para este bloque
+    $fecha_evaluacion_hitos_mg = isset($data['hitomgrueso']['fecha_evaluacion']) && !empty($data['hitomgrueso']['fecha_evaluacion']) 
+                                ? "'" . $Con->real_escape_string($data['hitomgrueso']['fecha_evaluacion']) . "'" : 'NULL';
 
-        foreach ($evaluation_maps['hitos_mg_fechas'] as $key => $id_hito_motor_grueso) {
+    foreach ($evaluation_maps['hitos_mg_fechas'] as $key => $id_hito_motor_grueso) {
+        
+        // La condición principal: solo proceder si el dato existe y no es una cadena vacía
+        if (isset($data['hitomgrueso'][$key]) && $data['hitomgrueso'][$key] !== '') {
+
+            // Preparamos el valor de "semanas"
+            $fecha_consolidacion_semanas_sql = "'" . $Con->real_escape_string($data['hitomgrueso'][$key]) . "'";
+            
+            // Falta haver bien la consolidacion en semanas
             $fecha_consolidacion_sql = 'NULL'; 
-            $fecha_consolidacion_semanas_sql = 'NULL'; 
 
-            if (isset($data['hitomgrueso'][$key]) && !empty($data['hitomgrueso'][$key])) {
-                $fecha_consolidacion_semanas_sql = "'" . $Con->real_escape_string($data['hitomgrueso'][$key]) . "'";
-                // La fecha de consolidación se guarda solo si el valor de semanas es '4'.
-                if ($data['hitomgrueso'][$key] === '4') {
-                    $fecha_consolidacion_sql = $fecha_evaluacion_hitos_mg;
-                }
+            // Si el valor es '4', usamos la fecha de evaluación como fecha de consolidación
+            if ($data['hitomgrueso'][$key] === '4') {
+                $fecha_consolidacion_sql = $fecha_evaluacion_hitos_mg;
             }
+
+            // Construimos y ejecutamos la consulta INSERT solo dentro de la condición
             $sql_hitos_mg = "INSERT INTO `resultados_hitos_mg` (`id_terapia_neuro`, `id_hito_motor_grueso`, `fecha_consolidacion`, `fecha_consolidacion_semanas`) VALUES ({$id_terapia_neuro_generado}, {$id_hito_motor_grueso}, {$fecha_consolidacion_sql}, {$fecha_consolidacion_semanas_sql})";
             if (!$Con->query($sql_hitos_mg)) {
                 $response['message'] .= " Error al guardar Hito Motor Grueso {$key}: " . $Con->error . ".";
             }
         }
     }
+}
 
-    // --- Hitos Motor Fino ---
-    if (isset($data['hitomfino']) && is_array($data['hitomfino'])) {
-        $fecha_evaluacion_hitos_mf = isset($data['hitomfino']['fecha_evaluacion']) && !empty($data['hitomfino']['fecha_evaluacion']) 
-                                    ? "'" . $Con->real_escape_string($data['hitomfino']['fecha_evaluacion']) . "'" : 'NULL';
+// --- Hitos Motor Fino ---
+if (isset($data['hitomfino']) && is_array($data['hitomfino'])) {
+    // Se obtiene la fecha de evaluación general para este bloque
+    $fecha_evaluacion_hitos_mf = isset($data['hitomfino']['fecha_evaluacion']) && !empty($data['hitomfino']['fecha_evaluacion']) 
+                                ? "'" . $Con->real_escape_string($data['hitomfino']['fecha_evaluacion']) . "'" : 'NULL';
 
-        foreach ($evaluation_maps['hitos_mf_fechas'] as $key => $id_hito_mf) {
+    foreach ($evaluation_maps['hitos_mf_fechas'] as $key => $id_hito_mf) {
+        
+        // La condición principal: solo proceder si el dato existe y no es una cadena vacía
+        if (isset($data['hitomfino'][$key]) && $data['hitomfino'][$key] !== '') {
+
+            // Preparamos el valor de "semanas"
+            $fecha_consolidacion_semanas_sql = "'" . $Con->real_escape_string($data['hitomfino'][$key]) . "'";
+
+            // Falta haver bien la consolidacion en semanas
             $fecha_consolidacion_sql = 'NULL'; 
-            $fecha_consolidacion_semanas_sql = 'NULL'; 
-
-            if (isset($data['hitomfino'][$key]) && !empty($data['hitomfino'][$key])) {
-                $fecha_consolidacion_semanas_sql = "'" . $Con->real_escape_string($data['hitomfino'][$key]) . "'";
-                // La fecha de consolidación se guarda solo si el valor de semanas es '4'.
-                if ($data['hitomfino'][$key] === '4') {
-                    $fecha_consolidacion_sql = $fecha_evaluacion_hitos_mf;
-                }
+            
+            // Si el valor es '4', usamos la fecha de evaluación como fecha de consolidación
+            if ($data['hitomfino'][$key] === '4') {
+                $fecha_consolidacion_sql = $fecha_evaluacion_hitos_mf;
             }
+
+            // Construimos y ejecutamos la consulta INSERT solo dentro de la condición
             $sql_hitos_mf = "INSERT INTO `resultados_hitos_mf` (`id_terapia_neuro`, `id_hito_mf`, `fecha_consolidacion`, `fecha_consolidacion_semanas`) VALUES ({$id_terapia_neuro_generado}, {$id_hito_mf}, {$fecha_consolidacion_sql}, {$fecha_consolidacion_semanas_sql})";
             if (!$Con->query($sql_hitos_mf)) {
                 $response['message'] .= " Error al guardar Hito Motor Fino {$key}: " . $Con->error . ".";
             }
         }
     }
+}
 
     // Cierra la conexión a la base de datos.
     $Con->close();

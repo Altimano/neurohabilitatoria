@@ -574,7 +574,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 4 de 6 - Motor Fino
+                        Paso 3 de 8 - Motor Fino
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →
@@ -661,10 +661,12 @@
                     // Incluye la fecha de evaluación del formulario.
                     if(dateInput) currentMotorFinoData['fecha_evaluacion'] = dateInput.value;
 
-                    // Itera sobre todos los selects y guarda sus valores.
+                    // Itera sobre todos los selects y guarda sus valores si es que su informacion no es NULL.
                     const allSelects = form.querySelectorAll('select');
                     allSelects.forEach(select => {
-                        currentMotorFinoData[select.name] = select.value;
+                        if(select.value !== ""){
+                            currentMotorFinoData[select.name] = select.value;
+                        }
                     });
                     
                     // Fusiona los datos del paso actual con el objeto principal del paciente.

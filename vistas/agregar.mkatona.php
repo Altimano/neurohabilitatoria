@@ -260,9 +260,6 @@
                     </h1>
                 </div>
                 <div class="legend-card">
-                    <h2 class="text-lg font-bold text-gray-800 mb-4 text-center">
-                        Leyenda de Abreviaciones
-                    </h2>
                     <div class="flex flex-wrap justify-center gap-2 text-xs">
                         <span class="abbreviation-tag">N - Normal</span>
                         <span class="abbreviation-tag">- Hipotonía</span>
@@ -453,11 +450,11 @@
                         </table>
                     </div>
                     <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <a href="/modificarDatosPaciente" class="btn-navigation">
+                        <a href="/vistas/agregar.view.php" class="btn-navigation">
                             ← ANTERIOR
                         </a>
                         <div class="text-sm text-gray-600 text-center hidden sm:block">
-                            Paso 2 de 6 - Maniobras Katona
+                            Paso 1 de 8 - Maniobras Katona
                         </div>
                         <button type="button" id="botonSiguientePaso" class="btn-navigation">
                             SIGUIENTE →

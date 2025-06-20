@@ -435,7 +435,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 5 de 6 - Lenguaje
+                        Paso 4 de 8 - Lenguaje
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →
@@ -522,10 +522,12 @@
                     // Incluye la fecha de evaluación del formulario.
                     if(dateInput) currentLenguajeData['fecha_evaluacion'] = dateInput.value;
 
-                    // Itera sobre todos los selects y guarda sus valores.
+                    // Itera sobre todos los selects y guarda sus valores si es que su informacion no es NULL.
                     const allSelects = form.querySelectorAll('select');
                     allSelects.forEach(select => {
-                        currentLenguajeData[select.name] = select.value;
+                        if(select.value !== ""){
+                            currentLenguajeData[select.name] = select.value;
+                        }
                     });
 
                     // Fusiona los datos del paso actual con el objeto principal del paciente.

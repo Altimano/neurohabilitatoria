@@ -426,7 +426,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 6 de 6 - Signos de Alarma
+                        Paso 6 de 8 - Signos de Alarma
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →

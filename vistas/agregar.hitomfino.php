@@ -394,7 +394,7 @@
                     <input type="hidden" name="hf_pinza_fina" id="hf_pinza_fina_value">
                 </div>
                 <div>
-                    <label for="hf_abajamiento_voluntario_display" class="block text-sm font-medium text-gray-700 mb-1">Alojamiento Voluntario (AV)</label>
+                    <label for="hf_abajamiento_voluntario_display" class="block text-sm font-medium text-gray-700 mb-1">Aflojamiento Voluntario (AV)</label>
                     <p id="hf_abajamiento_voluntario_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_abajamiento_voluntario" id="hf_abajamiento_voluntario_value">
                 </div>
@@ -409,6 +409,9 @@
                 <a href="agregar.hitomgrueso.php">
                     <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
                 </a>
+                <div class="text-sm text-gray-600 text-center hidden sm:block">
+                        Paso 8 de 8 - Lenguaje
+                    </div>
                 <button type="button" id="botonFinalizarEvaluacion" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">FINALIZAR EVALUACIÓN</button>
             </div>
         </form>
