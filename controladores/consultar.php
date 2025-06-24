@@ -4,7 +4,6 @@ session_start();
 include './config/db.php';
 include './Clases/Estudios.php';
 $pacientes = [];
-var_dump($_SESSION);
 
 if ($_SESSION["session"] === 'okA') {
     if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {

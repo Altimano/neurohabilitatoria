@@ -362,7 +362,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 7 de 8 - Hitos de Desarrollo Motor Grueso
+                        Paso 7 de 9 - Hitos de Desarrollo Motor Grueso
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →

@@ -283,8 +283,8 @@
                                     <th>Normal</th>
                                     <th>Hipotonía</th>
                                     <th>Hipertonía</th>
-                                    <th>M. Torácicos</th>
-                                    <th>M. Pélvicos</th>
+                                    <th>Miembros Torácicos</th>
+                                    <th>Miembros Pélvicos</th>
                                     <th>Extremidades</th>
                                     <th>Hemicuerpo</th>
                                     <th>Contralateral</th>
@@ -454,7 +454,7 @@
                             ← ANTERIOR
                         </a>
                         <div class="text-sm text-gray-600 text-center hidden sm:block">
-                            Paso 1 de 8 - Maniobras Katona
+                            Paso 2 de 9 - Maniobras Katona
                         </div>
                         <button type="button" id="botonSiguientePaso" class="btn-navigation">
                             SIGUIENTE →

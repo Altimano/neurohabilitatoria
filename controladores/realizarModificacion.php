@@ -111,6 +111,7 @@ $campos_modificar_paciente = [
     'peso' => 'peso',
     'perimetro_cefalico' => 'pc',
     'factores_de_riesgo' => 'factores_riesgo',
+    'observaciones' => 'observaciones'
 ];
 
 $datosPaciente = [];

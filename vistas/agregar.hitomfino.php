@@ -399,7 +399,7 @@
                     <input type="hidden" name="hf_abajamiento_voluntario" id="hf_abajamiento_voluntario_value">
                 </div>
                 <div>
-                    <label for="hf_coordinacion_oculomanual_display" class="block text-sm font-medium text-gray-700 mb-1">Coordinación Oculomanual (CO)</label>
+                    <label for="hf_coordinacion_oculomanual_display" class="block text-sm font-medium text-gray-700 mb-1">Coordinación Óculomanual (CO)</label>
                     <p id="hf_coordinacion_oculomanual_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_coordinacion_oculomanual" id="hf_coordinacion_oculomanual_value">
                 </div>

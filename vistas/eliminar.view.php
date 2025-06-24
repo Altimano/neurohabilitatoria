@@ -89,9 +89,10 @@
                     <tr class="bg-sky-200 text-custom-title">
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Clave del paciente</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Paciente</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Registro</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestacion</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluacion</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Terapia</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Personal Encargado	</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestación</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de inicio de tratamiento</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium"></th>
                         </tr>
                 </thead>

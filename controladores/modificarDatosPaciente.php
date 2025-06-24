@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["terapia_id"])) {
         'edad_corregida_display'   => $datosPaciente['edad_corregida'],
         'edad_cronologica_ingreso_display' => $datosPaciente['edad_cronologica_al_ingr_sem'],
         'factores_de_riesgo'    => $datosPaciente['factores_riesgo'],
+        'observaciones' => $datosPaciente['observaciones'],
         'esPrimeraEvaluacion'   => $esPrimeraEvaluacion
     ];
 } 

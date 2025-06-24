@@ -467,7 +467,7 @@
 
                     <div class="evaluation-card">
                         <label for="hf_abajamiento_voluntario_display" class="evaluation-label">
-                            Alojamiento Voluntario (AV)
+                            Aflojamiento Voluntario (AV)
                         </label>
                         <div class="hito-display" id="hf_abajamiento_voluntario_display">
                             <em>Cargando...</em>
@@ -477,7 +477,7 @@
 
                     <div class="evaluation-card md:col-span-2 lg:col-span-1">
                         <label for="hf_coordinacion_oculomanual_display" class="evaluation-label">
-                            Coordinación Oculomanual (CO)
+                            Coordinación Óculomanual (CO)
                         </label>
                         <div class="hito-display" id="hf_coordinacion_oculomanual_display">
                             <em>Cargando...</em>

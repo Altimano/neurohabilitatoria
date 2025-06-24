@@ -1,12 +1,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/output.css" rel="stylesheet" />
     <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
-    
+
 </head>
 
 <header class="bg-white text-black w-full shadow-lg">

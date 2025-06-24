@@ -69,7 +69,8 @@ class Estudios
     t.peso,
     t.talla,
     t.pc,
-    t.factores_riesgo
+    t.factores_riesgo,
+    t.observaciones
     FROM terapia_neurov2 t
     JOIN paciente p ON t.clave_paciente = p.clave_paciente
     JOIN personal pers ON t.clave_personal = pers.clave_personal

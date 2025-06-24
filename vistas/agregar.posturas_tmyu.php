@@ -441,7 +441,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 5 de 8 - Postura, Tono Muscular y Ubicacion
+                        Paso 6 de 9 - Postura, Tono Muscular y Ubicacion
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →

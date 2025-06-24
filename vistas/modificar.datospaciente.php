@@ -176,16 +176,16 @@
             .form-section {
                 padding: 1.5rem;
             }
-            
+
             .patient-data-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-            
+
             .navigation-buttons {
                 padding: 1.5rem;
             }
-            
+
             .btn-navigation {
                 min-width: 100px;
                 padding: 0.75rem 1.5rem;
@@ -226,18 +226,18 @@
     <div class="container mx-auto px-4 max-w-7xl">
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="formPaso1">
-                
+
                 <!-- Selector de mes -->
                 <div class="month-selector-section">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                         <label for="mes_seleccionado" class="form-label text-lg whitespace-nowrap">
-                             Selecciona el mes de revisión
+                            Selecciona el mes de revisión
                         </label>
                         <div class="select-wrapper flex-grow max-w-xs">
-                            <select name="mes" 
-                                    id="mes_seleccionado" 
-                                    required 
-                                    class="form-field select-custom w-full">
+                            <select name="mes"
+                                id="mes_seleccionado"
+                                required
+                                class="form-field select-custom w-full">
                                 <option value="" disabled selected>Seleccione el mes</option>
                                 <?php for ($i = 1; $i <= 24; $i++): ?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
@@ -252,7 +252,7 @@
                     <div class="text-center mb-8">
                         <div class="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl px-8 py-4 shadow-lg">
                             <h1 class="text-2xl md:text-3xl font-bold">
-                                 DATOS DEL PACIENTE
+                                DATOS DEL PACIENTE
                             </h1>
                         </div>
                     </div>
@@ -261,97 +261,96 @@
                     <div class="patient-data-grid">
                         <div>
                             <label class="form-label">Nombre Paciente</label>
-                            <input type="text" 
-                                   id="dp_nombre_paciente" 
-                                   name="nombre_paciente_display" 
-                                   value="<?= htmlspecialchars($datosPaciente['nombre_paciente']) ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="text"
+                                id="dp_nombre_paciente"
+                                name="nombre_paciente_display"
+                                value="<?= htmlspecialchars($datosPaciente['nombre_paciente']) ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
 
                         <div>
                             <label class="form-label">Clave Paciente</label>
-                            <input type="text" 
-                                   id="dp_clave_paciente" 
-                                   name="clave_paciente_display" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['clave_paciente']) ? $datos_paciente_para_mostrar['clave_paciente'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="text"
+                                id="dp_clave_paciente"
+                                name="clave_paciente_display"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['clave_paciente']) ? $datos_paciente_para_mostrar['clave_paciente'] : ''); ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
 
                         <div>
                             <label class="form-label">Fecha de Nacimiento</label>
-                            <input type="date" 
-                                   id="dp_fecha_nacimiento" 
-                                   name="fecha_nacimiento" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento']) ? $datos_paciente_para_mostrar['fecha_nacimiento'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="date"
+                                id="dp_fecha_nacimiento"
+                                name="fecha_nacimiento"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento']) ? $datos_paciente_para_mostrar['fecha_nacimiento'] : ''); ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
 
                         <div>
                             <label class="form-label">Semanas de Gestación (SDG)</label>
-                            <input type="text" 
-                                   id="dp_sdg" 
-                                   name="sdg" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['sdg']) ? $datos_paciente_para_mostrar['sdg'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="text"
+                                id="dp_sdg"
+                                name="sdg"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['sdg']) ? $datos_paciente_para_mostrar['sdg'] : ''); ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
 
                         <div>
                             <label class="form-label"> Talla</label>
-                            <input type="text" 
-                                   id="dp_talla" 
-                                   name="talla" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>" 
-                                   class="form-field w-full">
+                            <input type="text"
+                                id="dp_talla"
+                                name="talla"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>"
+                                class="form-field w-full">
                         </div>
 
                         <div>
                             <label class="form-label"> Peso</label>
-                            <input type="text" 
-                                   id="dp_peso" 
-                                   name="peso" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>" 
-                                   class="form-field w-full">
+                            <input type="text"
+                                id="dp_peso"
+                                name="peso"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>"
+                                class="form-field w-full">
                         </div>
 
                         <div>
                             <label class="form-label"> Perímetro Cefálico</label>
-                            <input type="text" 
-                                   id="dp_perimetro_cefalico" 
-                                   name="perimetro_cefalico" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   >
+                            <input type="text"
+                                id="dp_perimetro_cefalico"
+                                name="perimetro_cefalico"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>"
+                                class="form-field w-full">
                         </div>
 
                         <div>
                             <label class="form-label"> Fecha de Evaluación</label>
-                            <input type="date" 
-                                   id="dp_fecha_inicio_tratamiento" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="date"
+                                id="dp_fecha_inicio_tratamiento"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
 
                         <div>
                             <label class="form-label"> Edad Cronológica</label>
-                            <input type="text" 
-                                   id="dp_edad_cronologica_ingreso_display" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="text"
+                                id="dp_edad_cronologica_ingreso_display"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
 
                         <div>
                             <label class="form-label"> Fecha Nacimiento Corregida</label>
-                            <input type="text" 
-                                   id="dp_edad_corregida_display" 
-                                   value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>" 
-                                   class="form-field w-full" 
-                                   readonly>
+                            <input type="text"
+                                id="dp_edad_corregida_display"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>"
+                                class="form-field w-full"
+                                readonly>
                         </div>
                     </div>
 
@@ -360,15 +359,29 @@
                     <!-- Factores de riesgo -->
                     <div>
                         <label for="factores_riesgo" class="form-label text-lg mb-3">
-                             Factores de Riesgo
+                            Factores de Riesgo
                         </label>
-                        <textarea id="factores_riesgo" 
-                                  name="factores_riesgo" 
-                                  rows="4" 
-                                  class="form-field textarea-field w-full" 
-                                  placeholder="Describir los factores de riesgo relevantes..."
-                                  ><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['factores_de_riesgo']) ? $datos_paciente_para_mostrar['factores_de_riesgo'] : ''); ?></textarea>
+                        <textarea id="factores_riesgo"
+                            name="factores_riesgo"
+                            rows="4"
+                            class="form-field textarea-field w-full"
+                            placeholder="Describir los factores de riesgo relevantes..."><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['factores_de_riesgo']) ? $datos_paciente_para_mostrar['factores_de_riesgo'] : ''); ?></textarea>
                     </div>
+
+                    <div class="section-divider"></div>
+
+                    <div>
+                        <label for="observaciones" class="form-label text-lg mb-3">
+                            Observaciones
+                        </label>
+                        <textarea id="observaciones"
+                            name="observaciones"
+                            rows="4"
+                            class="form-field textarea-field w-full"
+                            placeholder="Describir los factores de riesgo relevantes..."><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['observaciones']) ? $datos_paciente_para_mostrar['observaciones'] : ''); ?></textarea>
+                    </div>
+
+
                 </div>
 
                 <!-- Botones de navegación -->
@@ -424,7 +437,7 @@
                 try {
                     pacienteDataParaActualizar = JSON.parse(datosPacienteGuardados);
                     esPrimeraEvaluacionJS = pacienteDataParaActualizar.esPrimeraEvaluacion || false;
-                    
+
                     document.getElementById('dp_nombre_paciente').value = pacienteDataParaActualizar.nombre_paciente || '';
                     document.getElementById('dp_clave_paciente').value = pacienteDataParaActualizar.clave_paciente || '';
                     document.getElementById('dp_fecha_nacimiento').value = pacienteDataParaActualizar.fecha_nacimiento || '';
@@ -436,6 +449,7 @@
                     document.getElementById('dp_edad_cronologica_ingreso_display').value = pacienteDataParaActualizar.edad_cronologica_ingreso_display || '';
                     document.getElementById('dp_edad_corregida_display').value = pacienteDataParaActualizar.edad_corregida_display || '';
                     document.getElementById('factores_riesgo').value = pacienteDataParaActualizar.factores_de_riesgo || '';
+                    document.getElementById('observaciones').value = pacienteDataParaActualizar.observaciones || '';
 
                     console.log("Datos del paciente cargados desde sessionStorage:", pacienteDataParaActualizar);
                     console.log("Es primera evaluación:", esPrimeraEvaluacionJS);;
@@ -485,11 +499,11 @@
                         alertDiv.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
                         alertDiv.innerHTML = '⚠️ Por favor, selecciona un mes de revisión.';
                         document.body.appendChild(alertDiv);
-                        
+
                         setTimeout(() => {
                             alertDiv.remove();
                         }, 3000);
-                        
+
                         mesSelector.focus();
                         return;
                     }
@@ -505,19 +519,20 @@
                         pacienteDataParaActualizar.sdg = document.getElementById('dp_sdg').value;
                         pacienteDataParaActualizar.fecha_nacimiento = document.getElementById('dp_fecha_nacimiento').value;
                         pacienteDataParaActualizar.factores_de_riesgo = document.getElementById('factores_riesgo').value;
+                        pacienteDataParaActualizar.observaciones = document.getElementById('observaciones').value;
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(pacienteDataParaActualizar));
                     }
 
                     try {
                         sessionStorage.setItem('evaluacionPaso1', JSON.stringify(datosPaso1));
-                         window.location.href = '/modificarKatona';
+                        window.location.href = '/modificarKatona';
                     } catch (e) {
                         console.error("Error al guardar mes en sessionStorage:", e);
                         const alertDiv = document.createElement('div');
                         alertDiv.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50';
                         alertDiv.innerHTML = '❌ Hubo un error al intentar guardar los datos.';
                         document.body.appendChild(alertDiv);
-                        
+
                         setTimeout(() => alertDiv.remove(), 3000);
                     }
                 });
@@ -529,7 +544,7 @@
                 campo.addEventListener('focus', function() {
                     this.style.transform = 'translateY(-1px)';
                 });
-                
+
                 campo.addEventListener('blur', function() {
                     this.style.transform = 'translateY(0)';
                 });

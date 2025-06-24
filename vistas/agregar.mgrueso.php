@@ -642,7 +642,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 2 de 8 - Motor Grueso
+                        Paso 3 de 9 - Motor Grueso
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →
