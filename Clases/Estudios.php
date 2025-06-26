@@ -31,6 +31,7 @@ class Estudios
                 CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
                 t.fecha_inicio_terapia,
                 t.fecha_terapia,
+                t.num_evaluacion,
                 pers.nombre_personal AS terapeuta,
                 p.semanas_gestacion         
             FROM terapia_neurov2 t
@@ -70,7 +71,8 @@ class Estudios
     t.talla,
     t.pc,
     t.factores_riesgo,
-    t.observaciones
+    t.observaciones,
+    t.num_evaluacion
     FROM terapia_neurov2 t
     JOIN paciente p ON t.clave_paciente = p.clave_paciente
     JOIN personal pers ON t.clave_personal = pers.clave_personal
@@ -258,6 +260,7 @@ class Estudios
         CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
         t.fecha_inicio_terapia,
         t.fecha_terapia,
+        t.num_evaluacion,
         pers.nombre_personal AS terapeuta,
         p.semanas_gestacion         
         FROM terapia_neurov2 t
@@ -286,6 +289,7 @@ class Estudios
         CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
         t.fecha_inicio_terapia,
         t.fecha_terapia,
+        t.num_evaluacion,
         pers.nombre_personal AS terapeuta,
         p.semanas_gestacion         
         FROM terapia_neurov2 t
@@ -314,6 +318,7 @@ class Estudios
         CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
         t.fecha_inicio_terapia,
         t.fecha_terapia,
+        t.num_evaluacion,
         pers.nombre_personal AS terapeuta,
         p.semanas_gestacion         
         FROM terapia_neurov2 t
@@ -343,6 +348,7 @@ class Estudios
         CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
         t.fecha_inicio_terapia,
         t.fecha_terapia,
+        t.num_evaluacion,
         pers.nombre_personal AS terapeuta,
         p.semanas_gestacion         
         FROM terapia_neurov2 t
@@ -370,6 +376,7 @@ class Estudios
         CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
         t.fecha_inicio_terapia,
         t.fecha_terapia,
+        t.num_evaluacion,
         pers.nombre_personal AS terapeuta,
         p.semanas_gestacion         
         FROM terapia_neurov2 t
@@ -397,6 +404,7 @@ class Estudios
         CONCAT(p.nombre_paciente , ' ' , p.apellido_paterno_paciente , ' ' , p.apellido_materno_paciente) AS nombre_paciente,
         t.fecha_inicio_terapia,
         t.fecha_terapia,
+        t.num_evaluacion,
         pers.nombre_personal AS terapeuta,
         p.semanas_gestacion         
         FROM terapia_neurov2 t
@@ -725,6 +733,21 @@ class Estudios
         $resultado = $stmt->get_result();
         $stmt->close();
         return $resultado->num_rows > 0; 
+    }
+
+    public function contadorEvaluacion($clave_paciente)
+    {
+        $stmt = $this->db->prepare("SELECT num_evaluacion FROM terapia_neurov2 WHERE clave_paciente = ? ORDER BY num_evaluacion DESC LIMIT 1");
+        $stmt->bind_param("i", $clave_paciente);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $resultAssoc = $resultado->fetch_assoc();
+        if (!empty($resultado)){
+            $resultAssoc["num_evaluacion"] = 1 + $resultAssoc["num_evaluacion"];
+            //Falta logica para encontrar el id de terapia especifica depende de miguel
+            $stmt = $this->db->prepare("INSERT INTO terapia_neurov2 (num_evaluacion) VALUES ($resultAssoc) WHERE clave_paciente = ? ");
+        }
+
     }
 
 }

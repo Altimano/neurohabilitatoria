@@ -71,7 +71,7 @@
 
             </div>
             <div class="w-full sm:flex-grow">
-                <label for="codigo" class="block text-sm font-medium text-custom-title mb-1">Codigo de paciente</label>
+                <label for="codigo" class="block text-sm font-medium text-custom-title mb-1">Clave del paciente</label>
                 <input
                     type="text"
                     id="codigo"
@@ -98,13 +98,13 @@
             <table class="w-full border-collapse border border-sky-300 bg-white text-sm">
                 <thead>
                     <tr class="bg-sky-200 text-custom-title">
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Clave de Paciente</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Clave del Paciente</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Paciente</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluación</th>
                         <th class="border border-sky-300 px-3 py-2 text-left font-medium">Nombre del Personal Encargado</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestacion</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de inicio de tratamiento</th>
-                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluacion</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Fecha de Evaluación</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Numero de Evaluación</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium">Semanas de Gestación</th>
+                        <th class="border border-sky-300 px-3 py-2 text-left font-medium"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,10 +114,10 @@
                             <tr>
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_paciente"]) ?> </td>
-                                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["terapeuta"]) ?></td>
+                                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
+                                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["num_evaluacion"]) ?></td>
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
-                                <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_inicio_terapia"]) ?></td>
                                 <td class="border border-sky-300 px-3 py-2">
                                     <form action='modificarDatosPaciente' method='POST' style='display:inline;'>
                                         <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"], ENT_QUOTES); ?>'>

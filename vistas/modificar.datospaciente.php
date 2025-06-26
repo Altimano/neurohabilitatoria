@@ -390,11 +390,6 @@
                         <a href="/modificar" class="btn-navigation">
                             ← ANTERIOR
                         </a>
-                        <div class="info-banner flex-grow mx-4 hidden sm:block">
-                            <p class="text-sm text-blue-700 font-medium">
-                                Complete todos los campos requeridos para continuar
-                            </p>
-                        </div>
                         <button type="button" id="botonSiguientePaso" class="btn-navigation">
                             SIGUIENTE →
                         </button>

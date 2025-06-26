@@ -316,7 +316,12 @@
               <label class="field-label">Personal encargado</label>
               <input type="text" name="edad_correg_al_ingr_mes" readonly value="<?= htmlspecialchars($datosPaciente['nombre_personal']) ?>" class="field-input">
             </div>
-            
+          
+            <div class="patient-field">
+              <label class="field-label">Numero de Evaluacion</label>
+              <input type="text" name="num_evaluacion" readonly value="<?= htmlspecialchars($datosPaciente['num_evaluacion']) ?>" class="field-input">
+            </div>
+
             <div class="patient-field md:col-span-2 lg:col-span-3">
               <label class="field-label">Factores de Riesgo</label>
               <input type="text" name="factores_riesgo" readonly value="<?= htmlspecialchars($datosPaciente['factores_riesgo']) ?>" class="field-input">
