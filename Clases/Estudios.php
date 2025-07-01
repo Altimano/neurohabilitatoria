@@ -72,10 +72,18 @@ class Estudios
     t.pc,
     t.factores_riesgo,
     t.observaciones,
-    t.num_evaluacion
+    t.num_evaluacion,
+    t.motor_grueso_puntaje_total,
+    t.motor_grueso_porcentaje,
+    t.motor_fino_puntaje_total,
+    t.motor_fino_porcentaje,
+    t.lenguaje_puntaje_total,
+    t.lenguaje_porcentaje,
+    espa.descripcion_estado_paciente
     FROM terapia_neurov2 t
     JOIN paciente p ON t.clave_paciente = p.clave_paciente
     JOIN personal pers ON t.clave_personal = pers.clave_personal
+    JOIN estado_paciente espa ON p.clave_estado_paciente = espa.clave_estado_paciente 
     WHERE t.id_terapia_neurohabilitatoriav2 = ?";
 
         $stmt = $this->db->prepare($SQL);

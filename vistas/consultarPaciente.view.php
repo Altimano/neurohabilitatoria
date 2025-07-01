@@ -267,6 +267,11 @@
             </div>
 
             <div class="patient-field">
+              <label class="field-label">Estado del Paciente</label>
+              <input type="text" name="descripcion_estado_paciente" readonly value="<?= htmlspecialchars($datosPaciente['descripcion_estado_paciente']) ?>" class="field-input">
+            </div>
+
+            <div class="patient-field">
               <label class="field-label">Talla</label>
               <input type="text" name="talla" readonly value="<?= htmlspecialchars($datosPaciente['talla']) ?>" class="field-input">
             </div>
@@ -317,6 +322,36 @@
               <input type="text" name="edad_correg_al_ingr_mes" readonly value="<?= htmlspecialchars($datosPaciente['nombre_personal']) ?>" class="field-input">
             </div>
           
+            <div class="patient-field">
+              <label class="field-label">Puntaje Motor Grueso</label>
+              <input type="text" name="motor_grueso_puntaje_total" readonly value="<?= htmlspecialchars($datosPaciente['motor_grueso_puntaje_total']) ?>" class="field-input">
+            </div>
+
+            <div class="patient-field">
+              <label class="field-label">Porcentaje hasta el momento Motor Grueso</label>
+              <input type="text" name="motor_grueso_porcentaje" readonly value="<?= htmlspecialchars($datosPaciente['motor_grueso_porcentaje']) ?>" class="field-input">
+            </div>
+
+            <div class="patient-field">
+              <label class="field-label">Puntaje Motor Fino</label>
+              <input type="text" name="motor_fino_puntaje_total" readonly value="<?= htmlspecialchars($datosPaciente['motor_fino_puntaje_total']) ?>" class="field-input">
+            </div>
+        
+            <div class="patient-field">
+              <label class="field-label">Porcentaje hasta el momento en Motor Fino</label>
+              <input type="text" name="motor_fino_porcentaje" readonly value="<?= htmlspecialchars($datosPaciente['motor_fino_porcentaje']) ?>" class="field-input">
+            </div>
+
+            <div class="patient-field">
+              <label class="field-label">Puntaje Lenguaje</label>
+              <input type="text" name="lenguaje_puntaje_total" readonly value="<?= htmlspecialchars($datosPaciente['lenguaje_puntaje_total']) ?>" class="field-input">
+            </div>
+
+            <div class="patient-field">
+              <label class="field-label">Porcentaje hasta el momento en Lenguaje</label>
+              <input type="text" name="lenguaje_porcentaje" readonly value="<?= htmlspecialchars($datosPaciente['lenguaje_porcentaje']) ?>" class="field-input">
+            </div>
+
             <div class="patient-field">
               <label class="field-label">Numero de Evaluacion</label>
               <input type="text" name="num_evaluacion" readonly value="<?= htmlspecialchars($datosPaciente['num_evaluacion']) ?>" class="field-input">
