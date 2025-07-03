@@ -79,11 +79,13 @@ class Estudios
     t.motor_fino_porcentaje,
     t.lenguaje_puntaje_total,
     t.lenguaje_porcentaje,
-    espa.descripcion_estado_paciente
+    espa.descripcion_estado_paciente,
+    reg.regular_no_regular
     FROM terapia_neurov2 t
     JOIN paciente p ON t.clave_paciente = p.clave_paciente
     JOIN personal pers ON t.clave_personal = pers.clave_personal
     JOIN estado_paciente espa ON p.clave_estado_paciente = espa.clave_estado_paciente 
+    LEFT JOIN pacientes_regulares_no_regulares reg ON p.clave_paciente = reg.clave_paciente
     WHERE t.id_terapia_neurohabilitatoriav2 = ?";
 
         $stmt = $this->db->prepare($SQL);

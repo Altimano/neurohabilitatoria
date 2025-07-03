@@ -21,5 +21,5 @@ $resultPostura = $Estudio->consultarResultadosPostura($id_terapia);
 $datosPostura = mysqli_fetch_all($resultPostura);
 $resultLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
 $datosLenguaje = mysqli_fetch_all($resultLenguaje);
-
+var_dump($datosPaciente);
 require './vistas/consultarPaciente.view.php';

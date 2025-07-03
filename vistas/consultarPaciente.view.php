@@ -272,6 +272,11 @@
             </div>
 
             <div class="patient-field">
+              <label class="field-label">Paciente Regular/No Regular</label>
+              <input type="text" name="regular_no_regular" readonly value="<?= ($datosPaciente['regular_no_regular'] === 'Si') ? 'Sí' : 'No' ?>" class="field-input">
+            </div>
+
+            <div class="patient-field">
               <label class="field-label">Talla</label>
               <input type="text" name="talla" readonly value="<?= htmlspecialchars($datosPaciente['talla']) ?>" class="field-input">
             </div>
