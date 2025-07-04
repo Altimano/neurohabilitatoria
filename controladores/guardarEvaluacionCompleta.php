@@ -105,9 +105,45 @@ try {
         $existing_fecha_inicio_terapia_sql = $fecha_terapia_actual_sql;
     }
 
-    // Prepara otras variables de datos del paciente para la inserción.
-    $edad_corregida_sql = isset($data['edad_corregida_display']) ? "'" . $Con->real_escape_string($data['edad_corregida_display']) . "'" : 'NULL'; 
-    $edad_cronologica_sql = isset($data['edad_cronologica_ingreso_display']) ? "'" . $Con->real_escape_string($data['edad_cronologica_ingreso_display']) . "'" : 'NULL';
+    // --- MODIFICACIÓN AQUÍ para edad_corregida y edad_cronologica ---
+    // Prepara la edad corregida
+    $edad_corregida_sql = 'NULL';
+    if (isset($data['edad_corregida_display']) && !empty($data['edad_corregida_display'])) {
+        // Asumiendo que 'edad_corregida_display' ya viene como "5 A" o "6 M" del frontend
+        $edad_corregida_sql = "'" . $Con->real_escape_string($data['edad_corregida_display']) . "'"; 
+    } else {
+        // Si no viene la edad_corregida_display, podrías intentar calcularla o dejarla en NULL
+        // o si tienes la edad_corregida_anios y edad_corregida_meses
+        if (isset($data['edad_corregida_anios']) && is_numeric($data['edad_corregida_anios'])) {
+            $edad_corregida_value = $data['edad_corregida_anios'] . ' A';
+            if (isset($data['edad_corregida_meses']) && is_numeric($data['edad_corregida_meses']) && $data['edad_corregida_meses'] > 0) {
+                $edad_corregida_value .= ' ' . $data['edad_corregida_meses'] . ' M';
+            }
+            $edad_corregida_sql = "'" . $Con->real_escape_string($edad_corregida_value) . "'";
+        } elseif (isset($data['edad_corregida_meses']) && is_numeric($data['edad_corregida_meses']) && $data['edad_corregida_meses'] > 0) {
+             $edad_corregida_sql = "'" . $Con->real_escape_string($data['edad_corregida_meses'] . ' M') . "'";
+        }
+    }
+
+    // Prepara la edad cronológica
+    $edad_cronologica_sql = 'NULL';
+    if (isset($data['edad_cronologica_ingreso_display']) && !empty($data['edad_cronologica_ingreso_display'])) {
+        // Asumiendo que 'edad_cronologica_ingreso_display' ya viene como "5 A" o "6 M" del frontend
+        $edad_cronologica_sql = "'" . $Con->real_escape_string($data['edad_cronologica_ingreso_display']) . "'";
+    } else {
+        // Si no viene la edad_cronologica_ingreso_display, podrías intentar calcularla o dejarla en NULL
+        // o si tienes la edad_cronologica_anios y edad_cronologica_meses
+        if (isset($data['edad_cronologica_anios']) && is_numeric($data['edad_cronologica_anios'])) {
+            $edad_cronologica_value = $data['edad_cronologica_anios'] . ' A';
+            if (isset($data['edad_cronologica_meses']) && is_numeric($data['edad_cronologica_meses']) && $data['edad_cronologica_meses'] > 0) {
+                $edad_cronologica_value .= ' ' . $data['edad_cronologica_meses'] . ' M';
+            }
+            $edad_cronologica_sql = "'" . $Con->real_escape_string($edad_cronologica_value) . "'";
+        } elseif (isset($data['edad_cronologica_meses']) && is_numeric($data['edad_cronologica_meses']) && $data['edad_cronologica_meses'] > 0) {
+             $edad_cronologica_sql = "'" . $Con->real_escape_string($data['edad_cronologica_meses'] . ' M') . "'";
+        }
+    }
+    // --- FIN DE MODIFICACIÓN ---
     
     // Determina la fecha de nacimiento corregida para la base de datos.
     $dat_ter_fech_nac_edad_correg_sql = 'NULL'; 
@@ -126,17 +162,38 @@ try {
     $pc_sql = isset($data['perimetro_cefalico']) && !empty($data['perimetro_cefalico']) ? "'" . $Con->real_escape_string($data['perimetro_cefalico']) . "'" : 'NULL';
     $factores_riesgo_sql = isset($data['factores_de_riesgo']) && !empty($data['factores_de_riesgo']) ? "'" . $Con->real_escape_string($data['factores_de_riesgo']) . "'" : 'NULL';
 
+    // --- Obtener observaciones del apartado de Signos de Alarma ---
+    $observaciones_generales_sql = 'NULL';
+    if (isset($data['signos_alarma']['observaciones']) && !empty($data['signos_alarma']['observaciones'])) {
+        $observaciones_generales_sql = "'" . $Con->real_escape_string($data['signos_alarma']['observaciones']) . "'";
+    }
+
+    // --- Lógica para determinar el número de evaluación ---
+    $num_evaluacion_sql = 1; // Por defecto, si no hay estudios previos, es la evaluación #1
+    $sql_get_last_eval = "SELECT MAX(num_evaluacion) as last_eval FROM `terapia_neurov2` WHERE `clave_paciente` = {$clave_paciente_sql}";
+    $result_last_eval = $Con->query($sql_get_last_eval);
+
+    if ($result_last_eval && $result_last_eval->num_rows > 0) {
+        $row_last_eval = $result_last_eval->fetch_assoc();
+        if ($row_last_eval['last_eval'] !== null) {
+            $num_evaluacion_sql = $row_last_eval['last_eval'] + 1;
+        }
+    }
+
+
     // Inserta los datos principales de la terapia en la tabla `terapia_neurov2`.
     $sql = "INSERT INTO `terapia_neurov2` (
                 `clave_paciente`, `clave_personal`, `fecha_inicio_terapia`, `fecha_terapia`, 
                 `edad_corregida`, `edad_cronologica`, `dat_ter_fech_nac_edad_correg`, 
                 `edad_cronologica_al_ingr_sem`, `edad_correg_al_ingr_sem`, 
-                `peso`, `talla`, `pc`, `factores_riesgo`
+                `peso`, `talla`, `pc`, `factores_riesgo`,
+                `observaciones`, `num_evaluacion` 
             ) VALUES (
                 {$clave_paciente_sql}, {$clave_personal_sql}, {$existing_fecha_inicio_terapia_sql}, {$fecha_terapia_actual_sql}, 
                 {$edad_corregida_sql}, {$edad_cronologica_sql}, {$dat_ter_fech_nac_edad_correg_sql}, 
                 {$edad_cronologica_al_ingr_sem_sql}, {$edad_correg_al_ingr_sem_sql}, 
-                {$peso_sql}, {$talla_sql}, {$pc_sql}, {$factores_riesgo_sql}
+                {$peso_sql}, {$talla_sql}, {$pc_sql}, {$factores_riesgo_sql},
+                {$observaciones_generales_sql}, {$num_evaluacion_sql} 
             )";
 
     if (!$Con->query($sql)) {
@@ -146,7 +203,7 @@ try {
     // Obtiene el ID del registro recién insertado para usarlo en tablas relacionadas.
     $id_terapia_neuro_generado = $Con->insert_id; 
 
-    // --- Maniobras de Katona ---    
+    // --- Maniobras de Katona ---    
     if (isset($data['katona']) && is_array($data['katona'])) {
         foreach ($evaluation_maps['katona'] as $key => $id_katona) {
             $tono_muscular_topografia_sql = 'NULL'; 
@@ -170,12 +227,15 @@ try {
                 }
             }
             
-            $sql_katona = "INSERT INTO `resultados_maniobras_katona` 
-                        (`id_terapia_neuro`, `id_katona`, `tono_muscular_topografia`) 
-                        VALUES ({$id_terapia_neuro_generado}, {$id_katona}, {$tono_muscular_topografia_sql})";
-                        
-            if (!$Con->query($sql_katona)) {
-                $response['message'] .= " Error al guardar Katona {$key}: " . $Con->error . ".";
+            // Solo inserta si $tono_muscular_topografia_sql no es 'NULL'
+            if ($tono_muscular_topografia_sql !== 'NULL') {
+                $sql_katona = "INSERT INTO `resultados_maniobras_katona` 
+                                (`id_terapia_neuro`, `id_katona`, `tono_muscular_topografia`) 
+                                VALUES ({$id_terapia_neuro_generado}, {$id_katona}, {$tono_muscular_topografia_sql})";
+                                
+                if (!$Con->query($sql_katona)) {
+                    $response['message'] .= " Error al guardar Katona {$key}: " . $Con->error . ".";
+                }
             }
         }
     }
@@ -265,9 +325,12 @@ if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
                 }
             }
             
-            $sql_postura = "INSERT INTO `resultados_postura` (`id_terapia_neuro`, `id_postura`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_postura}, {$resultado_postura})";
-            if (!$Con->query($sql_postura)) {
-                $response['message'] .= " Error al guardar Postura (Asimetria): " . $Con->error . ".";
+            // Solo inserta si $resultado_postura no es 'NULL'
+            if ($resultado_postura !== 'NULL') {
+                $sql_postura = "INSERT INTO `resultados_postura` (`id_terapia_neuro`, `id_postura`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_postura}, {$resultado_postura})";
+                if (!$Con->query($sql_postura)) {
+                    $response['message'] .= " Error al guardar Postura (Asimetria): " . $Con->error . ".";
+                }
             }
         }
 
@@ -293,18 +356,24 @@ if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
                     $resultado_tono_muscular = "'" . $Con->real_escape_string($concatenated_values) . "'";
                 }
             }
-            $sql_tono_muscular = "INSERT INTO `resultados_tono_muscular` (`id_terapia_neuro`, `id_tono_muscular_ubicacion`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_tono_muscular_ubicacion}, {$resultado_tono_muscular})";
-            if (!$Con->query($sql_tono_muscular)) {
-                $response['message'] .= " Error al guardar Tono Muscular {$key}: " . $Con->error . ".";
+            // Solo inserta si $resultado_tono_muscular no es 'NULL'
+            if ($resultado_tono_muscular !== 'NULL') {
+                $sql_tono_muscular = "INSERT INTO `resultados_tono_muscular` (`id_terapia_neuro`, `id_tono_muscular_ubicacion`, `resultado`) VALUES ({$id_terapia_neuro_generado}, {$id_tono_muscular_ubicacion}, {$resultado_tono_muscular})";
+                if (!$Con->query($sql_tono_muscular)) {
+                    $response['message'] .= " Error al guardar Tono Muscular {$key}: " . $Con->error . ".";
+                }
             }
         }
     }
 
     // --- Signos de Alarma ---
+    // NOTA: Las observaciones ya se extrajeron de $data['signos_alarma']['observaciones']
+    // y se insertaron en `terapia_neurov2`.
     if (isset($data['signos_alarma']) && is_array($data['signos_alarma'])) {
         foreach ($evaluation_maps['signos_alarma_detalles'] as $key => $id_signos_alarma) {
             // Inserta solo si el signo de alarma está presente (valor '1' o no vacío).
-            if (isset($data['signos_alarma'][$key]) && (!empty($data['signos_alarma'][$key]) || $data['signos_alarma'][$key] === '1')) {
+            // Excluir 'observaciones' de este bucle ya que ya se manejó.
+            if ($key !== 'observaciones' && isset($data['signos_alarma'][$key]) && (!empty($data['signos_alarma'][$key]) || $data['signos_alarma'][$key] === '1')) {
                 $sql_signos_alarma = "INSERT INTO `resultados_signos_alarma` (`id_terapia_neuro`, `id_signos_alarma`) VALUES ({$id_terapia_neuro_generado}, {$id_signos_alarma})";
                 if (!$Con->query($sql_signos_alarma)) {
                     $response['message'] .= " Error al guardar Signo de Alarma {$key}: " . $Con->error . ".";
@@ -317,7 +386,7 @@ if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
 if (isset($data['hitomgrueso']) && is_array($data['hitomgrueso'])) {
     // Se obtiene la fecha de evaluación general para este bloque
     $fecha_evaluacion_hitos_mg = isset($data['hitomgrueso']['fecha_evaluacion']) && !empty($data['hitomgrueso']['fecha_evaluacion']) 
-                                ? "'" . $Con->real_escape_string($data['hitomgrueso']['fecha_evaluacion']) . "'" : 'NULL';
+                                 ? "'" . $Con->real_escape_string($data['hitomgrueso']['fecha_evaluacion']) . "'" : 'NULL';
 
     foreach ($evaluation_maps['hitos_mg_fechas'] as $key => $id_hito_motor_grueso) {
         
@@ -348,7 +417,7 @@ if (isset($data['hitomgrueso']) && is_array($data['hitomgrueso'])) {
 if (isset($data['hitomfino']) && is_array($data['hitomfino'])) {
     // Se obtiene la fecha de evaluación general para este bloque
     $fecha_evaluacion_hitos_mf = isset($data['hitomfino']['fecha_evaluacion']) && !empty($data['hitomfino']['fecha_evaluacion']) 
-                                ? "'" . $Con->real_escape_string($data['hitomfino']['fecha_evaluacion']) . "'" : 'NULL';
+                                 ? "'" . $Con->real_escape_string($data['hitomfino']['fecha_evaluacion']) . "'" : 'NULL';
 
     foreach ($evaluation_maps['hitos_mf_fechas'] as $key => $id_hito_mf) {
         

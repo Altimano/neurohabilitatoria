@@ -306,7 +306,7 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_elev_tronco_manos_A" name="mk_elev_tronco_manos[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_elev_tronco_manos_A" name="mk_elev_tronco_manos[]" value="Ausente"></td>
                                 </tr>
 
                                 <tr id="mk_elev_tronco_espalda_row" value="Elevación de tronco (espalda-cadera)">
@@ -315,136 +315,136 @@
                                     <td><input type="checkbox" id="mk_elev_tronco_espalda_Hip" name="mk_elev_tronco_espalda[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_elev_tronco_espalda_Hiper" name="mk_elev_tronco_espalda[]" value="Hipertonía(+)"></td>
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                    <td><input type="checkbox" id="mk_elev_tronco_espalda_A" name="mk_elev_tronco_espalda[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_elev_tronco_espalda_A" name="mk_elev_tronco_espalda[]" value="Ausente"></td>
                                 </tr>
 
                                 <tr id="mk_sentado_aire_row" value="Sentado al aire">
                                     <td>Sentado al aire</td>
-                                    <td><input type="checkbox" id="mk_sentado_aire_N" name="mk_sentado_aire[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_sentado_aire_N" name="mk_sentado_aire[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_sentado_aire_Hneg" name="mk_sentado_aire[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_sentado_aire_Hpos" name="mk_sentado_aire[]" value="Hipertonía(+)"></td>
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                    <td><input type="checkbox" id="mk_sentado_aire_A" name="mk_sentado_aire[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_sentado_aire_A" name="mk_sentado_aire[]" value="Ausente"></td>
                                 </tr>
                                 
                                 <tr id="mk_rotacion_izq_der_row" value="Rotación izquierda y derecha">
                                     <td>Rotación izquierda y derecha</td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_N" name="mk_rotacion_izq_der[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_N" name="mk_rotacion_izq_der[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_rotacion_izq_der_Hneg" name="mk_rotacion_izq_der[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_rotacion_izq_der_Hpos" name="mk_rotacion_izq_der[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_MTs" name="mk_rotacion_izq_der[]" value="Miembros Toracicos(MTs)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_MP" name="mk_rotacion_izq_der[]" value="Miembro Pelvico(MP)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_E1" name="mk_rotacion_izq_der[]" value="Extremidades(E)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_H" name="mk_rotacion_izq_der[]" value="Hemicuerpo(H)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_CL" name="mk_rotacion_izq_der[]" value="Contralateral(CL)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_D" name="mk_rotacion_izq_der[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_I" name="mk_rotacion_izq_der[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_rotacion_izq_der_A" name="mk_rotacion_izq_der[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_MTs" name="mk_rotacion_izq_der[]" value="Miembros Toracicos"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_MP" name="mk_rotacion_izq_der[]" value="Miembro Pelvico"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_E1" name="mk_rotacion_izq_der[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_H" name="mk_rotacion_izq_der[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_CL" name="mk_rotacion_izq_der[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_D" name="mk_rotacion_izq_der[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_I" name="mk_rotacion_izq_der[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_rotacion_izq_der_A" name="mk_rotacion_izq_der[]" value="Ausente"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Gateo asistido</td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_N" name="mk_gateo_asistido[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_N" name="mk_gateo_asistido[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_gateo_asistido_Hneg" name="mk_gateo_asistido[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_gateo_asistido_Hpos" name="mk_gateo_asistido[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_MTs" name="mk_gateo_asistido[]" value="Miembros Toracicos(MTs)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_MP" name="mk_gateo_asistido[]" value="Miembro Pelvico(MP)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_E1" name="mk_gateo_asistido[]" value="Extremidades(E)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_H" name="mk_gateo_asistido[]" value="Hemicuerpo(H)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_CL" name="mk_gateo_asistido[]" value="Contralateral(CL)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_D" name="mk_gateo_asistido[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_I" name="mk_gateo_asistido[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_A" name="mk_gateo_asistido[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_MTs" name="mk_gateo_asistido[]" value="Miembros Toracicos"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_MP" name="mk_gateo_asistido[]" value="Miembro Pelvico"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_E1" name="mk_gateo_asistido[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_H" name="mk_gateo_asistido[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_CL" name="mk_gateo_asistido[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_D" name="mk_gateo_asistido[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_I" name="mk_gateo_asistido[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_A" name="mk_gateo_asistido[]" value="Ausente"></td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Gateo asistido modificado</td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_N" name="mk_gateo_asistido_mod[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_N" name="mk_gateo_asistido_mod[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_gateo_asistido_mod_Hneg" name="mk_gateo_asistido_mod[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_gateo_asistido_mod_Hpos" name="mk_gateo_asistido_mod[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_MTs" name="mk_gateo_asistido_mod[]" value="Miembros Toracicos(MTs)"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_MTs" name="mk_gateo_asistido_mod[]" value="Miembros Toracicos"></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_D" name="mk_gateo_asistido_mod[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_I" name="mk_gateo_asistido_mod[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_A" name="mk_gateo_asistido_mod[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_D" name="mk_gateo_asistido_mod[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_I" name="mk_gateo_asistido_mod[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_A" name="mk_gateo_asistido_mod[]" value="Ausente"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Arrastre horizontal</td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_N" name="mk_arrastre_horizontal[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_N" name="mk_arrastre_horizontal[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_arrastre_horizontal_Hneg" name="mk_arrastre_horizontal[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_arrastre_horizontal_Hpos" name="mk_arrastre_horizontal[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_MTs" name="mk_arrastre_horizontal[]" value="Miembros Toracicos(MTs)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_MP" name="mk_arrastre_horizontal[]" value="Miembro Pelvico(MP)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_E1" name="mk_arrastre_horizontal[]" value="Extremidades(E)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_H" name="mk_arrastre_horizontal[]" value="Hemicuerpo(H)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_CL" name="mk_arrastre_horizontal[]" value="Contralateral(CL)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_D" name="mk_arrastre_horizontal[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_I" name="mk_arrastre_horizontal[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_horizontal_A" name="mk_arrastre_horizontal[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_MTs" name="mk_arrastre_horizontal[]" value="Miembros Toracicos"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_MP" name="mk_arrastre_horizontal[]" value="Miembro Pelvico"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_E1" name="mk_arrastre_horizontal[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_H" name="mk_arrastre_horizontal[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_CL" name="mk_arrastre_horizontal[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_D" name="mk_arrastre_horizontal[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_I" name="mk_arrastre_horizontal[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_horizontal_A" name="mk_arrastre_horizontal[]" value="Ausente"></td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Marcha en plano horizontal</td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_N" name="mk_marcha_plano_horizontal[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_N" name="mk_marcha_plano_horizontal[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_marcha_plano_horizontal_Hneg" name="mk_marcha_plano_horizontal[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_marcha_plano_horizontal_Hpos" name="mk_marcha_plano_horizontal[]" value="Hipertonía(+)"></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_MP" name="mk_marcha_plano_horizontal[]" value="Miembro Pelvico(MP)"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_MP" name="mk_marcha_plano_horizontal[]" value="Miembro Pelvico"></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_D" name="mk_marcha_plano_horizontal[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_I" name="mk_marcha_plano_horizontal[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_A" name="mk_marcha_plano_horizontal[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_D" name="mk_marcha_plano_horizontal[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_I" name="mk_marcha_plano_horizontal[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_A" name="mk_marcha_plano_horizontal[]" value="Ausente"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Marcha en plano ascendente</td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_N" name="mk_marcha_plano_ascendente[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_N" name="mk_marcha_plano_ascendente[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_marcha_plano_ascendente_Hneg" name="mk_marcha_plano_ascendente[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_marcha_plano_ascendente_Hpos" name="mk_marcha_plano_ascendente[]" value="Hipertonía(+)"></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_MP" name="mk_marcha_plano_ascendente[]" value="Miembro Pelvico(MP)"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_MP" name="mk_marcha_plano_ascendente[]" value="Miembro Pelvico"></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_D" name="mk_marcha_plano_ascendente[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_I" name="mk_marcha_plano_ascendente[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_A" name="mk_marcha_plano_ascendente[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_D" name="mk_marcha_plano_ascendente[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_I" name="mk_marcha_plano_ascendente[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_A" name="mk_marcha_plano_ascendente[]" value="Ausente"></td>
                                 </tr>
                                 
                                 <tr>
                                     <td>Arrastre en plano inclinado descendente</td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_N" name="mk_arrastre_inclinado_desc[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_N" name="mk_arrastre_inclinado_desc[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_arrastre_inclinado_desc_Hneg" name="mk_arrastre_inclinado_desc[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_arrastre_inclinado_desc_Hpos" name="mk_arrastre_inclinado_desc[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_MTs" name="mk_arrastre_inclinado_desc[]" value="Miembros Toracicos(MTs)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_MP" name="mk_arrastre_inclinado_desc[]" value="Miembro Pelvico(MP)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_E1" name="mk_arrastre_inclinado_desc[]" value="Extremidades(E)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_H" name="mk_arrastre_inclinado_desc[]" value="Hemicuerpo(H)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_CL" name="mk_arrastre_inclinado_desc[]" value="Contralateral(CL)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_D" name="mk_arrastre_inclinado_desc[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_I" name="mk_arrastre_inclinado_desc[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_A" name="mk_arrastre_inclinado_desc[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_MTs" name="mk_arrastre_inclinado_desc[]" value="Miembros Toracicos"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_MP" name="mk_arrastre_inclinado_desc[]" value="Miembro Pelvico"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_E1" name="mk_arrastre_inclinado_desc[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_H" name="mk_arrastre_inclinado_desc[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_CL" name="mk_arrastre_inclinado_desc[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_D" name="mk_arrastre_inclinado_desc[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_I" name="mk_arrastre_inclinado_desc[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_desc_A" name="mk_arrastre_inclinado_desc[]" value="Ausente"></td>
                                 </tr>
 
                                 <tr>
                                     <td>Arrastre en plano inclinado ascendente</td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_N" name="mk_arrastre_inclinado_asc[]" value="Normal(N)"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_N" name="mk_arrastre_inclinado_asc[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_arrastre_inclinado_asc_Hneg" name="mk_arrastre_inclinado_asc[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_arrastre_inclinado_asc_Hpos" name="mk_arrastre_inclinado_asc[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_MTs" name="mk_arrastre_inclinado_asc[]" value="Miembros Toracicos(MTs)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_MP" name="mk_arrastre_inclinado_asc[]" value="Miembro Pelvico(MP)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_E1" name="mk_arrastre_inclinado_asc[]" value="Extremidades(E)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_H" name="mk_arrastre_inclinado_asc[]" value="Hemicuerpo(H)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_CL" name="mk_arrastre_inclinado_asc[]" value="Contralateral(CL)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_D" name="mk_arrastre_inclinado_asc[]" value="Derecha(D)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_I" name="mk_arrastre_inclinado_asc[]" value="Izquierda(I)"></td>
-                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_A" name="mk_arrastre_inclinado_asc[]" value="Ausente(A)"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_MTs" name="mk_arrastre_inclinado_asc[]" value="Miembros Toracicos"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_MP" name="mk_arrastre_inclinado_asc[]" value="Miembro Pelvico"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_E1" name="mk_arrastre_inclinado_asc[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_H" name="mk_arrastre_inclinado_asc[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_CL" name="mk_arrastre_inclinado_asc[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_D" name="mk_arrastre_inclinado_asc[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_I" name="mk_arrastre_inclinado_asc[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="mk_arrastre_inclinado_asc_A" name="mk_arrastre_inclinado_asc[]" value="Ausente"></td>
                                 </tr>
                             </tbody>
                         </table>

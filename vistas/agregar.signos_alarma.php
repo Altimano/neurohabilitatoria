@@ -37,7 +37,7 @@
 
         .select-custom {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3csvg%3e");
             background-position: right 0.5rem center;
             background-repeat: no-repeat;
             background-size: 1.5em 1.5em;
@@ -274,15 +274,66 @@
             }
         }
 
-        .radio-group-laterality { 
-            display: none; 
-            margin-top: 0.5rem; 
-            padding-left: 1rem;
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .radio-group-laterality label { 
-            margin-left: 0.25rem; 
-            margin-right: 0.75rem; 
-            font-weight: normal;
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #EF4444;
+            margin-bottom: 1rem;
+        }
+        .modal-message {
+            font-size: 1.1rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .modal-button {
+            background-color: #0284C7;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .modal-button:hover {
+            background-color: #0369A1;
+            transform: translateY(-1px);
         }
     </style>
 </head>
@@ -290,7 +341,7 @@
 
     <div class="floating-header sticky top-0 z-10 py-4 mb-6">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold text-custom-title text-center">
+            <h3 class="text-3xl font-bold text-custom-title =text-center">
                 Signos de Alarma
             </h3>
             <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
@@ -360,11 +411,6 @@
                                 <option value="1">Sí</option>
                             </select>
                         </div>
-                        <div id="ps_marcha_en_punta_lado_group" class="radio-group-laterality">
-                            <label><input type="radio" name="ps_marcha_en_punta_lado" value="derecha"> Derecha</label>
-                            <label><input type="radio" name="ps_marcha_en_punta_lado" value="izquierda"> Izquierda</label>
-                            <label><input type="radio" name="ps_marcha_en_punta_lado" value="ambas"> Ambas</label>
-                        </div>
                     </div>
 
                     <div class="subescala evaluation-card">
@@ -376,11 +422,6 @@
                                 <option value="1">Sí</option>
                             </select>
                         </div>
-                        <div id="ps_marcha_cruzada_lado_group" class="radio-group-laterality">
-                            <label><input type="radio" name="ps_marcha_cruzada_lado" value="derecha"> Derecha</label>
-                            <label><input type="radio" name="ps_marcha_cruzada_lado" value="izquierda"> Izquierda</label>
-                            <label><input type="radio" name="ps_marcha_cruzada_lado" value="ambas"> Ambas</label>
-                        </div>
                     </div>
 
                     <div class="subescala evaluation-card">
@@ -391,11 +432,6 @@
                                 <option value="0">No</option>
                                 <option value="1">Sí</option>
                             </select>
-                        </div>
-                        <div id="ps_punos_cerrados_lado_group" class="radio-group-laterality">
-                            <label><input type="radio" name="ps_punos_cerrados_lado" value="derecha"> Derecha</label>
-                            <label><input type="radio" name="ps_punos_cerrados_lado" value="izquierda"> Izquierda</label>
-                            <label><input type="radio" name="ps_punos_cerrados_lado" value="ambas"> Ambas</label>
                         </div>
                     </div>
 
@@ -421,6 +457,11 @@
                     </div>
                 </div>
 
+                <div class="mb-6"> 
+                    <label for="observaciones" class="evaluation-label required">Observaciones</label>
+                    <textarea id="observaciones" name="observaciones" rows="3" class="w-full p-2 border rounded-md bg-white"></textarea>
+                </div>
+
                 <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
                     <a href="agregar.posturas_tmyu.php" class="btn-navigation">
                         ← ANTERIOR
@@ -436,10 +477,44 @@
         </div>
     </div>
 
+    <div id="modalAdvertencia" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 class="modal-title">¡Atención!</h3>
+            <p class="modal-message">Ingresa las observaciones correspondientes para continuar.</p>
+            <button id="cerrarModal" class="modal-button">Entendido</button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('fecha_evaluacion');
             const sessionKey = 'evaluacionP7_signos_alarma'; // Clave para los datos de Signos de Alarma
+            const form = document.getElementById('evaluacionSignosAlarmaForm');
+            const botonSiguiente = document.getElementById('botonSiguientePaso');
+            const observacionesTextarea = document.getElementById('observaciones');
+
+            // Elementos del Modal
+            const modalAdvertencia = document.getElementById('modalAdvertencia');
+            const cerrarModalBtn = document.getElementById('cerrarModal');
+
+            // --- Funciones del Modal ---
+            function mostrarModal() {
+                modalAdvertencia.classList.remove('hidden');
+                modalAdvertencia.classList.add('show');
+            }
+
+            function ocultarModal() {
+                modalAdvertencia.classList.remove('show');
+                modalAdvertencia.classList.add('hidden');
+            }
+
+            // Event listener para cerrar el modal
+            cerrarModalBtn.addEventListener('click', ocultarModal);
+            modalAdvertencia.addEventListener('click', function(e) {
+                if (e.target === modalAdvertencia) { // Solo cierra si se hace clic en el overlay, no en el contenido
+                    ocultarModal();
+                }
+            });
 
             // Recupera el objeto de datos del paciente principal
             const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
@@ -498,57 +573,60 @@
                     }
                 }
             }
-
-            const form = document.getElementById('evaluacionSignosAlarmaForm');
             
-            // Define los selectores para los campos de lateralidad. Los radios quedarán deshabilitados para guardar.
-            const camposConLateralidad = [
-                { selectId: 'ps_marcha_en_punta_presencia', radioGroupId: 'ps_marcha_en_punta_lado_group', radioName: 'ps_marcha_en_punta_lado' },
-                { selectId: 'ps_marcha_cruzada_presencia', radioGroupId: 'ps_marcha_cruzada_lado_group', radioName: 'ps_marcha_cruzada_lado' },
-                { selectId: 'ps_punos_cerrados_presencia', radioGroupId: 'ps_punos_cerrados_lado_group', radioName: 'ps_punos_cerrados_lado' }
-            ];
-
-            // Cargar datos al iniciar la página
-            if(form && Object.keys(datosSignosAlarma).length > 0 ) {
+            // Cargar datos al iniciar la página y configurar listeners
+            if(form) {
                 const allSelects = form.querySelectorAll('select');
                 allSelects.forEach(select => { 
                     if(datosSignosAlarma[select.name] !== undefined) { 
                         select.value = datosSignosAlarma[select.name]; 
                     } 
                 });
+
+                // Cargar observaciones
+                if (observacionesTextarea && datosSignosAlarma.observaciones !== undefined) {
+                    observacionesTextarea.value = datosSignosAlarma.observaciones;
+                }
             }
 
-            const botonSiguiente = document.getElementById('botonSiguientePaso');
-            if (botonSiguiente && form) {
-                botonSiguiente.addEventListener('click', function() {
-                    // Recopila los datos del formulario (solo los valores de los select)
-                    const currentSignosAlarmaData = {};
-                    if(dateInput) currentSignosAlarmaData['fecha_evaluacion'] = dateInput.value;
+            // Manejar el clic del botón "SIGUIENTE"
+            botonSiguiente.addEventListener('click', function(event) {
+                // Validación de observaciones
+                if (observacionesTextarea.value.trim() === '') {
+                    mostrarModal();
+                    return; // Detiene la ejecución si las observaciones están vacías
+                }
 
-                    // Recolectar todos los valores de los select
-                    const allSelects = form.querySelectorAll('select');
-                    allSelects.forEach(select => {
-                        currentSignosAlarmaData[select.name] = select.value;
-                    });
-                    
-                    // Fusiona los datos del paso actual con el objeto principal del paciente
-                    datosPaciente.signos_alarma = currentSignosAlarmaData; 
+                // Recopila los datos del formulario
+                const currentSignosAlarmaData = {};
+                if(dateInput) currentSignosAlarmaData['fecha_evaluacion'] = dateInput.value;
 
-                    try {
-                        // Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage.
-                        sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
-                        
-                        // Guarda los datos específicos de Signos de Alarma por separado (opcional).
-                        sessionStorage.setItem(sessionKey, JSON.stringify(currentSignosAlarmaData)); 
-
-                        // Redirige al siguiente paso de la evaluación.
-                        window.location.href = 'agregar.hitomgrueso.php'; 
-                    } catch(e) { 
-                        console.error("Error al guardar datos en sessionStorage:", e);
-                        alert("Hubo un error al guardar los Signos de Alarma."); 
-                    }
+                // Recolectar todos los valores de los select
+                const allSelects = form.querySelectorAll('select');
+                allSelects.forEach(select => {
+                    currentSignosAlarmaData[select.name] = select.value;
                 });
-            }
+
+                // Recolectar observaciones
+                currentSignosAlarmaData['observaciones'] = observacionesTextarea.value.trim();
+                
+                // Fusiona los datos del paso actual con el objeto principal del paciente
+                datosPaciente.signos_alarma = currentSignosAlarmaData; 
+
+                try {
+                    // Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage.
+                    sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
+                    
+                    // Guarda los datos específicos de Signos de Alarma por separado (opcional pero bueno para consistencia).
+                    sessionStorage.setItem(sessionKey, JSON.stringify(currentSignosAlarmaData)); 
+
+                    // Redirige al siguiente paso de la evaluación.
+                    window.location.href = 'agregar.hitomgrueso.php'; 
+                } catch(e) { 
+                    console.error("Error al guardar datos en sessionStorage:", e);
+                    alert("Hubo un error al guardar los Signos de Alarma."); 
+                }
+            });
         });
     </script>
 </body>
