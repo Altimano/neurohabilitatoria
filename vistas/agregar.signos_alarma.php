@@ -1,6 +1,6 @@
 <?php
-//para verificacion de la version descomentar
-//phpinfo();
+// para verificacion de la version descomentar
+// phpinfo();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -103,14 +103,6 @@
             background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
             height: 1px;
             margin: 2rem 0;
-        }
-        .scale-legend {
-            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-            border-left: 4px solid #F59E0B;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         .info-card {
             background: white;
@@ -341,7 +333,7 @@
 
     <div class="floating-header sticky top-0 z-10 py-4 mb-6">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold text-custom-title =text-center">
+            <h3 class="text-3xl font-bold text-custom-title text-center">
                 Signos de Alarma
             </h3>
             <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
@@ -467,7 +459,7 @@
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 6 de 8 - Signos de Alarma
+                        Paso 7 de 9 - Signos de Alarma
                     </div>
                     <button type="button" id="botonSiguientePaso" class="btn-navigation">
                         SIGUIENTE →

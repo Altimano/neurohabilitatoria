@@ -97,14 +97,6 @@
             height: 1px;
             margin: 2rem 0;
         }
-        .scale-legend {
-            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-            border-left: 4px solid #F59E0B;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
         .info-card {
             background: white;
             border-radius: 12px;
@@ -298,20 +290,6 @@
                         TONO MUSCULAR Y UBICACIÓN
                     </h1>
                 </div>
-                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
-                    <div class="flex flex-wrap justify-center gap-2 text-sm">
-                        <span class="abbreviation-tag">General (1)</span>
-                        <span class="abbreviation-tag">Axial (2)</span>
-                        <span class="abbreviation-tag">Extremidades (3)</span>
-                        <span class="abbreviation-tag">Miembros Torácicos (4)</span>
-                        <span class="abbreviation-tag">Miembros Pélvicos (5)</span>
-                        <span class="abbreviation-tag">Hemicuerpo (6)</span>
-                        <span class="abbreviation-tag">Contralateral (7)</span>
-                        <span class="abbreviation-tag">Derecho (8)</span>
-                        <span class="abbreviation-tag">Izquierdo (9)</span>
-                        <span class="abbreviation-tag">Normal</span>
-                    </div>
-                </div>
                 <div class="table-container">
                     <div class="overflow-x-auto">
                         <table class="evaluation-table">
@@ -321,8 +299,8 @@
                                     <th>General</th>
                                     <th>Axial</th>
                                     <th>Extremidades</th>
-                                    <th>M. Torácicos</th>
-                                    <th>M. Pélvicos</th>
+                                    <th>Miembros Torácicos</th>
+                                    <th>Miembros Pélvicos</th>
                                     <th>Hemicuerpo</th>
                                     <th>Contralateral</th>
                                     <th>Derecho</th>
@@ -392,18 +370,6 @@
                         POSTURA
                     </h1>
                 </div>
-                <div class="scale-legend rounded-xl p-6 mb-8 text-center">
-                    <div class="flex flex-wrap justify-center gap-2 text-sm">
-                        <span class="abbreviation-tag">Axial (1)</span>
-                        <span class="abbreviation-tag">Miembros Torácicos (2)</span>
-                        <span class="abbreviation-tag">Miembros Pélvicos (3)</span>
-                        <span class="abbreviation-tag">Hemicuerpo (4)</span>
-                        <span class="abbreviation-tag">Contralateral (5)</span>
-                        <span class="abbreviation-tag">Derecho (6)</span>
-                        <span class="abbreviation-tag">Izquierdo (7)</span>
-                        <span class="abbreviation-tag">Normal</span>
-                    </div>
-                </div>
                 <div class="table-container">
                     <div class="overflow-x-auto">
                         <table class="evaluation-table">
@@ -411,8 +377,8 @@
                                 <tr>
                                     <th>Característica</th>
                                     <th>Axial</th>
-                                    <th>M. Torácicos</th>
-                                    <th>M. Pélvicos</th>
+                                    <th>Miembros Torácicos</th>
+                                    <th>Miembros Pélvicos</th>
                                     <th>Hemicuerpo</th>
                                     <th>Contralateral</th>
                                     <th>Derecho</th>

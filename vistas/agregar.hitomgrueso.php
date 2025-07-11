@@ -10,11 +10,16 @@
     <title>Hitos de Desarrollo Motor Grueso</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+        }
         .bg-custom-header-area {
             background-color: #FFFFFF;
         }
         .bg-custom-main-box {
-            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
         }
         .bg-custom-button {
             background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
@@ -65,6 +70,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid #E5E7EB;
             transition: all 0.2s ease-in-out;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .evaluation-card:hover {
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -91,6 +100,7 @@
             height: 4px;
             border-radius: 2px;
             transition: width 0.3s ease-in-out;
+            width: 100%;
         }
         .section-divider {
             background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
@@ -111,7 +121,7 @@
             padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid #E5E7EB;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .navigation-buttons {
             background: white;
@@ -159,6 +169,7 @@
             font-size: 1rem;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
         .date-input:focus {
             outline: none;
@@ -282,94 +293,105 @@
             display: flex;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            color: #1E3A8A;
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, transparent 0%, #DBEAFE 50%, transparent 100%);
+            border-radius: 8px;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
-    <div class="floating-header sticky top-0 z-10 py-4 mb-6">
-        <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold text-custom-title text-center">
-                Agregar Evaluación - Hitos de Desarrollo Motor Grueso
-            </h3>
-            <div class="mt-2 max-w-md mx-auto bg-gray-200 rounded-full h-2">
-                <div class="progress-indicator w-full"></div> 
-            </div>
+<body class="min-h-screen">
+    <div class="text-center my-8"> <h3 class="text-3xl font-extrabold text-custom-title">Agregar una Evaluación</h3> </div>
+
+    <div class="max-w-7xl mx-auto px-6 mb-6"> <div class="h-2 bg-gray-200 rounded-full">
+            <div class="progress-indicator w-full"></div> 
         </div>
     </div>
 
-    <div class="container mx-auto px-4 max-w-7xl">
-        <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
-            <form id="evaluacionHitoMGruesoForm" class="text-center">
-                <div class="info-card text-center">
-                    <p class="text-lg text-gray-700">
-                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
-                    </p>
+    <div class="max-w-7xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-lg p-8">
+        <form id="evaluacionHitoMGruesoForm" class="text-center">
+            <div class="info-card"> <p class="text-center text-gray-700 font-semibold text-lg mb-2">Evaluación para el mes: <span id="mesSeleccionadoDisplay" class="text-blue-700 font-bold">...</span></p>
+            </div>
+            
+            <div class="info-card mb-6"> <label for="fecha_evaluacion" class="block text-base font-semibold text-gray-700 mb-2">Fecha de la Evaluación</label>
+                <input type="date" 
+                    name="fecha_evaluacion" 
+                    id="fecha_evaluacion" 
+                    class="date-input w-full" 
+                    readonly>
+            </div>
+
+            <div class="section-title">
+                <h1>HITOS DE DESARROLLO MOTOR GRUESO</h1>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 text-left">
+                <div class="subescala evaluation-card">
+                    <label for="hg_control_cefalico_display" class="evaluation-label">Control cefálico</label>
+                    <p id="hg_control_cefalico_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_control_cefalico" id="hg_control_cefalico_value">
                 </div>
-                <div class="mb-8 text-center">
-                    <label for="fecha_evaluacion" class="evaluation-label text-lg">
-                        Fecha de la Evaluación
-                    </label>
-                    <input type="date" 
-                        name="fecha_evaluacion" 
-                        id="fecha_evaluacion" 
-                        class="date-input" 
-                        readonly>
+                <div class="subescala evaluation-card">
+                    <label for="hg_posicion_sentado_display" class="evaluation-label">Posición de sentado</label>
+                    <p id="hg_posicion_sentado_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_posicion_sentado" id="hg_posicion_sentado_value">
                 </div>
-                <div class="section-title text-center">
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
-                        HITOS DE DESARROLLO MOTOR GRUESO
-                    </h1>
+                <div class="subescala evaluation-card">
+                    <label for="hg_reacciones_proteccion_display" class="evaluation-label">Reacciones de protección</label>
+                    <p id="hg_reacciones_proteccion_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_reacciones_proteccion" id="hg_reacciones_proteccion_value">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 text-left">
-                    <div class="subescala evaluation-card">
-                        <label for="hg_control_cefalico_display" class="evaluation-label">Control cefálico</label>
-                        <p id="hg_control_cefalico_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_control_cefalico" id="hg_control_cefalico_value">
-                    </div>
-                    <div class="subescala evaluation-card">
-                        <label for="hg_posicion_sentado_display" class="evaluation-label">Posición de sentado</label>
-                        <p id="hg_posicion_sentado_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_posicion_sentado" id="hg_posicion_sentado_value">
-                    </div>
-                    <div class="subescala evaluation-card">
-                        <label for="hg_reacciones_proteccion_display" class="evaluation-label">Reacciones de protección</label>
-                        <p id="hg_reacciones_proteccion_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_reacciones_proteccion" id="hg_reacciones_proteccion_value">
-                    </div>
-                    <div class="subescala evaluation-card">
-                        <label for="hg_patron_arrastre_display" class="evaluation-label">Patrón de arrastre</label>
-                        <p id="hg_patron_arrastre_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_patron_arrastre" id="hg_patron_arrastre_value">
-                    </div>
-                    <div class="subescala evaluation-card">
-                        <label for="hg_patron_gateo_display" class="evaluation-label">Patrón de gateo</label>
-                        <p id="hg_patron_gateo_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_patron_gateo" id="hg_patron_gateo_value">
-                    </div>
-                    <div class="subescala evaluation-card">
-                        <label for="hg_mov_posturales_autonomos_display" class="evaluation-label">Movimientos posturales autónomos</label>
-                        <p id="hg_mov_posturales_autonomos_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_mov_posturales_autonomos" id="hg_mov_posturales_autonomos_value">
-                    </div>
-                    <div class="subescala evaluation-card">
-                        <label for="hg_patron_marcha_independiente_display" class="evaluation-label">Patrón de marcha independiente</label>
-                        <p id="hg_patron_marcha_independiente_display" class="hito-display"><em>...</em></p>
-                        <input type="hidden" name="hg_patron_marcha_independiente" id="hg_patron_marcha_independiente_value">
-                    </div>
+                <div class="subescala evaluation-card">
+                    <label for="hg_patron_arrastre_display" class="evaluation-label">Patrón de arrastre</label>
+                    <p id="hg_patron_arrastre_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_patron_arrastre" id="hg_patron_arrastre_value">
                 </div>
-                <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <a href="agregar.signos_alarma.php" class="btn-navigation">
-                        ← ANTERIOR
-                    </a>
-                    <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 7 de 9 - Hitos de Desarrollo Motor Grueso
-                    </div>
-                    <button type="button" id="botonSiguientePaso" class="btn-navigation">
-                        SIGUIENTE →
+                <div class="subescala evaluation-card">
+                    <label for="hg_patron_gateo_display" class="evaluation-label">Patrón de gateo</label>
+                    <p id="hg_patron_gateo_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_patron_gateo" id="hg_patron_gateo_value">
+                </div>
+                <div class="subescala evaluation-card">
+                    <label for="hg_mov_posturales_autonomos_display" class="evaluation-label">Movimientos posturales autónomos</label>
+                    <p id="hg_mov_posturales_autonomos_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_mov_posturales_autonomos" id="hg_mov_posturales_autonomos_value">
+                </div>
+                <div class="subescala evaluation-card">
+                    <label for="hg_patron_marcha_independiente_display" class="evaluation-label">Patrón de marcha independiente</label>
+                    <p id="hg_patron_marcha_independiente_display" class="hito-display"><em>...</em></p>
+                    <input type="hidden" name="hg_patron_marcha_independiente" id="hg_patron_marcha_independiente_value">
+                </div>
+            </div>
+
+            <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a href="agregar.signos_alarma.php" class="w-full sm:w-auto mb-4 sm:mb-0">
+                    <button type="button" class="btn-navigation w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        </svg>
+                        ANTERIOR
                     </button>
+                </a>
+                <div class="text-base text-gray-600 font-medium mx-4 mb-4 sm:mb-0">
+                    Paso 8 de 9 - Hitos de Desarrollo Motor Grueso
                 </div>
-            </form>
-        </div>
+                <button type="button" id="botonSiguientePaso" class="btn-navigation w-full sm:w-auto">
+                    SIGUIENTE 
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </form>
     </div>
 
     <script>
@@ -377,35 +399,29 @@
             const dateInput = document.getElementById('fecha_evaluacion');
             const sessionKey = 'evaluacionP8_hitomgrueso'; // Clave para los datos de Hitos de Desarrollo Motor Grueso
             
-            // Recupera el objeto de datos del paciente principal
-            const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
-            let datosPaciente = {};
-            if (datosPacienteRaw) {
+            // Función para cargar datos de sessionStorage de forma segura.
+            const loadSessionData = (key) => {
                 try {
-                    datosPaciente = JSON.parse(datosPacienteRaw);
+                    const data = sessionStorage.getItem(key);
+                    return data ? JSON.parse(data) : {};
                 } catch (e) {
-                    console.error("Error al cargar datos del paciente:", e);
-                    window.location.href = 'agregar.view.php?error=datos_corruptos';
-                    return;
+                    console.error(`Error al parsear datos de sessionStorage para ${key}:`, e);
+                    sessionStorage.removeItem(key); // Limpia datos corruptos.
+                    return {};
                 }
-            } else {
+            };
+
+            // Recupera el objeto de datos del paciente principal
+            const datosPaciente = loadSessionData('datosPacienteParaEvaluacion');
+            if (Object.keys(datosPaciente).length === 0) {
                 console.error("No se encontraron datos del paciente. Redirigiendo...");
                 window.location.href = 'agregar.view.php?error=datos_faltantes';
                 return;
             }
 
             // Recupera los datos específicos de Hitos Motor Grueso para este paso 
-            const datosHitoMgruesoGuardados = sessionStorage.getItem(sessionKey);
-            let datosHitoMgrueso = {};
-            if (datosHitoMgruesoGuardados) { 
-                try { 
-                    datosHitoMgrueso = JSON.parse(datosHitoMgruesoGuardados); 
-                } catch(e) { 
-                    console.error(`Error al cargar datos de Hito M. Grueso:`, e);
-                    sessionStorage.removeItem(sessionKey); 
-                } 
-            }
-
+            const datosHitoMgrueso = loadSessionData(sessionKey);
+            
             // Lógica para cargar la fecha de evaluación
             if (dateInput) {
                 if(datosHitoMgrueso.fecha_evaluacion) { 
@@ -508,7 +524,7 @@
                         // Guarda el objeto datosPaciente (que ahora contiene todo) de nuevo en sessionStorage.
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
                         
-                        // Guarda los datos específicos de Hitos Motor Grueso por separado (opcional).
+                        // Guarda los datos específicos de Hitos Motor Grueso por separado.
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentHitoMgruesoData)); 
 
                         // Redirige al siguiente paso de la evaluación.

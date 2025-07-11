@@ -97,14 +97,6 @@
             border-color: #2563EB;
             transform: scale(1.05);
         }
-        .legend-card {
-            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-            border-left: 4px solid #F59E0B;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
         .section-title {
             background: white;
             border-radius: 16px;
@@ -258,21 +250,6 @@
                     <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
                         MANIOBRAS DE KATONA
                     </h1>
-                </div>
-                <div class="legend-card">
-                    <div class="flex flex-wrap justify-center gap-2 text-xs">
-                        <span class="abbreviation-tag">N - Normal</span>
-                        <span class="abbreviation-tag">- Hipotonía</span>
-                        <span class="abbreviation-tag">+ Hipertonía</span>
-                        <span class="abbreviation-tag">MTs - Miembros Torácicos</span>
-                        <span class="abbreviation-tag">MP - Miembro Pélvico</span>
-                        <span class="abbreviation-tag">E - Extremidades</span>
-                        <span class="abbreviation-tag">H - Hemicuerpo</span>
-                        <span class="abbreviation-tag">CL - Contralateral</span>
-                        <span class="abbreviation-tag">D - Derecha</span>
-                        <span class="abbreviation-tag">I - Izquierda</span>
-                        <span class="abbreviation-tag">A - Ausente</span>
-                    </div>
                 </div>
                 <div class="table-container">
                     <div class="overflow-x-auto">

@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
         $stmt = $Con->prepare(
             "SELECT clave_paciente, codigo_paciente, nombre_paciente, apellido_paterno_paciente, apellido_materno_paciente,
                      fecha_nacimiento_paciente, semanas_gestacion
-                 FROM paciente WHERE clave_paciente = ?"
+                   FROM paciente WHERE clave_paciente = ?"
         );
 
         if (!$stmt) {
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Peso*</label><input type="text" id="dp_peso" name="peso" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; else echo 'required'; ?>></div>
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Perimetro Cefalico*</label><input type="text" id="dp_perimetro_cefalico" name="perimetro_cefalico" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>" class="w-full p-2 border rounded-md bg-white" <?php if (!$esPrimeraEvaluacion) echo 'readonly'; else echo 'required'; ?>></div>
 
-                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Evaluación Actual</label><input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_inicio_tratamiento']) ? $datos_paciente_para_mostrar['fecha_inicio_tratamiento'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha de Evaluación Actual</label><input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_inicio_tratamiento']) ? $datos_paciente_para_mostrar['fecha_inicio_tratamiento'] : ''); ?>" class="w-full p-2 border rounded-md"></div>
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Edad Cronológica</label><input type="text" id="dp_edad_cronologica_ingreso_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha Nacimiento Corregida</label><input type="text" id="dp_edad_corregida_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                 </div>
@@ -185,6 +185,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
 
                 <div class="flex justify-between mt-8">
                     <a href="/crear"> <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button> </a>
+                    <div class="text-sm text-gray-600 text-center hidden sm:block">
+                            Paso 1 de 9 - Datos Generales
+                        </div>
                     <button type="button" id="botonSiguientePaso" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">SIGUIENTE</button>
                 </div>
             </form>
@@ -198,12 +201,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
 
             function limpiarDatosPasosEvaluacion() {
                 const clavesPasos = [
-                    'evaluacionPaso1', 'evaluacionPaso2_mkatona', 'evaluacionPaso3_mgrueso',
-                    'evaluacionPaso4_mfino', 'evaluacionPaso5_lenguaje',
-                    'evaluacionPaso6_posturas_tmyu',
-                    'evaluacionPaso7_signos_alarma',
-                    'evaluacionPaso8_hitomgrueso',
-                    'evaluacionPaso9_hitomfino'
+                    'datosPacienteParaEvaluacion',
+                    'evaluacionP1',
+                    'evaluacionP2_mkatona',
+                    'evaluacionP3_mgrueso',
+                    'evaluacionP4_mfino',
+                    'evaluacionP5_lenguaje',
+                    'evaluacionP6_posturas_tmyu',
+                    'evaluacionP7_signos_alarma',
+                    'evaluacionP8_hitomgrueso',
+                    'evaluacionP9_hitomfino'
                 ];
                 clavesPasos.forEach(clave => sessionStorage.removeItem(clave));
             }
@@ -213,6 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                 limpiarDatosPasosEvaluacion(); // Limpia datos de sesiones anteriores para una nueva evaluación
                 try {
                     const datosPacienteActualesPHP = <?php echo json_encode($datos_paciente_para_mostrar); ?>;
+                    datosPacienteActualesPHP.mes = datosPacienteActualesPHP.mes || '';
                     sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPacienteActualesPHP));
                 } catch (e) {
                     console.error("Error JS PHP block: guardar datos Paciente:", e);
@@ -263,7 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     });
 
                     // Campos que siempre son readonly
-                    const camposSiempreReadOnly = ['dp_sdg', 'dp_fecha_nacimiento', 'dp_codigo_paciente', 'dp_nombre_paciente', 'dp_fecha_inicio_tratamiento', 'dp_edad_cronologica_ingreso_display', 'dp_edad_corregida_display'];
+                    const camposSiempreReadOnly = ['dp_sdg', 'dp_fecha_nacimiento', 'dp_codigo_paciente', 'dp_nombre_paciente', 'dp_edad_cronologica_ingreso_display', 'dp_edad_corregida_display'];
                     camposSiempreReadOnly.forEach(idCampo => {
                         const el = document.getElementById(idCampo);
                         if (el) {
@@ -326,15 +334,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                         pacienteDataParaActualizar.perimetro_cefalico = perimetroCefalico;
                         pacienteDataParaActualizar.factores_de_riesgo = factoresRiesgo;
                     }
+                    
+                    // Obtener el valor de la fecha de evaluación actual directamente del input
+                    const fechaEvaluacionActual = document.getElementById('dp_fecha_inicio_tratamiento').value;
 
+
+                    pacienteDataParaActualizar.mes = mesSeleccionado;
                     // Crear el objeto para el Paso 1
                     const datosPaso1 = {
                         mes: mesSeleccionado,
                         clave_paciente: pacienteDataParaActualizar.clave_paciente,
                         clave_personal: pacienteDataParaActualizar.clave_personal, // Usar la clave_personal del objeto pacienteDataParaActualizar
                         
-                        fecha_inicio_terapia: pacienteDataParaActualizar.fecha_inicio_tratamiento,
-                        fecha_terapia: pacienteDataParaActualizar.fecha_inicio_tratamiento, 
+                        fecha_inicio_terapia: fechaEvaluacionActual, // Usar la fecha de evaluación actual
+                        fecha_terapia: fechaEvaluacionActual, // Usar la fecha de evaluación actual
                         
                         edad_corregida: pacienteDataParaActualizar.edad_corregida_display, 
                         edad_cronologica: pacienteDataParaActualizar.edad_cronologica_ingreso_display,

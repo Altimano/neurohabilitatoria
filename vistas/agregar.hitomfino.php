@@ -10,17 +10,90 @@
     <title>Hitos de Desarrollo Motricidad Fina</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 1rem;
+            width: 100%;
+            max-width: 600px;
+            height: 450px;
+            max-height: 600px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+        .modal-icon {
+            font-size: 6rem;
+            color: #facc15;
+            line-height: 1;
+        }
+        .modal-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 1rem;
+        }
+        .modal-message {
+            font-size: 2rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+        }
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+        .modal-buttons button {
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: background-color 0.2s ease-in-out;
+            border: none;
+            color: white;
+            min-width: 180px;
+        }
+        .bg-custom-button {
+            background-color: #16a34a;
+        }
+        .bg-custom-button:hover {
+            background-color: #4ade80;
+        }
+        .bg-custom-button-no {
+            background-color: #dc2626;
+        }
+        .bg-custom-button-no:hover {
+            background-color: #f87171;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+        }
         .bg-custom-header-area {
             background-color: #FFFFFF;
         }
         .bg-custom-main-box {
-            background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%);
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
         }
         .bg-custom-button {
             background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
-        }
-        .bg-custom-button-no {
-            background-color: #6B7280; 
         }
         .text-custom-title {
             color: #0369A1;
@@ -68,6 +141,10 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid #E5E7EB;
             transition: all 0.2s ease-in-out;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .evaluation-card:hover {
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
@@ -94,6 +171,7 @@
             height: 4px;
             border-radius: 2px;
             transition: width 0.3s ease-in-out;
+            width: 100%;
         }
         .section-divider {
             background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
@@ -114,7 +192,7 @@
             padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             border: 1px solid #E5E7EB;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
         .navigation-buttons {
             background: white;
@@ -162,6 +240,7 @@
             font-size: 1rem;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            text-align: center;
         }
         .date-input:focus {
             outline: none;
@@ -285,134 +364,93 @@
             display: flex;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
             text-align: center;
+            font-weight: 600;
         }
-        .modal-icon {
-            font-size: 2.5rem;
-            color: #F59E0B;
-            margin-bottom: 1rem;
-        }
-        .modal-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #1F2937;
-        }
-        .modal-message {
-            font-size: 1rem;
-            color: #4B5563;
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-align: center;
+            color: #1E3A8A;
+            padding: 1.5rem 0;
             margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, transparent 0%, #DBEAFE 50%, transparent 100%);
+            border-radius: 8px;
         }
-        .modal-buttons button {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            color: white;
-            margin: 0 0.5rem;
-            cursor: pointer;
-        }
-        .hidden { 
-            display: none; 
-        }
-        #statusMessage {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            display: none;
-        }
-        #statusMessage.success {
-            background-color: #d4edda;
-            color: #155724;
-            border-color: #c3e6cb;
-        }
-        #statusMessage.error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border-color: #f5c6cb;
-        }
-    </style>
+</style>
 </head>
-<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+<body class="min-h-screen">
 
-    <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluación</h3></div>
+    <div class="text-center my-8"> <h3 class="text-3xl font-extrabold text-custom-title">Agregar una Evaluación</h3> </div>
 
-    <div class="max-w-4xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-md p-6">
+    <div class="max-w-7xl mx-auto px-6 mb-6"> <div class="h-2 bg-gray-200 rounded-full">
+            <div class="progress-indicator w-full"></div> 
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-lg p-8">
         <form id="evaluacionHitoMFinoForm" class="text-center">
-            <p class="text-center text-gray-600 mb-4">Evaluación para el mes: <strong id="mesSeleccionadoDisplay">...</strong></p>
-
-            <div class="mb-6 text-center">
-                <label for="fecha_evaluacion" class="block text-sm font-medium text-gray-700 mb-1">Fecha de la Evaluación</label>
-                <input type="date" name="fecha_evaluacion" id="fecha_evaluacion" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 inline-block" readonly>
+            <div class="info-card"> <p class="text-center text-gray-700 font-semibold text-lg mb-2">Evaluación para el mes: <span id="mesSeleccionadoDisplay" class="text-blue-700 font-bold">...</span></p>
             </div>
 
-            <div class="border-t border-b border-gray-400 py-2 mb-2"><h1 class="text-xl font-semibold text-center text-gray-800">HITOS DE DESARROLLO MOTRICIDAD FINA</h1></div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 mb-6 text-left">
+            <div class="info-card mb-6"> <label for="fecha_evaluacion" class="block text-base font-semibold text-gray-700 mb-2">Fecha de la Evaluación</label>
+                <input type="date" 
+                    name="fecha_evaluacion" 
+                    id="fecha_evaluacion" 
+                    class="date-input w-full" 
+                    readonly>
+            </div>
+
+            <div class="section-title">
+                <h1>HITOS DE DESARROLLO MOTRICIDAD FINA</h1>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6 text-left">
                 <div>
-                    <label for="hf_fijacion_ocular_display" class="block text-sm font-medium text-gray-700 mb-1">Fijación Ocular (FO)</label>
+                    <label for="hf_fijacion_ocular_display" class="evaluation-label">Fijación Ocular (FO)</label>
                     <p id="hf_fijacion_ocular_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_fijacion_ocular" id="hf_fijacion_ocular_value">
                 </div>
                 <div>
-                    <label for="hf_cubito_palmar_display" class="block text-sm font-medium text-gray-700 mb-1">Cúbito-Palmar (CP)</label>
+                    <label for="hf_cubito_palmar_display" class="evaluation-label">Cúbito-Palmar (CP)</label>
                     <p id="hf_cubito_palmar_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_cubito_palmar" id="hf_cubito_palmar_value">
                 </div>
                 <div>
-                    <label for="hf_presion_r_display" class="block text-sm font-medium text-gray-700 mb-1">Prensión "Rascado" (PR)</label>
+                    <label for="hf_presion_r_display" class="evaluation-label">Prensión "Rascado" (PR)</label>
                     <p id="hf_presion_r_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_presion_r" id="hf_presion_r_value">
                 </div>
                 <div>
-                    <label for="hf_pinza_inferior_display" class="block text-sm font-medium text-gray-700 mb-1">Pinza Inferior (PI)</label>
+                    <label for="hf_pinza_inferior_display" class="evaluation-label">Pinza Inferior (PI)</label>
                     <p id="hf_pinza_inferior_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_pinza_inferior" id="hf_pinza_inferior_value">
                 </div>
                 <div>
-                    <label for="hf_pinza_fina_display" class="block text-sm font-medium text-gray-700 mb-1">Pinza Fina (PF)</label>
+                    <label for="hf_pinza_fina_display" class="evaluation-label">Pinza Fina (PF)</label>
                     <p id="hf_pinza_fina_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_pinza_fina" id="hf_pinza_fina_value">
                 </div>
                 <div>
-                    <label for="hf_abajamiento_voluntario_display" class="block text-sm font-medium text-gray-700 mb-1">Aflojamiento Voluntario (AV)</label>
+                    <label for="hf_abajamiento_voluntario_display" class="evaluation-label">Aflojamiento Voluntario (AV)</label>
                     <p id="hf_abajamiento_voluntario_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_abajamiento_voluntario" id="hf_abajamiento_voluntario_value">
                 </div>
                 <div>
-                    <label for="hf_coordinacion_oculomanual_display" class="block text-sm font-medium text-gray-700 mb-1">Coordinación Óculomanual (CO)</label>
+                    <label for="hf_coordinacion_oculomanual_display" class="evaluation-label">Coordinación Óculomanual (CO)</label>
                     <p id="hf_coordinacion_oculomanual_display" class="hito-display"><em>...</em></p>
                     <input type="hidden" name="hf_coordinacion_oculomanual" id="hf_coordinacion_oculomanual_value">
                 </div>
             </div>
 
-            <div class="flex justify-between mt-8">
-                <a href="agregar.hitomgrueso.php">
-                    <button type="button" class="bg-custom-button hover:opacity-90 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">ANTERIOR</button>
+            <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a href="agregar.hitomgrueso.php" class="w-full sm:w-auto mb-4 sm:mb-0">
+                    <button type="button" class="btn-navigation w-full">ANTERIOR</button>
                 </a>
-                <div class="text-sm text-gray-600 text-center hidden sm:block">
-                        Paso 8 de 8 - Lenguaje
-                    </div>
-                <button type="button" id="botonFinalizarEvaluacion" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg text-sm font-medium shadow">FINALIZAR EVALUACIÓN</button>
+                <div class="text-base text-gray-600 font-medium mx-4 mb-4 sm:mb-0">
+                            Paso 9 de 9 - Lenguaje
+                        </div>
+                <button type="button" id="botonFinalizarEvaluacion" class="btn-navigation bg-green-500 hover:bg-green-400 w-full sm:w-auto">FINALIZAR EVALUACIÓN</button>
             </div>
         </form>
         <div id="statusMessage" class=""></div>
@@ -421,11 +459,11 @@
     <div id="confirmacionModal" class="modal-overlay hidden">
         <div class="modal-content">
             <div class="modal-icon">⚠️</div>
-            <h3 class="modal-title">Finalizar Evaluación</h3>
+            <h1 class="modal-title">Finalizar Evaluación</h1>
             <p class="modal-message">¿Seguro que quieres finalizar la evaluación?</p>
             <div class="modal-buttons">
-                <button id="modalBotonSi" class="bg-custom-button">Sí</button>
-                <button id="modalBotonNo" class="bg-custom-button-no">No</button>
+            <button id="modalBotonSi" class="bg-custom-button">Sí</button>
+            <button id="modalBotonNo" class="bg-custom-button-no">No</button>
             </div>
         </div>
     </div>
@@ -581,9 +619,9 @@
         // Claves de sessionStorage a limpiar después de la finalización exitosa.
         const clavesDePasos = [
             'datosPacienteParaEvaluacion',
-            'evaluacionPaso1',
-            'evaluacionPaso2_mkatona',
-            'evaluacionPaso3_mgrueso',
+            'evaluacionP1',
+            'evaluacionP2_mkatona',
+            'evaluacionP3_mgrueso',
             'evaluacionP4_mfino',
             'evaluacionP5_lenguaje',
             'evaluacionP6_posturas_tmyu',
