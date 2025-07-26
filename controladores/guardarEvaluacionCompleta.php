@@ -222,7 +222,7 @@ try {
                 });
                 
                 if (!empty($katona_values)) {
-                    $concatenated_values = implode(' | ', $katona_values);
+                    $concatenated_values = implode(', ', $katona_values);
                     $tono_muscular_topografia_sql = "'" . $Con->real_escape_string($concatenated_values) . "'";
                 }
             }
@@ -320,7 +320,7 @@ if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
                 });
                 
                 if (!empty($asimetria_values)) {
-                    $concatenated_values = implode(' | ', $asimetria_values);
+                    $concatenated_values = implode(', ', $asimetria_values);
                     $resultado_postura = "'" . $Con->real_escape_string($concatenated_values) . "'";
                 }
             }
@@ -352,7 +352,7 @@ if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
                 });
                 
                 if (!empty($tono_values)) {
-                    $concatenated_values = implode(' | ', $tono_values);
+                    $concatenated_values = implode(', ', $tono_values);
                     $resultado_tono_muscular = "'" . $Con->real_escape_string($concatenated_values) . "'";
                 }
             }

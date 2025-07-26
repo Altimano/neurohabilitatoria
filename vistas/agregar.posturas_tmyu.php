@@ -314,12 +314,12 @@
                                     <td><input type="checkbox" id="tu_hipotonia_opt1" name="tu_hipotonia[]" value="General"></td>
                                     <td><input type="checkbox" id="tu_hipotonia_opt2" name="tu_hipotonia[]" value="Axial"></td>
                                     <td><input type="checkbox" id="tu_hipotonia_opt3" name="tu_hipotonia[]" value="Extremidades"></td>
-                                    <td><input type="checkbox" id="tu_hipotonia_opt4" name="tu_hipotonia[]" value="Miembros Toracicos"></td>
-                                    <td><input type="checkbox" id="tu_hipotonia_opt5" name="tu_hipotonia[]" value="Miembros Pelvicos"></td>
+                                    <td><input type="checkbox" id="tu_hipotonia_opt4" name="tu_hipotonia[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="tu_hipotonia_opt5" name="tu_hipotonia[]" value="Miembros Pélvicos"></td>
                                     <td><input type="checkbox" id="tu_hipotonia_opt6" name="tu_hipotonia[]" value="Hemicuerpo"></td>
                                     <td><input type="checkbox" id="tu_hipotonia_opt7" name="tu_hipotonia[]" value="Contralateral"></td>
-                                    <td><input type="checkbox" id="tu_hipotonia_opt8" name="tu_hipotonia[]" value="Derecho"></td>
-                                    <td><input type="checkbox" id="tu_hipotonia_opt9" name="tu_hipotonia[]" value="Izquierdo"></td>
+                                    <td><input type="checkbox" id="tu_hipotonia_opt8" name="tu_hipotonia[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="tu_hipotonia_opt9" name="tu_hipotonia[]" value="Izquierda"></td>
                                     <td><input type="checkbox" id="tu_hipotonia_opt10" name="tu_hipotonia[]" value="Normal"></td>
                                 </tr>
                                 <tr>
@@ -327,12 +327,12 @@
                                     <td><input type="checkbox" id="tu_hipertonia_opt1" name="tu_hipertonia[]" value="General"></td>
                                     <td><input type="checkbox" id="tu_hipertonia_opt2" name="tu_hipertonia[]" value="Axial"></td>
                                     <td><input type="checkbox" id="tu_hipertonia_opt3" name="tu_hipertonia[]" value="Extremidades"></td>
-                                    <td><input type="checkbox" id="tu_hipertonia_opt4" name="tu_hipertonia[]" value="Miembros Toracicos"></td>
-                                    <td><input type="checkbox" id="tu_hipertonia_opt5" name="tu_hipertonia[]" value="Miembros Pelvicos"></td>
+                                    <td><input type="checkbox" id="tu_hipertonia_opt4" name="tu_hipertonia[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="tu_hipertonia_opt5" name="tu_hipertonia[]" value="Miembros Pélvicos"></td>
                                     <td><input type="checkbox" id="tu_hipertonia_opt6" name="tu_hipertonia[]" value="Hemicuerpo"></td>
                                     <td><input type="checkbox" id="tu_hipertonia_opt7" name="tu_hipertonia[]" value="Contralateral"></td>
-                                    <td><input type="checkbox" id="tu_hipertonia_opt8" name="tu_hipertonia[]" value="Derecho"></td>
-                                    <td><input type="checkbox" id="tu_hipertonia_opt9" name="tu_hipertonia[]" value="Izquierdo"></td>
+                                    <td><input type="checkbox" id="tu_hipertonia_opt8" name="tu_hipertonia[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="tu_hipertonia_opt9" name="tu_hipertonia[]" value="Izquierda"></td>
                                     <td><input type="checkbox" id="tu_hipertonia_opt10" name="tu_hipertonia[]" value="Normal"></td>
                                 </tr>
                                 <tr>
@@ -340,12 +340,12 @@
                                     <td><input type="checkbox" id="tu_mixto_opt1" name="tu_mixto[]" value="General"></td>
                                     <td><input type="checkbox" id="tu_mixto_opt2" name="tu_mixto[]" value="Axial"></td>
                                     <td><input type="checkbox" id="tu_mixto_opt3" name="tu_mixto[]" value="Extremidades"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt4" name="tu_mixto[]" value="Miembros Toracicos"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt5" name="tu_mixto[]" value="Miembros Pelvicos"></td>
+                                    <td><input type="checkbox" id="tu_mixto_opt4" name="tu_mixto[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="tu_mixto_opt5" name="tu_mixto[]" value="Miembros Pélvicos"></td>
                                     <td><input type="checkbox" id="tu_mixto_opt6" name="tu_mixto[]" value="Hemicuerpo"></td>
                                     <td><input type="checkbox" id="tu_mixto_opt7" name="tu_mixto[]" value="Contralateral"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt8" name="tu_mixto[]" value="Derecho"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt9" name="tu_mixto[]" value="Izquierdo"></td>
+                                    <td><input type="checkbox" id="tu_mixto_opt8" name="tu_mixto[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="tu_mixto_opt9" name="tu_mixto[]" value="Izquierda"></td>
                                     <td><input type="checkbox" id="tu_mixto_opt10" name="tu_mixto[]" value="Normal"></td>
                                 </tr>
                                 <tr>
@@ -353,12 +353,12 @@
                                     <td><input type="checkbox" id="tu_fluctuante_opt1" name="tu_fluctuante[]" value="General"></td>
                                     <td><input type="checkbox" id="tu_fluctuante_opt2" name="tu_fluctuante[]" value="Axial"></td>
                                     <td><input type="checkbox" id="tu_fluctuante_opt3" name="tu_fluctuante[]" value="Extremidades"></td>
-                                    <td><input type="checkbox" id="tu_fluctuante_opt4" name="tu_fluctuante[]" value="Miembros Toracicos"></td>
-                                    <td><input type="checkbox" id="tu_fluctuante_opt5" name="tu_fluctuante[]" value="Miembros Pelvicos"></td>
+                                    <td><input type="checkbox" id="tu_fluctuante_opt4" name="tu_fluctuante[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="tu_fluctuante_opt5" name="tu_fluctuante[]" value="Miembros Pélvicos"></td>
                                     <td><input type="checkbox" id="tu_fluctuante_opt6" name="tu_fluctuante[]" value="Hemicuerpo"></td>
                                     <td><input type="checkbox" id="tu_fluctuante_opt7" name="tu_fluctuante[]" value="Contralateral"></td>
-                                    <td><input type="checkbox" id="tu_fluctuante_opt8" name="tu_fluctuante[]" value="Derecho"></td>
-                                    <td><input type="checkbox" id="tu_fluctuante_opt9" name="tu_fluctuante[]" value="Izquierdo"></td>
+                                    <td><input type="checkbox" id="tu_fluctuante_opt8" name="tu_fluctuante[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="tu_fluctuante_opt9" name="tu_fluctuante[]" value="Izquierda"></td>
                                     <td><input type="checkbox" id="tu_fluctuante_opt10" name="tu_fluctuante[]" value="Normal"></td>
                                 </tr>
                             </tbody>
@@ -390,12 +390,12 @@
                                 <tr>
                                     <td>Asimetría</td>
                                     <td><input type="checkbox" id="Asimetria_opt1" name="Asimetria[]" value="Axial"></td>
-                                    <td><input type="checkbox" id="Asimetria_opt2" name="Asimetria[]" value="Miembros Toracicos"></td>
-                                    <td><input type="checkbox" id="Asimetria_opt3" name="Asimetria[]" value="Miembros Pelvicos"></td>
+                                    <td><input type="checkbox" id="Asimetria_opt2" name="Asimetria[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="Asimetria_opt3" name="Asimetria[]" value="Miembros Pélvicos"></td>
                                     <td><input type="checkbox" id="Asimetria_opt4" name="Asimetria[]" value="Hemicuerpo"></td>
                                     <td><input type="checkbox" id="Asimetria_opt5" name="Asimetria[]" value="Contralateral"></td>
-                                    <td><input type="checkbox" id="Asimetria_opt6" name="Asimetria[]" value="Derecho"></td>
-                                    <td><input type="checkbox" id="Asimetria_opt7" name="Asimetria[]" value="Izquierdo"></td>
+                                    <td><input type="checkbox" id="Asimetria_opt6" name="Asimetria[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="Asimetria_opt7" name="Asimetria[]" value="Izquierda"></td>
                                     <td><input type="checkbox" id="Asimetria_opt8" name="Asimetria[]" value="Normal"></td>
                                 </tr>
                             </tbody>

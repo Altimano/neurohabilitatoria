@@ -300,24 +300,6 @@
                     </h1>
                 </div>
 
-                <!-- Leyenda de abreviaciones -->
-                <div class="legend-card">
-                    <h2 class="text-lg font-bold text-gray-800 mb-4 text-center">
-                        Leyenda de Abreviaciones
-                    </h2>
-                    <div class="flex flex-wrap justify-center gap-2 text-xs">
-                        <span class="abbreviation-tag">(1) - General</span>
-                        <span class="abbreviation-tag">(2) - Axial</span>
-                        <span class="abbreviation-tag">(3) - Extremidades</span>
-                        <span class="abbreviation-tag">(4) - Miembros Torácicos</span>
-                        <span class="abbreviation-tag">(5) - Miembro Pélvico</span>
-                        <span class="abbreviation-tag">(6) - Hemicuerpo</span>
-                        <span class="abbreviation-tag">(7) - Contralateral</span>
-                        <span class="abbreviation-tag">(8) - Derecho</span>
-                        <span class="abbreviation-tag">(9) - Izquierdo</span>
-                        <span class="abbreviation-tag"> Normal</span>
-                    </div>
-                </div>
                 <!-- Tabla de evaluaciones -->
                 <div class="table-container">
                     <div class="overflow-x-auto">
@@ -400,21 +382,6 @@
                         </h1>
                     </div>
                     <!-- Leyenda de abreviaciones -->
-                    <div class="legend-card">
-                        <h2 class="text-lg font-bold text-gray-800 mb-4 text-center">
-                            Leyenda de Abreviaciones
-                        </h2>
-                        <div class="flex flex-wrap justify-center gap-2 text-xs">
-                            <span class="abbreviation-tag">(1) - Axial</span>
-                            <span class="abbreviation-tag">(2) - Miembros Torácicos</span>
-                            <span class="abbreviation-tag">(3) - Miembros Pélvicos</span>
-                            <span class="abbreviation-tag">(4) - Hemicuerpo</span>
-                            <span class="abbreviation-tag">(5) - Contralateral</span>
-                            <span class="abbreviation-tag">(6) - Derecho</span>
-                            <span class="abbreviation-tag">(7) - Izquierdo</span>
-                            <span class="abbreviation-tag">Normal</span>
-                        </div>
-                    </div>
                 </div>
                 <div class="table-container">
                     <div class="overflow-x-auto">
@@ -518,6 +485,7 @@
                         const checkboxes = fila.querySelectorAll('input[type="checkbox"]');
                         checkboxes.forEach(checkbox => {
                             const checkboxValue = checkbox.value.trim().toLowerCase();
+                            console.log("Checkbox actual:", checkboxValue);
                             if (resultadosTonoArray.includes(checkboxValue) || resultadosPosturaArray.includes(checkboxValue)) {
                                 checkbox.checked = true;
                             } else {

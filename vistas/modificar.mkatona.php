@@ -300,25 +300,6 @@
                     </h1>
                 </div>
 
-                <!-- Leyenda de abreviaciones -->
-                <div class="legend-card">
-                    <h2 class="text-lg font-bold text-gray-800 mb-4 text-center">
-                        Leyenda de Abreviaciones
-                    </h2>
-                    <div class="flex flex-wrap justify-center gap-2 text-xs">
-                        <span class="abbreviation-tag">Normal</span>
-                        <span class="abbreviation-tag">- Hipotonía</span>
-                        <span class="abbreviation-tag">+ Hipertonía</span>
-                        <span class="abbreviation-tag">Miembros Torácicos</span>
-                        <span class="abbreviation-tag">Miembros Pélvicos</span>
-                        <span class="abbreviation-tag">Extremidades</span>
-                        <span class="abbreviation-tag">Hemicuerpo</span>
-                        <span class="abbreviation-tag">Contralateral</span>
-                        <span class="abbreviation-tag">Derecha</span>
-                        <span class="abbreviation-tag">Izquierda</span>
-                        <span class="abbreviation-tag">Ausente</span>
-                    </div>
-                </div>
 
                 <!-- Tabla de evaluaciones -->
                 <div class="table-container">
@@ -538,6 +519,7 @@
 
                 filas.forEach(fila => {
                     const filaValue = fila.getAttribute('value').trim().toLowerCase();
+                    console.log(`Procesando fila: ${filaValue}`); // Para depuración
 
                     // Verifica si la fila corresponde a una evaluación de la query
                     const resultadoEncontrado = resultadosKatona.find(item =>
@@ -546,17 +528,21 @@
 
                     if (resultadoEncontrado) {
                         fila.style.display = ''; // Muestra la fila
+                        console.log(`Resultado encontrado para: ${filaValue}`, resultadoEncontrado); // Para depuración
 
                         // Obtiene los resultados separados por coma
                         const resultados = resultadoEncontrado.resultadosKatona
                             .split(',')
                             .map(r => r.trim().toLowerCase()); // Normaliza
+                        console.log(`Resultados normalizados para ${filaValue}:`, resultados); // Para depuración
 
                         // Selecciona todos los inputs de la fila
                         const checkboxes = fila.querySelectorAll('input[type="checkbox"]');
+                        console.log(`Checkboxes encontrados para ${filaValue}:`, checkboxes); // Para depuración
 
                         checkboxes.forEach(checkbox => {
                             const checkboxValue = checkbox.value.trim().toLowerCase();
+                            console.log(`Verificando checkbox: ${checkboxValue}`); // Para depuración
                             if (resultados.includes(checkboxValue)) {
                                 checkbox.checked = true;
                             } else {
