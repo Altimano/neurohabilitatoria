@@ -1,5 +1,7 @@
 <?php
-
+//Esta clase maneja las consultas a la base de datos relacionadas con los estudios de terapia neurohabilitatoria
+//Estas funciones regresan un objeto de tipo mysqli_result
+//Todas estas funciones se podrian agrupar en menos si se actualiza la filtracion de datos por el usuario a una query dinamica
 class Estudios
 {
     private $db;
@@ -8,21 +10,9 @@ class Estudios
         $this->db = $db;
     }
 
-    //    FUNCIONES PARA LA CONSULTA 
+    //    METODOS PARA LA CONSULTA 
 
-    public function consultarTodosLosEstudios()
-    {
-        $SQL = "SELECT * FROM terapia_neurohabilitatoria ORDER BY eval_subs_fec_eval DESC LIMIT 50";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
-
+    //Este metodo consulta los ultimos 100 estudios mas recientes, se usa en eliminar, modificar y consultar
     public function consultarTodosLosEstudiosv2()
     {
         $SQL = "SELECT 
@@ -203,17 +193,6 @@ class Estudios
         $this->db->close();
     }
 
-    public function consultarCamposSignosAlarma(){
-        $SQL = "SELECT campo FROM signos_alarma";
-        $stmt = $this->db->prepare($SQL);
-        if (!$stmt) {
-            die("Error en prepare: " . $this->db->error);
-        }
-        $stmt->execute();
-        return $stmt->get_result();
-        $stmt->close();
-        $this->db->close();
-    }
 
     public function consultarResultadosPostura($id_terapia)
     {
@@ -437,6 +416,7 @@ class Estudios
     //FUNCIONES PARA MODIFICAR
 
     //Consulta para obtener toda la informacion de un estudio en base a su id
+    //No lo he implementado
     public function consultarEstudioPorId($id_terapia_neurohabilitatoria)
     {
         $SQL = "SELECT * FROM terapia_neurohabilitatoria WHERE id_terapia_neurohabilitatoria = ? ";
@@ -451,29 +431,7 @@ class Estudios
         $this->db->close();
     }
 
-    //Funcion para modificar el estudio
-    //Queda pendiente los nombres de las nuevas variables de la bd para terapia neurohabilitatoria
-    //Queda pendiente si usar una funcion por seccion o todo junto y corregir con nombres de datos correctos
     
-   public function modificarDatos($id_terapia,$id_rows,$tabla,$datos)
-    {
-
-        foreach ($datos as $dato) {
-            $SQL = "UPDATE $tabla SET $dato[0] = ? WHERE id_resultados_katona = ?";
-            $stmt = $this->db->prepare($SQL);
-            if (!$stmt) {
-                die("Error en prepare: " . $this->db->error);
-            }
-
-        }
-
-        $SQL = "UPDATE ? SET ";
-        $set = [];
-        $ids = implode("AND id_resultados_katona=", $id_rows);
-        $condiciones = " WHERE id_resultados_katona= $ids";
-
-    }
-
     //FUNCIONES DE CONSULTA PARA AGREGAR (Consultas)
 
     public function consultarPacientes()
@@ -579,23 +537,10 @@ class Estudios
     }
 
     //FUNCIONES PARA AGREGAR (Insertar en la base de datos)
+    //Por el momento los procedimientos de insertar se realizan en el controlador pero se puede agregar aqui en todo caso
 
-    //Agrega un estudio a base de el campo post agregado en el formulario inicial
-    public function agregarEstudio($datos)
-    {
-        $stmt = $this->db->prepare("INSERT INTO terapia_neurohabilitatoria (clave_paciente, nombre_pacinete, eval_subs_fec_eval, eval_subs_edad_eval, eval_subs_edad_eval_meses, eval_subs_edad_eval_dias, eval_subs_edad_eval_semanas, eval_subs_edad_eval_anios, eval_subs_edad_eval_anios_meses, eval_subs_edad_eval_anios_dias) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssssss", $datos['nombre_pacinete'], $datos['eval_subs_fec_eval'], $datos['eval_subs_edad_eval'], $datos['eval_subs_edad_eval_meses'], $datos['eval_subs_edad_eval_dias'], $datos['eval_subs_edad_eval_semanas'], $datos['eval_subs_edad_eval_anios'], $datos['eval_subs_edad_eval_anios_meses'], $datos['eval_subs_edad_eval_anios_dias']);
-        $stmt->execute();
-        //if ($stmt->execute()) {
-        //  header("Location: /crear");
-        //} else {
-        //  echo "Error al agregar el estudio: " . $stmt->error;
-        //}
-        $stmt->close();
-    }
-
-
-    //    Elimina un estudio a base de el campo post agregado en el formulario inicial
+    //FUNCIONES PARA ELIMINAR
+    //    Elimina un estudio a base de el campo post terapia_id agregado en el formulario inicial
     public function eliminarEstudio($terapia_id)
     {
         $stmt = $this->db->prepare("DELETE FROM terapia_neurov2 WHERE id_terapia_neurohabilitatoriav2 = ?");
@@ -624,6 +569,8 @@ class Estudios
         }
         $stmt->close();
     }
+
+    //EN PROGRESO REALIZAR FILTRO DE BUSQUEDA DINAMICO PARA LA BUSQUEDA DE ESTUDIOS
 
     /*public function validarPorFiltrosPacientes($filtros) {
         $parametros = [];
@@ -682,6 +629,7 @@ class Estudios
     }*/
 
     //Funciones para agregar Evaluaciones
+    //Por el momento no se han implementando, un proceso diferente se encuentra en el controlador para agregar
     public function agregarEvaluacion($datos)
     {
         $stmt = $this->db->prepare("INSERT INTO terapia_neurohabilitatoria (clave_paciente, nombre_pacinete, eval_subs_fec_eval, eval_subs_edad_eval, eval_subs_edad_eval_meses, eval_subs_edad_eval_dias, eval_subs_edad_eval_semanas, eval_subs_edad_eval_anios, eval_subs_edad_eval_anios_meses, eval_subs_edad_eval_anios_dias) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

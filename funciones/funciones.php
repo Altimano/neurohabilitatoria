@@ -13,10 +13,13 @@
         $stmt->execute();
         $stmt->store_result();
         //Incluir la clave de personal 
+        //Regresa true si hay al menos un resultado, lo que significa que el usuario y la contraseña son válidos
+        //Si no hay resultados, regresa false
         return $stmt->num_rows > 0;
     }
 
     function tomarClavePersonal($user){
+        //Esta funcion toma el nombre de usuario y regresa la clave personal del usuario para insertarla al realizar operaciones con datos
         $Con = conectar();
         $stmt = $Con -> prepare("SELECT clave_personal FROM personal WHERE nombre_usuario_personal = ?");
         $stmt -> bind_param("s", $user);

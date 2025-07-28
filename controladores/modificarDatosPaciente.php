@@ -1,6 +1,5 @@
 <?php
 session_start();
-//PORFIN YA SE VE BONITO FAK FAK FAK
 header('Content-Type: text/html; charset=UTF-8');
 include './funciones/funciones.php';
 include './config/db.php';
@@ -54,18 +53,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
     $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'] = $datos_paciente_para_mostrar;
 }
 
-/*$dicKatona = generarDiccionario($datosKatona);
-$dicSubMG = generarDiccionario($datosSubMG);
-$dicSubMF = generarDiccionario($datosSubMF);
-$dicTono = generarDiccionario($datosTono);
-$dicSignos = generarDiccionario($datosSignos);
-$dicPostura = generarDiccionario($datosPostura);
-$dicLenguaje = generarDiccionario($datosLenguaje);
-$dicCamposSignos = generarDiccionario($datosCamposSignos);
-*/
-//Solo para ver si algo se esta filtrando por post y si los datos estan llegando correctamente
-echo "El array con los contenidos de POST";
-var_dump($_POST);
-echo "<br>";
-echo var_dump($datos_paciente_para_mostrar);
+
 require './vistas/modificar.datospaciente.php';

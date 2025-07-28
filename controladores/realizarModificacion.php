@@ -1,5 +1,6 @@
 <?php
 session_start();
+//controlador encargado de realizar la modificacion en la vista de modificar hitos finos
 $json_input = file_get_contents('php://input');
 $datos_recibidos = json_decode($json_input, true);
 require './config/db.php';
@@ -7,6 +8,10 @@ require './funciones/funciones.php';
 require './Clases/Estudios.php';
 //var_dump($datos_recibidos);
 date_default_timezone_set('America/Mexico_City');
+
+//Mapeo de los campos en respecto a como se encuentran en la base de datos con su respectivo id
+//Este mapeo es necesario para poder identificar los campos que se estan modificando y poder
+//actualizar los datos en la base de datos de manera correcta
 $mapeo_campos_id = [
     'mk_elev_tronco_manos' => 1,
     'mk_elev_tronco_espalda' => 2,
@@ -106,6 +111,7 @@ $mapeo_campos_id = [
     'hf_coordinacion_oculomanual' => 7,
 ];
 
+//Indica que se quedan los datos del paciente como estaban
 $campos_modificar_paciente = [
     'talla' => 'talla',
     'peso' => 'peso',
@@ -114,6 +120,7 @@ $campos_modificar_paciente = [
     'observaciones' => 'observaciones'
 ];
 
+//Inicializamos los arrays que se van a usar para guardar los datos de cada evaluacion hasta el momento de realizar la modificacion
 $datosPaciente = [];
 $datosKatonaConID = [];
 $datosMG = [];
@@ -125,14 +132,15 @@ $datosSignos = [];
 $datosHitoMG = [];
 $datosHitoMF = [];
 
+//si se han recibido datos, se procede a procesarlos
 if (isset($datos_recibidos)) {
     echo "Datos recibidos correctamente.\n";
 
-
+    //Por cada dato recibido es una evaluacion, y se toma el campo (nombre de la evaluacion)
     foreach ($datos_recibidos as $evaluacion => $campos) {
-
+        //por cada campo osea el nombre de la evaluacion se toma el resultado
         foreach ($campos as $nombreEvaluacion => $resultados) {
-
+            //si el nombre de la evaluacion es uno de los campos que se van a modificar, se guarda en el array de datos del paciente
             if (isset($campos_modificar_paciente[$nombreEvaluacion])) {
                 $campo_modificado = $campos_modificar_paciente[$nombreEvaluacion];
                 $datosPaciente[] = [
@@ -143,20 +151,24 @@ if (isset($datos_recibidos)) {
                 echo "Campo no encontrado: " . $nombreEvaluacion . "\n";
             }
             if ($nombreEvaluacion === 'fecha_evaluacion') continue; // Saltar fecha
-
+            //La variable $campo_id se usa para obtener el id del campo de la evaluacion correspondiente con el nombre de la evaluacion y el mapeo y asi poder realizar la actualizacion a base de id
             $campo_id = $mapeo_campos_id[$nombreEvaluacion];
+            //Si hay ocurrencias entre el mapeo y los nombres entonces procedemos
             if (isset($mapeo_campos_id[$nombreEvaluacion])) {
                 if (is_array($resultados)) {
+                    //Si son varios resultados, los convertimos a una cadena separada por comas
                     $resultado_final = implode(', ', $resultados);
                 }
 
                 //echo "Campo: $nombreEvaluacion, Resultado: $resultado_final ID: $campo_id\n";
 
+                //Dependiendo del las iniciales de la evaluacion se van guardando en el array correspondiente
+                //Asignamos la asociacion de los datos para luego iterarlos y realizar la actualizacion con las queries
                 if (strpos($nombreEvaluacion, 'mk') === 0) {
                     $datosKatonaConID[] = [
-                        'nombre_evaluacion' => $nombreEvaluacion,
-                        'resultado' => $resultado_final,
-                        'campo_id' => $campo_id,
+                        'nombre_evaluacion' => $nombreEvaluacion, //ejemplo: mk_elev_tronco_manos
+                        'resultado' => $resultado_final, // izquierda, normal
+                        'campo_id' => $campo_id, //3
                     ];
                 } elseif (strpos($nombreEvaluacion, 'mg') === 0) {
                     $datosMG[] = [
@@ -250,6 +262,7 @@ if (isset($datos_recibidos)) {
     echo "Datos Finales para HF:";
     print_r($datosHitoMF);*/
 
+    //Inicializamos variables para realizar las actualizaciones en la base de datos
     $tabla = '';
     $nombreEval = '';
     $columnaEvaluacion = '';
@@ -259,8 +272,11 @@ if (isset($datos_recibidos)) {
     $id_evaluacion = '';
     $Con = conectar();
 
+    //Se realiza la actualizacion de los datos del paciente
     if (isset($datosPaciente)) {
+        //Se indica la tabla donde se van a actualizar los datos del paciente
         $tabla = 'terapia_neurov2';
+        //Por cada elemento del array de datos del paciente, se toma el campo y el resultado
         foreach ($datosPaciente as $item) {
             $campo = $item['campo'];
             $resultado = mysqli_real_escape_string($Con, $item['resultados']);
@@ -363,6 +379,7 @@ if (isset($datos_recibidos)) {
         }
     }
 
+    //Tomamos datos de la sesion para realizar calculos de fechas
     $datosPacienteSession = $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'];
     $fechaEvaluacion = $datosPacienteSession['fecha_terapia'];
     $fechaNacimientoCorregida = $datosPacienteSession['fecha_nacimiento_edad_corregida'];
@@ -379,6 +396,8 @@ if (isset($datos_recibidos)) {
         foreach ($datosHitoMG as $datosHitoMGID) {
             $resultado = mysqli_real_escape_string($Con, $datosHitoMGID['resultado']);
             $id_evaluacion = $datosHitoMGID['campo_id'];
+            //Verificamos si ese paciente ha cumplido hitos, si no se ha encontrado un hito con ese id, entonces se procede a insertar el hito
+            //Si ya existe un hito con ese id, entonces se procede a eliminar el h
             if ($Estudio->verificarEvaluacionesRepetidas($tabla, $terapia_id, $columnaEvaluacion, $id_evaluacion) === false) {
                 if ($resultado === '4') {
                     $sql = "INSERT INTO $tabla (id_terapia_neuro, $columnaEvaluacion, fecha_consolidacion, fecha_consolidacion_semanas) VALUES ($terapia_id,$id_evaluacion,'$fechaEvaluacion',$fechaEnSemana)";
@@ -434,7 +453,8 @@ if (isset($datos_recibidos)) {
 
     Cerrar($Con);
 
-    file_put_contents('debug_ajax.log', print_r($log_data, true), FILE_APPEND);
+    //Para guardar logs, descomentar en caso de que se necesite
+    //file_put_contents('debug_ajax.log', print_r($log_data, true), FILE_APPEND);
 } else {
     echo "No se recibieron datos válidos.\n";
 }

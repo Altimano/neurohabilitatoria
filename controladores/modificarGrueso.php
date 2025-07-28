@@ -1,7 +1,7 @@
 <?php
 session_start();
 header('Content-Type: text/html; charset=UTF-8');
-
+//archivo encargado de cargar los datos del paciente en el area de subescalas motor grueso para mostrarlos en la vista de modificar grueso
 include './Clases/Estudios.php';
 include './config/db.php';
 include './funciones/funciones.php';
