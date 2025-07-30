@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include 'partials/modal.php'; ?>
     <title>Agregar Estudio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/assets/output.css" rel="stylesheet"/>
     <style>
         .bg-custom-header-area { background-color: #FFFFFF; }
         .bg-custom-main-box { background-color: #E0F2FE; } 

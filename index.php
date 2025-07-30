@@ -1,4 +1,3 @@
-<!-- Index con las rutas, router basico
 <?php
 $uriData = parse_url($_SERVER["REQUEST_URI"]);
 $uri = isset($uriData["path"]) ? $uriData["path"] : "/";

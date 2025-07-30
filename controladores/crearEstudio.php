@@ -72,6 +72,5 @@ if ($_SESSION["session"] === 'okA') {
          }
          
     }
-    var_dump($_POST);
     require './vistas/crear.view.php';
 }
