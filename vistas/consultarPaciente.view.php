@@ -1,6 +1,6 @@
+<!-- Pagina donde se muestran los resultados detallados del estudio, en progreso separar los estilos a su propio archivo para mayor orden --> 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -253,6 +253,8 @@
     <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
       
       <!-- Información básica del paciente -->
+      <!-- Si se requiere cambiar o agregar otro detalle de informacion agregar el nombre del campo como se escribe en la base de datos, en todo caso de que no se encuentre el campo en el array
+       modificar la consulta en Estudios.php -->
       <div class="info-card mb-8">
         <h2 class="section-title">Información del Paciente</h2>
         
@@ -394,7 +396,7 @@
           </div>
 
           <!-- Secciones de evaluación -->
-          
+           <!-- Estas secciones solo aparecen si son seleccionadas, revisar el javascript inferior para ver la funcion -->          
           <!-- Maniobras Katona -->
           <div id="maniobras" class="evaluation-section" style="display: none;">
             <h3 class="section-title">MANIOBRAS KATONA</h3>

@@ -1,3 +1,4 @@
+<!-- HTML (combinado con php) para la pagina donde puedes buscar estudios y de ahi seleccionar un estudio a consultar  -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,16 +25,18 @@
 
     <div class="mx-6 md:mx-10 my-6 bg-custom-main-box rounded-xl shadow-md p-6">
 
-        <form method="post" action="/consultar" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-2">
+<!--  Form donde se introducen los criterios de busqueda, estos son los campos que se pasan al controlador consultar.php -->
+        <form method="post" action="/consultar" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-2" autocomplete="off">
             <div class="w-full sm:flex-grow"> 
                 <label for="Nombre" class="block text-sm font-medium text-custom-title mb-1">Nombre del paciente</label>
                 <input 
-                    type="text" 
+                    type="text"
                     id="Nombre" 
                     name="Nombre" 
                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2" 
                     placeholder="Buscar por nombre..."
                     value="">
+                
                 
             </div>
             <div class="w-full sm:flex-grow"> 
@@ -61,7 +64,7 @@
             <div class="w-full sm:flex-grow"> 
                 <label for="codigo" class="block text-sm font-medium text-custom-title mb-1">Clave del paciente</label>
                 <input 
-                    type="text" 
+                    type="text"
                     id="codigo" 
                     name="codigo" 
                     class="block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm p-2" 
@@ -84,6 +87,7 @@
 
         </form>
 
+<!-- EN PROGRESO, boton para generar un archivo excel con todos los estudios de una consulta en base a los criterios -->
       <!--  <form method="post" action="/generarExcel" class="flex flex-col sm:flex-row items-end space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
         <input type="hidden" name="Nombre" value="<?= htmlspecialchars($_POST['Nombre']) ?>">
         <input type="hidden" name="eval_subs_fec_eval" value="<?= htmlspecialchars($_POST['eval_subs_fec_eval']) ?>">
@@ -99,6 +103,7 @@
         </form> -->
 
         <div class="overflow-x-auto"> <?php // Permite scroll horizontal en pantallas pequeñas ?>
+<!--  Tabla donde se muestran los resultados de la busqueda  -->
             <table class="w-full border-collapse border border-sky-300 bg-white text-sm">
                 <thead>
                     <tr class="bg-sky-200 text-custom-title">
@@ -112,17 +117,21 @@
                         </tr>
                 </thead>
                 <tbody>
-                <?php // Mostrar los resultados de la consulta 
+                    <!-- En el cuerpo de la tabla se cargan los resultados con php donde iteramos el array pacientes (este se genera en el controlador consultar.php) -->
+                <?php 
                 if (!empty($pacientes)): ?>
+                <!-- Por cada elemento del array pacientes es un paciente con sus datos e iteramos cada uno -->
         <?php foreach ($pacientes as $paciente): ?>
-            <tr>
+            <tr> <!-- Si se quiere cambiar lo que aparece en la tabla para cada campo, pueden cambiar al nombre que se le asigna en la base de datos  pero 
+                se tendria que actualizar la consulta en Estudios.php correspondiente-->
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["nombre_paciente"]) ?> </td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["terapeuta"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_terapia"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["num_evaluacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
-                <td class="border border-sky-300 px-3 py-2">  
+                <td class="border border-sky-300 px-3 py-2">
+                    <!-- Formulario encargado de enviar el id del paciente seleccionado para consultar a detalle todos sus datos de su estudio -->  
                     <form action='consultarPaciente' method='POST' style='display:inline;'>
                     <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
                     <button type='submit'  class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">

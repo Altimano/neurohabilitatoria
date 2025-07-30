@@ -1,3 +1,4 @@
+<!-- Pagina de inicio, aqui se muestra el carrousel de imagenes junto con el header para seleccionar operaciones a realizar -->
 <?php require 'partials/header.php'; ?>
 
 <div id="default-carousel" class="relative w-full h-screen" data-carousel="slide">

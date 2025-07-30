@@ -1,3 +1,4 @@
+<!-- Pagina de modificacion de los datos del paciente -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -227,7 +228,8 @@
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="formPaso1">
 
-                <!-- Selector de mes -->
+                <!-- Selector de mes 
+                 QUEDA PENDIENTE ELIMINARLO?-->
                 <div class="month-selector-section">
                     <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                         <label for="mes_seleccionado" class="form-label text-lg whitespace-nowrap">
@@ -257,7 +259,8 @@
                         </div>
                     </div>
 
-                    <!-- Grid de campos del paciente -->
+                    <!-- Grid de campos del paciente --> 
+                    <!--No todos los datos del paciente se pueden modificar, solo se modifican los datos pertinentes a terapia neurohabilitatoria-->
                     <div class="patient-data-grid">
                         <div>
                             <label class="form-label">Nombre Paciente</label>

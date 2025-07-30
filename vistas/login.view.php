@@ -1,3 +1,6 @@
+    <!-- Pagina de login  
+     Pagina en progreso de hacer mas bonita y agregar mas validaciones de usuario (mostrar si contra o usuario esta incorrecto, colores, etc) 
+  -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/output.css" rel="stylesheet" />

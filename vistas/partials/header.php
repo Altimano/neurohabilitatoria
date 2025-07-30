@@ -1,3 +1,7 @@
+<!-- Header (barrita de arriba blanca con opciones de operacion) 
+    Se usa para navegar entre las diferentes secciones de la aplicacion. 
+    Usa flowbite
+-->
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
