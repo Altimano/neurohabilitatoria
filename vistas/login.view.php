@@ -12,6 +12,7 @@
           <h1>Terapia Neurohabilitatoria</h1>
         </div>
 
+        <!-- Controlador login.php maneja el inicio de sesión -->
         <form action="/" method="post" autocomplete="off" class="bg-[#1f7BB8] p-6 rounded-xl shadow-lg">
           <label for="usuario" class="block text-base mb-2 text-white">Usuario</label>
           <input
@@ -35,6 +36,18 @@
             Iniciar sesión
           </button>
         </form>
+        <!-- En el controlador login.php manejamos la variable de error, si existe, mostramos la alerta de acceso denegado -->
+        <?php if (isset($error)) : ?>
+          <!-- Tailwind -->
+          <div class="mt-4 flex items-center gap-2 p-4 mb-4 text-blue-900 border border-blue-300 rounded-lg bg-blue-100 shadow-sm" role="alert">
+            <svg class="flex-shrink-0 w-5 h-5 text-blue-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11.75a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5zm0 6a.75.75 0 00-1.5 0v.5a.75.75 0 001.5 0v-.5z" />
+            </svg>
+            <div class="text-sm font-medium">
+              <?= htmlspecialchars($error) ?>
+            </div>
+          </div>
+        <?php endif; ?>
       </div>
 
     </body>
