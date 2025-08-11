@@ -224,11 +224,6 @@
     <div class="container mx-auto px-4 max-w-7xl">
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="evaluacionLenguajeForm"> 
-                <div class="info-card text-center">
-                    <p class="text-lg text-gray-700">
-                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
-                    </p>
-                </div>
                 <div class="mb-8 text-center">
                     <label for="fecha_evaluacion" class="evaluation-label text-lg">
                         Fecha de la Evaluación
@@ -476,14 +471,6 @@
                 } catch(e) { 
                     console.error("Error al cargar datos de Lenguaje:", e);
                 }
-            }
-            
-            // Muestra el mes seleccionado (del Paso 1)
-            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            if (mesDisplay && datosPaciente.mes) { 
-                mesDisplay.textContent = datosPaciente.mes;
-            } else if (mesDisplay) { 
-                mesDisplay.textContent = 'No disponible'; 
             }
 
             // Establece la fecha de evaluación.

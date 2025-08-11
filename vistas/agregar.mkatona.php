@@ -231,11 +231,6 @@
     <div class="container mx-auto px-4 max-w-7xl">
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="evaluacionKatonaForm">
-                <div class="info-card text-center">
-                    <p class="text-lg text-gray-700">
-                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
-                    </p>
-                </div>
                 <div class="mb-8 text-center">
                     <label for="fecha_evaluacion" class="block text-lg font-semibold text-gray-700 mb-3">
                         Fecha de la Evaluación
@@ -475,14 +470,6 @@
                 }
             }
             
-            // Muestra el mes de la evaluación.
-            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            if (mesDisplay && datosPaciente.mes) { 
-                mesDisplay.textContent = datosPaciente.mes;
-            } else if (mesDisplay) {
-                mesDisplay.textContent = 'No disponible';
-            }
-
             // Establece la fecha de evaluación.
             if (dateInput) {
                 if(datosKatona.fecha_evaluacion) { 

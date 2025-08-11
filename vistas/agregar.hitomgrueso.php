@@ -319,8 +319,6 @@
 
     <div class="max-w-7xl mx-auto mb-6 bg-custom-main-box rounded-xl shadow-lg p-8">
         <form id="evaluacionHitoMGruesoForm" class="text-center">
-            <div class="info-card"> <p class="text-center text-gray-700 font-semibold text-lg mb-2">Evaluación para el mes: <span id="mesSeleccionadoDisplay" class="text-blue-700 font-bold">...</span></p>
-            </div>
             
             <div class="info-card mb-6"> <label for="fecha_evaluacion" class="block text-base font-semibold text-gray-700 mb-2">Fecha de la Evaluación</label>
                 <input type="date" 
@@ -435,14 +433,6 @@
                         dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                     }
                 }
-            }
-
-            // Lógica para cargar el mes de evaluación
-            const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
-            if (mesDisplay && datosPaciente.mes) { 
-                mesDisplay.textContent = datosPaciente.mes;
-            } else if (mesDisplay) { 
-                mesDisplay.textContent = 'No disponible'; 
             }
 
             const form = document.getElementById('evaluacionHitoMGruesoForm');

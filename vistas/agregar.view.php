@@ -150,15 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
             </div>
         <?php else: ?>
             <form id="formPaso1">
-                <div class="flex items-center space-x-4 mb-6">
-                    <label for="mes_seleccionado" class="block text-sm font-medium text-gray-700 whitespace-nowrap">Selecciona el mes de revision</label>
-                    <select name="mes" id="mes_seleccionado" required class="flex-grow p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-blue-500">
-                        <option value="" disabled selected>Seleccione el mes</option>
-                        <?php for ($i = 1; $i <= 24; $i++): ?>
-                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                        <?php endfor; ?>
-                    </select>
-                </div>
                 <div class="border-t border-b border-gray-400 py-2 mb-6"><h1 class="text-xl font-semibold text-center text-gray-800">DATOS DEL PACIENTE</h1></div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-4 mb-6">
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Nombre Paciente</label><input type="text" id="dp_nombre_paciente" name="nombre_paciente_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['nombre_paciente']) ? $datos_paciente_para_mostrar['nombre_paciente'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
@@ -297,24 +288,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                 }
             }
 
-            const mesSelector = document.getElementById('mes_seleccionado');
             const botonSiguiente = document.getElementById('botonSiguientePaso');
 
-            const datosPaso1Guardados = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Guardados) {
-                try {
-                    const datosJson = JSON.parse(datosPaso1Guardados);
-                    if (mesSelector && datosJson.mes) mesSelector.value = datosJson.mes;
-                } catch(e) { sessionStorage.removeItem('evaluacionPaso1'); }
-            }
-
-            if (botonSiguiente && mesSelector) {
+            if (botonSiguiente) {
                 botonSiguiente.addEventListener('click', function() {
-                    const mesSeleccionado = mesSelector.value;
-                    if (!mesSeleccionado) {
-                        alert('Por favor, selecciona un mes de revisión.');
-                        return;
-                    }
 
                     // Actualizar pacienteDataParaActualizar con los valores del formulario
                     if (pacienteDataParaActualizar.esPrimeraEvaluacion) {
@@ -339,10 +316,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     const fechaEvaluacionActual = document.getElementById('dp_fecha_inicio_tratamiento').value;
 
 
-                    pacienteDataParaActualizar.mes = mesSeleccionado;
                     // Crear el objeto para el Paso 1
                     const datosPaso1 = {
-                        mes: mesSeleccionado,
                         clave_paciente: pacienteDataParaActualizar.clave_paciente,
                         clave_personal: pacienteDataParaActualizar.clave_personal, // Usar la clave_personal del objeto pacienteDataParaActualizar
                         
