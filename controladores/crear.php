@@ -13,25 +13,7 @@
     $semanasEnGestacion = $_POST["semanas_gestacion"];
     $fechaInicioTratamiento = new DateTime();
     $fechaInicioTratamiento = $fechaInicioTratamiento->format('Y-m-d');
-    var_dump($_POST);
-    echo "<br>";
-    echo $clave_paciente;
-    echo "<br>";
-    echo $fechaInicioTratamiento;
-    echo "<br>";
-    echo $fechaNacimiento;
-    echo "<br>";
-    echo $semanasEnGestacion;
-    echo "<br>";
-    echo $codigo_paciente;
-    echo "<br>";
     //calcularEdadCorregidaSemanas();
-     echo "AQUI ESTA LA EDAD CRONOLOGICA DE INGRESO" .' '.calcularEdadCronologicaIngreso($fechaInicioTratamiento, $fechaNacimiento);
-    echo "<br>";
-     echo "AQUI ESTA LA FECHA DE NACIMIENTO CORREGIDA PAPOI" .' '. calcularFechaNacimientoCorregida($fechaNacimiento, $semanasEnGestacion);
-    echo "<br>";
-    var_dump($clave_paciente);
-    echo "<br>";
     if ($Estudio->validarEvaluacionInicial($clave_paciente) == true) {
     echo "Ya existe una evaluacion inicial para este paciente";
     }else{

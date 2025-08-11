@@ -1,3 +1,4 @@
+<!-- HTML (combinado con php) para la pagina donde puedes buscar pacientes y de ahi agregar un estudio nuevo  -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include 'partials/modal.php'; ?>
     <title>Agregar Estudio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/assets/output.css" rel="stylesheet"/>
     <style>
         .bg-custom-header-area { background-color: #FFFFFF; }
         .bg-custom-main-box { background-color: #E0F2FE; } 
@@ -24,7 +25,8 @@
 
     <div class="mx-6 md:mx-10 my-6 bg-custom-main-box rounded-xl shadow-md p-6">
 
-        <form method="post" action="/crear" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+<!--  Form donde se introducen los criterios de busqueda, estos son los campos que se pasan al controlador crearEstudio.php -->
+        <form method="post" action="/crear" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6" autocomplete="off">
             <div class="w-full sm:flex-grow"> 
                 <label for="Nombre" class="block text-sm font-medium text-custom-title mb-1">Nombre del paciente</label>
                 <input 
@@ -97,6 +99,7 @@
                 </thead>
                 <tbody>
                 <?php if (!empty($pacientes)): ?>
+                    <!-- Iteramos el array de pacientes por cada uno mostrando la info como un campo como viene en la consulta el campo -->
         <?php foreach ($pacientes as $paciente): ?>
             <tr>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["codigo_paciente"]) ?></td>
@@ -109,6 +112,7 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
                 <td class="border border-sky-300 px-3">  
+                    <!-- Pasamos estos datos para la siguiente pagina por post -->
                 <form action='../vistas/agregar.view.php' method='POST' style='display:inline;'>
                     <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"]); ?>'>
                     <input type='hidden' name='codigo_paciente' value='<?php echo htmlspecialchars(isset($paciente["codigo_paciente"]) ? $paciente["codigo_paciente"] : ""); ?>'>

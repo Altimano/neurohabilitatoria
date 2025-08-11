@@ -238,12 +238,12 @@
                     </h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 text-sm">
                         <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                            <div class="font-bold text-red-600">0</div>
-                            <div>No lo tiene</div>
+                            <div class="font-bold text-red-600">Sí</div>
+                            <div> Lo tiene</div>
                         </div>
                         <div class="bg-white rounded-lg p-3 text-center shadow-sm">
-                            <div class="font-bold text-green-600">1</div>
-                            <div>Lo tiene</div>
+                            <div class="font-bold text-green-600">No</div>
+                            <div>No lo tiene</div>
                         </div>
                     </div>
                 </div>
@@ -261,8 +261,8 @@
                                 id="sa_aduccion_pulgares"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -278,8 +278,8 @@
                                 id="sa_estrabismo"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -295,8 +295,8 @@
                                 id="sa_irritabilidad"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -312,8 +312,8 @@
                                 id="sa_marcha_en_punta_presencia"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -329,8 +329,8 @@
                                 id="sa_marcha_cruzada_presencia"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -346,8 +346,8 @@
                                 id="sa_punos_cerrados_presencia"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -363,8 +363,8 @@
                                 id="sa_reflejo_hiperextension"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>
@@ -380,8 +380,8 @@
                                 id="sa_lenguaje_escaso"
                                 class="select-custom w-full p-3 border-2 border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                                 <option value="" disabled selected>Seleccione</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
+                                <option value="0">No</option>
+                                <option value="1">Sí</option>
                             </select>
                         </div>
                         </div>

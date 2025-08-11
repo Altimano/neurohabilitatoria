@@ -1,7 +1,9 @@
 <?php
 session_start();
-//Controlador encargado de validar acceso a un usuario en base a su usuario y contra
 require './funciones/funciones.php';
+
+$error = null;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST["user"];
     $password = $_POST["password"];
@@ -12,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: /inicio");
         exit();
     } else {
-        echo "Acceso denegado";
+        $error = "Usuario o contraseña incorrectos";
     }
 }
+
 require './vistas/login.view.php';

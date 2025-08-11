@@ -2,6 +2,8 @@
 $uriData = parse_url($_SERVER["REQUEST_URI"]);
 $uri = isset($uriData["path"]) ? $uriData["path"] : "/";
 
+//Variable con todas las rutas de la app web
+//Si queremos agregar o eliminar nuevas paginas, agregar el nombre a usar y su correspondiente controlador
 $rutas = [
     "/" => "controladores/login.php",
     "/inicio" => "controladores/inicio.php",
@@ -24,6 +26,7 @@ $rutas = [
     "/modificarHitosMF" => "controladores/modificarHitosMF.php",
 ];
 
+//Si encuentra que la ruta actual existe en el array de rutas, carga la ruta con match else pagina de error
 if (array_key_exists($uri, $rutas)) {
     require $rutas[$uri];
 } else {

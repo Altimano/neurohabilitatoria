@@ -1,3 +1,4 @@
+<!-- Pagina de consulta para modificar evaluaciones -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,7 +36,7 @@
     </div>
 
     <div class="mx-6 md:mx-10 my-6 bg-custom-main-box rounded-xl shadow-md p-6">
-
+        <!-- Campos que pasamos al controlador para realizar la busqueda de evaluaciones a modificar -->
         <form method="post" action="/modificar" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
             <div class="w-full sm:flex-grow">
                 <label for="Nombre" class="block text-sm font-medium text-custom-title mb-1">Nombre del paciente</label>
@@ -110,6 +111,7 @@
                 <tbody>
                     <?php // Mostrar los resultados de la consulta 
                     if (!empty($pacientes)): ?>
+                    <!-- Iteramos los datos del paciente en el cuerpo de la tabla, si queremos cambiar que dato aparece, cambiamos el nombre de la variable a buscar segun la consulta -->
                         <?php foreach ($pacientes as $paciente): ?>
                             <tr>
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["clave_paciente"]) ?></td>
@@ -119,6 +121,7 @@
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["num_evaluacion"]) ?></td>
                                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
                                 <td class="border border-sky-300 px-3 py-2">
+                                    <!-- Datos para procedimientos siguientes al seleccionar una evaluacion -->
                                     <form action='modificarDatosPaciente' method='POST' style='display:inline;'>
                                         <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"], ENT_QUOTES); ?>'>
                                         <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"]); ?>'>
