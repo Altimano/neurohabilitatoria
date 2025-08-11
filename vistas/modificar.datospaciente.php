@@ -228,26 +228,6 @@
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="formPaso1">
 
-                <!-- Selector de mes 
-                 QUEDA PENDIENTE ELIMINARLO?-->
-                <div class="month-selector-section">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                        <label for="mes_seleccionado" class="form-label text-lg whitespace-nowrap">
-                            Selecciona el mes de revisión
-                        </label>
-                        <div class="select-wrapper flex-grow max-w-xs">
-                            <select name="mes"
-                                id="mes_seleccionado"
-                                required
-                                class="form-field select-custom w-full">
-                                <option value="" disabled selected>Seleccione el mes</option>
-                                <?php for ($i = 1; $i <= 24; $i++): ?>
-                                    <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                <?php endfor; ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Sección de datos del paciente -->
                 <div class="form-section">
@@ -475,39 +455,17 @@
                 }
             }
 
-            const mesSelector = document.getElementById('mes_seleccionado');
             const botonSiguiente = document.getElementById('botonSiguientePaso');
 
             const datosPaso1Guardados = sessionStorage.getItem('evaluacionPaso1');
-            if (datosPaso1Guardados) {
-                try {
-                    const datosJson = JSON.parse(datosPaso1Guardados);
-                    if (mesSelector && datosJson.mes) mesSelector.value = datosJson.mes;
-                } catch (e) {
-                    sessionStorage.removeItem('evaluacionPaso1');
-                }
-            }
 
-            if (botonSiguiente && mesSelector) {
+            if (botonSiguiente) {
                 botonSiguiente.addEventListener('click', function() {
-                    const mesSeleccionado = mesSelector.value;
-                    if (!mesSeleccionado) {
-                        // Crear alerta personalizada más elegante
-                        const alertDiv = document.createElement('div');
-                        alertDiv.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50 transform transition-all duration-300';
-                        alertDiv.innerHTML = '⚠️ Por favor, selecciona un mes de revisión.';
-                        document.body.appendChild(alertDiv);
 
-                        setTimeout(() => {
-                            alertDiv.remove();
-                        }, 3000);
-
-                        mesSelector.focus();
-                        return;
-                    }
+                    
 
                     const datosPaso1 = {
-                        mes: mesSeleccionado
+
                     };
 
                     if (pacienteDataParaActualizar) {

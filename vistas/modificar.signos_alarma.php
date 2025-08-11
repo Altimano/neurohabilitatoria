@@ -204,14 +204,14 @@
             <form id="evaluacionSignosAlarmaForm">
 
                 <!-- Información del mes -->
-                <div class="text-center mb-8 p-4 bg-white rounded-xl shadow-sm">
-                    <p class="text-lg text-gray-700">
+                <div hidden class="text-center mb-8 p-4 bg-white rounded-xl shadow-sm">
+                    <p  class="text-lg text-gray-700">
                         Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
                     </p>
                 </div>
 
                 <!-- Fecha de evaluación -->
-                <div class="mb-8 text-center">
+                <div hidden class="mb-8 text-center">
                     <label for="fecha_evaluacion" class="evaluation-label text-lg">
                         Fecha de la Evaluación
                     </label>

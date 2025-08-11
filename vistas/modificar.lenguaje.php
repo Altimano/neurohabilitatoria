@@ -202,24 +202,7 @@
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="evaluacionLenguajeForm">
 
-                <!-- Información del mes -->
-                <div class="text-center mb-8 p-4 bg-white rounded-xl shadow-sm">
-                    <p class="text-lg text-gray-700">
-                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
-                    </p>
-                </div>
 
-                <!-- Fecha de evaluación -->
-                <div class="mb-8 text-center">
-                    <label for="fecha_evaluacion" class="evaluation-label text-lg">
-                        Fecha de la Evaluación
-                    </label>
-                    <input type="date"
-                        name="fecha_evaluacion"
-                        id="fecha_evaluacion"
-                        class="p-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg"
-                        readonly>
-                </div>
 
                 <!-- Título de la sección -->
                 <div class="text-center mb-8">
@@ -571,19 +554,7 @@
                     }
                 }
 
-                const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
                 const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
-                if (datosPaso1Raw) {
-                    try {
-                        const dP1 = JSON.parse(datosPaso1Raw);
-                        if (mesDisplay && dP1.mes) mesDisplay.textContent = dP1.mes;
-                    } catch (e) {
-                        if (mesDisplay) mesDisplay.textContent = 'Error';
-                        console.error("Error Paso 5 (Lenguaje): No se pudo parsear JSON de evaluacionPaso1.", e);
-                    }
-                } else if (mesDisplay) {
-                    mesDisplay.textContent = 'No disponible';
-                }
 
                 const form = document.getElementById('evaluacionLenguajeForm');
                 if (form && datosJson) {

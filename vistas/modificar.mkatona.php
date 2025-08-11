@@ -274,24 +274,7 @@
         <div class="bg-custom-main-box rounded-2xl shadow-xl p-6 md:p-8">
             <form id="evaluacionKatonaForm">
 
-                <!-- Información del mes -->
-                <div class="info-card text-center">
-                    <p class="text-lg text-gray-700">
-                        Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
-                    </p>
-                </div>
 
-                <!-- Fecha de evaluación -->
-                <div class="mb-8 text-center">
-                    <label for="fecha_evaluacion" class="block text-lg font-semibold text-gray-700 mb-3">
-                        Fecha de la Evaluación
-                    </label>
-                    <input type="date"
-                        name="fecha_evaluacion"
-                        id="fecha_evaluacion"
-                        class="date-input"
-                        readonly>
-                </div>
 
                 <!-- Título de la sección -->
                 <div class="section-title text-center">
@@ -571,27 +554,9 @@
                     }
                 }
 
-                const mesDisplay = document.getElementById('mesSeleccionadoDisplay');
                 const datosPaso1Raw = sessionStorage.getItem('evaluacionPaso1');
                 // Si se encontraron datos del Paso 1
-                if (datosPaso1Raw) {
-                    try {
-                        // Parsea los datos del Paso 1.
-                        const dP1 = JSON.parse(datosPaso1Raw);
-                        if (mesDisplay && dP1.mes) {
-                            // Muestra el mes.
-                            mesDisplay.textContent = dP1.mes;
-                        } else if (mesDisplay) {
-                            //No muestra el mes
-                            mesDisplay.textContent = 'No disponible';
-                        }
-                    } catch (e) {
-                        if (mesDisplay) mesDisplay.textContent = 'Error al cargar mes';
-                        console.error("Error Paso 2 (Katona): No se pudo parsear JSON de evaluacionPaso1 para el mes.", e);
-                    }
-                } else if (mesDisplay) {
-                    mesDisplay.textContent = 'No disponible';
-                }
+                
 
                 if (dateInput) {
                     if (datosJson.fecha_evaluacion) {

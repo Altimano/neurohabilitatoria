@@ -2,6 +2,7 @@
 session_start();
 require './funciones/funciones.php';
 
+
 $error = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -275,14 +275,14 @@
             <form id="evaluacionTonoUbicacionForm">
 
                 <!-- Información del mes -->
-                <div class="info-card text-center">
+                <div hidden class="info-card text-center">
                     <p class="text-lg text-gray-700">
                         Evaluación para el mes: <span class="font-bold text-custom-title" id="mesSeleccionadoDisplay">...</span>
                     </p>
                 </div>
 
                 <!-- Fecha de evaluación -->
-                <div class="mb-8 text-center">
+                <div hidden class="mb-8 text-center">
                     <label for="fecha_evaluacion" class="block text-lg font-semibold text-gray-700 mb-3">
                         Fecha de la Evaluación
                     </label>
@@ -561,16 +561,21 @@
                  console.log("Datos JSON cargados:", datosJson);
 
                  // Verificar si encuentra los checkboxes
-console.log('Checkboxes encontrados:', document.querySelectorAll('input[name="pt_Asimetria[]"]'));
+console.log('Checkboxes encontrados de posturaaaa:', document.querySelectorAll('input[name="pt_Asimetria[]"]'));
+console.log('Checkboxes encontrados de tono:', document.querySelectorAll('input[name="tu_hipotonia[]"]'));
 
 // Verificar estructura de datos
-console.log('Datos:', datosJson.pt_Asimetria);
+console.log('Datos Postura???""""":', datosJson.pt_Asimetria);
+console.log('DatosJSON AYUDA', datosJson);
 
                 if (form && Object.keys(datosJson).length > 0) {
                     checkboxGroupNames.forEach(groupName => {
+                        console.log(`Procesando grupo: ${groupName}`);
                         if (datosJson[groupName] && Array.isArray(datosJson[groupName])) {
-                            const checkboxesInGroup = form.querySelectorAll(`input[name="${groupName}[]"]`);
+                            console.log(`Datos encontrados para el grupo ${groupName}:`, datosJson[groupName]);
+                            const checkboxesInGroup = document.querySelectorAll(`input[name="${groupName}[]"]`);
                             checkboxesInGroup.forEach(checkbox => {
+                                console.log(`Verificando checkbox: ${checkbox.value} en grupo ${groupName}`);
                                 if (datosJson[groupName].includes(checkbox.value)) {
                                     checkbox.checked = true;
                                     console.log(`Checkbox ${checkbox.value} en grupo ${groupName} marcado.`);
@@ -596,9 +601,11 @@ console.log('Datos:', datosJson.pt_Asimetria);
                         if (dateInput) datosPaso['fecha_evaluacion'] = dateInput.value;
 
                         checkboxGroupNames.forEach(groupName => {
-                            const checkedBoxes = form.querySelectorAll(`input[name="${groupName}[]"]:checked`);
+                            console.log(`Procesando grupo al presionar boton siguiente: ${groupName}`);
+                            const checkedBoxes = document.querySelectorAll(`input[name="${groupName}[]"]:checked`);
                             const values = [];
                             checkedBoxes.forEach(checkbox => {
+                                console.log(`Checkbox marcado: ${checkbox.value} en grupo ${groupName}`);
                                 values.push(checkbox.value);
                             });
                             if (values.length > 0) {
