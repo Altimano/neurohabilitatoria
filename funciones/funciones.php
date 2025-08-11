@@ -97,22 +97,23 @@
         header("Location: /");
     }
 
-    // Funciones para agregar estudios / formato pdf (las que tú modificaste/añadiste)
+     // Funciones para agregar estudios
     function calcularFechaNacimientoCorregida($fechaNacimientoRealStr, $semanasGestacion)
     {
-        $fechaNacimientoReal = new DateTime($fechaNacimientoRealStr);
         $semanasTermino = 40;
         $semanasPrematuro = $semanasTermino - $semanasGestacion;
         
-        // Si el bebé no fue prematuro, la fecha corregida es la misma que la real.
+        // Si el bebé no fue prematuro, la edad corregida es la edad cronológica en semanas.
         if ($semanasPrematuro <= 0) {
-            return $fechaNacimientoReal->format('Y-m-d');
+            $fechaNacimientoReal = new DateTime($fechaNacimientoRealStr);
+            $fechaActual = new DateTime();
+            $diferencia = $fechaNacimientoReal->diff($fechaActual);
+            $semanas = floor($diferencia->days / 7);
+            return $semanas;
         }
         
-        $diasCorreccion = $semanasPrematuro * 7;
-        $fechaCorregida = clone $fechaNacimientoReal;
-        $fechaCorregida->modify("-$diasCorreccion days");
-        return $fechaCorregida->format('Y-m-d');
+        // Si el bebé fue prematuro, la edad corregida es semanasPrematuro.
+        return $semanasPrematuro;
     }
 
     function calcularEdadCronologicaIngreso($fechaInicioTratamientoStr, $fechaNacimientoStr)

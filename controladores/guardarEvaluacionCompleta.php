@@ -1,5 +1,4 @@
 <?php
-// Este archivo procesa y guarda los datos de una evaluación completa.
 // Incluye la configuración de la base de datos y funciones auxiliares.
 require_once '../config/db.php'; 
 require_once '../funciones/funciones.php'; 
@@ -29,7 +28,7 @@ try {
         throw new Exception("Error al conectar con la base de datos: " . $Con->connect_error);
     }
 
-    // --- Mapeo de evaluaciones (catálogos) ---
+    // --- Mapeo de evaluaciones ---
     $evaluation_maps = [
         'katona' => [
             'mk_elev_tronco_manos' => 1, 'mk_elev_tronco_espalda' => 2, 'mk_sentado_aire' => 3,
@@ -105,24 +104,19 @@ try {
         $existing_fecha_inicio_terapia_sql = $fecha_terapia_actual_sql;
     }
 
-    // --- MODIFICACIÓN AQUÍ para edad_corregida y edad_cronologica ---
     // Prepara la edad corregida
     $edad_corregida_sql = 'NULL';
     if (isset($data['edad_corregida_display']) && !empty($data['edad_corregida_display'])) {
-        // Asumiendo que 'edad_corregida_display' ya viene como "5 A" o "6 M" del frontend
+        // Si 'edad_corregida_display' viene del frontend, la guardamos directamente
         $edad_corregida_sql = "'" . $Con->real_escape_string($data['edad_corregida_display']) . "'"; 
     } else {
-        // Si no viene la edad_corregida_display, podrías intentar calcularla o dejarla en NULL
-        // o si tienes la edad_corregida_anios y edad_corregida_meses
-        if (isset($data['edad_corregida_anios']) && is_numeric($data['edad_corregida_anios'])) {
-            $edad_corregida_value = $data['edad_corregida_anios'] . ' A';
-            if (isset($data['edad_corregida_meses']) && is_numeric($data['edad_corregida_meses']) && $data['edad_corregida_meses'] > 0) {
-                $edad_corregida_value .= ' ' . $data['edad_corregida_meses'] . ' M';
-            }
-            $edad_corregida_sql = "'" . $Con->real_escape_string($edad_corregida_value) . "'";
-        } elseif (isset($data['edad_corregida_meses']) && is_numeric($data['edad_corregida_meses']) && $data['edad_corregida_meses'] > 0) {
-             $edad_corregida_sql = "'" . $Con->real_escape_string($data['edad_corregida_meses'] . ' M') . "'";
-        }
+        // Si no viene, calculamos la edad corregida en semanas
+        $edadCorregidaSemanas = calcularEdadCorregidaEnSemanas(
+            $data['fecha_nacimiento'],
+            $data['sdg'],
+            $data['fecha_inicio_tratamiento']
+        );
+        $edad_corregida_sql = "'" . $Con->real_escape_string($edadCorregidaSemanas . ' S') . "'";
     }
 
     // Prepara la edad cronológica
@@ -143,7 +137,6 @@ try {
              $edad_cronologica_sql = "'" . $Con->real_escape_string($data['edad_cronologica_meses'] . ' M') . "'";
         }
     }
-    // --- FIN DE MODIFICACIÓN ---
     
     // Determina la fecha de nacimiento corregida para la base de datos.
     $dat_ter_fech_nac_edad_correg_sql = 'NULL'; 
@@ -180,6 +173,9 @@ try {
         }
     }
 
+    // -- aqui agregar el timestamp
+    $timestamp_sql = "'" . date('Y-m-d H:i:s') . "'";
+
 
     // Inserta los datos principales de la terapia en la tabla `terapia_neurov2`.
     $sql = "INSERT INTO `terapia_neurov2` (
@@ -187,13 +183,13 @@ try {
                 `edad_corregida`, `edad_cronologica`, `dat_ter_fech_nac_edad_correg`, 
                 `edad_cronologica_al_ingr_sem`, `edad_correg_al_ingr_sem`, 
                 `peso`, `talla`, `pc`, `factores_riesgo`,
-                `observaciones`, `num_evaluacion` 
+                `observaciones`, `num_evaluacion`, `fecha_registro`
             ) VALUES (
                 {$clave_paciente_sql}, {$clave_personal_sql}, {$existing_fecha_inicio_terapia_sql}, {$fecha_terapia_actual_sql}, 
                 {$edad_corregida_sql}, {$edad_cronologica_sql}, {$dat_ter_fech_nac_edad_correg_sql}, 
                 {$edad_cronologica_al_ingr_sem_sql}, {$edad_correg_al_ingr_sem_sql}, 
                 {$peso_sql}, {$talla_sql}, {$pc_sql}, {$factores_riesgo_sql},
-                {$observaciones_generales_sql}, {$num_evaluacion_sql} 
+                {$observaciones_generales_sql}, {$num_evaluacion_sql}, {$timestamp_sql}
             )";
 
     if (!$Con->query($sql)) {
