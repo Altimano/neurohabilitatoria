@@ -1,0 +1,25 @@
+{
+  "name": "neurohabilitatoria",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Altimano/neurohabilitatoria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Altimano/neurohabilitatoria/issues"
+  },
+  "homepage": "https://github.com/Altimano/neurohabilitatoria#readme",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
+    "flowbite": "^3.1.2",
+    "tailwindcss": "^4.1.10"
+  }
+}
