@@ -18,15 +18,28 @@ $rutas = [
     "/" => "controladores/login.php",
     "/login" => "controladores/login.php",
     "/inicio" => "controladores/inicio.php",
-    "/crear" => "controladores/crearEstudio.php",
+    
+    // --- RUTAS PARA AGREGAR EVALUACIÓN ---
+    "/crear" => "controladores/crearEstudio.php", // Muestra la búsqueda de pacientes
+    "/agregar" => "vistas/agregar.view.php", // Muestra el primer paso
+    "/agregarKatona" => "vistas/agregar.mkatona.php",
+    "/agregarGrueso" => "vistas/agregar.mgrueso.php",
+    "/agregarFino" => "vistas/agregar.mfino.php",
+    "/agregarLenguaje" => "vistas/agregar.lenguaje.php",
+    "/agregarPostura" => "vistas/agregar.posturas_tmyu.php",
+    "/agregarSignos" => "vistas/agregar.signos_alarma.php",
+    "/agregarHitosMG" => "vistas/agregar.hitomgrueso.php",
+    "/agregarHitosMF" => "vistas/agregar.hitomfino.php",
+    "/guardarEvaluacion" => "controladores/guardarEvaluacionCompleta.php", // Guarda todo al final
+
+    // --- RUTAS PARA CONSULTAR ---
     "/consultar" => "controladores/consultar.php",
     "/consultarPaciente" => "controladores/consultarPaciente.php",
+    
+    // --- RUTAS PARA MODIFICAR ---
     "/modificar" => "controladores/modificarEvaluacion.php",
     "/modificarDatosPaciente" => "controladores/modificarDatosPaciente.php",
     "/realizarModificacion" => "controladores/realizarModificacion.php",
-    "/eliminar" => "controladores/eliminar_Estudio.php",
-    "/eliminarEvaluacion" => "controladores/eliminar.php",
-    "/salir" => "controladores/salir.php",
     "/modificarKatona" => "controladores/modificarKatona.php",
     "/modificarGrueso" => "controladores/modificarGrueso.php",
     "/modificarFino" => "controladores/modificarFino.php",
@@ -35,6 +48,13 @@ $rutas = [
     "/modificarSignos" => "controladores/modificarSignos.php",
     "/modificarHitosMG" => "controladores/modificarHitosMG.php",
     "/modificarHitosMF" => "controladores/modificarHitosMF.php",
+    
+    // --- RUTAS PARA ELIMINAR ---
+    "/eliminar" => "controladores/eliminar_Estudio.php",
+    "/eliminarEvaluacion" => "controladores/eliminar.php",
+    
+    // --- SALIR ---
+    "/salir" => "controladores/salir.php",
 ];
 
 // =========================

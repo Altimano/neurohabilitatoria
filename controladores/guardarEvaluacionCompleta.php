@@ -1,7 +1,7 @@
 <?php
 // Incluye la configuración de la base de datos y funciones auxiliares.
-require_once '../config/db.php'; 
-require_once '../funciones/funciones.php'; 
+require_once './config/db.php'; 
+require_once './funciones/funciones.php'; 
 
 // Establece la zona horaria para un manejo consistente de fechas y horas.
 date_default_timezone_set('America/Mexico_City');

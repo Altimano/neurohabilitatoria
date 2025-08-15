@@ -633,7 +633,7 @@
                     </div>
                 </div>
                 <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <a href=<?=base_url("agregar.mkatona.php")?> class="btn-navigation">
+                    <a href=<?=base_url("/agregarKatona")?> class="btn-navigation">
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -735,7 +735,7 @@
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentMotorGruesoData)); 
 
                         // Redirige al siguiente paso de la evaluación.
-                        window.location.href = "<?=base_url('agregar.mfino.php')?>"; 
+                        window.location.href = "<?=base_url('/agregarFino')?>"; 
                     } catch(e) { 
                         console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los datos de Motor Grueso."); 

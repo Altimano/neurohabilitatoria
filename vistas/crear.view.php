@@ -113,7 +113,7 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["fecha_registro"]) ?></td>
                 <td class="border border-sky-300 px-3">  
                     <!-- Pasamos estos datos para la siguiente pagina por post -->
-                <form action=<?=base_url('../vistas/agregar.view.php')?> method='POST' style='display:inline;'>
+                <form action='agregar' method='POST' style='display:inline;'>
                     <input type='hidden' name='clave_paciente' value='<?php echo htmlspecialchars($paciente["clave_paciente"]); ?>'>
                     <input type='hidden' name='codigo_paciente' value='<?php echo htmlspecialchars(isset($paciente["codigo_paciente"]) ? $paciente["codigo_paciente"] : ""); ?>'>
                     <input type='hidden' name='fecha_nacimiento_paciente' value='<?php echo htmlspecialchars($paciente["fecha_nacimiento_paciente"]); ?>'>

@@ -442,7 +442,7 @@
             </div>
 
             <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                <a href=<?=base_url("agregar.hitomgrueso.php")?> class="w-full sm:w-auto mb-4 sm:mb-0">
+                <a href=<?=base_url("/agregarHitosMG")?> class="w-full sm:w-auto mb-4 sm:mb-0">
                     <button type="button" class="btn-navigation w-full">ANTERIOR</button>
                 </a>
                 <div class="text-base text-gray-600 font-medium mx-4 mb-4 sm:mb-0">
@@ -454,7 +454,7 @@
         <div id="statusMessage" class=""></div>
     </div>
 
-    <div id="confirmacionModal" class="modal-overlay hidden">
+    <div hidden id="confirmacionModal" class="modal-overlay hidden">
         <div class="modal-content">
             <div class="modal-icon">⚠️</div>
             <h1 class="modal-title">Finalizar Evaluación</h1>
@@ -572,8 +572,8 @@
         // Función para enviar todos los datos de la evaluación al servidor.
         function enviarDatosEvaluacion(datos) {
             const http = new XMLHttpRequest();
-            http.open("POST", "<?=base_url("../controladores/guardarEvaluacionCompleta.php")?>", true); 
-            http.setRequestHeader("Content-Type", "<?=base_url("application/json")?>"); 
+            http.open("POST", "/guardarEvaluacion", true); 
+            http.setRequestHeader("Content-Type", "application/json"); 
             http.send(JSON.stringify(datos));
 
             http.onreadystatechange = function() {
@@ -670,7 +670,7 @@
         function limpiarSessionStorageYRedirigir(claves) {
             claves.forEach(clave => sessionStorage.removeItem(clave));
             setTimeout(() => {
-                window.location.href = "<?=base_url('/inicio')?>"; // Redirige al inicio después de 1.5 segundos.
+                window.location.href = "inicio"; // Redirige al inicio después de 1.5 segundos.
             }, 1500);
         }
     });

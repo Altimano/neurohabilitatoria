@@ -426,7 +426,7 @@
                 </div>
 
                 <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <a href=<?=base_url("agregar.mfino.php")?> class="btn-navigation">
+                    <a href=<?=base_url("/agregarFino")?> class="btn-navigation">
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -528,7 +528,7 @@
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentLenguajeData)); 
 
                         // Redirige al siguiente paso de la evaluación.
-                        window.location.href = "<?=base_url('agregar.posturas_tmyu.php')?>"; 
+                        window.location.href = "<?=base_url('/agregarPostura')?>"; 
                     } catch(e) { 
                         console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los datos de Lenguaje."); 

@@ -5,9 +5,9 @@
 
 session_start();
 
-require_once '../funciones/funciones.php';
-require_once '../config/db.php';
-require_once '../Clases/Estudios.php';
+require_once './funciones/funciones.php';
+require_once './config/db.php';
+require_once './Clases/Estudios.php';
 
 $datos_paciente_para_mostrar = [];
 $error_mensaje = null;
@@ -76,9 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
                     'edad_cronologica_ingreso_display' => $edadCronologicaIngreso, // String como "9A 7M"
                     'factores_de_riesgo'         => '', // Se inicializan vacíos
                     'esPrimeraEvaluacion'        => $esPrimeraEvaluacion,
-                    // --- AÑADIDO: clave_personal para ser enviado al SessionStorage ---
-                    'clave_personal'             => $_SESSION['clave_personal'] // ¡IMPORTANTE! Reemplaza este valor con la clave real del personal logueado
-                    // --- FIN AÑADIDO ---
+                    'clave_personal'             => $_SESSION['clave_personal']
                 ];
 
                 // SI NO ES LA PRIMERA EVALUACIÓN, CARGA LOS ÚLTIMOS DATOS EXISTENTES
@@ -345,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     try {
                         sessionStorage.setItem('evaluacionPaso1', JSON.stringify(datosPaso1));
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(pacienteDataParaActualizar)); // Guarda los datos actualizados del paciente
-                        window.location.href = "<?=base_url('agregar.mkatona.php')?>";
+                        window.location.href = "<?=base_url('/agregarKatona')?>";
                     } catch (e) {
                         console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al intentar guardar los datos.");

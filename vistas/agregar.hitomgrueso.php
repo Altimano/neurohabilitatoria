@@ -371,7 +371,7 @@
             </div>
 
             <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                <a href=<?=base_url("agregar.signos_alarma.php")?> class="w-full sm:w-auto mb-4 sm:mb-0">
+                <a href=<?=base_url("/agregarSignos")?> class="w-full sm:w-auto mb-4 sm:mb-0">
                     <button type="button" class="btn-navigation w-full">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -518,7 +518,7 @@
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentHitoMgruesoData)); 
 
                         // Redirige al siguiente paso de la evaluación.
-                        window.location.href = "<?=base_url('agregar.hitomfino.php')?>"; 
+                        window.location.href = "agregarHitosMF"; 
                     } catch(e) { 
                         console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los Hitos de Desarrollo Motor Grueso."); 
