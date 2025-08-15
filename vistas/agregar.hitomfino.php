@@ -15,7 +15,7 @@
             inset: 0;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 50;
-            display: flex;
+            display: none; /* Cambiado para que funcione con el JS original */
             justify-content: center;
             align-items: center;
             padding: 1rem;
@@ -173,19 +173,6 @@
             transition: width 0.3s ease-in-out;
             width: 100%;
         }
-        .section-divider {
-            background: linear-gradient(90deg, transparent 0%, #D1D5DB 50%, transparent 100%);
-            height: 1px;
-            margin: 2rem 0;
-        }
-        .scale-legend {
-            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-            border-left: 4px solid #F59E0B;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
         .info-card {
             background: white;
             border-radius: 12px;
@@ -248,111 +235,6 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
             transform: translateY(-1px);
         }
-        .abbreviation-tag {
-            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin: 0.125rem;
-            display: inline-block;
-        }
-        @media (max-width: 768px) {
-            .evaluation-card {
-                padding: 1rem;
-            }
-            .navigation-buttons {
-                padding: 1.5rem;
-            }
-            .btn-navigation {
-                min-width: 100px;
-                padding: 0.75rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            .section-title {
-                padding: 1rem 1.5rem;
-            }
-            .abbreviation-tag {
-                font-size: 0.7rem;
-            }
-        }
-        .evaluation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-            font-size: 0.875rem;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-        }
-        .evaluation-table th, .evaluation-table td {
-            border: 1px solid #E5E7EB;
-            padding: 0.75rem 0.5rem;
-            text-align: center;
-            vertical-align: middle;
-            transition: background-color 0.2s ease-in-out;
-        }
-        .evaluation-table th {
-            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
-            font-weight: 700;
-            white-space: normal; 
-            color: #334155;
-            font-size: 0.8rem;
-            line-height: 1.3;
-        }
-        .evaluation-table td:first-child {
-            text-align: left;
-            font-weight: 600;
-            white-space: normal;
-            background: linear-gradient(135deg, #FEFEFE 0%, #F8FAFC 100%);
-            color: #1E293B;
-            padding-left: 1rem;
-        }
-        .evaluation-table tbody tr:hover {
-            background-color: rgba(59, 130, 246, 0.05);
-        }
-        .evaluation-table input[type="checkbox"] {
-            height: 1.25rem;
-            width: 1.25rem;
-            color: #2563EB;
-            border-color: #9CA3AF;
-            border-radius: 4px;
-            display: block; 
-            margin: auto;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        .evaluation-table input[type="checkbox"]:hover {
-            transform: scale(1.1);
-            border-color: #2563EB;
-        }
-        .evaluation-table input[type="checkbox"]:checked {
-            background-color: #2563EB;
-            border-color: #2563EB;
-            transform: scale(1.05);
-        }
-        @media (max-width: 640px) {
-            .evaluation-table {
-                font-size: 0.7rem;
-            }
-            .evaluation-table th,
-            .evaluation-table td {
-                padding: 0.375rem 0.25rem;
-            }
-        }
-        .radio-group-laterality { 
-            display: none; 
-            margin-top: 0.5rem; 
-            padding-left: 1rem;
-        }
-        .radio-group-laterality label { 
-            margin-left: 0.25rem; 
-            margin-right: 0.75rem; 
-            font-weight: normal;
-        }
         .hito-display {
             background: white;
             border: 2px solid #E5E7EB;
@@ -378,7 +260,23 @@
             background: linear-gradient(90deg, transparent 0%, #DBEAFE 50%, transparent 100%);
             border-radius: 8px;
         }
-</style>
+        @media (max-width: 768px) {
+            .evaluation-card {
+                padding: 1rem;
+            }
+            .navigation-buttons {
+                padding: 1.5rem;
+            }
+            .btn-navigation {
+                min-width: 100px;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .section-title {
+                padding: 1rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body class="min-h-screen">
 
@@ -454,14 +352,14 @@
         <div id="statusMessage" class=""></div>
     </div>
 
-    <div hidden id="confirmacionModal" class="modal-overlay hidden">
+    <div id="confirmacionModal" class="modal-overlay"> <!-- Quitamos 'hidden' para que el JS lo controle -->
         <div class="modal-content">
             <div class="modal-icon">⚠️</div>
             <h1 class="modal-title">Finalizar Evaluación</h1>
             <p class="modal-message">¿Seguro que quieres finalizar la evaluación?</p>
             <div class="modal-buttons">
-            <button id="modalBotonSi" class="bg-custom-button">Sí</button>
-            <button id="modalBotonNo" class="bg-custom-button-no">No</button>
+                <button id="modalBotonSi" class="bg-custom-button">Sí</button>
+                <button id="modalBotonNo" class="bg-custom-button-no">No</button>
             </div>
         </div>
     </div>
@@ -469,21 +367,19 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dateInput = document.getElementById('fecha_evaluacion');
-        const sessionKey = 'evaluacionP9_hitomfino'; // Clave para los datos de Hitos de Desarrollo Motricidad Fina
+        const sessionKey = 'evaluacionP9_hitomfino';
 
-        // Función para cargar datos de sessionStorage de forma segura.
         const loadSessionData = (key) => {
             try {
                 const data = sessionStorage.getItem(key);
                 return data ? JSON.parse(data) : {};
             } catch (e) {
                 console.error(`Error al parsear datos de sessionStorage para ${key}:`, e);
-                sessionStorage.removeItem(key); // Limpia datos corruptos.
+                sessionStorage.removeItem(key);
                 return {};
             }
         };
 
-        // 1. Recupera el objeto principal de datos del paciente.
         const datosPacienteRaw = sessionStorage.getItem('datosPacienteParaEvaluacion');
         let datosPaciente = {};
         if (datosPacienteRaw) {
@@ -500,19 +396,15 @@
             return;
         }
 
-        // 2. Recupera los datos específicos de Hitos Motricidad Fina para este paso.
         const datosHitoMfinoGuardados = loadSessionData(sessionKey);
         
-        // Carga la fecha de evaluación.
         if (dateInput) {
             if (datosHitoMfinoGuardados.fecha_evaluacion) { 
                 dateInput.value = datosHitoMfinoGuardados.fecha_evaluacion; 
             } else {
-                // Si no hay fecha guardada para este paso, usa la fecha del inicio de tratamiento del paciente.
                 if (datosPaciente.fecha_inicio_tratamiento) {
                     dateInput.value = datosPaciente.fecha_inicio_tratamiento;
                 } else { 
-                    // Si no hay fecha en ninguna parte, usa la fecha actual.
                     const t = new Date(); 
                     dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                 }
@@ -520,18 +412,14 @@
         }
 
         const form = document.getElementById('evaluacionHitoMFinoForm');
-        
-        // Obtiene los datos de Motor Fino del paso anterior para precargar los hitos.
         const datosMotorFinoPasoAnterior = loadSessionData('evaluacionP4_mfino'); 
 
-        // Mapeo de valores numéricos a descripciones legibles para la visualización.
         const resultados_mfino_display = {
             '0': 'No lo logra (0)', '1': 'Lo intenta pero no lo logra (1)',
             '2': 'En proceso (2)', '3': 'Lo realiza inhábilmente (3)',
             '4': 'Normal (4)', '': 'Aún no se evalúa' 
         };
 
-        // Función para actualizar los elementos de display y los campos hidden con los valores de los hitos.
         const setHitoDisplay = (baseId, valorNumericoDelCampoAnterior) => {
             const displayElement = document.getElementById(baseId + '_display');
             const valueElement = document.getElementById(baseId + '_value'); 
@@ -543,11 +431,10 @@
                 const textoDisplay = resultados_mfino_display[valorParaInput] || resultados_mfino_display[''];
 
                 displayElement.textContent = textoDisplay;
-                valueElement.value = valorParaInput; // Asigna el valor al input hidden
+                valueElement.value = valorParaInput;
             }
         };
 
-        // Mapeo de los IDs de los elementos HTML con los nombres de las claves en datosMotorFinoPasoAnterior.
         const mapeoHitosMFParaDisplay = {
             'hf_fijacion_ocular': datosMotorFinoPasoAnterior.mf_manos_linea_media, 
             'hf_cubito_palmar': datosMotorFinoPasoAnterior.mf_estruja_papel, 
@@ -558,7 +445,6 @@
             'hf_coordinacion_oculomanual': datosMotorFinoPasoAnterior.mf_torre_6_cubos 
         };
         
-        // Recorrer el mapeo y actualizar los displays y hidden inputs.
         for (const idHito in mapeoHitosMFParaDisplay) {
             setHitoDisplay(idHito, mapeoHitosMFParaDisplay[idHito]);
         }
@@ -569,10 +455,9 @@
         const modalBotonNo = document.getElementById('modalBotonNo');
         const statusMessageDiv = document.getElementById('statusMessage');
 
-        // Función para enviar todos los datos de la evaluación al servidor.
         function enviarDatosEvaluacion(datos) {
             const http = new XMLHttpRequest();
-            http.open("POST", "/guardarEvaluacion", true); 
+            http.open("POST", "guardarEvaluacion", true); 
             http.setRequestHeader("Content-Type", "application/json"); 
             http.send(JSON.stringify(datos));
 
@@ -606,27 +491,18 @@
             };
         }
 
-        // Claves de sessionStorage a limpiar después de la finalización exitosa.
         const clavesDePasos = [
-            'datosPacienteParaEvaluacion',
-            'evaluacionP1',
-            'evaluacionP2_mkatona',
-            'evaluacionP3_mgrueso',
-            'evaluacionP4_mfino',
-            'evaluacionP5_lenguaje',
-            'evaluacionP6_posturas_tmyu',
-            'evaluacionP7_signos_alarma',
-            'evaluacionP8_hitomgrueso',
-            sessionKey 
+            'datosPacienteParaEvaluacion', 'evaluacionP1', 'evaluacionP2_mkatona',
+            'evaluacionP3_mgrueso', 'evaluacionP4_mfino', 'evaluacionP5_lenguaje',
+            'evaluacionP6_posturas_tmyu', 'evaluacionP7_signos_alarma',
+            'evaluacionP8_hitomgrueso', sessionKey 
         ];
 
         if (botonFinalizar && form && modal && modalBotonSi && modalBotonNo && statusMessageDiv) {
             botonFinalizar.addEventListener('click', function() {
                 const currentHitoMfinoData = {};
-                // La fecha de evaluación es del Paso 9.
                 if(dateInput) currentHitoMfinoData['fecha_evaluacion'] = dateInput.value;
 
-                // Recopila los valores de los campos hidden, guardando solo si el valor es "4".
                 const hitoInputs = form.querySelectorAll('input[type="hidden"]');
                 hitoInputs.forEach(input => {
                     if (input.value === '4') {
@@ -634,46 +510,41 @@
                     } 
                 });
 
-                // Fusiona los datos del paso actual con el objeto principal del paciente.
                 datosPaciente.hitomfino = currentHitoMfinoData; 
 
                 try {
-                    // Guarda los datos actualizados del paciente en sessionStorage.
                     sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosPaciente));
-                    // Guarda los datos específicos de Hitos Motricidad Fina por separado.
                     sessionStorage.setItem(sessionKey, JSON.stringify(currentHitoMfinoData)); 
-
                 } catch(e) {
                     console.error(`Error guardando datos de ${sessionKey} antes de mostrar modal:`, e);
                     alert("Hubo un error al guardar los Hitos de Desarrollo Motor Fino actuales. Por favor, inténtalo de nuevo.");
                     return;
                 }
-                modal.classList.remove('hidden'); // Muestra el modal de confirmación
+                modal.style.display = 'flex'; // Muestra el modal
             });
 
-            modalBotonNo.addEventListener('click', () => modal.classList.add('hidden'));
+            modalBotonNo.addEventListener('click', () => {
+                modal.style.display = 'none'; // Oculta el modal
+            });
 
             modalBotonSi.addEventListener('click', function() {
-                modal.classList.add('hidden');
+                modal.style.display = 'none'; // Oculta el modal
                 statusMessageDiv.textContent = 'Enviando datos...';
                 statusMessageDiv.className = 'status-message';
                 statusMessageDiv.style.display = 'block';
 
-                // Obtiene todos los datos consolidados del sessionStorage para el envío final.
                 const finalDataToSend = loadSessionData('datosPacienteParaEvaluacion');
-
                 enviarDatosEvaluacion(finalDataToSend);
             });
         }
 
-        // Función para limpiar sessionStorage y redirigir.
         function limpiarSessionStorageYRedirigir(claves) {
             claves.forEach(clave => sessionStorage.removeItem(clave));
             setTimeout(() => {
-                window.location.href = "inicio"; // Redirige al inicio después de 1.5 segundos.
+                window.location.href = "inicio";
             }, 1500);
         }
     });
-</script>
+    </script>
 </body>
 </html>
