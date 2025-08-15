@@ -3,7 +3,7 @@
 //para verificacion de la version
 //phpinfo();
 
-session_start();
+
 
 require_once './funciones/funciones.php';
 require_once './config/db.php';
