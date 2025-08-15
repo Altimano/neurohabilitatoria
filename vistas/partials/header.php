@@ -37,7 +37,7 @@
             <a href=<?= base_url("/eliminar")?> class="font-bold text-lg px-4 py-2">ELIMINAR</a>
         </nav>
 
-        <a href="/"
+        <a href=<?= base_url("/salir")?>
             class="bg-[#1F7BB8] text-black font-bold px-10 py-3 text-lg rounded-full hover:bg-[#155E8A] no-underline">
             Cerrar sesión
         </a>
