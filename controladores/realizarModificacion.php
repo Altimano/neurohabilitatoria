@@ -1,5 +1,4 @@
 <?php
-session_start();
 //controlador encargado de realizar la modificacion en la vista de modificar hitos finos
 $json_input = file_get_contents('php://input');
 $datos_recibidos = json_decode($json_input, true);

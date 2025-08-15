@@ -1,5 +1,4 @@
 <?php
-session_start();
 require './funciones/funciones.php';
 require_once './config/config.php';
 

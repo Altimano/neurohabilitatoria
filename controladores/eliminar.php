@@ -1,5 +1,4 @@
 <?php
-session_start();
 //Controlador encargado de manejar la eliminacion de un estudio especifico en la pagina de consultar eliminar, al presionar el boton de eliminar se ejecuta el controlador
 include './config/db.php';
 include './Clases/Estudios.php';
