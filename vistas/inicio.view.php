@@ -6,23 +6,23 @@
     <div class="relative h-screen overflow-hidden">
         <!-- Item 1 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide1.webp" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src=<?=base_url("/assets/fotoscarrusel/Slide1.webp")?> class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 2 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide2.webp" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src=<?=base_url("/assets/fotoscarrusel/Slide2.webp")?> class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 3 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide3.webp" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src=<?=base_url("/assets/fotoscarrusel/Slide3.webp")?> class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 4 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide4.webp" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src=<?=base_url("/assets/fotoscarrusel/Slide4.webp")?> class="absolute w-full h-full object-cover top-0 left-0">
         </div>
         <!-- Item 5 -->
         <div class="hidden duration-1000 ease-in-out" data-carousel-item>
-            <img src="/assets/fotoscarrusel/Slide5.webp" class="absolute w-full h-full object-cover top-0 left-0">
+            <img src=<?=base_url("/assets/fotoscarrusel/Slide5.webp")?> class="absolute w-full h-full object-cover top-0 left-0">
         </div>
     </div>
     <!-- Slider indicators -->
@@ -58,7 +58,7 @@
 
 <div class="flex flex-col justify-center items-center">
     <div class="w-[300px] h-[300px]">
-        <img src="/assets/img/bebe.svg" alt="Bebe" class="w-full h-full">
+        <img src=<?=base_url("/assets/img/bebe.svg")?> alt="Bebe" class="w-full h-full">
     </div>
 
     <div class="text-center text-lg border-t-4 border-b-4 border-indigo-500 mb-24 p-4 mx-72">

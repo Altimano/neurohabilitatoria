@@ -1,5 +1,4 @@
 <?php
-session_start();
 include './config/db.php';
 include './Clases/Estudios.php';
 $pacientes = [];
@@ -7,11 +6,12 @@ $pacientes = [];
 if ($_SESSION["session"] === 'okA') {
     $Con = conectar();
     $Estudio = new Estudios($Con);
-    $Criterio = strtoupper($_POST['Nombre']);
-    $fechaInicial = $_POST['fechaInicial'];
-    $fechaFinal = $_POST['fechaFinal'];
-    $codigo = $_POST['codigo'];
-
+    if (isset($_POST['Nombre']) || isset($_POST['fechaInicial']) || isset($_POST['fechaFinal']) || isset($_POST['codigo'])) {
+        $Criterio = strtoupper($_POST['Nombre']);
+        $fechaInicial = $_POST['fechaInicial'];
+        $fechaFinal = $_POST['fechaFinal'];
+        $codigo = $_POST['codigo'];
+    }
     // Si no se envian criterios de busqueda, se consultan los ultimos 100 estudios mas recientes
     if ($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])) {
         $result = $Estudio->consultarTodosLosEstudiosv2();
@@ -41,11 +41,12 @@ if ($_SESSION["session"] === 'okA') {
         $result = $Estudio->consultarDatosPacienteClave($codigo);
     }
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
-        // Del  resultado regresado lo agregamos a un array para luego iterarlo en la vista
+    if (isset($result) && $result) { 
         while ($Fila = mysqli_fetch_assoc($result)) {
-        $pacientes[] = $Fila;
-         }
+            $pacientes[] = $Fila;
+        }
     }
+}
     //Carga la vista de modificación
     require './vistas/modificar.view.php';
 }

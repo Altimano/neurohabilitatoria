@@ -91,11 +91,18 @@
     }
     */
 
-    function cerrar_sesion() {
-        session_start();
-        session_destroy();
-        header("Location: /");
-    }
+function cerrar_sesion() {
+    session_start();
+    session_unset();
+    session_destroy();
+
+    require_once './config/config.php';
+    header("Location: " . base_url()); // Esto ya apunta al router, no al dashboard
+    exit();
+}
+
+
+
 
      // Funciones para agregar estudios
     function calcularFechaNacimientoCorregida($fechaNacimientoRealStr, $semanasGestacion)

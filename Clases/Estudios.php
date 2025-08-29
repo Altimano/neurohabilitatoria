@@ -27,7 +27,7 @@ class Estudios
             FROM terapia_neurov2 t
             JOIN paciente p ON t.clave_paciente = p.clave_paciente
             JOIN personal pers ON t.clave_personal = pers.clave_personal
-            ORDER BY t.fecha_inicio_terapia DESC
+            ORDER BY t.fecha_registro DESC
             LIMIT 100";
 
         $stmt = $this->db->prepare($SQL);
@@ -543,11 +543,13 @@ class Estudios
     //    Elimina un estudio a base de el campo post terapia_id agregado en el formulario inicial
     public function eliminarEstudio($terapia_id)
     {
+        
         $stmt = $this->db->prepare("DELETE FROM terapia_neurov2 WHERE id_terapia_neurohabilitatoriav2 = ?");
         $stmt->bind_param("i", $terapia_id);
         $stmt->execute();
         if ($stmt->affected_rows > 0) {
-            header("Location: /eliminar");
+            header("Location: " . base_url('/eliminar'));
+            
         } else {
             echo "No se pudo eliminar el paciente " . $stmt->error;
         }

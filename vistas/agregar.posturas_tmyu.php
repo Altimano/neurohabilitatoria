@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Postura, Tono Muscular y Ubicacion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -398,7 +398,7 @@
                     </div>
                 </div>
                 <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                    <a href="agregar.lenguaje.php" class="btn-navigation">
+                    <a href=<?=base_url("/agregarLenguaje")?> class="btn-navigation">
                         ← ANTERIOR
                     </a>
                     <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -425,12 +425,12 @@
                     datosPaciente = JSON.parse(datosPacienteRaw);
                 } catch (e) {
                     console.error("Error al cargar datos del paciente:", e);
-                    window.location.href = 'agregar.view.php?error=datos_corruptos';
+                    window.location.href = "<?=base_url('agregar.view.php?error=datos_corruptos')?>";
                     return;
                 }
             } else {
                 console.error("No se encontraron datos del paciente. Redirigiendo...");
-                window.location.href = 'agregar.view.php?error=datos_faltantes';
+                window.location.href = "<?=base_url('agregar.view.php?error=datos_faltantes')?>";
                 return;
             }
 
@@ -506,7 +506,7 @@
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentTmyuData)); 
 
                         // Redirige al siguiente paso de la evaluación.
-                        window.location.href = 'agregar.signos_alarma.php'; 
+                        window.location.href = "<?=base_url('/agregarSignos')?>"; 
                     } catch(e) { 
                         console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los datos de Postura, Tono Muscular y Ubicación."); 

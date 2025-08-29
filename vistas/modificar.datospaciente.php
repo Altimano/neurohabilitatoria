@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Evaluación</title>
-    <link href="/assets/output.css" rel="stylesheet" />
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet" />
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -370,7 +370,7 @@
                 <!-- Botones de navegación -->
                 <div class="navigation-buttons">
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <a href="/modificar" class="btn-navigation">
+                        <a href=<?=base_url("/modificar")?> class="btn-navigation">
                             ← ANTERIOR
                         </a>
                         <button type="button" id="botonSiguientePaso" class="btn-navigation">
@@ -481,7 +481,7 @@
 
                     try {
                         sessionStorage.setItem('evaluacionPaso1', JSON.stringify(datosPaso1));
-                        window.location.href = '/modificarKatona';
+                        window.location.href = "<?= base_url('/modificarKatona') ?>";
                     } catch (e) {
                         console.error("Error al guardar mes en sessionStorage:", e);
                         const alertDiv = document.createElement('div');

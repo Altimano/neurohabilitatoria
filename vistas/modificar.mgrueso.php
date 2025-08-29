@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motor Grueso</title>
-    <link href="/assets/output.css" rel="stylesheet"/>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -697,7 +697,7 @@
                 </div>
                     <div class="navigation-buttons">
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <a href="/modificarKatona" class="btn-navigation">
+                            <a href=<?=base_url("/modificarKatona")?> class="btn-navigation">
                                 ← ANTERIOR
                             </a>
                             <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -800,7 +800,7 @@
 
                         try {
                             sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                            window.location.href = '/modificarFino';
+                            window.location.href = "<?=base_url('/modificarFino')?>";
                         } catch (e) {
                             console.error("Error guardando P3_M grueso:", e);
                             alert("Hubo un error al guardar.");

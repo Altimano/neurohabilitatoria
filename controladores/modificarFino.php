@@ -1,5 +1,4 @@
 <?php
-session_start();
 header('Content-Type: text/html; charset=UTF-8');
 //archivo encargado de cargar los datos del paciente en el area de subescalas motor fino para mostrarlos en la vista de modificar fino
 include './Clases/Estudios.php';

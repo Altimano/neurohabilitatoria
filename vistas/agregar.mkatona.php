@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maniobras Katona</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -422,7 +422,7 @@
                         </table>
                     </div>
                     <div class="navigation-buttons flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <a href="/vistas/agregar.view.php" class="btn-navigation">
+                        <a href=<?=base_url("/agregar")?> class="btn-navigation">
                             ← ANTERIOR
                         </a>
                         <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -450,12 +450,12 @@
                     datosPaciente = JSON.parse(datosPacienteRaw);
                 } catch (e) {
                     console.error("Error al cargar datos del paciente:", e);
-                    window.location.href = 'agregar.view.php?error=datos_corruptos';
+                    window.location.href = "<?=base_url('agregar.view.php?error=datos_corruptos')?>";
                     return;
                 }
             } else {
                 console.error("No se encontraron datos del paciente. Redirigiendo...");
-                window.location.href = 'agregar.view.php?error=datos_faltantes';
+                window.location.href = "<?=base_url('agregar.view.php?error=datos_faltantes')?>";
                 return;
             }
 
@@ -480,6 +480,8 @@
                     const t = new Date(); 
                     dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                 }
+                //Debug por si la fecha de evaluacion no les sirve a futuro
+                console.log('DEBUG: Fecha de evaluación cargada desde sessionStorage:', datosPaciente.fecha_inicio_tratamiento);
             }
 
             // Define los nombres de los grupos de checkboxes para las maniobras de Katona.
@@ -533,7 +535,7 @@
                         sessionStorage.setItem(sessionKey, JSON.stringify(currentKatonaData)); 
                         
                         // Redirige al siguiente paso de la evaluación.
-                        window.location.href = 'agregar.mgrueso.php'; 
+                        window.location.href = "<?=base_url('/agregarGrueso')?>"; 
                     } catch(e) { 
                         console.error("Error al guardar datos en sessionStorage:", e);
                         alert("Hubo un error al guardar los datos de Katona."); 

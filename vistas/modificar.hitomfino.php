@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hitos de Desarrollo Motricidad Fina - Finalizar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -473,7 +473,7 @@
                 <!-- Botones de navegación -->
                 <div class="navigation-buttons">
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <a href="/modificarHitosMG" class="btn-navigation">
+                        <a href=<?=base_url("/modificarHitosMG")?> class="btn-navigation">
                             ← ANTERIOR
                         </a>
                         <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -694,8 +694,8 @@
                     function enviarDatosEvaluacion(datos) {
                         console.log("Enviando datos de evaluación al servidor...");
                         http = new XMLHttpRequest();
-                        http.open("POST", "/realizarModificacion", true);
-                        http.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                        http.open("POST", "<?=base_url("/realizarModificacion")?>", true);
+                        http.setRequestHeader("Content-Type", "<?=base_url("application/json;charset=UTF-8")?>"); //PUEDE SER QUE NO FUNCIONE, PROBAR CON application/x-www-form-urlencoded
                         http.send(JSON.stringify(datos));
                         http.onreadystatechange = function() {
                             if (http.readyState === 4) {
@@ -728,7 +728,7 @@
                     console.log(`Removido: ${clave}`);
                 });
                 console.log("Limpieza de sessionStorage completada.");
-                window.location.href = '/inicio';
+                window.location.href = "<?=base_url('/inicio')?>";
             }
         });
     </script>

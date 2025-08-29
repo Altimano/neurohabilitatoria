@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katona</title>
-    <link href="/assets/output.css" rel="stylesheet"/>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -476,7 +476,7 @@
 
                     <div class="navigation-buttons">
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <a href="/modificarDatosPaciente" class="btn-navigation">
+                            <a href=<?=base_url("/modificarDatosPaciente")?> class="btn-navigation">
                                 ← ANTERIOR
                             </a>
                             <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -655,7 +655,7 @@
                             const datosKatonaActualizadosPHP = JSON.stringify(datosPaso2);
                             sessionStorage.setItem('datosKatona', datosKatonaActualizadosPHP);
                             // Redirige al usuario a la siguiente página del formulario.
-                            window.location.href = '/modificarGrueso';
+                            window.location.href = "<?=base_url('/modificarGrueso')?>";
                         } catch (e) {
                             // Si ocurre un error al guardar en sessionStorage (ej. almacenamiento lleno),
                             // lo muestra en consola y alerta al usuario.

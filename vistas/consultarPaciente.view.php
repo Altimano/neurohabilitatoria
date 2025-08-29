@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consultar Paciente</title>
-  <link href="/assets/output.css" rel="stylesheet" />
+  <link rel="stylesheet" href="<?= base_url('/assets/output.css') ?>">
   <style>
     .bg-custom-header-area {
       background-color: #FFFFFF;
@@ -242,7 +242,7 @@
         <h1 class="text-2xl md:text-3xl font-bold text-custom-title">
           Consultar Evaluación del Paciente
         </h1>
-        <a href="/consultar" class="btn-primary">
+        <a href=<?=base_url("/consultar")?> class="btn-primary">
           ← Volver
         </a>
       </div>
@@ -258,7 +258,7 @@
       <div class="info-card mb-8">
         <h2 class="section-title">Información del Paciente</h2>
         
-        <form method="post" action="/consultarPaciente">
+        <form method="post" action=<?=base_url("/consultarPaciente")?>>
           <input type="hidden" name="id_terapia" value="<?= htmlspecialchars($datosPaciente['id_terapia_neurohabilitatoriav2']) ?>">
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
@@ -371,7 +371,7 @@
 
             <div class="patient-field md:col-span-2 lg:col-span-3">
               <label class="field-label">Observaciones</label>
-              <input type="text" name="observaciones" readonly value="<?= htmlspecialchars($datosPaciente['observaciones']) ?>" class="field-input">
+              <textarea name="observaciones" readonly class="field-input"><?= htmlspecialchars($datosPaciente['observaciones']) ?></textarea>
             </div>
 
           </div>

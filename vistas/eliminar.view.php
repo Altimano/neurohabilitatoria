@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar Estudio</title>
-    <link href="/assets/output.css" rel="stylesheet"/>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area { background-color: #FFFFFF; }
         .bg-custom-main-box { background-color: #E0F2FE; } 
@@ -14,11 +14,11 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src=<?=base_url("/node_modules/flowbite/dist/flowbite.min.js")?>></script>
 
     <div class="px-6 md:px-10 py-4 flex justify-between items-center bg-custom-header-area shadow-sm">
         <h1 class="text-2xl font-bold text-custom-title">Eliminar Evaluaciones</h1>
-        <a href="/inicio" class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
+        <a href=<?=base_url("/inicio")?> class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
             Salir
         </a> 
     </div>
@@ -26,7 +26,7 @@
     <div class="mx-6 md:mx-10 my-6 bg-custom-main-box rounded-xl shadow-md p-6">
 
         <!-- Los criterios que mandamos al controlador donde se hace la busqueda de un paciente en especifico -->
-        <form method="post" action="/eliminar" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
+        <form method="post" action=<?=base_url("/eliminar")?> class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
             <div class="w-full sm:flex-grow"> 
                 <label for="Nombre" class="block text-sm font-medium text-custom-title mb-1">Nombre del paciente</label>
                 <input 
@@ -77,7 +77,7 @@
                 >
                     <input type="hidden" name="Vacio" value="">
                     <img 
-                    src="/assets/img_iconos/buuscar.svg" 
+                    src=<?=base_url("/assets/img_iconos/buuscar.svg")?> 
                     alt="Buscar" 
                     class="w-56 h-24 hover:scale-110 hover:brightness-75 transition-all"
                     />
@@ -111,7 +111,7 @@
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["num_evaluacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2"><?= htmlspecialchars($paciente["semanas_gestacion"]) ?></td>
                 <td class="border border-sky-300 px-3 py-2">  
-                    <form action='eliminarEvaluacion' method='POST' style='display:inline;'>
+                    <form action=<?=base_url('/eliminarEvaluacion')?> method='POST' style='display:inline;'>
                         <!-- Mandamos el terapia_id del paciente seleccionado para realizar la eliminacion del estudio a base de esa id que le corresponde a un estudio unico -->
                     <input type='hidden' name='terapia_id' value='<?php echo htmlspecialchars($paciente["id_terapia_neurohabilitatoriav2"] , ENT_QUOTES); ?>'>
                     <button type='submit' onclick='return confirm("¿Estás seguro de eliminar esta evaluacion para este paciente?");' class="bg-custom-button hover:opacity-90 text-white font-semibold py-2 px-6 rounded-lg h-[42px]">

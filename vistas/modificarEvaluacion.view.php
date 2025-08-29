@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Editar Evaluación</title>
-  <link href="/assets/output.css" rel="stylesheet"/>
+  <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
   <style>
     .bg-custom-main-box {
       background-color: #E0F2FE;
@@ -24,14 +24,14 @@
 
   <div class="px-6 py-4 bg-white shadow-md flex justify-between items-center">
     <h1 class="text-2xl font-bold text-custom-title">Editar Evaluación del Paciente</h1>
-    <a href="/inicio" class="bg-custom-button text-white px-4 py-2 rounded-lg text-sm font-medium">
+    <a href=<?=base_url("/inicio")?> class="bg-custom-button text-white px-4 py-2 rounded-lg text-sm font-medium">
       Volver
     </a>
   </div>
   <!-- TOMAR EN CUENTA LOS NOMBRES DE LOS CAMPOS PARA USARLOS EN LA BD NUEVA -->
   <div class="m-6 bg-custom-main-box rounded-xl shadow-md p-6">
     <h2 class="text-xl font-bold text-custom-title mb-4">Modificar Evaluación</h2>
-    <form method="post" action="/realizarModificacion">
+    <form method="post" action=<?=base_url("/realizarModificacion")?>>
       <input type="hidden" name="id_terapia" value="<?= htmlspecialchars($datosPaciente['id_terapia_neurohabilitatoriav2']) ?>">
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

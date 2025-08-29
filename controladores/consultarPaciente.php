@@ -1,5 +1,4 @@
 <?php
-session_start();
 //Este archivo se encarga de al seleccionar a un paciente en especifico, todos sus datos son cargados en variables para manipular y mostrar
 require './config/db.php';
 require './Clases/Estudios.php';

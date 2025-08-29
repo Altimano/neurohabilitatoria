@@ -1,5 +1,4 @@
 <?php
-session_start();
 header('Content-Type: text/html; charset=UTF-8');
 //archivo encargado de cargar los datos del paciente en el area de katona para mostrarlos en la vista de modificar katona
 include './Clases/Estudios.php';

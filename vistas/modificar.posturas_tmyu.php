@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tono Muscular y Ubicación, Postura</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -418,7 +418,7 @@
 
                     <div class="navigation-buttons">
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                            <a href="/modificarLenguaje" class="btn-navigation">
+                            <a href=<?=base_url("/modificarLenguaje")?> class="btn-navigation">
                                 ← ANTERIOR
                             </a>
                             <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -617,7 +617,7 @@ console.log('DatosJSON AYUDA', datosJson);
 
                         try {
                             sessionStorage.setItem(sessionKey, JSON.stringify(datosPaso));
-                            window.location.href = '/modificarSignos';
+                            window.location.href = "<?=base_url('/modificarSignos')?>";
                         } catch (e) {
                             console.error(`Error guardando datos de ${sessionKey}:`, e);
                             alert("Hubo un error al guardar los datos de Postura, Tono Muscular y Ubicación.");

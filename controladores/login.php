@@ -1,7 +1,6 @@
 <?php
-session_start();
 require './funciones/funciones.php';
-
+require_once './config/config.php';
 
 $error = null;
 
@@ -12,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user"] = $user;
         $_SESSION["session"] = 'okA';
         $_SESSION["clave_personal"] = tomarClavePersonal($user);
-        header("Location: /inicio");
-        exit();
+        header("Location: $baseUrl/inicio");
+        exit;
     } else {
         $error = "Usuario o contraseña incorrectos";
     }

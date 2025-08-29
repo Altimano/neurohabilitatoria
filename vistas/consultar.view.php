@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Evaluaciones</title>
-    <link href="/assets/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?= base_url('/assets/output.css') ?>">
     <style>
         .bg-custom-header-area { background-color: #FFFFFF; }
         .bg-custom-main-box { background-color: #E0F2FE; } 
@@ -14,11 +14,11 @@
     </style>
 </head>
 <body class="bg-gray-100">
-    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="<?= base_url('/node_modules/flowbite/dist/flowbite.min.js') ?>"></script>
 
     <div class="px-6 md:px-10 py-4 flex justify-between items-center bg-custom-header-area shadow-sm">
         <h1 class="text-2xl font-bold text-custom-title">Consulta de evaluaciones</h1>
-        <a href="/inicio" class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
+        <a href=<?=base_url("/inicio")?> class="bg-custom-button hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-medium">
             Salir
         </a> 
     </div>
@@ -26,7 +26,7 @@
     <div class="mx-6 md:mx-10 my-6 bg-custom-main-box rounded-xl shadow-md p-6">
 
 <!--  Form donde se introducen los criterios de busqueda, estos son los campos que se pasan al controlador consultar.php -->
-        <form method="post" action="/consultar" class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-2" autocomplete="off">
+        <form method="post" action=<?=base_url("/consultar")?> class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-2" autocomplete="off">
             <div class="w-full sm:flex-grow"> 
                 <label for="Nombre" class="block text-sm font-medium text-custom-title mb-1">Nombre del paciente</label>
                 <input 
@@ -78,7 +78,7 @@
                 >
                     <input type="hidden" name="Vacio" value="">
                     <img 
-                    src="/assets/img_iconos/buuscar.svg" 
+                    src=<?=base_url("/assets/img_iconos/buuscar.svg")?> 
                     alt="Buscar" 
                     class="w-56 h-24 hover:scale-110 hover:brightness-75 transition-all"
                     />

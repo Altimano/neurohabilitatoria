@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hitos de Desarrollo Motor Grueso</title>
-    <link href="/assets/output.css" rel="stylesheet"/>
+    <link href=<?=base_url("/assets/output.css")?> rel="stylesheet"/>
     <style>
         .bg-custom-header-area {
             background-color: #FFFFFF;
@@ -335,7 +335,7 @@
                 <!-- Botones de navegación -->
                 <div class="navigation-buttons">
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                        <a href="/modificarSignos" class="btn-navigation">
+                        <a href=<?=base_url("/modificarSignos")?> class="btn-navigation">
                             ← ANTERIOR
                         </a>
                         <div class="text-sm text-gray-600 text-center hidden sm:block">
@@ -491,7 +491,7 @@
 
                     try {
                         sessionStorage.setItem(sessionKeyThisStep, JSON.stringify(datosPasoActual));
-                        window.location.href = '/modificarHitosMF';
+                        window.location.href = "<?=base_url('/modificarHitosMF')?>";
                     } catch (e) {
                         console.error(`Error guardando datos de ${sessionKeyThisStep}:`, e);
                         alert("Hubo un error al guardar los Hitos de Desarrollo Motor Grueso.");

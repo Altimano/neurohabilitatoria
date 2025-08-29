@@ -1,10 +1,10 @@
 <?php
     function conectar(){
-        $Hostname = "db"; // Nombre del servicio en Docker Compose
+        $Hostname = "127.0.0.1"; // Nombre del servicio en Docker Compose
         $Usuario = "root";
         $Password = "15103106";
         $BD = "inb";
-        $Port = 3306; // Puerto interno del contenedor MySQL
+        $Port = 3311; // Puerto interno del contenedor MySQL
     
         $Con = mysqli_connect($Hostname, $Usuario, $Password, $BD, $Port);
         mysqli_set_charset($Con, "utf8");
