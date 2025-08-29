@@ -480,6 +480,8 @@
                     const t = new Date(); 
                     dateInput.value = `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; 
                 }
+                //Debug por si la fecha de evaluacion no les sirve a futuro
+                console.log('DEBUG: Fecha de evaluación cargada desde sessionStorage:', datosPaciente.fecha_inicio_tratamiento);
             }
 
             // Define los nombres de los grupos de checkboxes para las maniobras de Katona.

@@ -371,7 +371,7 @@
 
             <div class="patient-field md:col-span-2 lg:col-span-3">
               <label class="field-label">Observaciones</label>
-              <input type="text" name="observaciones" readonly value="<?= htmlspecialchars($datosPaciente['observaciones']) ?>" class="field-input">
+              <textarea name="observaciones" readonly class="field-input"><?= htmlspecialchars($datosPaciente['observaciones']) ?></textarea>
             </div>
 
           </div>
