@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
                     'sdg'                           => $semanasGestacionReales,
                     'fecha_nacimiento'              => $fechaNacimientoReal,
                     'fecha_inicio_tratamiento'      => $fechaInicioTratamientoFormateada,
-                    'edad_corregida_display'        => $fechaNacimientoCorregidaStr, // String como "1A 2M"
+                    'edad_corregida_display'        => $fechaNacimientoCorregidaStr,
                     'edad_cronologica_ingreso_display' => $edadCronologicaIngreso, // String como "9A 7M"
                     'factores_de_riesgo'            => '', // Se inicializan vacíos
                     'esPrimeraEvaluacion'           => $esPrimeraEvaluacion,
