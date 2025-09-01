@@ -256,7 +256,7 @@ class Estudios
         JOIN paciente p ON t.clave_paciente = p.clave_paciente
         JOIN personal pers ON t.clave_personal = pers.clave_personal
         WHERE CONCAT(p.nombre_paciente, ' ', p.apellido_paterno_paciente, ' ', p.apellido_materno_paciente) LIKE ?
-        ORDER BY t.fecha_inicio_terapia DESC
+        ORDER BY t.fecha_registro DESC
         LIMIT 100";        
             $stmt = $this->db->prepare($SQL);
             if (!$stmt) {
@@ -285,7 +285,7 @@ class Estudios
         JOIN paciente p ON t.clave_paciente = p.clave_paciente
         JOIN personal pers ON t.clave_personal = pers.clave_personal
         WHERE CONCAT(p.nombre_paciente, ' ', p.apellido_paterno_paciente, ' ', p.apellido_materno_paciente) LIKE ? AND fecha_terapia BETWEEN ? AND ?
-        ORDER BY t.fecha_inicio_terapia DESC
+        ORDER BY t.fecha_registro DESC
         LIMIT 100";        
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -314,7 +314,7 @@ class Estudios
         JOIN paciente p ON t.clave_paciente = p.clave_paciente
         JOIN personal pers ON t.clave_personal = pers.clave_personal
         WHERE CONCAT(p.nombre_paciente, ' ', p.apellido_paterno_paciente, ' ', p.apellido_materno_paciente) LIKE ? AND p.clave_paciente = ?
-        ORDER BY t.fecha_inicio_terapia DESC
+        ORDER BY t.fecha_registro DESC
         LIMIT 100";        
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -344,7 +344,7 @@ class Estudios
         JOIN paciente p ON t.clave_paciente = p.clave_paciente
         JOIN personal pers ON t.clave_personal = pers.clave_personal
         WHERE t.fecha_terapia BETWEEN ? AND ?
-        ORDER BY t.fecha_inicio_terapia DESC
+        ORDER BY t.fecha_registro DESC
         LIMIT 100";        
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -372,7 +372,7 @@ class Estudios
         JOIN paciente p ON t.clave_paciente = p.clave_paciente
         JOIN personal pers ON t.clave_personal = pers.clave_personal
         WHERE t.fecha_terapia BETWEEN ? AND ? AND p.clave_paciente = ?
-        ORDER BY t.fecha_inicio_terapia DESC
+        ORDER BY t.fecha_registro DESC
         LIMIT 100";        
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
@@ -400,7 +400,7 @@ class Estudios
         JOIN paciente p ON t.clave_paciente = p.clave_paciente
         JOIN personal pers ON t.clave_personal = pers.clave_personal
         WHERE p.clave_paciente = ?
-        ORDER BY t.fecha_inicio_terapia DESC
+        ORDER BY t.fecha_registro DESC
         LIMIT 100";        
         $stmt = $this->db->prepare($SQL);
         if (!$stmt) {
