@@ -43,12 +43,11 @@ if ($_SESSION["session"] === 'okA') {
         $result = $Estudio->consultarDatosPacienteClave($codigo);
     }
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    if (isset($result) && $result) { 
+        // Del  resultado regresado lo agregamos a un array para luego iterarlo en la vista
         while ($Fila = mysqli_fetch_assoc($result)) {
-            $pacientes[] = $Fila;
-        }
+        $pacientes[] = $Fila;
+         }
     }
-}
     //Carga la vista de eliminación
     require './vistas/eliminar.view.php';
 }

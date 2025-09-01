@@ -45,16 +45,12 @@ $pacientes = [];
     }elseif($_SERVER["REQUEST_METHOD"] === "POST" && empty($_POST['Nombre']) && !empty($_POST['codigo']) && empty($_POST['fechaInicial']) && empty($_POST['fechaFinal'])){
         $result = $Estudio->consultarDatosPacienteClave($codigo);
     }
-
-    //aqui hacer para busqueda de una sola fecha
-
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    if (isset($result) && $result) { 
+        // Del  resultado regresado lo agregamos a un array para luego iterarlo en la vista
         while ($Fila = mysqli_fetch_assoc($result)) {
-            $pacientes[] = $Fila;
-        }
+        $pacientes[] = $Fila;
+         }
     }
-}
     //Carga la vista de consulta
         require './vistas/consultar.view.php';
    // }

@@ -278,7 +278,7 @@
                     </div>
                     <div class="subescala evaluation-card">
                         <label for="mf_mantiene_objeto" class="evaluation-label">
-                            Sostiene y mantiene firmemente un objeto con la mano
+                            Tiene y mantiene firmemente un objeto con la mano
                         </label>
                         <div class="select-wrapper">
                             <select name="mf_mantiene_objeto" id="mf_mantiene_objeto" class="select-custom">

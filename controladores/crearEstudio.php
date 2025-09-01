@@ -66,11 +66,10 @@ if ($_SESSION["session"] === 'okA') {
         //FUNCIONA
     }
     if ($_SERVER["REQUEST_METHOD"] === "POST"){
-    if (isset($result) && $result) { 
         while ($Fila = mysqli_fetch_assoc($result)) {
-            $pacientes[] = $Fila;
-        }
+        $pacientes[] = $Fila;
+         }
+         
     }
-}
     require './vistas/crear.view.php';
 }
