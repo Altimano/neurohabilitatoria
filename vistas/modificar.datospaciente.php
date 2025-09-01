@@ -279,7 +279,11 @@
                         
                         <div>
                             <label class="form-label"> Fecha de Evaluación</label>
-                            <input type="date" id="dp_fecha_inicio_tratamiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>" class="form-field w-full">
+                            <input type="date"
+                                id="dp_fecha_inicio_tratamiento"
+                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>"
+                                class="form-field w-full"
+                                >
                         </div>
 
                         <div>
@@ -515,5 +519,4 @@
         });
     </script>
 </body>
-
 </html>
