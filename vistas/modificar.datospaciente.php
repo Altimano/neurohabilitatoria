@@ -315,7 +315,7 @@
                                 id="dp_fecha_inicio_tratamiento"
                                 value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_terapia']) ? $datos_paciente_para_mostrar['fecha_terapia'] : ''); ?>"
                                 class="form-field w-full"
-                                readonly>
+                                >
                         </div>
 
                         <div>
@@ -508,5 +508,4 @@
         });
     </script>
 </body>
-
 </html>
