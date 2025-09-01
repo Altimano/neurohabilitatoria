@@ -239,76 +239,44 @@
                         </div>
                     </div>
 
-                    <!-- Grid de campos del paciente --> 
+                    <!-- Grid de campos del paciente -->
                     <!--No todos los datos del paciente se pueden modificar, solo se modifican los datos pertinentes a terapia neurohabilitatoria-->
                     <div class="patient-data-grid">
                         <div>
                             <label class="form-label">Nombre Paciente</label>
-                            <input type="text"
-                                id="dp_nombre_paciente"
-                                name="nombre_paciente_display"
-                                value="<?= htmlspecialchars($datosPaciente['nombre_paciente']) ?>"
-                                class="form-field w-full"
-                                readonly>
+                            <input type="text" id="dp_nombre_paciente" name="nombre_paciente_display" value="<?= htmlspecialchars($datosPaciente['nombre_paciente']) ?>" class="form-field w-full" readonly>
                         </div>
 
                         <div>
                             <label class="form-label">Clave Paciente</label>
-                            <input type="text"
-                                id="dp_clave_paciente"
-                                name="clave_paciente_display"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['clave_paciente']) ? $datos_paciente_para_mostrar['clave_paciente'] : ''); ?>"
-                                class="form-field w-full"
-                                readonly>
+                            <input type="text" id="dp_clave_paciente" name="clave_paciente_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['clave_paciente']) ? $datos_paciente_para_mostrar['clave_paciente'] : ''); ?>" class="form-field w-full" readonly>
                         </div>
 
                         <div>
                             <label class="form-label">Fecha de Nacimiento</label>
-                            <input type="date"
-                                id="dp_fecha_nacimiento"
-                                name="fecha_nacimiento"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento']) ? $datos_paciente_para_mostrar['fecha_nacimiento'] : ''); ?>"
-                                class="form-field w-full"
-                                readonly>
+                            <input type="date" id="dp_fecha_nacimiento" name="fecha_nacimiento" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento']) ? $datos_paciente_para_mostrar['fecha_nacimiento'] : ''); ?>" class="form-field w-full" readonly>
                         </div>
 
                         <div>
                             <label class="form-label">Semanas de Gestación (SDG)</label>
-                            <input type="text"
-                                id="dp_sdg"
-                                name="sdg"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['sdg']) ? $datos_paciente_para_mostrar['sdg'] : ''); ?>"
-                                class="form-field w-full"
-                                readonly>
+                            <input type="text" id="dp_sdg" name="sdg" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['sdg']) ? $datos_paciente_para_mostrar['sdg'] : ''); ?>" class="form-field w-full" readonly>
                         </div>
 
                         <div>
                             <label class="form-label"> Talla</label>
-                            <input type="text"
-                                id="dp_talla"
-                                name="talla"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>"
-                                class="form-field w-full">
+                            <input type="text" id="dp_talla" name="talla" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['talla']) ? $datos_paciente_para_mostrar['talla'] : ''); ?>" class="form-field w-full">
                         </div>
 
                         <div>
                             <label class="form-label"> Peso</label>
-                            <input type="text"
-                                id="dp_peso"
-                                name="peso"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>"
-                                class="form-field w-full">
+                            <input type="text" id="dp_peso" name="peso" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['peso']) ? $datos_paciente_para_mostrar['peso'] : ''); ?>" class="form-field w-full">
                         </div>
 
                         <div>
                             <label class="form-label"> Perímetro Cefálico</label>
-                            <input type="text"
-                                id="dp_perimetro_cefalico"
-                                name="perimetro_cefalico"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>"
-                                class="form-field w-full">
+                            <input type="text" id="dp_perimetro_cefalico" name="perimetro_cefalico" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['perimetro_cefalico']) ? $datos_paciente_para_mostrar['perimetro_cefalico'] : ''); ?>" class="form-field w-full">
                         </div>
-
+                        
                         <div>
                             <label class="form-label"> Fecha de Evaluación</label>
                             <input type="date"
@@ -320,20 +288,12 @@
 
                         <div>
                             <label class="form-label"> Edad Cronológica</label>
-                            <input type="text"
-                                id="dp_edad_cronologica_ingreso_display"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>"
-                                class="form-field w-full"
-                                readonly>
+                            <input type="text" id="dp_edad_cronologica_ingreso_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>" class="form-field w-full" readonly>
                         </div>
 
                         <div>
-                            <label class="form-label"> Fecha Nacimiento Corregida</label>
-                            <input type="text"
-                                id="dp_edad_corregida_display"
-                                value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>"
-                                class="form-field w-full"
-                                readonly>
+                            <label class="form-label">Fecha Nacimiento Corregida</label>
+                            <input type="text" id="dp_edad_corregida_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>" class="form-field w-full" readonly>
                         </div>
                     </div>
 
@@ -344,11 +304,7 @@
                         <label for="factores_riesgo" class="form-label text-lg mb-3">
                             Factores de Riesgo
                         </label>
-                        <textarea id="factores_riesgo"
-                            name="factores_riesgo"
-                            rows="4"
-                            class="form-field textarea-field w-full"
-                            placeholder="Describir los factores de riesgo relevantes..."><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['factores_de_riesgo']) ? $datos_paciente_para_mostrar['factores_de_riesgo'] : ''); ?></textarea>
+                        <textarea id="factores_riesgo" name="factores_riesgo" rows="4" class="form-field textarea-field w-full" placeholder="Describir los factores de riesgo relevantes..."><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['factores_de_riesgo']) ? $datos_paciente_para_mostrar['factores_de_riesgo'] : ''); ?></textarea>
                     </div>
 
                     <div class="section-divider"></div>
@@ -357,11 +313,7 @@
                         <label for="observaciones" class="form-label text-lg mb-3">
                             Observaciones
                         </label>
-                        <textarea id="observaciones"
-                            name="observaciones"
-                            rows="4"
-                            class="form-field textarea-field w-full"
-                            placeholder="Describir los factores de riesgo relevantes..."><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['observaciones']) ? $datos_paciente_para_mostrar['observaciones'] : ''); ?></textarea>
+                        <textarea id="observaciones" name="observaciones" rows="4" class="form-field textarea-field w-full" placeholder="Añadir observaciones..."><?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['observaciones']) ? $datos_paciente_para_mostrar['observaciones'] : ''); ?></textarea>
                     </div>
 
 
@@ -386,6 +338,93 @@
         document.addEventListener('DOMContentLoaded', function() {
             const formPaso1 = document.getElementById('formPaso1');
             if (!formPaso1) return;
+
+            // --- INICIO DE MODIFICACIONES ---
+
+            /**
+             * Calcula la diferencia entre dos fechas y la devuelve en formato "X A, Y M, Z D".
+             * @param {string} fechaMayorStr - La fecha más reciente en formato YYYY-MM-DD.
+             * @param {string} fechaMenorStr - La fecha más antigua en formato YYYY-MM-DD.
+             * @returns {string} - La edad formateada.
+             */
+            function calcularEdadAniosMesesDias(fechaMayorStr, fechaMenorStr) {
+                if (!fechaMayorStr || !fechaMenorStr) return 'N/A';
+                const fechaMayor = new Date(fechaMayorStr + 'T00:00:00');
+                const fechaMenor = new Date(fechaMenorStr + 'T00:00:00');
+                if (isNaN(fechaMayor.getTime()) || isNaN(fechaMenor.getTime())) return 'Fechas inválidas';
+
+                let anios = fechaMayor.getFullYear() - fechaMenor.getFullYear();
+                let meses = fechaMayor.getMonth() - fechaMenor.getMonth();
+                let dias = fechaMayor.getDate() - fechaMenor.getDate();
+
+                if (dias < 0) {
+                    meses--;
+                    const ultimoDiaMesAnterior = new Date(fechaMayor.getFullYear(), fechaMayor.getMonth(), 0).getDate();
+                    dias += ultimoDiaMesAnterior;
+                }
+                if (meses < 0) {
+                    anios--;
+                    meses += 12;
+                }
+                return `${anios} A, ${meses} M, ${dias} D`;
+            }
+
+            /**
+             * Calcula la edad corregida y devuelve solo el número de semanas.
+             * @param {string} fechaEvaluacionStr - La fecha actual de evaluación.
+             * @param {string} fechaNacimientoStr - La fecha de nacimiento real.
+             * @param {number} semanasGestacion - Las semanas de gestación.
+             * @returns {string} - El número total de semanas corregidas.
+             */
+            function calcularEdadCorregidaSemanas(fechaEvaluacionStr, fechaNacimientoStr, semanasGestacion) {
+                if (!fechaEvaluacionStr || !fechaNacimientoStr || isNaN(semanasGestacion)) return 'N/A';
+
+                const fechaEvaluacion = new Date(fechaEvaluacionStr + 'T00:00:00');
+                const fechaNacimiento = new Date(fechaNacimientoStr + 'T00:00:00');
+                if (isNaN(fechaEvaluacion.getTime()) || isNaN(fechaNacimiento.getTime())) return 'Fechas inválidas';
+
+                const semanasFaltantes = 40 - semanasGestacion;
+                let diasTotales;
+
+                if (semanasFaltantes <= 0) {
+                    const diffMilisegundos = fechaEvaluacion.getTime() - fechaNacimiento.getTime();
+                    diasTotales = Math.floor(diffMilisegundos / (1000 * 60 * 60 * 24));
+                } else {
+                    const diasAjuste = semanasFaltantes * 7;
+                    const fechaNacimientoCorregida = new Date(fechaNacimiento);
+                    fechaNacimientoCorregida.setDate(fechaNacimiento.getDate() + diasAjuste);
+
+                    const diffMilisegundosCorregida = fechaEvaluacion.getTime() - fechaNacimientoCorregida.getTime();
+                    if (diffMilisegundosCorregida < 0) return '0';
+                    diasTotales = Math.floor(diffMilisegundosCorregida / (1000 * 60 * 60 * 24));
+                }
+                
+                if (diasTotales < 0) return '0';
+
+                const semanas = Math.floor(diasTotales / 7);
+                return semanas.toString();
+            }
+
+            /**
+             * Función principal para actualizar los campos de edad en el formulario.
+             */
+            function actualizarEdadesCalculadas() {
+                const fechaEvaluacion = document.getElementById('dp_fecha_inicio_tratamiento').value;
+                const fechaNacimiento = document.getElementById('dp_fecha_nacimiento').value;
+                const sdg = parseInt(document.getElementById('dp_sdg').value, 10);
+
+                if (fechaEvaluacion && fechaNacimiento) {
+                    const edadCronologica = calcularEdadAniosMesesDias(fechaEvaluacion, fechaNacimiento);
+                    document.getElementById('dp_edad_cronologica_ingreso_display').value = edadCronologica;
+                }
+
+                if (fechaEvaluacion && fechaNacimiento && !isNaN(sdg)) {
+                    const edadCorregida = calcularEdadCorregidaSemanas(fechaEvaluacion, fechaNacimiento, sdg);
+                    document.getElementById('dp_edad_corregida_display').value = edadCorregida;
+                }
+            }
+            
+            // --- FIN DE MODIFICACIONES ---
 
             function limpiarDatosPasosEvaluacion() {
                 const clavesPasos = [
@@ -424,50 +463,27 @@
                     document.getElementById('dp_peso').value = pacienteDataParaActualizar.peso || '';
                     document.getElementById('dp_perimetro_cefalico').value = pacienteDataParaActualizar.perimetro_cefalico || '';
                     document.getElementById('dp_fecha_inicio_tratamiento').value = pacienteDataParaActualizar.fecha_terapia || '';
-                    document.getElementById('dp_edad_cronologica_ingreso_display').value = pacienteDataParaActualizar.edad_cronologica_ingreso_display || '';
-                    document.getElementById('dp_edad_corregida_display').value = pacienteDataParaActualizar.edad_corregida_display || '';
                     document.getElementById('factores_riesgo').value = pacienteDataParaActualizar.factores_de_riesgo || '';
                     document.getElementById('observaciones').value = pacienteDataParaActualizar.observaciones || '';
+
+                    actualizarEdadesCalculadas();
 
                     console.log("Datos del paciente cargados desde sessionStorage:", pacienteDataParaActualizar);
                     console.log("Es primera evaluación:", esPrimeraEvaluacionJS);;
 
-                    const camposAfectadosPorPrimeraEval = [
-                        'dp_talla', 'dp_peso', 'dp_perimetro_cefalico',
-                        'factores_riesgo'
-                    ];
-                    /*
-                    camposAfectadosPorPrimeraEval.forEach(idCampo => {
-                        const el = document.getElementById(idCampo);
-                        if (el) {
-                            el.readOnly = !esPrimeraEvaluacionJS;
-                            if (el.readOnly) {
-                                el.classList.add('bg-gray-100', 'cursor-not-allowed', 'text-gray-500');
-                                el.classList.remove('bg-white');
-                            } else {
-                                el.classList.remove('bg-gray-100', 'cursor-not-allowed', 'text-gray-500');
-                                el.classList.add('bg-white');
-                            }
-                        }
-                    });*/
                 } catch (e) {
                     console.error("Error JS: leyendo datosPacienteParaEvaluacion:", e);
                 }
             }
+            
+            const fechaEvaluacionInput = document.getElementById('dp_fecha_inicio_tratamiento');
+            if (fechaEvaluacionInput) {
+                fechaEvaluacionInput.addEventListener('change', actualizarEdadesCalculadas);
+            }
 
             const botonSiguiente = document.getElementById('botonSiguientePaso');
-
-            const datosPaso1Guardados = sessionStorage.getItem('evaluacionPaso1');
-
             if (botonSiguiente) {
                 botonSiguiente.addEventListener('click', function() {
-
-                    
-
-                    const datosPaso1 = {
-
-                    };
-
                     if (pacienteDataParaActualizar) {
                         pacienteDataParaActualizar.talla = document.getElementById('dp_talla').value;
                         pacienteDataParaActualizar.peso = document.getElementById('dp_peso').value;
@@ -476,14 +492,21 @@
                         pacienteDataParaActualizar.fecha_nacimiento = document.getElementById('dp_fecha_nacimiento').value;
                         pacienteDataParaActualizar.factores_de_riesgo = document.getElementById('factores_riesgo').value;
                         pacienteDataParaActualizar.observaciones = document.getElementById('observaciones').value;
+                        
+                        // Guardar los valores actualizados de las fechas y edades
+                        pacienteDataParaActualizar.fecha_terapia = document.getElementById('dp_fecha_inicio_tratamiento').value;
+                        pacienteDataParaActualizar.edad_cronologica_ingreso_display = document.getElementById('dp_edad_cronologica_ingreso_display').value;
+                        pacienteDataParaActualizar.edad_corregida_display = document.getElementById('dp_edad_corregida_display').value;
+
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(pacienteDataParaActualizar));
                     }
 
                     try {
+                        const datosPaso1 = {}; // Objeto vacío según el código original
                         sessionStorage.setItem('evaluacionPaso1', JSON.stringify(datosPaso1));
                         window.location.href = "<?= base_url('/modificarKatona') ?>";
                     } catch (e) {
-                        console.error("Error al guardar mes en sessionStorage:", e);
+                        console.error("Error al guardar datos en sessionStorage:", e);
                         const alertDiv = document.createElement('div');
                         alertDiv.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50';
                         alertDiv.innerHTML = '❌ Hubo un error al intentar guardar los datos.';
@@ -493,18 +516,6 @@
                     }
                 });
             }
-
-            // Agregar efectos de hover más suaves a los campos de entrada
-            const campos = document.querySelectorAll('.form-field:not([readonly])');
-            campos.forEach(campo => {
-                campo.addEventListener('focus', function() {
-                    this.style.transform = 'translateY(-1px)';
-                });
-
-                campo.addEventListener('blur', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
         });
     </script>
 </body>
