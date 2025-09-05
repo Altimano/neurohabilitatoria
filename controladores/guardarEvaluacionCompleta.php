@@ -1,7 +1,7 @@
 <?php
 // Incluye la configuración de la base de datos y funciones auxiliares.
-require_once './config/db.php'; 
-require_once './funciones/funciones.php'; 
+require_once './config/db.php';
+require_once './funciones/funciones.php';
 
 // Establece la zona horaria para un manejo consistente de fechas y horas.
 date_default_timezone_set('America/Mexico_City');
@@ -71,8 +71,8 @@ try {
             'ps_aduccion_pulgares' => 1, 'ps_estrabismo' => 2, 'ps_irritabilidad' => 3,
             'ps_marcha_en_punta_presencia' => 4, 'ps_marcha_cruzada_presencia' => 5,
             'ps_punos_cerrados_presencia' => 6, 'ps_reflejo_hiperextension' => 7,
-            'ps_lenguaje_escaso' => 8, 'ps_marcha_en_punta_lado' => 9, 
-            'ps_marcha_cruzada_lado' => 10, 'ps_punos_cerrados_lado' => 11, 
+            'ps_lenguaje_escaso' => 8, 'ps_marcha_en_punta_lado' => 9,
+            'ps_marcha_cruzada_lado' => 10, 'ps_punos_cerrados_lado' => 11,
         ],
         'hitos_mg_fechas' => [
             'hg_control_cefalico' => 1, 'hg_posicion_sentado' => 2, 'hg_reacciones_proteccion' => 3,
@@ -88,8 +88,8 @@ try {
 
     // Prepara los datos principales para la tabla 'terapia_neurov2'.
     $clave_paciente_sql = (int)$data['clave_paciente'];
-    $clave_personal_sql = (int)$data['clave_personal']; 
-    $fecha_terapia_actual_sql = "'" . $Con->real_escape_string($data['fecha_inicio_tratamiento']) . "'"; 
+    $clave_personal_sql = (int)$data['clave_personal'];
+    $fecha_terapia_actual_sql = "'" . $Con->real_escape_string($data['fecha_inicio_tratamiento']) . "'";
     
     // Corroboramos si la fecha de inicio de terapia existente.
     $existing_fecha_inicio_terapia_sql = 'NULL';
@@ -104,46 +104,25 @@ try {
         $existing_fecha_inicio_terapia_sql = $fecha_terapia_actual_sql;
     }
 
-    // Prepara la edad corregida
-    $edad_corregida_sql = 'NULL';
-    if (isset($data['edad_corregida_display']) && !empty($data['edad_corregida_display'])) {
-        // Si 'edad_corregida_display' viene del frontend, la guardamos directamente
-        $edad_corregida_sql = "'" . $Con->real_escape_string($data['edad_corregida_display']) . "'"; 
+    // Prepara la edad corregida (en semanas) desde el frontend.
+    if (isset($data['edad_corregida_display']) && ($data['edad_corregida_display'] === '0' || !empty($data['edad_corregida_display']))) {
+        $edad_corregida_sql = "'" . $Con->real_escape_string($data['edad_corregida_display']) . "'";
     } else {
-        // Si no viene, calculamos la edad corregida en semanas
-        $edadCorregidaSemanas = calcularEdadCorregidaEnSemanas(
-            $data['fecha_nacimiento'],
-            $data['sdg'],
-            $data['fecha_inicio_tratamiento']
-        );
-        $edad_corregida_sql = "'" . $Con->real_escape_string($edadCorregidaSemanas . ' S') . "'";
+        throw new Exception("El dato 'edad_corregida_display' (Edad Corregida en Semanas) no fue enviado o está vacío.");
     }
 
-    // Prepara la edad cronológica
-    $edad_cronologica_sql = 'NULL';
+    // Prepara la edad cronológica desde el frontend.
     if (isset($data['edad_cronologica_ingreso_display']) && !empty($data['edad_cronologica_ingreso_display'])) {
-        // Asumiendo que 'edad_cronologica_ingreso_display' ya viene como "5 A" o "6 M" del frontend
         $edad_cronologica_sql = "'" . $Con->real_escape_string($data['edad_cronologica_ingreso_display']) . "'";
     } else {
-        // Si no viene la edad_cronologica_ingreso_display, podrías intentar calcularla o dejarla en NULL
-        // o si tienes la edad_cronologica_anios y edad_cronologica_meses
-        if (isset($data['edad_cronologica_anios']) && is_numeric($data['edad_cronologica_anios'])) {
-            $edad_cronologica_value = $data['edad_cronologica_anios'] . ' A';
-            if (isset($data['edad_cronologica_meses']) && is_numeric($data['edad_cronologica_meses']) && $data['edad_cronologica_meses'] > 0) {
-                $edad_cronologica_value .= ' ' . $data['edad_cronologica_meses'] . ' M';
-            }
-            $edad_cronologica_sql = "'" . $Con->real_escape_string($edad_cronologica_value) . "'";
-        } elseif (isset($data['edad_cronologica_meses']) && is_numeric($data['edad_cronologica_meses']) && $data['edad_cronologica_meses'] > 0) {
-             $edad_cronologica_sql = "'" . $Con->real_escape_string($data['edad_cronologica_meses'] . ' M') . "'";
-        }
+        throw new Exception("El dato 'edad_cronologica_ingreso_display' (Edad Cronológica) no fue enviado o está vacío.");
     }
     
-    // Determina la fecha de nacimiento corregida para la base de datos.
-    $dat_ter_fech_nac_edad_correg_sql = 'NULL'; 
-    if (isset($data['dat_ter_fech_nac_edad_correg_db_format']) && !empty($data['dat_ter_fech_nac_edad_correg_db_format'])) {
-        $dat_ter_fech_nac_edad_correg_sql = "'" . $Con->real_escape_string($data['dat_ter_fech_nac_edad_correg_db_format']) . "'";
-    } elseif (isset($data['fecha_nacimiento']) && !empty($data['fecha_nacimiento'])) {
-        $dat_ter_fech_nac_edad_correg_sql = "'" . $Con->real_escape_string($data['fecha_nacimiento']) . "'";
+    // Determina la fecha de nacimiento corregida (YYYY-MM-DD) desde el frontend.
+    if (isset($data['fecha_nacimiento_corregida_display']) && !empty($data['fecha_nacimiento_corregida_display'])) {
+        $dat_ter_fech_nac_edad_correg_sql = "'" . $Con->real_escape_string($data['fecha_nacimiento_corregida_display']) . "'";
+    } else {
+        throw new Exception("El dato 'fecha_nacimiento_corregida_display' (Fecha Nacimiento Corregida YYYY-MM-DD) no fue enviado o está vacío.");
     }
 
     $edad_cronologica_al_ingr_sem_sql = isset($data['sdg']) && !empty($data['sdg']) ? "'" . $Con->real_escape_string($data['sdg']) . "'" : 'NULL';
@@ -197,9 +176,9 @@ try {
     }
 
     // Obtiene el ID del registro recién insertado para usarlo en tablas relacionadas.
-    $id_terapia_neuro_generado = $Con->insert_id; 
+    $id_terapia_neuro_generado = $Con->insert_id;
 
-    // --- Maniobras de Katona ---    
+    // --- Maniobras de Katona ---   
     if (isset($data['katona']) && is_array($data['katona'])) {
         foreach ($evaluation_maps['katona'] as $key => $id_katona) {
             $tono_muscular_topografia_sql = 'NULL'; 
@@ -382,7 +361,7 @@ if (isset($data['lenguaje']) && is_array($data['lenguaje'])) {
 if (isset($data['hitomgrueso']) && is_array($data['hitomgrueso'])) {
     // Se obtiene la fecha de evaluación general para este bloque
     $fecha_evaluacion_hitos_mg = isset($data['hitomgrueso']['fecha_evaluacion']) && !empty($data['hitomgrueso']['fecha_evaluacion']) 
-                                 ? "'" . $Con->real_escape_string($data['hitomgrueso']['fecha_evaluacion']) . "'" : 'NULL';
+                                ? "'" . $Con->real_escape_string($data['hitomgrueso']['fecha_evaluacion']) . "'" : 'NULL';
 
     foreach ($evaluation_maps['hitos_mg_fechas'] as $key => $id_hito_motor_grueso) {
         
@@ -413,7 +392,7 @@ if (isset($data['hitomgrueso']) && is_array($data['hitomgrueso'])) {
 if (isset($data['hitomfino']) && is_array($data['hitomfino'])) {
     // Se obtiene la fecha de evaluación general para este bloque
     $fecha_evaluacion_hitos_mf = isset($data['hitomfino']['fecha_evaluacion']) && !empty($data['hitomfino']['fecha_evaluacion']) 
-                                 ? "'" . $Con->real_escape_string($data['hitomfino']['fecha_evaluacion']) . "'" : 'NULL';
+                                ? "'" . $Con->real_escape_string($data['hitomfino']['fecha_evaluacion']) . "'" : 'NULL';
 
     foreach ($evaluation_maps['hitos_mf_fechas'] as $key => $id_hito_mf) {
         
