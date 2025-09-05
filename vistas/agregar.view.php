@@ -32,9 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
         if (!$stmt) {
             $error_mensaje = "Error en preparación de consulta: " . $Con->error;
         } else {
-            // Asegúrate de que clave_paciente es un entero si lo es en tu BD
-            // ¡Importante!: Si clave_paciente es un INT en la BD, usa "i" en bind_param
-            $stmt->bind_param("i", $clave_paciente); // Cambiado a "i" (integer) asumiendo que clave_paciente es INT
+            $stmt->bind_param("i", $clave_paciente);
             $stmt->execute();
             $result = $stmt->get_result();
             $datos_db_paciente = $result->fetch_assoc();
@@ -43,11 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
             if (!$datos_db_paciente) {
                 $error_mensaje = "Error: Paciente con clave '" . htmlspecialchars($clave_paciente) . "' no encontrado.";
             } else {
-                if ($codigo_paciente_post && $datos_db_paciente['codigo_paciente'] !== $codigo_paciente_post) {
-                    // Este error puede ser omitido o manejado de otra forma si solo se busca por clave_paciente
-                    // $error_mensaje = "Error: El código de paciente proporcionado no coincide con la clave del paciente.";
-                }
-
                 // Determinar si es la primera evaluación
                 $yaTieneEvaluacionInicial = $Estudio->validarEvaluacionInicial($clave_paciente);
                 $esPrimeraEvaluacion = !$yaTieneEvaluacionInicial; // True si NO tiene evaluaciones previas
@@ -57,53 +50,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
                 $fechaNacimientoReal = $datos_db_paciente['fecha_nacimiento_paciente'];
                 $semanasGestacionReales = $datos_db_paciente['semanas_gestacion'];
 
-                $edadCronologicaIngreso = calcularEdadCronologicaIngreso($fechaInicioTratamientoFormateada, $fechaNacimientoReal);
-                $fechaNacimientoCorregidaStr = calcularFechaNacimientoCorregida($fechaNacimientoReal, $semanasGestacionReales);
-
+                // Inicializar el array de datos del paciente
                 $datos_paciente_para_mostrar = [
                     'clave_paciente'                => $clave_paciente,
                     'codigo_paciente'               => $datos_db_paciente['codigo_paciente'],
                     'nombre_paciente'               => trim((isset($datos_db_paciente['nombre_paciente']) ? $datos_db_paciente['nombre_paciente'] : '') . ' ' . (isset($datos_db_paciente['apellido_paterno_paciente']) ? $datos_db_paciente['apellido_paterno_paciente'] : '') . ' ' . (isset($datos_db_paciente['apellido_materno_paciente']) ? $datos_db_paciente['apellido_materno_paciente'] : '')),
-                    'talla'                         => '', // Se inicializan vacíos
-                    'peso'                          => '', // Se inicializan vacíos
-                    'perimetro_cefalico'            => '', // Se inicializan vacíos
+                    'talla'                         => '',
+                    'peso'                          => '',
+                    'perimetro_cefalico'            => '',
                     'sdg'                           => $semanasGestacionReales,
                     'fecha_nacimiento'              => $fechaNacimientoReal,
                     'fecha_inicio_tratamiento'      => $fechaInicioTratamientoFormateada,
-                    'edad_corregida_display'        => $fechaNacimientoCorregidaStr,
-                    'edad_cronologica_ingreso_display' => $edadCronologicaIngreso, // String como "9A 7M"
-                    'factores_de_riesgo'            => '', // Se inicializan vacíos
+                    'factores_de_riesgo'            => '',
                     'esPrimeraEvaluacion'           => $esPrimeraEvaluacion,
-                    'clave_personal'                => $_SESSION['clave_personal']
+                    'clave_personal'                => $_SESSION['clave_personal'],
+                    'edad_corregida_display'        => '', // Inicializado vacío
+                    'fecha_nacimiento_corregida_display' => '', // Inicializado vacío
+                    'edad_cronologica_ingreso_display' => '', // Inicializado vacío
                 ];
 
-                // SI NO ES LA PRIMERA EVALUACIÓN, CARGA LOS ÚLTIMOS DATOS EXISTENTES
-                if (!$esPrimeraEvaluacion) {
+                if ($esPrimeraEvaluacion) {
+                    // SI ES LA PRIMERA EVALUACIÓN, se calculan los valores iniciales para mostrar
+                    $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] = calcularEdadCronologicaIngreso($fechaInicioTratamientoFormateada, $fechaNacimientoReal);
+                    $datos_paciente_para_mostrar['edad_corregida_display'] = calcularFechaNacimientoCorregida($fechaNacimientoReal, $semanasGestacionReales);
+                } else {
+                    // SI NO ES LA PRIMERA EVALUACIÓN, se cargan los datos de la última guardada en la BD
                     $ultimaEvaluacion = $Estudio->obtenerUltimaEvaluacionPaciente($clave_paciente);
                     if ($ultimaEvaluacion) {
                         $datos_paciente_para_mostrar['talla'] = $ultimaEvaluacion['talla'];
                         $datos_paciente_para_mostrar['peso'] = $ultimaEvaluacion['peso'];
-                        $datos_paciente_para_mostrar['perimetro_cefalico'] = $ultimaEvaluacion['pc']; // El campo en DB es 'pc'
+                        $datos_paciente_para_mostrar['perimetro_cefalico'] = $ultimaEvaluacion['pc'];
                         $datos_paciente_para_mostrar['factores_de_riesgo'] = $ultimaEvaluacion['factores_riesgo'];
+                    }
+
+                    // Prepara y ejecuta una consulta para obtener los datos de edad de la PRIMERA evaluación guardada.
+                    $stmt_primera_eval = $Con->prepare(
+                        "SELECT edad_cronologica, edad_corregida, dat_ter_fech_nac_edad_correg 
+                         FROM terapia_neurov2 
+                         WHERE clave_paciente = ? 
+                         ORDER BY id_terapia_neurohabilitatoriav2 ASC 
+                         LIMIT 1"
+                    );
+                    if ($stmt_primera_eval) {
+                        $stmt_primera_eval->bind_param("i", $clave_paciente);
+                        $stmt_primera_eval->execute();
+                        $result_primera_eval = $stmt_primera_eval->get_result();
+                        $primeraEvaluacion = $result_primera_eval->fetch_assoc();
+                        $stmt_primera_eval->close();
+
+                        if ($primeraEvaluacion) {
+                            // Carga los valores de edad estáticos directamente desde la primera evaluación.
+                            $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] = $primeraEvaluacion['edad_cronologica'] ?? 'N/A';
+                            $datos_paciente_para_mostrar['edad_corregida_display'] = $primeraEvaluacion['edad_corregida'] ?? 'N/A';
+                            $datos_paciente_para_mostrar['fecha_nacimiento_corregida_display'] = $primeraEvaluacion['dat_ter_fech_nac_edad_correg'] ?? '';
+                        }
                     }
                 }
             }
         }
     }
-    $Con->close(); // Cierra la conexión a la base de datos una vez que se han realizado todas las operaciones.
+    $Con->close();
 
 } else if (isset($_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'])) {
     $datos_paciente_para_mostrar = $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'];
     $esPrimeraEvaluacion = isset($datos_paciente_para_mostrar['esPrimeraEvaluacion']) ? $datos_paciente_para_mostrar['esPrimeraEvaluacion'] : false;
 } else {
-    // Redirige si no hay datos en sesión ni en POST, o si la clave del paciente no se envió en el POST inicial.
-    // Esto evita que se acceda directamente a esta página sin haber buscado un paciente.
     header('Location: crear.view.php?error=acceso_invalido_agregar_view');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar) && !$error_mensaje) {
-    // Solo guarda en sesión si no hay un error
     $_SESSION['datosPacienteParaEvaluacionCargadosPHP_View'] = $datos_paciente_para_mostrar;
 }
 
@@ -131,6 +147,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
         // Mostrará los datos que PHP preparó antes de enviarlos al cliente.
         console.log('DEBUG (PHP a JS): datos_paciente_para_mostrar (al cargar la página):', <?php echo json_encode($datos_paciente_para_mostrar); ?>);
         console.log('DEBUG (PHP a JS): esPrimeraEvaluacion (desde PHP al cargar la página):', <?php echo json_encode($esPrimeraEvaluacion); ?>);
+        
+        <?php if ($esPrimeraEvaluacion): ?>
+            console.log('DEBUG: Es la primera evaluación, los cálculos serán dinámicos.');
+        <?php else: ?>
+            console.log('DEBUG: No es la primera evaluación, los datos de edad son fijos desde la BD.');
+            console.log('DEBUG (PHP a JS): Edad Cronológica (BD):', '<?php echo isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : "N/A"; ?>');
+            console.log('DEBUG (PHP a JS): Fecha Nacimiento Corregida (Semanas) (BD):', '<?php echo isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : "N/A"; ?>');
+            console.log('DEBUG (PHP a JS): Fecha Nacimiento Corregida (BD):', '<?php echo isset($datos_paciente_para_mostrar['fecha_nacimiento_corregida_display']) ? $datos_paciente_para_mostrar['fecha_nacimiento_corregida_display'] : "N/A"; ?>');
+        <?php endif; ?>
     </script>
     <div class="text-center my-6"><h3 class="text-2xl font-bold text-custom-title">Agregar una Evaluacion</h3></div>
 
@@ -161,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Edad Cronológica</label><input type="text" id="dp_edad_cronologica_ingreso_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_cronologica_ingreso_display']) ? $datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                     
                     <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha Nacimiento Corregida(Semanas)</label><input type="text" id="dp_edad_corregida_display_en_sem" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['edad_corregida_display']) ? $datos_paciente_para_mostrar['edad_corregida_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
-                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha Nacimiento Corregida</label><input type="date" id="dp_edad_corregida_display" class="w-full p-2 border rounded-md" readonly></div>
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Fecha Nacimiento Corregida</label><input type="date" id="dp_edad_corregida_display" value="<?php echo htmlspecialchars(isset($datos_paciente_para_mostrar['fecha_nacimiento_corregida_display']) ? $datos_paciente_para_mostrar['fecha_nacimiento_corregida_display'] : ''); ?>" class="w-full p-2 border rounded-md" readonly></div>
                 </div>
                 <div class="mb-6">
                     <label for="factores_riesgo" class="block text-sm font-medium text-gray-700 mb-1">Factores de Riesgo*</label>
@@ -198,9 +223,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                 clavesPasos.forEach(clave => sessionStorage.removeItem(clave));
             }
 
-            // Esta sección PHP se ejecuta solo cuando la página se carga vía POST por primera vez con datos del paciente
             <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar) && !$error_mensaje): ?>
-                limpiarDatosPasosEvaluacion(); // Limpia datos de sesiones anteriores para una nueva evaluación
+                limpiarDatosPasosEvaluacion();
                 try {
                     const datosPacienteActualesPHP = <?php echo json_encode($datos_paciente_para_mostrar); ?>;
                     datosPacienteActualesPHP.mes = datosPacienteActualesPHP.mes || '';
@@ -212,25 +236,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
 
             const datosPacienteGuardados = sessionStorage.getItem('datosPacienteParaEvaluacion');
             let esPrimeraEvaluacionJS = false;
-            let pacienteDataParaActualizar = {}; // Este objeto contendrá los datos del paciente para ser actualizados y pasados.
+            let pacienteDataParaActualizar = {};
 
             if(datosPacienteGuardados){
                 try {
                     pacienteDataParaActualizar = JSON.parse(datosPacienteGuardados);
-                    esPrimeraEvaluacionJS = pacienteDataParaActualizar.esPrimeraEvaluacion || false;
-
-                    // Precargar los campos de display y los campos editables
-                    document.getElementById('dp_nombre_paciente').value = pacienteDataParaActualizar.nombre_paciente || '';
-                    document.getElementById('dp_codigo_paciente').value = pacienteDataParaActualizar.codigo_paciente || '';
-                    document.getElementById('dp_fecha_nacimiento').value = pacienteDataParaActualizar.fecha_nacimiento || '';
-                    document.getElementById('dp_sdg').value = pacienteDataParaActualizar.sdg || '';
-                    document.getElementById('dp_talla').value = pacienteDataParaActualizar.talla || '';
-                    document.getElementById('dp_peso').value = pacienteDataParaActualizar.peso || '';
-                    document.getElementById('dp_perimetro_cefalico').value = pacienteDataParaActualizar.perimetro_cefalico || '';
-                    document.getElementById('dp_fecha_inicio_tratamiento').value = pacienteDataParaActualizar.fecha_inicio_tratamiento || '';
-                    document.getElementById('dp_edad_cronologica_ingreso_display').value = pacienteDataParaActualizar.edad_cronologica_ingreso_display || '';
-                    document.getElementById('dp_edad_corregida_display_en_sem').value = pacienteDataParaActualizar.edad_corregida_display || '';
-                    document.getElementById('factores_riesgo').value = pacienteDataParaActualizar.factores_de_riesgo || '';
+                    esPrimeraEvaluacionJS = pacienteDataParaActualizar.esPrimeraEvaluacion;
 
                     const camposEditablesPrimeraEval = [ 'dp_talla', 'dp_peso', 'dp_perimetro_cefalico', 'factores_riesgo' ];
                     camposEditablesPrimeraEval.forEach(idCampo => {
@@ -249,14 +260,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                         }
                     });
 
-                    const camposSempreReadOnly = ['dp_sdg', 'dp_fecha_nacimiento', 'dp_codigo_paciente', 'dp_nombre_paciente', 'dp_edad_cronologica_ingreso_display', 'dp_edad_corregida_display_en_sem', 'dp_edad_corregida_display'];
-                    camposSempreReadOnly.forEach(idCampo => {
+                    const camposSiempreReadOnly = ['dp_sdg', 'dp_fecha_nacimiento', 'dp_codigo_paciente', 'dp_nombre_paciente', 'dp_edad_cronologica_ingreso_display', 'dp_edad_corregida_display_en_sem', 'dp_edad_corregida_display'];
+                    camposSiempreReadOnly.forEach(idCampo => {
                         const el = document.getElementById(idCampo);
                         if (el) {
                             el.readOnly = true;
                             el.classList.add('bg-gray-200', 'cursor-default', 'text-gray-500');
                             el.classList.remove('bg-white');
-                            el.removeAttribute('required');
                         }
                     });
 
@@ -294,35 +304,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
                     }
                     
                     const fechaEvaluacionActual = document.getElementById('dp_fecha_inicio_tratamiento').value;
-
                     pacienteDataParaActualizar.fecha_inicio_tratamiento = fechaEvaluacionActual;
 
-                    // Actualizar los valores de edad en el objeto ANTES de guardar
                     pacienteDataParaActualizar.edad_cronologica_ingreso_display = document.getElementById('dp_edad_cronologica_ingreso_display').value;
                     pacienteDataParaActualizar.edad_corregida_display = document.getElementById('dp_edad_corregida_display_en_sem').value;
                     pacienteDataParaActualizar.fecha_nacimiento_corregida_display = document.getElementById('dp_edad_corregida_display').value;
 
-                    const datosPaso1 = {
-                        clave_paciente: pacienteDataParaActualizar.clave_paciente,
-                        clave_personal: pacienteDataParaActualizar.clave_personal,
-                        fecha_inicio_terapia: fechaEvaluacionActual,
-                        fecha_terapia: fechaEvaluacionActual,
-                        edad_corregida: pacienteDataParaActualizar.edad_corregida_display, 
-                        edad_cronologica: pacienteDataParaActualizar.edad_cronologica_ingreso_display,
-                        dat_ter_fech_nac_edad_correg: pacienteDataParaActualizar.fecha_nacimiento,
-                        edad_cronologica_al_ingr_sem: pacienteDataParaActualizar.sdg.toString(),
-                        edad_correg_al_ingr_sem: pacienteDataParaActualizar.sdg.toString(),
-                        peso: pacienteDataParaActualizar.peso,
-                        talla: pacienteDataParaActualizar.talla,
-                        pc: pacienteDataParaActualizar.perimetro_cefalico,
-                        factores_riesgo: pacienteDataParaActualizar.factores_de_riesgo
-                    };
-
-                    console.log('DEBUG (JS - Botón Siguiente): datosPaso1 a guardar:', datosPaso1);
-                    console.log('DEBUG (JS - Botón Siguiente): pacienteDataParaActualizar actualizada:', pacienteDataParaActualizar);
-
                     try {
-                        sessionStorage.setItem('evaluacionPaso1', JSON.stringify(datosPaso1));
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(pacienteDataParaActualizar));
                         window.location.href = "<?=base_url('/agregarKatona')?>";
                     } catch (e) {
@@ -336,103 +324,98 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Obtener el objeto de datos del paciente desde sessionStorage (ya cargado por tu script anterior)
         let pacienteData = {};
         const datosGuardados = sessionStorage.getItem('datosPacienteParaEvaluacion');
         if (datosGuardados) {
-            pacienteData = JSON.parse(datosGuardados);
-        }
-
-        // 1. OBTENER REFERENCIAS A LOS ELEMENTOS DEL FORMULARIO
-        const fechaEvaluacionInput = document.getElementById('dp_fecha_inicio_tratamiento');
-        const fechaNacimientoInput = document.getElementById('dp_fecha_nacimiento');
-        const semanasGestacionInput = document.getElementById('dp_sdg');
-        const edadCronologicaOutput = document.getElementById('dp_edad_cronologica_ingreso_display');
-        const edadCorregidaSemanasOutput = document.getElementById('dp_edad_corregida_display_en_sem');
-        const fechaNacimientoCorregidaOutput = document.getElementById('dp_edad_corregida_display'); // Campo para la fecha corregida
-
-        //Formatea la edad cronológica en Años, Meses y Días.
-        function formatearEdadAniosMesesDias(totalDias) {
-            if (isNaN(totalDias) || totalDias < 0) return 'N/A';
-            const diasEnAnio = 365.25;
-            const diasEnPromedioPorMes = 30.4375;
-            let diasRestantes = totalDias;
-            const anios = Math.floor(diasRestantes / diasEnAnio);
-            diasRestantes %= diasEnAnio;
-            const meses = Math.floor(diasRestantes / diasEnPromedioPorMes);
-            diasRestantes %= diasEnPromedioPorMes;
-            const dias = Math.floor(diasRestantes);
-            return `${anios} A, ${meses} M, ${dias} D`;
-        }
-
-        //Formatea la edad corregida devolviendo solo el número total de semanas.
-        function formatearEdadEnSemanas(totalDias) {
-            if (isNaN(totalDias) || totalDias < 0) return '0'; // O 'N/A' si prefieres
-            const semanas = Math.floor(totalDias / 7);
-            return semanas.toString();
-        }
-
-        // Función principal que lee las fechas, calcula las edades y actualiza la interfaz.
-        function actualizarEdades() {
-            const fechaEvaluacionStr = fechaEvaluacionInput.value;
-            const fechaNacimientoStr = fechaNacimientoInput.value;
-            const semanasGestacion = parseInt(semanasGestacionInput.value, 10);
-
-            if (!fechaEvaluacionStr || !fechaNacimientoStr) {
-                edadCronologicaOutput.value = '';
-                edadCorregidaSemanasOutput.value = '';
-                fechaNacimientoCorregidaOutput.value = ''; // Limpiar campo
+            try {
+                pacienteData = JSON.parse(datosGuardados);
+            } catch(e) {
+                console.error("Error al parsear datos del paciente en el segundo script:", e);
                 return;
             }
-
-            const fechaEvaluacion = new Date(fechaEvaluacionStr + 'T00:00:00');
-            const fechaNacimiento = new Date(fechaNacimientoStr + 'T00:00:00');
-            
-            const diffMilisegundos = fechaEvaluacion.getTime() - fechaNacimiento.getTime();
-            const edadCronologicaEnDias = Math.floor(diffMilisegundos / (1000 * 60 * 60 * 24));
-
-            let edadCorregidaEnDias = edadCronologicaEnDias;
-            let diasDePrematurez = 0;
-            if (!isNaN(semanasGestacion) && semanasGestacion < 39) {
-                diasDePrematurez = (39 - semanasGestacion) * 7;
-                edadCorregidaEnDias = edadCronologicaEnDias - diasDePrematurez;
-            }
-            
-            // --- INICIO: Lógica para calcular y formatear la Fecha de Nacimiento Corregida ---
-            const fechaNacimientoCorregida = new Date(fechaNacimiento.getTime());
-            // A la fecha de nacimiento real se le suman los días de prematurez
-            fechaNacimientoCorregida.setDate(fechaNacimiento.getDate() + diasDePrematurez);
-
-            // Formatear a 'YYYY-MM-DD' para el input de tipo date
-            const yyyy = fechaNacimientoCorregida.getFullYear();
-            const mm = String(fechaNacimientoCorregida.getMonth() + 1).padStart(2, '0'); // Los meses son base 0
-            const dd = String(fechaNacimientoCorregida.getDate()).padStart(2, '0');
-            const fechaCorregidaFormateada = `${yyyy}-${mm}-${dd}`;
-            // --- FIN: Lógica ---
-
-            // Formatear y mostrar resultados
-            const edadCronologicaFormateada = formatearEdadAniosMesesDias(edadCronologicaEnDias);
-            const edadCorregidaSemanasFormateada = formatearEdadEnSemanas(edadCorregidaEnDias);
-
-            edadCronologicaOutput.value = edadCronologicaFormateada;
-            edadCorregidaSemanasOutput.value = edadCorregidaSemanasFormateada;
-            fechaNacimientoCorregidaOutput.value = fechaCorregidaFormateada; // Asignar la fecha corregida al campo
-
-            // Actualizar el objeto de datos y guardarlo en sessionStorage
-            if (pacienteData) {
-                pacienteData.fecha_inicio_tratamiento = fechaEvaluacionStr;
-                pacienteData.edad_cronologica_ingreso_display = edadCronologicaFormateada;
-                pacienteData.edad_corregida_display = edadCorregidaSemanasFormateada;
-                pacienteData.fecha_nacimiento_corregida_display = fechaCorregidaFormateada; // Opcional: guardar en sesión
-                sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(pacienteData));
-            }
         }
 
-        // Asignar el evento y ejecutar al inicio
-        if (fechaEvaluacionInput) {
-            fechaEvaluacionInput.addEventListener('change', actualizarEdades);
-            actualizarEdades();
+        //INICIO: LÓGICA CONDICIONAL
+        // Solo ejecuta los cálculos dinámicos si es la primera evaluación.
+        if (pacienteData.esPrimeraEvaluacion) {
+            const fechaEvaluacionInput = document.getElementById('dp_fecha_inicio_tratamiento');
+            const fechaNacimientoInput = document.getElementById('dp_fecha_nacimiento');
+            const semanasGestacionInput = document.getElementById('dp_sdg');
+            const edadCronologicaOutput = document.getElementById('dp_edad_cronologica_ingreso_display');
+            const edadCorregidaSemanasOutput = document.getElementById('dp_edad_corregida_display_en_sem');
+            const fechaNacimientoCorregidaOutput = document.getElementById('dp_edad_corregida_display');
+
+            function formatearEdadAniosMesesDias(totalDias) {
+                if (isNaN(totalDias) || totalDias < 0) return 'N/A';
+                const diasEnAnio = 365.25;
+                const diasEnPromedioPorMes = 30.4375;
+                let diasRestantes = totalDias;
+                const anios = Math.floor(diasRestantes / diasEnAnio);
+                diasRestantes %= diasEnAnio;
+                const meses = Math.floor(diasRestantes / diasEnPromedioPorMes);
+                diasRestantes %= diasEnPromedioPorMes;
+                const dias = Math.floor(diasRestantes);
+                return `${anios} A, ${meses} M, ${dias} D`;
+            }
+
+            function formatearEdadEnSemanas(totalDias) {
+                if (isNaN(totalDias) || totalDias < 0) return '0';
+                const semanas = Math.floor(totalDias / 7);
+                return semanas.toString();
+            }
+
+            function actualizarEdades() {
+                const fechaEvaluacionStr = fechaEvaluacionInput.value;
+                const fechaNacimientoStr = fechaNacimientoInput.value;
+                const semanasGestacion = parseInt(semanasGestacionInput.value, 10);
+
+                if (!fechaEvaluacionStr || !fechaNacimientoStr) {
+                    return;
+                }
+
+                const fechaEvaluacion = new Date(fechaEvaluacionStr + 'T00:00:00');
+                const fechaNacimiento = new Date(fechaNacimientoStr + 'T00:00:00');
+                
+                const diffMilisegundos = fechaEvaluacion.getTime() - fechaNacimiento.getTime();
+                const edadCronologicaEnDias = Math.floor(diffMilisegundos / (1000 * 60 * 60 * 24));
+
+                let edadCorregidaEnDias = edadCronologicaEnDias;
+                let diasDePrematurez = 0;
+                if (!isNaN(semanasGestacion) && semanasGestacion < 39) {
+                    diasDePrematurez = (39 - semanasGestacion) * 7;
+                    edadCorregidaEnDias = edadCronologicaEnDias - diasDePrematurez;
+                }
+                
+                const fechaNacimientoCorregida = new Date(fechaNacimiento.getTime());
+                fechaNacimientoCorregida.setDate(fechaNacimiento.getDate() + diasDePrematurez);
+
+                const yyyy = fechaNacimientoCorregida.getFullYear();
+                const mm = String(fechaNacimientoCorregida.getMonth() + 1).padStart(2, '0');
+                const dd = String(fechaNacimientoCorregida.getDate()).padStart(2, '0');
+                const fechaCorregidaFormateada = `${yyyy}-${mm}-${dd}`;
+
+                const edadCronologicaFormateada = formatearEdadAniosMesesDias(edadCronologicaEnDias);
+                const edadCorregidaSemanasFormateada = formatearEdadEnSemanas(edadCorregidaEnDias);
+
+                edadCronologicaOutput.value = edadCronologicaFormateada;
+                edadCorregidaSemanasOutput.value = edadCorregidaSemanasFormateada;
+                fechaNacimientoCorregidaOutput.value = fechaCorregidaFormateada;
+
+                if (pacienteData) {
+                    pacienteData.fecha_inicio_tratamiento = fechaEvaluacionStr;
+                    pacienteData.edad_cronologica_ingreso_display = edadCronologicaFormateada;
+                    pacienteData.edad_corregida_display = edadCorregidaSemanasFormateada;
+                    pacienteData.fecha_nacimiento_corregida_display = fechaCorregidaFormateada;
+                    sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(pacienteData));
+                }
+            }
+
+            if (fechaEvaluacionInput) {
+                fechaEvaluacionInput.addEventListener('change', actualizarEdades);
+                actualizarEdades();
+            }
         }
+        //FIN: LÓGICA CONDICIONAL
     });
     </script>
 
