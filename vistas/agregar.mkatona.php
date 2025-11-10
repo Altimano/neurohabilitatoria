@@ -334,7 +334,7 @@
                                     <td><input type="checkbox" id="mk_gateo_asistido_mod_N" name="mk_gateo_asistido_mod[]" value="Normal"></td>
                                     <td><input type="checkbox" id="mk_gateo_asistido_mod_Hneg" name="mk_gateo_asistido_mod[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_gateo_asistido_mod_Hpos" name="mk_gateo_asistido_mod[]" value="Hipertonía(+)"></td>
-                                    <td><input type="checkbox" id="mk_gateo_asistido_mod_MTs" name="mk_gateo_asistido_mod[]" value="Miembros Torácicos"></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -365,7 +365,7 @@
                                     <td><input type="checkbox" id="mk_marcha_plano_horizontal_Hneg" name="mk_marcha_plano_horizontal[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_marcha_plano_horizontal_Hpos" name="mk_marcha_plano_horizontal[]" value="Hipertonía(+)"></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_horizontal_MP" name="mk_marcha_plano_horizontal[]" value="Miembros Pélvicos"></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -380,7 +380,7 @@
                                     <td><input type="checkbox" id="mk_marcha_plano_ascendente_Hneg" name="mk_marcha_plano_ascendente[]" value="Hipotonía(-)"></td>
                                     <td><input type="checkbox" id="mk_marcha_plano_ascendente_Hpos" name="mk_marcha_plano_ascendente[]" value="Hipertonía(+)"></td>
                                     <td></td>
-                                    <td><input type="checkbox" id="mk_marcha_plano_ascendente_MP" name="mk_marcha_plano_ascendente[]" value="Miembros Pélvicos"></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
