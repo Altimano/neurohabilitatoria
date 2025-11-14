@@ -134,6 +134,14 @@ try {
     $pc_sql = isset($data['perimetro_cefalico']) && !empty($data['perimetro_cefalico']) ? "'" . $Con->real_escape_string($data['perimetro_cefalico']) . "'" : 'NULL';
     $factores_riesgo_sql = isset($data['factores_de_riesgo']) && !empty($data['factores_de_riesgo']) ? "'" . $Con->real_escape_string($data['factores_de_riesgo']) . "'" : 'NULL';
 
+    // ===== MODIFICACIÓN (INICIO) =====
+    // Prepara la nueva Edad Corregida Actual (en semanas)
+    // Se lee la clave 'edad_corregida_actual_sem' que viene del JSON (Paso 1 del frontend)
+    // Si no existe o está vacía (como en la primera evaluación), se guarda como NULL.
+    $edad_correg_actual_sem_sql = isset($data['edad_corregida_actual_sem']) && $data['edad_corregida_actual_sem'] !== '' ? "'" . $Con->real_escape_string($data['edad_corregida_actual_sem']) . "'" : 'NULL';
+    // ===== MODIFICACIÓN (FIN) =====
+
+
     // --- Obtener observaciones del apartado de Signos de Alarma ---
     $observaciones_generales_sql = 'NULL';
     if (isset($data['signos_alarma']['observaciones']) && !empty($data['signos_alarma']['observaciones'])) {
@@ -162,13 +170,15 @@ try {
                 `edad_corregida`, `edad_cronologica`, `dat_ter_fech_nac_edad_correg`, 
                 `edad_cronologica_al_ingr_sem`, `edad_correg_al_ingr_sem`, 
                 `peso`, `talla`, `pc`, `factores_riesgo`,
-                `observaciones`, `num_evaluacion`, `fecha_registro`
+                `observaciones`, `num_evaluacion`, `fecha_registro`,
+                `edad_correg_actual_sem` -- ===== MODIFICACIÓN (COLUMNA AÑADIDA) =====
             ) VALUES (
                 {$clave_paciente_sql}, {$clave_personal_sql}, {$existing_fecha_inicio_terapia_sql}, {$fecha_terapia_actual_sql}, 
                 {$edad_corregida_sql}, {$edad_cronologica_sql}, {$dat_ter_fech_nac_edad_correg_sql}, 
                 {$edad_cronologica_al_ingr_sem_sql}, {$edad_correg_al_ingr_sem_sql}, 
                 {$peso_sql}, {$talla_sql}, {$pc_sql}, {$factores_riesgo_sql},
-                {$observaciones_generales_sql}, {$num_evaluacion_sql}, {$timestamp_sql}
+                {$observaciones_generales_sql}, {$num_evaluacion_sql}, {$timestamp_sql},
+                {$edad_correg_actual_sem_sql} -- ===== MODIFICACIÓN (VALOR AÑADIDO) =====
             )";
 
     if (!$Con->query($sql)) {
