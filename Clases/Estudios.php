@@ -710,5 +710,43 @@ class Estudios
 
     }
 
+    public function consultarResultadosHitosMG($id_terapia)
+    {
+        $SQL = "SELECT
+        hmg.campos,
+        rhmg.fecha_consolidacion_semanas
+        FROM terapia_neurov2 t
+        JOIN resultados_hitos_mg rhmg ON t.id_terapia_neurohabilitatoriav2 = rhmg.id_terapia_neuro
+        JOIN hitos_mg hmg ON rhmg.id_hito_motor_grueso = hmg.id_hito_motor_grueso
+        WHERE t.id_terapia_neurohabilitatoriav2 = ?";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("i", $id_terapia);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+        // Nota: no cerramos $this->db->close() aquí para permitir múltiples llamadas seguidas en el controlador
+    }
+
+    public function consultarResultadosHitosMF($id_terapia)
+    {
+        $SQL = "SELECT
+        hmf.campo,
+        rhmf.fecha_consolidacion_semanas
+        FROM terapia_neurov2 t
+        JOIN resultados_hitos_mf rhmf ON t.id_terapia_neurohabilitatoriav2 = rhmf.id_terapia_neuro
+        JOIN hitos_mf hmf ON rhmf.id_hito_mf = hmf.id_hito_motor_fino
+        WHERE t.id_terapia_neurohabilitatoriav2 = ?";
+        $stmt = $this->db->prepare($SQL);
+        if (!$stmt) {
+            die("Error en prepare: " . $this->db->error);
+        }
+        $stmt->bind_param("i", $id_terapia);
+        $stmt->execute();
+        return $stmt->get_result();
+        $stmt->close();
+    }
 }
 ?>

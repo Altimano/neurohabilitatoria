@@ -324,6 +324,12 @@
               <input type="text" name="edad_correg_al_ingr_sem" readonly value="<?= htmlspecialchars($datosPaciente['edad_correg_al_ingr_sem']) ?>" class="field-input">
             </div>
 
+            <?php if (isset($datosPaciente['num_evaluacion']) && $datosPaciente['num_evaluacion'] > 1): ?>
+            <div class="patient-field bg-blue-50 border-blue-200"> <label class="field-label text-blue-800">Fecha Nto Corregida actual(Sem)</label>
+                <input type="text" id="dp_edad_corregida_actual_sem" value="<?= htmlspecialchars($datosPaciente['edad_correg_actual_sem'] ?? '') ?>" class="field-input border-blue-300 text-blue-900 font-semibold" readonly>
+            </div>
+            <?php endif; ?>
+
             <div class="patient-field">
               <label class="field-label">Personal encargado</label>
               <input type="text" name="edad_correg_al_ingr_mes" readonly value="<?= htmlspecialchars($datosPaciente['nombre_personal']) ?>" class="field-input">
@@ -390,6 +396,8 @@
                   <option value="tono">Tono Muscular y Ubicación</option>
                   <option value="postura">Postura</option>
                   <option value="signos">Signos de Alarma</option>
+                  <option value="hitosMG" class="font-bold text-blue-700">★ Hitos Motor Grueso</option>
+                  <option value="hitosMF" class="font-bold text-blue-700">★ Hitos Motor Fino</option>
                 </select>
               </div>
             </div>
@@ -487,6 +495,52 @@
             </div>
           </div>
 
+          <!-- Hitos de Motor Grueso -->
+          <div id="hitosMG" class="evaluation-section border-l-8 border-blue-500 bg-blue-50" style="display: none;">
+            <h3 class="section-title text-blue-800">HITOS DE DESARROLLO MOTOR GRUESO</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <?php if(!empty($datosHitosMG)): ?>
+                    <?php foreach ($datosHitosMG as $fila): ?>
+                    <div class="evaluation-item bg-white border border-blue-200 shadow-sm">
+                        <div class="evaluation-label text-blue-900"><?= htmlspecialchars($fila[0]) ?></div>
+                        <div class="evaluation-value font-bold">
+                            <?php 
+                                $val = htmlspecialchars($fila[1]);
+                                $textos = ['0'=>'No lo logra', '1'=>'Lo intenta', '2'=>'En proceso', '3'=>'Inhabilmente', '4'=>'Normal'];
+                                echo isset($textos[$val]) ? $textos[$val] . " ($val)" : $val;
+                            ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center text-gray-500 w-full col-span-2">No se registraron hitos en esta evaluación.</p>
+                <?php endif; ?>
+            </div>
+            </div>
+
+            <!-- Hitos de Motor Fino -->
+            <div id="hitosMF" class="evaluation-section border-l-8 border-green-500 bg-green-50" style="display: none;">
+            <h3 class="section-title text-green-800">HITOS DE DESARROLLO MOTOR FINO</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <?php if(!empty($datosHitosMF)): ?>
+                    <?php foreach ($datosHitosMF as $fila): ?>
+                    <div class="evaluation-item bg-white border border-green-200 shadow-sm">
+                        <div class="evaluation-label text-green-900"><?= htmlspecialchars($fila[0]) ?></div>
+                        <div class="evaluation-value font-bold">
+                            <?php 
+                                $val = htmlspecialchars($fila[1]);
+                                $textos = ['0'=>'No lo logra', '1'=>'Lo intenta', '2'=>'En proceso', '3'=>'Inhabilmente', '4'=>'Normal'];
+                                echo isset($textos[$val]) ? $textos[$val] . " ($val)" : $val;
+                            ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-center text-gray-500 w-full col-span-2">No se registraron hitos en esta evaluación.</p>
+                <?php endif; ?>
+            </div>
+            </div>
+
           <!-- Botones de navegación -->
           <div class="info-card mt-8">
             <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -510,7 +564,15 @@
 
     function mostrar() {
       var select = document.getElementById("myselect");
-      var sections = ['motor', 'motorFino', 'maniobras', 'tono', 'postura', 'signos', 'lenguaje'];
+      var sections = ['motor', 'motorFino', 'maniobras', 'tono', 'postura', 'signos', 'lenguaje', 'hitosMG', 'hitosMF'];
+      
+      // Ocultar todas las secciones
+      sections.forEach(function(sectionId) {
+        var section = document.getElementById(sectionId);
+        if (section) {
+          section.style.display = "none";
+        }
+      });
       
       // Ocultar todas las secciones
       sections.forEach(function(sectionId) {

@@ -35,5 +35,12 @@ $datosPostura = mysqli_fetch_all($resultPostura);
 
 $resultLenguaje = $Estudio->consultarResultadosLenguaje($id_terapia);
 $datosLenguaje = mysqli_fetch_all($resultLenguaje);
+
+$resultHitosMG = $Estudio->consultarResultadosHitosMG($id_terapia);
+$datosHitosMG = mysqli_fetch_all($resultHitosMG);
+
+$resultHitosMF = $Estudio->consultarResultadosHitosMF($id_terapia);
+$datosHitosMF = mysqli_fetch_all($resultHitosMF);
+
 //var_dump($datosLoQueQuierasVer) para examinar los datos
 require './vistas/consultarPaciente.view.php';
