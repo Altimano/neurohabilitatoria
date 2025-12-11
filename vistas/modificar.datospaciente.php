@@ -13,10 +13,13 @@ $fechaMinimaPermitida = date('Y-m-d');
 $fechaMaximaPermitida = date('Y-m-d');
 $fechaRegistroRef = date('Y-m-d');
 
-// 1. Lógica para recuperar datos (Híbrido entre sesión y POST)
+// 1. Si venimos de la tabla de búsqueda (POST) o recarga
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
-    // Si vienen datos por POST (desde la tabla de búsqueda)
+    
     $clave_paciente = $_POST["clave_paciente"];
+    // Capturar ID específico de la tabla
+    $id_terapia_especifica = isset($_POST["id_terapia"]) ? $_POST["id_terapia"] : null;
+
     $Con = conectar();
     $Estudio = new Estudios($Con);
 
@@ -28,10 +31,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
     $stmt->close();
 
     if ($datos_db_paciente) {
-        // Recuperamos la última evaluación para llenar el formulario
-        $ultimaEvaluacion = $Estudio->obtenerUltimaEvaluacionPaciente($clave_paciente);
-        
-        // Recuperamos datos de la PRIMERA evaluación para obtener la fecha corregida base
+        $evaluacionCargada = null;
+
+        // A) Definir qué evaluación cargar y establecer Sesión
+        if ($id_terapia_especifica) {
+            $stmtEval = $Con->prepare("SELECT * FROM terapia_neurov2 WHERE id_terapia_neurohabilitatoriav2 = ?");
+            $stmtEval->bind_param("i", $id_terapia_especifica);
+            $stmtEval->execute();
+            $evaluacionCargada = $stmtEval->get_result()->fetch_assoc();
+            $stmtEval->close();
+            
+            $_SESSION['id_terapia'] = $id_terapia_especifica;
+        } else {
+            // Fallback (última)
+            $evaluacionCargada = $Estudio->obtenerUltimaEvaluacionPaciente($clave_paciente);
+            if(isset($evaluacionCargada['id_terapia_neurohabilitatoriav2'])) {
+                $_SESSION['id_terapia'] = $evaluacionCargada['id_terapia_neurohabilitatoriav2'];
+            }
+        }
+
+        // --- LÓGICA PARA OBTENER EL NÚMERO DE TERAPIA (SECUENCIAL) ---
+        $numero_terapia_display = 'N/A';
+        if (isset($_SESSION['id_terapia'])) {
+            $id_actual = $_SESSION['id_terapia'];
+            // Contamos cuantas terapias existen para este paciente con ID menor o igual al actual
+            // Esto nos dice si es la 1ra, 2da, 3ra...
+            $stmtSeq = $Con->prepare("SELECT COUNT(*) as num FROM terapia_neurov2 WHERE clave_paciente = ? AND id_terapia_neurohabilitatoriav2 <= ?");
+            $stmtSeq->bind_param("ii", $clave_paciente, $id_actual);
+            $stmtSeq->execute();
+            $resSeq = $stmtSeq->get_result()->fetch_assoc();
+            $numero_terapia_display = $resSeq['num'];
+            $stmtSeq->close();
+        }
+
+        // Recuperamos datos de la PRIMERA evaluación (Referencia)
         $stmt_primera = $Con->prepare("SELECT dat_ter_fech_nac_edad_correg, edad_cronologica, edad_corregida FROM terapia_neurov2 WHERE clave_paciente = ? ORDER BY id_terapia_neurohabilitatoriav2 ASC LIMIT 1");
         $stmt_primera->bind_param("i", $clave_paciente);
         $stmt_primera->execute();
@@ -40,51 +73,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["clave_paciente"])) {
 
         $datos_paciente_para_mostrar = [
             'clave_paciente'    => $clave_paciente,
+            'id_terapia'        => $_SESSION['id_terapia'] ?? null,
+            'numero_terapia'    => $numero_terapia_display, // Nuevo dato guardado
             'codigo_paciente'   => $datos_db_paciente['codigo_paciente'],
             'nombre_paciente'   => trim(($datos_db_paciente['nombre_paciente'] ?? '') . ' ' . ($datos_db_paciente['apellido_paterno_paciente'] ?? '') . ' ' . ($datos_db_paciente['apellido_materno_paciente'] ?? '')),
-            'talla'             => $ultimaEvaluacion['talla'] ?? '',
-            'peso'              => $ultimaEvaluacion['peso'] ?? '',
-            'perimetro_cefalico'=> $ultimaEvaluacion['pc'] ?? '',
+            
+            'talla'             => $evaluacionCargada['talla'] ?? '',
+            'peso'              => $evaluacionCargada['peso'] ?? '',
+            'perimetro_cefalico'=> $evaluacionCargada['pc'] ?? '',
+            'fecha_terapia'     => $evaluacionCargada['fecha_terapia'] ?? date('Y-m-d'),
+            'factores_de_riesgo'=> $evaluacionCargada['factores_riesgo'] ?? '',
+            'observaciones'     => $evaluacionCargada['observaciones'] ?? '',
+            
             'sdg'               => $datos_db_paciente['semanas_gestacion'],
             'fecha_nacimiento'  => $datos_db_paciente['fecha_nacimiento_paciente'],
-            'fecha_terapia'     => $ultimaEvaluacion['fecha_terapia'] ?? date('Y-m-d'), // Fecha de la evaluación actual
-            'factores_de_riesgo'=> $ultimaEvaluacion['factores_riesgo'] ?? '',
-            'observaciones'     => $ultimaEvaluacion['observaciones'] ?? '',
             
-            // Datos fijos calculados en la primera evaluación (desde BD)
             'edad_cronologica_ingreso_display' => $primera_eval['edad_cronologica'] ?? '',
-            'edad_corregida_display'           => $primera_eval['edad_corregida'] ?? '', // Semanas al ingresar
+            'edad_corregida_display'           => $primera_eval['edad_corregida'] ?? '',
             'fecha_nacimiento_corregida_display'=> $primera_eval['dat_ter_fech_nac_edad_correg'] ?? '',
             
-            // Dato a calcular dinámicamente con JS
-            'edad_corregida_actual_sem' => '' 
+            'edad_corregida_actual_sem' => ''
         ];
         
-        // --- LOGICA DEL CANDADO DE 7 DÍAS ---
-        $stmtFecha = $Con->prepare("SELECT fecha_registro FROM terapia_neurov2 WHERE clave_paciente = ? ORDER BY id_terapia_neurohabilitatoriav2 DESC LIMIT 1");
-        $stmtFecha->bind_param("i", $clave_paciente);
-        $stmtFecha->execute();
-        $stmtFecha->bind_result($fechaRegistroBD);
-        if ($stmtFecha->fetch()) {
-            $fechaRegistroRef = date('Y-m-d', strtotime($fechaRegistroBD));
+        // Candado Fechas
+        if (isset($evaluacionCargada['fecha_registro'])) {
+            $fechaRegistroRef = date('Y-m-d', strtotime($evaluacionCargada['fecha_registro']));
+        } else {
+            $fechaRegistroRef = date('Y-m-d');
         }
-        $stmtFecha->close();
+
     } else {
         $error_mensaje = "Paciente no encontrado.";
     }
     $Con->close();
 
+// 2. Si venimos de sesión (navegación wizard)
 } else if (isset($_SESSION['datosPacienteParaEvaluacion'])) {
-    // Si ya están en sesión (flujo normal de modificar al regresar de otro paso)
     $datos_paciente_para_mostrar = $_SESSION['datosPacienteParaEvaluacion'];
     $fechaRegistroRef = $datos_paciente_para_mostrar['fecha_terapia'] ?? date('Y-m-d');
 }
 
-// Calcular rangos permitidos (+/- 7 días desde el REGISTRO)
 $fechaMinimaPermitida = date('Y-m-d', strtotime($fechaRegistroRef . ' - 7 days'));
 $fechaMaximaPermitida = date('Y-m-d', strtotime($fechaRegistroRef . ' + 7 days'));
 
-// Guardar en sesión para persistencia
 if (!empty($datos_paciente_para_mostrar)) {
     $_SESSION['datosPacienteParaEvaluacion'] = $datos_paciente_para_mostrar;
 }
@@ -98,7 +129,6 @@ if (!empty($datos_paciente_para_mostrar)) {
     <title>Modificar Evaluación</title>
     <link href="<?=base_url("/assets/output.css")?>" rel="stylesheet" />
     <style>
-        /* ESTILOS ORIGINALES RESTAURADOS */
         .bg-custom-header-area { background-color: #FFFFFF; }
         .bg-custom-main-box { background: linear-gradient(135deg, #E0F2FE 0%, #F0F9FF 100%); }
         .bg-custom-button { background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%); }
@@ -215,7 +245,6 @@ if (!empty($datos_paciente_para_mostrar)) {
             resize: vertical;
         }
 
-        /* Estilo para fecha bloqueada/alerta */
         .date-locked {
             background-color: #FFFBEB !important;
             border-color: #FCD34D !important;
@@ -253,7 +282,8 @@ if (!empty($datos_paciente_para_mostrar)) {
                     <div class="text-center mb-8">
                         <div class="inline-block bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl px-8 py-4 shadow-lg">
                             <h1 class="text-2xl md:text-3xl font-bold">
-                                DATOS DEL PACIENTE
+                                DATOS DEL PACIENTE 
+                                <span class="text-sm font-light block mt-1">(Editando Terapia N° <?= htmlspecialchars($datos_paciente_para_mostrar['numero_terapia'] ?? 'N/A') ?>)</span>
                             </h1>
                         </div>
                     </div>
@@ -265,21 +295,18 @@ if (!empty($datos_paciente_para_mostrar)) {
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['nombre_paciente'] ?? '') ?>"
                                 class="form-field" readonly>
                         </div>
-
                         <div>
                             <label class="form-label">Clave Paciente</label>
                             <input type="text" id="dp_clave_paciente"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['codigo_paciente'] ?? '') ?>"
                                 class="form-field" readonly>
                         </div>
-
                         <div>
                             <label class="form-label">Fecha de Nacimiento</label>
                             <input type="date" id="dp_fecha_nacimiento"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['fecha_nacimiento'] ?? '') ?>"
                                 class="form-field" readonly>
                         </div>
-
                         <div>
                             <label class="form-label">Semanas de Gestación (SDG)</label>
                             <input type="text" id="dp_sdg"
@@ -288,37 +315,33 @@ if (!empty($datos_paciente_para_mostrar)) {
                         </div>
 
                         <div>
-                            <label class="form-label">Talla (cm)</label>
+                            <label class="form-label text-blue-700">Talla (cm)</label>
                             <input type="text" id="dp_talla"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['talla'] ?? '') ?>"
-                                class="form-field hover:bg-blue-50">
+                                class="form-field border-blue-200 focus:border-blue-500">
                         </div>
-
                         <div>
-                            <label class="form-label">Peso (kg)</label>
+                            <label class="form-label text-blue-700">Peso (kg)</label>
                             <input type="text" id="dp_peso"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['peso'] ?? '') ?>"
-                                class="form-field hover:bg-blue-50">
+                                class="form-field border-blue-200 focus:border-blue-500">
                         </div>
-
                         <div>
-                            <label class="form-label">Perímetro Cefálico (cm)</label>
+                            <label class="form-label text-blue-700">Perímetro Cefálico (cm)</label>
                             <input type="text" id="dp_perimetro_cefalico"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['perimetro_cefalico'] ?? '') ?>"
-                                class="form-field hover:bg-blue-50">
+                                class="form-field border-blue-200 focus:border-blue-500">
                         </div>
 
                         <div>
-                            <label class="form-label text-blue-700">Fecha de Evaluación (Modificable)</label>
+                            <label class="form-label text-blue-700">Fecha de Evaluación</label>
                             <input type="date" id="dp_fecha_inicio_tratamiento"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['fecha_terapia'] ?? '') ?>"
                                 min="<?= $fechaMinimaPermitida ?>"
                                 max="<?= $fechaMaximaPermitida ?>"
                                 class="form-field date-locked cursor-pointer">
-                            <p class="text-xs text-orange-600 mt-1 font-medium text-center">
-                                <span class="inline-block bg-orange-100 px-2 py-1 rounded border border-orange-200">
-                                    ⚠️ Rango permitido: <?= date('d/m', strtotime($fechaMinimaPermitida)) ?> al <?= date('d/m', strtotime($fechaMaximaPermitida)) ?>
-                                </span>
+                            <p class="text-xs text-orange-600 mt-1 font-medium">
+                                Rango permitido: <?= date('d/m', strtotime($fechaMinimaPermitida)) ?> al <?= date('d/m', strtotime($fechaMaximaPermitida)) ?>
                             </p>
                         </div>
 
@@ -328,14 +351,12 @@ if (!empty($datos_paciente_para_mostrar)) {
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['edad_cronologica_ingreso_display'] ?? '') ?>"
                                 class="form-field" readonly>
                         </div>
-
                         <div>
                             <label class="form-label">Fecha Nacimiento Corregida</label>
                             <input type="date" id="dp_fecha_nacimiento_corregida_display"
                                 value="<?= htmlspecialchars($datos_paciente_para_mostrar['fecha_nacimiento_corregida_display'] ?? '') ?>"
                                 class="form-field" readonly>
                         </div>
-
                         <div>
                             <label class="form-label text-green-700">Edad Corregida Actual (Semanas)</label>
                             <input type="text" id="dp_edad_corregida_actual_sem"
@@ -379,7 +400,7 @@ if (!empty($datos_paciente_para_mostrar)) {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // 1. Limpieza de pasos anteriores si es nueva carga desde PHP
+            // Limpiar sesiones antiguas si es carga nueva
             <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($datos_paciente_para_mostrar)): ?>
                 const clavesPasos = [
                     'evaluacionPaso1', 'evaluacionPaso2_mkatona', 'evaluacionPaso3_mgrueso',
@@ -390,71 +411,54 @@ if (!empty($datos_paciente_para_mostrar)) {
                 clavesPasos.forEach(clave => sessionStorage.removeItem(clave));
             <?php endif; ?>
 
-            // 2. Elementos del DOM
             const fechaEvalInput = document.getElementById('dp_fecha_inicio_tratamiento');
-            // Nota: Este input contiene la fecha corregida fija traída de BD (si existe)
             const fechaNacCorregidaInput = document.getElementById('dp_fecha_nacimiento_corregida_display');
             const outputSemanasActual = document.getElementById('dp_edad_corregida_actual_sem');
             const btnSiguiente = document.getElementById('botonSiguientePaso');
 
-            // 3. Lógica para calcular Edad Corregida Actual en Semanas
-            // Esta es la lógica que pediste de agregar.view.php adaptada
+            // Cálculo dinámico de semanas
             function calcularSemanasActuales() {
+                if (!fechaEvalInput || !fechaNacCorregidaInput || !outputSemanasActual) return;
+                
                 const fechaEvaluacionStr = fechaEvalInput.value;
                 const fechaNacCorregidaStr = fechaNacCorregidaInput.value;
 
                 if (!fechaEvaluacionStr || !fechaNacCorregidaStr) {
-                    if(outputSemanasActual) outputSemanasActual.value = 'N/A';
+                    outputSemanasActual.value = 'N/A';
                     return;
                 }
 
-                // Asegurar formato de fecha para prevenir errores de zona horaria
                 const fechaEvaluacion = new Date(fechaEvaluacionStr + 'T00:00:00');
                 const fechaNacCorregida = new Date(fechaNacCorregidaStr + 'T00:00:00');
 
                 if (isNaN(fechaEvaluacion.getTime()) || isNaN(fechaNacCorregida.getTime())) {
-                    if(outputSemanasActual) outputSemanasActual.value = 'Fechas Inválidas';
-                     return;
+                    outputSemanasActual.value = 'Error Fecha';
+                    return;
                 }
 
                 const diffMs = fechaEvaluacion.getTime() - fechaNacCorregida.getTime();
                 const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
                 if (diffDias < 0) {
-                     // Caso raro: se evalúa antes de nacer (corregido)
-                     if(outputSemanasActual) outputSemanasActual.value = '0'; 
+                     outputSemanasActual.value = '0'; 
                      return;
                 }
 
                 const semanas = Math.floor(diffDias / 7);
-                if(outputSemanasActual) outputSemanasActual.value = semanas.toString();
+                outputSemanasActual.value = semanas.toString();
             }
 
-            // 4. Listeners para recálculo dinámico
-            if (fechaEvalInput && fechaNacCorregidaInput) {
-                fechaEvalInput.addEventListener('change', function() {
-                    // Validar candado (visual en JS, seguridad real en PHP/BD)
-                    const min = "<?= $fechaMinimaPermitida ?>";
-                    const max = "<?= $fechaMaximaPermitida ?>";
-                    if(this.value < min || this.value > max) {
-                        alert("La fecha seleccionada está fuera del rango permitido (+/- 7 días del registro original).");
-                        // Opcional: resetear a la fecha original si se desea forzar
-                    }
-                    calcularSemanasActuales();
-                });
-                // Calcular al cargar la página
-                calcularSemanasActuales();
+            if (fechaEvalInput) {
+                fechaEvalInput.addEventListener('change', calcularSemanasActuales);
+                calcularSemanasActuales(); // Al cargar
             }
 
-            // 5. Manejo del botón Siguiente
+            // Guardar y avanzar
             if (btnSiguiente) {
                 btnSiguiente.addEventListener('click', function() {
-                    // Recopilar datos actuales del formulario
                     const datosActualizados = {
-                        // Traer lo que ya estaba en sesión o BD (implícito en PHP, pero útil tenerlo en JS)
-                        ...<?php echo json_encode($datos_paciente_para_mostrar); ?>,
+                        id_terapia: "<?= $datos_paciente_para_mostrar['id_terapia'] ?? '' ?>",
                         
-                        // Sobrescribir con valores actuales del DOM
                         talla: document.getElementById('dp_talla').value,
                         peso: document.getElementById('dp_peso').value,
                         perimetro_cefalico: document.getElementById('dp_perimetro_cefalico').value,
@@ -462,14 +466,17 @@ if (!empty($datos_paciente_para_mostrar)) {
                         factores_de_riesgo: document.getElementById('factores_riesgo').value,
                         observaciones: document.getElementById('observaciones').value,
                         
-                        // Guardar el cálculo dinámico importante
-                        edad_corregida_actual_sem: document.getElementById('dp_edad_corregida_actual_sem').value
+                        // Datos calculados
+                        edad_corregida_actual_sem: document.getElementById('dp_edad_corregida_actual_sem').value,
+                        fecha_nacimiento_edad_corregida: document.getElementById('dp_fecha_nacimiento_corregida_display').value,
+                        
+                        // Mantener numero de terapia en sesion JS
+                        numero_terapia: "<?= $datos_paciente_para_mostrar['numero_terapia'] ?? 'N/A' ?>"
                     };
 
                     try {
                         sessionStorage.setItem('datosPacienteParaEvaluacion', JSON.stringify(datosActualizados));
                         
-                        // Inicializar pasos vacíos si no existen para evitar errores en siguientes pantallas
                         if(!sessionStorage.getItem('evaluacionPaso1')) {
                             sessionStorage.setItem('evaluacionPaso1', JSON.stringify({}));
                         }
@@ -477,17 +484,10 @@ if (!empty($datos_paciente_para_mostrar)) {
                         window.location.href = "<?= base_url('/modificarKatona') ?>";
                     } catch (e) {
                         console.error("Error al guardar en sessionStorage:", e);
-                        alert('Error al procesar los datos. Por favor intente nuevamente.');
+                        alert('Error local al procesar los datos. Revise la consola.');
                     }
                 });
             }
-
-            // Efectos visuales en inputs
-            const campos = document.querySelectorAll('.form-field:not([readonly])');
-            campos.forEach(campo => {
-                campo.addEventListener('focus', () => campo.style.transform = 'translateY(-1px)');
-                campo.addEventListener('blur', () => campo.style.transform = 'translateY(0)');
-            });
         });
     </script>
 </body>
