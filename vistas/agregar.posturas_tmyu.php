@@ -331,17 +331,30 @@
                                     <td><input type="checkbox" id="tu_hipertonia_opt10" name="tu_hipertonia[]" value="Normal"></td>
                                 </tr>
                                 <tr>
-                                    <td>Mixto (Hipotonía/Hipertonía)</td>
-                                    <td><input type="checkbox" id="tu_mixto_opt1" name="tu_mixto[]" value="General"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt2" name="tu_mixto[]" value="Axial"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt3" name="tu_mixto[]" value="Extremidades"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt4" name="tu_mixto[]" value="Miembros Torácicos"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt5" name="tu_mixto[]" value="Miembros Pélvicos"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt6" name="tu_mixto[]" value="Hemicuerpo"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt7" name="tu_mixto[]" value="Contralateral"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt8" name="tu_mixto[]" value="Derecha"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt9" name="tu_mixto[]" value="Izquierda"></td>
-                                    <td><input type="checkbox" id="tu_mixto_opt10" name="tu_mixto[]" value="Normal"></td>
+                                    <td>Mixto (Hipotonía)</td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt1" name="tu_mixto_hipotonia[]" value="General"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt2" name="tu_mixto_hipotonia[]" value="Axial"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt3" name="tu_mixto_hipotonia[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt4" name="tu_mixto_hipotonia[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt5" name="tu_mixto_hipotonia[]" value="Miembros Pélvicos"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt6" name="tu_mixto_hipotonia[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt7" name="tu_mixto_hipotonia[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt8" name="tu_mixto_hipotonia[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt9" name="tu_mixto_hipotonia[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipotonia_opt10" name="tu_mixto_hipotonia[]" value="Normal"></td>
+                                </tr>
+                                <tr>
+                                    <td>Mixto (Hipertonía)</td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt1" name="tu_mixto_hipertonia[]" value="General"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt2" name="tu_mixto_hipertonia[]" value="Axial"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt3" name="tu_mixto_hipertonia[]" value="Extremidades"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt4" name="tu_mixto_hipertonia[]" value="Miembros Torácicos"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt5" name="tu_mixto_hipertonia[]" value="Miembros Pélvicos"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt6" name="tu_mixto_hipertonia[]" value="Hemicuerpo"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt7" name="tu_mixto_hipertonia[]" value="Contralateral"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt8" name="tu_mixto_hipertonia[]" value="Derecha"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt9" name="tu_mixto_hipertonia[]" value="Izquierda"></td>
+                                    <td><input type="checkbox" id="tu_mixto_hipertonia_opt10" name="tu_mixto_hipertonia[]" value="Normal"></td>
                                 </tr>
                                 <tr>
                                     <td>Fluctuante</td>
@@ -461,8 +474,9 @@
 
             // Precarga los valores de los checkboxes
             const form = document.getElementById('evaluacionTonoUbicacionForm');
+            // Actualización del array de nombres de grupos de checkboxes
             const checkboxGroupNames = [
-                'tu_hipotonia', 'tu_hipertonia', 'tu_mixto', 'tu_fluctuante', 'Asimetria'
+                'tu_hipotonia', 'tu_hipertonia', 'tu_mixto_hipotonia', 'tu_mixto_hipertonia', 'tu_fluctuante', 'Asimetria'
             ];
 
             if(form && Object.keys(datosTmyu).length > 0) { 

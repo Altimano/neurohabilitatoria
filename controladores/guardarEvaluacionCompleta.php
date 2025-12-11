@@ -65,7 +65,11 @@ try {
             'Asimetria' => 1,
         ],
         'tono_muscular_tipos' => [
-            'tu_hipotonia' => 1, 'tu_hipertonia' => 2, 'tu_mixto' => 3, 'tu_fluctuante' => 4,
+            'tu_hipotonia' => 1, 
+            'tu_hipertonia' => 2, 
+            'tu_mixto_hipotonia' => 3, 
+            'tu_fluctuante' => 4,
+            'tu_mixto_hipertonia' => 6,
         ],
         'signos_alarma_detalles' => [
             'ps_aduccion_pulgares' => 1, 'ps_estrabismo' => 2, 'ps_irritabilidad' => 3,
