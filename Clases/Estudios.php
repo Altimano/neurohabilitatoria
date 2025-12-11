@@ -57,6 +57,7 @@ class Estudios
     t.dat_ter_fech_nac_edad_correg,
     t.edad_cronologica_al_ingr_sem,
     t.edad_correg_al_ingr_sem,
+    t.edad_correg_actual_sem,
     t.peso,
     t.talla,
     t.pc,

@@ -325,9 +325,16 @@
             </div>
 
             <?php if (isset($datosPaciente['num_evaluacion']) && $datosPaciente['num_evaluacion'] > 1): ?>
-            <div class="patient-field bg-blue-50 border-blue-200"> <label class="field-label text-blue-800">Fecha Nto Corregida actual(Sem)</label>
-                <input type="text" id="dp_edad_corregida_actual_sem" value="<?= htmlspecialchars($datosPaciente['edad_correg_actual_sem'] ?? '') ?>" class="field-input border-blue-300 text-blue-900 font-semibold" readonly>
-            </div>
+              <div id="campo_edad_corregida_actual" class="patient-field">
+                  <label class="field-label">Fecha Nto Corregida actual (Sem)</label>
+                  <input 
+                      type="text" 
+                      id="dp_edad_corregida_actual_sem" 
+                      value="<?php echo htmlspecialchars($datosPaciente['edad_correg_actual_sem'] ?? ''); ?>" 
+                      class="field-input" 
+                      readonly
+                  >
+              </div>
             <?php endif; ?>
 
             <div class="patient-field">
